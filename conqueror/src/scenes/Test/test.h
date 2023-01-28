@@ -18,7 +18,9 @@ public:
 	void update(float) override;
 	void init() override;
 	void loadResources() override;
+	void imgui(float dt) override {
 
+	}
 	void OnEvent(Event& e) override
 	{
 		EventDispatcher dispatcher(e);
