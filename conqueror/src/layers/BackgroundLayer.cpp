@@ -2,7 +2,7 @@
 
 void BackgroundLayer::OnAttach()
 {
-    background1 = new GameObject("Background", Transform(glm::vec2(-3.0f, 2.0f), glm::vec2(2.0f, 2.0f)));
+    /*background1 = new GameObject("Background", Transform(glm::vec2(-3.0f, 2.0f), glm::vec2(2.0f, 2.0f)));
     background2 = new GameObject("Background", Transform(glm::vec2(0.0f, 2.0f), glm::vec2(2.0f, 2.0f)));
     background3 = new GameObject("Background", Transform(glm::vec2(3.0f, 2.0f), glm::vec2(2.0f, 2.0f)));
     background4 = new GameObject("Background", Transform(glm::vec2(-3.0f, -1.0f), glm::vec2(2.0f, 2.0f)));
@@ -28,16 +28,16 @@ void BackgroundLayer::OnAttach()
     this->AddGameObjectToLayer(background5);
     this->AddGameObjectToLayer(background6);
     this->AddGameObjectToLayer(background7);
-    this->AddGameObjectToLayer(background8);
+    this->AddGameObjectToLayer(background8);*/
 }
 
 void BackgroundLayer::OnDetach()
 {
-    for (auto i : game_objects)
+    /*for (auto i : game_objects)
     {
         delete i;
     }
-    game_objects.clear();
+    game_objects.clear();*/
 
 }
 

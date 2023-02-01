@@ -3,13 +3,16 @@
 class ForegroundLayer : public Layer
 {
 private:
-	GameObject* character1;
+	/*GameObject* character1;
 	GameObject* character2;
-	GameObject* object1;
+	GameObject* object1;*/
+
+	GameObject* test_go;
+
+	//int speed = 2;
 
 public:
-	ForegroundLayer()
-		: Layer("Foreground") { }
+	ForegroundLayer(): Layer("Foreground") { }
 	virtual ~ForegroundLayer() = default;
 
 	void OnAttach() override;
@@ -17,5 +20,7 @@ public:
 	void update(const float dt) override;
 	void imgui(const float dt) override;
 	void OnEvent(Event& event) override;
+
+	void CreateGrid(int);
 };
 
