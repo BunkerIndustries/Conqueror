@@ -19,20 +19,7 @@ namespace core {
         //set vectors
         // the camera has to look somewhere (just set it to 0 because we are making it absolute)
 
-        /*TEMPORARY*/
-        float targetY = 0;
-        if (this->position.z < 5) {
-            targetY = this->position.y + (5 - this->position.z);
-            if (targetY < 0) targetY = 0;
-        }
-        else
-        {
-            targetY = this->position.y;
-        }
-        /**/
-
-
-        this->target = glm::vec3(this->position.x, targetY, 0.0f);
+        this->target = glm::vec3(this->position.x, this->position.y, 0.0f);
         // move every gameObject that is orthographic before the camera moves
         for (auto& go : Application::getCurrentScene()->getGameObjects()) {
             if (go->displayMode == DataPool::DISPLAYMODE::ORTHOGRAPHIC) {
