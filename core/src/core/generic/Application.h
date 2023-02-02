@@ -25,7 +25,7 @@ namespace core {
 		float dt;
 		long int frames_rendered = 0;
 		bool game_running = true;
-		bool imgui_enabled = false; int imgui_enabled_queue = 0;
+		bool imgui_enabled = true; int imgui_enabled_queue = 0;
 
 		bool onWindowClose(WindowCloseEvent& e);
 		bool onWindowResize(WindowResizeEvent& e);
@@ -61,6 +61,8 @@ namespace core {
 		static bool GetImGuiEnabled() { return Get()->imgui_enabled; }
 		static float GetDT() { return Get()->dt; }
 		static void setEventCallback(const EventCallbackFunction& callback_function) { Get()->window->setEventCallback(callback_function); }
+		static void Debug_TrackVariable(std::string name, void* variable);
+
 
 		static Window* getWindow() { return Get()->window; }
 		static Scene* getCurrentScene() { return Get()->current_scene; }

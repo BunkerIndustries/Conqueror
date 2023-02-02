@@ -5,8 +5,8 @@ namespace core {
 
     class Shader {
     private:
-        int shaderProgrammID;
-        bool beingUsed;
+        int shaderProgrammID = 0;
+        bool beingUsed = false;
 
         std::string vertexSources;
         std::string fragmentSources;

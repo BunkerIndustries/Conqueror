@@ -3,6 +3,8 @@
 
 #include "imgui/ImGuiLayer.h"
 #include "generic/Application.h"
+#include "renderer/Renderer.h"
+#include "renderer/RenderBatch.h"
 
 
 
@@ -138,6 +140,19 @@ namespace core {
         }
     }
 
+    static void HelpMarker(const char* desc)
+    {
+        ImGui::TextDisabled("(?)");
+        if (ImGui::IsItemHovered(ImGuiHoveredFlags_DelayShort))
+        {
+            ImGui::BeginTooltip();
+            ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+            ImGui::TextUnformatted(desc);
+            ImGui::PopTextWrapPos();
+            ImGui::EndTooltip();
+        }
+    }
+
     static bool p_open = true;
     void ImGuiLayer::imgui(const float dt)
     {
@@ -170,11 +185,12 @@ namespace core {
             ImGui::DockBuilderSetNodeSize(dockspace_id, ImVec2(Application::getWindow()->getWidth() + 500, Application::getWindow()->getHeight() + 500));
 
             dock_id_main = dockspace_id;
-            dock_id_right = ImGui::DockBuilderSplitNode(dock_id_main, ImGuiDir_Right, 0.15f, nullptr, &dock_id_main);
+            dock_id_right = ImGui::DockBuilderSplitNode(dock_id_main, ImGuiDir_Right, 0.2f, nullptr, &dock_id_main);
             dock_id_left = ImGui::DockBuilderSplitNode(dock_id_main, ImGuiDir_Left, 0.2f, nullptr, &dock_id_main);
             dock_id_top = ImGui::DockBuilderSplitNode(dock_id_main, ImGuiDir_Up, 0.2f, nullptr, &dock_id_main);
             dock_id_down = ImGui::DockBuilderSplitNode(dock_id_main, ImGuiDir_Down, 0.25f, nullptr, &dock_id_main);
             dock_id_right2 = ImGui::DockBuilderSplitNode(dock_id_right, ImGuiDir_Left, 0.2f, nullptr, &dock_id_right);
+            dock_id_left_bottom = ImGui::DockBuilderSplitNode(dock_id_left, ImGuiDir_Down, 0.5f, nullptr, &dock_id_left);
 
 
             ImGui::DockBuilderFinish(dockspace_id);
@@ -188,18 +204,21 @@ namespace core {
         ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockflags);
         ImGui::End();
 
-        ApplicationPanel(dt);
-        ScenePanel(dt);
-        LayerPanel(dt);
-        ViewPortPanel(dt);
-
+        static bool first = true;
+        ApplicationPanel(dt, first);
+        CustomPanel(dt, first);
+        LayerPanel(dt, first);
+        ViewPortPanel(dt, first);
+        InspectorPanel(dt, first);
+        if (first) first = false;
     }
 
-	void ImGuiLayer::ApplicationPanel(const float dt)
+	void ImGuiLayer::ApplicationPanel(const float dt, bool first)
     {
         const char* name = "Application: ";
         std::stringstream stream;
-        Application::IMGUI().DockPanel(name, Application::IMGUI().getDockspaceRIGHT());
+        if (first) 
+            Application::IMGUI().DockPanel(name, Application::IMGUI().getDockspaceRIGHT());
 
         ImGui::Begin(name);
 
@@ -216,71 +235,155 @@ namespace core {
         }
         timehelper += dt;
         time += dt;
-        ImGui::SliderFloat("Time", &history, 1, 50, "%.1f");
 
-        stream << "ms per frame: " << 1000 * dt;
-        ImGui::Text(stream.str().c_str()); stream.str("");
-        if (ImPlot::BeginPlot("##ms_per_frame", ImVec2(-1, 100))) {
-            ImPlot::SetupAxes(NULL, NULL, flags, flags);
-            ImPlot::SetupAxisLimits(ImAxis_X1, time - history, time, ImGuiCond_Always);
-            ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 20);
-            ImPlot::SetNextFillStyle(ImVec4(0.0f, 0.0f, 1.0f, -1.0f), 0.5f);
-            ImPlot::PlotLine("##ms", &sbuff_dt.Data[0].x, &sbuff_dt.Data[0].y, sbuff_dt.Data.size(), 0, sbuff_dt.Offset, 2 * sizeof(float));
-            ImPlot::EndPlot();
+        if (ImGui::TreeNode("Time"))
+        {
+		    ImGui::SliderFloat("Time", &history, 1, 50, "%.1f");
+
+		    stream << "ms per frame: " << 1000 * dt;
+		    ImGui::Text(stream.str().c_str()); stream.str("");
+		    if (ImPlot::BeginPlot("##ms_per_frame", ImVec2(-1, 100))) {
+		        ImPlot::SetupAxes(NULL, NULL, flags, flags);
+		        ImPlot::SetupAxisLimits(ImAxis_X1, time - history, time, ImGuiCond_Always);
+		        ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 20);
+		        ImPlot::SetNextFillStyle(ImVec4(0.0f, 0.0f, 1.0f, -1.0f), 0.5f);
+		        ImPlot::PlotLine("##ms", &sbuff_dt.Data[0].x, &sbuff_dt.Data[0].y, sbuff_dt.Data.size(), 0, sbuff_dt.Offset, 2 * sizeof(float));
+		        ImPlot::EndPlot();
+		    }
+
+		    stream << "frames per sec: " << 1 / dt;
+		    ImGui::Text(stream.str().c_str()); stream.str("");
+		    if (ImPlot::BeginPlot("##frames_per_second", ImVec2(-1, 100))) {
+		        ImPlot::SetupAxes(NULL, NULL, flags, flags);
+		        ImPlot::SetupAxisLimits(ImAxis_X1, time - history, time, ImGuiCond_Always);
+		        ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1000);
+		        ImPlot::SetNextFillStyle(ImVec4(1.0f, 0.0f, 0.0f, -1.0f), 0.5f);
+		        ImPlot::PlotLine("##frames", &sbuff_fps.Data[0].x, &sbuff_fps.Data[0].y, sbuff_fps.Data.size(), 0, sbuff_fps.Offset, 2 * sizeof(float));
+		        ImPlot::EndPlot();
+		    }
+		    
+		    stream << "Frames rendered: " << Application::GetFramesRendered();
+		    ImGui::BulletText(stream.str().c_str()); stream.str("");
+
+		    static bool vsync = true;
+		    ImGui::Checkbox("V-Sync", &vsync);
+		    Application::getWindow()->setVSync(vsync);
+
+		    
+
+			ImGui::Text("");
+            ImGui::TreePop();
         }
 
-        stream << "frames per sec: " << 1 / dt;
-        ImGui::Text(stream.str().c_str()); stream.str("");
-        if (ImPlot::BeginPlot("##frames_per_second", ImVec2(-1, 100))) {
-            ImPlot::SetupAxes(NULL, NULL, flags, flags);
-            ImPlot::SetupAxisLimits(ImAxis_X1, time - history, time, ImGuiCond_Always);
-            ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1000);
-            ImPlot::SetNextFillStyle(ImVec4(1.0f, 0.0f, 0.0f, -1.0f), 0.5f);
-            ImPlot::PlotLine("##frames", &sbuff_fps.Data[0].x, &sbuff_fps.Data[0].y, sbuff_fps.Data.size(), 0, sbuff_fps.Offset, 2 * sizeof(float));
-            ImPlot::EndPlot();
+
+        if (ImGui::TreeNode("Renderer"))
+        {
+            stream << "Draw calls: " << RenderBatch::GetDrawCalls();
+            ImGui::BulletText(stream.str().c_str()); stream.str("");
+
+        	stream << "Batch count: " << Renderer::GetBatchCount();
+            ImGui::BulletText(stream.str().c_str()); stream.str("");
+
+            stream << "Vertex count: " << Renderer::GetVerticesCount();
+            ImGui::BulletText(stream.str().c_str()); stream.str("");
+
+            stream << "Sprite count: " << Renderer::GetSpriteCount();
+            ImGui::BulletText(stream.str().c_str()); stream.str("");
+
+            ImGui::Text("");
+
+            stream << "Polygon Model: ";
+            ImGui::Text(stream.str().c_str()); stream.str("");
+
+            static int selected = 6914;
+            if (ImGui::Selectable("OFF", selected == 6914))
+                selected = 6914;
+            if (ImGui::Selectable("POINT", selected == 6912))
+                selected = 6912;
+            if (ImGui::Selectable("LINE", selected == 6913))
+                selected = 6913;
+            RenderBatch::setPolygonMode(selected);
+
+
+            ImGui::TreePop();
         }
-        
-        stream << "Frames rendered: " << Application::GetFramesRendered();
-        ImGui::BulletText(stream.str().c_str()); stream.str("");
-
-        ImGui::Text("Render Stats:");
-        ImGui::BulletText("draw calls: N/A");
-        ImGui::BulletText("vertices: N/A");
-        ImGui::BulletText("draw calls: N/A");
-        ImGui::BulletText("draw calls: N/A");
-
-        static bool vsync = true;
-        ImGui::Checkbox("V-Sync", &vsync);
-        Application::getWindow()->setVSync(vsync);
 
         ImGui::End();
     }
 
-    void ImGuiLayer::ScenePanel(const float dt)
+    void ImGuiLayer::AddVariable(std::string name, void* variable) {
+        if (variable_pool.find(name) == variable_pool.end()) {
+            variable_pool.emplace(name, variable);
+        }
+    }
+
+    void ImGuiLayer::CustomPanel(const float dt, bool first)
     {
-        const char* name = "Scenes: ";
+        const char* name = "Track Variables: ";
         std::stringstream stream;
-        Application::IMGUI().DockPanel(name, Application::IMGUI().getDockspaceBOTTOM());
+
+        if (first)
+			Application::IMGUI().DockPanel(name, Application::IMGUI().getDockspaceBOTTOM());
 
         ImGui::Begin(name);
         ImGui::End();
     }
 
-    void ImGuiLayer::LayerPanel(const float dt)
+    void ImGuiLayer::LayerPanel(const float dt, bool first)
     {
         const char* name = "Layers: ";
         std::stringstream stream;
-        Application::IMGUI().DockPanel(name, Application::IMGUI().getDockspaceLEFT());
+
+        if (first)
+			Application::IMGUI().DockPanel(name, Application::IMGUI().getDockspaceLEFT());
 
         ImGui::Begin(name);
+
+        for (Layer* layer : Application::GetLayerStack()) 
+        {
+            std::vector<GameObject*> gameobjects = layer->GetGameObjects();
+            if (ImGui::TreeNode(layer->GetName().c_str())) 
+            {
+                if (ImGui::TreeNode("Objects: "))
+                {
+                    for (int i = 0; i < gameobjects.size(); i++)
+                    {
+                        if (ImGui::Selectable((gameobjects[i]->getName() + std::string("##" + std::to_string(i))).c_str(), gameobjects[i] == selected_gameobject)) {
+                            selected_gameobject = gameobjects[i];
+                        }
+                    }
+                    ImGui::TreePop();
+                }
+
+                ImGui::Text("");
+                ImGui::TreePop();
+            }
+        }
+
         ImGui::End();
     }
 
-    void ImGuiLayer::ViewPortPanel(const float dt)
+    void ImGuiLayer::InspectorPanel(const float dt, bool first) {
+        const char* name = "Inspector: ";
+        std::stringstream stream;
+
+        if (first)
+            Application::IMGUI().DockPanel(name, Application::IMGUI().getDockspaceLEFT_BOTTOM());
+
+        ImGui::Begin(name);
+        if (selected_gameobject != nullptr) {
+            selected_gameobject->imgui(dt);
+        }
+        ImGui::End();
+    }
+
+    void ImGuiLayer::ViewPortPanel(const float dt, bool first)
     {
         const char* name = "ViewPort: ";
         std::stringstream stream;
-        Application::IMGUI().DockPanel(name, Application::IMGUI().getDockspaceMAIN());
+
+        if (first)
+			Application::IMGUI().DockPanel(name, Application::IMGUI().getDockspaceMAIN());
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
         ImGui::Begin(name);

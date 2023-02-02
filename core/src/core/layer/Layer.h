@@ -38,6 +38,7 @@ namespace core
 
 		bool getOverlayStatus() { return overlay; }
 		std::vector<GameObject*> GetGameObjects() const { return game_objects; }
+		std::string GetName() { return name; }
 	};
 }
 

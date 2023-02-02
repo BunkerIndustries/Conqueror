@@ -40,13 +40,17 @@ namespace core {
         int zIndex;
 
         std::shared_ptr<Shader> shader;
-        float* vertices;
+        std::vector<float> vertices;
         unsigned int* elements;
 
         void updateTextures();
         void loadVertexProperties(int index);
         void generateIndices(unsigned int* element);
         void loadElementIndices(unsigned int* arrayElements, int index);
+
+        inline static int draw_calls = 0;
+        inline static bool enable_polygon = false;
+        inline static int polygonMode = 6914;
 
     public:
 
@@ -64,6 +68,16 @@ namespace core {
         int getZIndex();
 
         DataPool::DISPLAYMODE displayMode;
+
+        int GetSpritesCount() const;
+        int GetVertexCount() const; 
+
+        inline static void setPolygonMode(int mode)
+        {
+            polygonMode = mode;
+        }
+
+        static int GetDrawCalls() { return draw_calls; }
     };
 
 }

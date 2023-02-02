@@ -101,7 +101,7 @@ namespace core {
             glUseProgram(shaderProgrammID);
             beingUsed = true;
         }
-    }
+    } 
 
     void Shader::detach() {
         glUseProgram(0);

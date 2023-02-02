@@ -95,7 +95,7 @@ namespace core {
 		// start of the calculations
 		float begin_time = static_cast<float>(glfwGetTime());
 		dt = 0.0167f;
-
+		Application::Debug_TrackVariable("dt", &dt);
 		bool warn = true;
 
 		while (game_running)
@@ -189,4 +189,7 @@ namespace core {
 		Get()->layer_stack.removeOverlay(layer);
 	}
 
+	void Application::Debug_TrackVariable(std::string name, void* variable) {
+		Get()->imguilayer->AddVariable(name, variable);
+	}
 }

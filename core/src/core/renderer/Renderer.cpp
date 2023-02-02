@@ -7,6 +7,8 @@
 #include "glad/glad.h"
 namespace core {
 
+    Renderer* Renderer::instance;
+
     struct less_than_key
     {
         inline bool operator() (RenderBatch* batch1, RenderBatch* batch2)
@@ -16,6 +18,7 @@ namespace core {
     };
 
     Renderer::Renderer() {
+        instance = this;
         properties.width = 1080;
         properties.height = 720;
         frame_buffer = new FrameBuffer(properties);
@@ -79,10 +82,17 @@ namespace core {
         //update GameObjects
         updateGameObjects(dt, Application::getCurrentScene()->gameObjects);
 
+        int sprites_count_calc = 0;
+        int vertices_count_calc = 0;
         // render all batches
         for (int i = 0; i < batches.size(); i++) {
+            sprites_count_calc += batches[i]->GetSpritesCount();
+            vertices_count_calc += batches[i]->GetVertexCount();
             batches[i]->render();
         }
+
+        sprites_count = sprites_count_calc;
+        vertex_count = vertices_count_calc;
 
         frame_buffer->Unbind();
     }
@@ -99,5 +109,4 @@ namespace core {
             }
         }
     }
-
 }
