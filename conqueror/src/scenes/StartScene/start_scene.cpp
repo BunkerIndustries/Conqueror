@@ -50,31 +50,6 @@ void StartScene::update(float dt) {
         camera->position.x -= 2.0f * dt;
     }
 
-
-    //// adjust the size of the current gameobject
-    //if (Input::IsKeyPressed(KEY_LEFT)) {
-    //    activeGameObject->transform.scale.x += 2.0f * dt;
-    //}
-    //if (Input::IsKeyPressed(KEY_RIGHT)) {
-    //    activeGameObject->transform.scale.x -= 2.0f * dt;
-    //}
-    //if (Input::IsKeyPressed(KEY_UP)) {
-    //    activeGameObject->transform.scale.y += 2.0f * dt;
-    //}
-    //if (Input::IsKeyPressed(KEY_DOWN)) {
-    //    activeGameObject->transform.scale.y -= 2.0f * dt;
-    //}
-
-    //// HERE YOU CAN CHANGE THE SCENE TO ANOTHER
-    //// YOU JUST HAVE TO INCLUDE THE DESIRED SCENE HEADER, IN ORDER TO ALLOCATE SPACE AND FIND THE REFERENCE TO THE SWITCHING SCENE
-
-    //if (Input::IsKeyPressed(KEY_U)) {
-    //    Application::Get()->changeScene(new StartScene());
-    //}
-
-    // tell the renderer to use our created layers
-
-
     this->renderer->render(Application::GetLayerStack(), dt);
 }
 
