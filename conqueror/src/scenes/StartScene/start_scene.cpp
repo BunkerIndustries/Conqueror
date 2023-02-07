@@ -1,5 +1,6 @@
 #include "start_scene.h"
 #include "constants.h"
+#include "functions.h"
 
 using namespace core;
 
