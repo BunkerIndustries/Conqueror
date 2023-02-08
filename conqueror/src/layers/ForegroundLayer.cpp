@@ -16,7 +16,6 @@ void ForegroundLayer::OnAttach()
 	this->AddGameObjectToLayer(character2);
 	this->AddGameObjectToLayer(object1);*/
 
-	CreateGrid(3);
 }
 
 void ForegroundLayer::OnDetach()
@@ -53,15 +52,6 @@ void ForegroundLayer::update(const float dt)
 		test_go->transform.scale.y -= 1.0f * dt;
 	}*/
 
-}
-
-void ForegroundLayer::CreateGrid(int x_size) {
-	std::vector<GameObject*> grid_vec;
-	for (size_t i = 0; i < x_size; i++) {
-		grid_vec.push_back(new GameObject(std::to_string(i), Transform(glm::vec2(i * 2.0f, 0.0f), glm::vec2(0.2f, 0.2f))));
-		grid_vec.at(i)->addComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));
-		this->AddGameObjectToLayer(grid_vec.at(i));
-	}
 }
 
 void ForegroundLayer::imgui(const float dt)

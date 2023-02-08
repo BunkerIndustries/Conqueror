@@ -21,6 +21,5 @@ public:
 	void imgui(const float dt) override;
 	void OnEvent(Event& event) override;
 
-	void CreateGrid(int);
 };
 
