@@ -22,7 +22,8 @@ void StartScene::loadResources() {
     foreground_layer = new ForegroundLayer();
     //sound_layer = new SoundLayer;
 
-    std::vector<std::vector<GameObject*>> enemy_grid = CreateGrid(5, 5, 2.0f, glm::vec2(0.0f, 0.0f), foreground_layer);
+    //Grid creation
+    std::vector<std::vector<GameObject*>> enemy_grid = CreateGrid(5, 5, 2.0f, glm::vec2(0.0f, 0.0f), foreground_layer); 
 }
 void StartScene::init() {
     //Application::AddLayer(background_layer);

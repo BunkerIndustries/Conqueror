@@ -348,7 +348,7 @@ namespace core {
     }
 
     bool RenderBatch::hasTextureRoom() {
-        return textures.size() < 1;
+        return textures.size() < 8;
     }
 
     bool RenderBatch::hasTexture(std::shared_ptr<Texture> tex) {
