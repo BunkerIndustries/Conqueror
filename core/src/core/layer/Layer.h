@@ -32,6 +32,8 @@ namespace core
 		virtual void imgui(const float dt) = 0;
 		virtual void OnEvent(Event& event) = 0;
 
+		void event(Event& event);
+
 		void AddGameObjectToLayer(GameObject* game_object);
 
 		void setOverlayStatus(bool overlay) { this->overlay = overlay; }

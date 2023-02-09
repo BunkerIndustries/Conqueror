@@ -11,8 +11,11 @@ namespace core {
     public:
         FontRenderer();
         virtual ~FontRenderer();
+
         void start() override;
+        void stop() override { }
         void update(float dt) override;
+        void event(Event& event) override { }
     };
 
 }

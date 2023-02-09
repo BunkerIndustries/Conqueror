@@ -5,9 +5,9 @@
 namespace core {
 
     //FONTRENDERER
-    FontRenderer::FontRenderer() {
-        // set renderer to FONTRENDERER
-        this->typeID = std::string("font_renderer");
+    FontRenderer::FontRenderer()
+	    : Component("font_renderer")
+	{
         // pascal you are funny
         LOG_CORE_DEBUG("FOUND FONT RENDERER");
     }

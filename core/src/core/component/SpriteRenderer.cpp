@@ -12,19 +12,19 @@ namespace core {
 
 
     //SPRITERENDERER
-    SpriteRenderer::SpriteRenderer(glm::vec4 color) {
-        this->typeID = std::string("sprite_renderer");
-        this->color = color;
+    SpriteRenderer::SpriteRenderer(glm::vec4 color)
+	    : Component("sprite_renderer")
+	{
+    	this->color = color;
         isDirty = true;
         // set newest sprite to no texture (symoblizes that this sprite only contains colors and no texture)
         this->sprite = new Sprite(nullptr);
     }
 
     SpriteRenderer::SpriteRenderer(Sprite* sprite)
+	    : Component("sprite_renderer")
     {
-        // set the renderer to SPRITERENDERER
-        this->typeID = std::string("sprite_renderer");
-        // our sprite is the sprite from the function call
+    	// our sprite is the sprite from the function call
         this->sprite = sprite;
         // set default colors
         this->color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);

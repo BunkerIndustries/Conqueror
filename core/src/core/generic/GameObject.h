@@ -5,6 +5,7 @@
 #include "generic/Component.h"
 #include "generic/Transform.h"
 #include "utils/DataPool.h"
+#include "event/Event.h"
 
 namespace core {
     class CORE_API GameObject {
@@ -12,6 +13,8 @@ namespace core {
         std::string name;
         std::vector<Component*> components;
         int zIndex;
+
+        bool running = false;
 
     public:
         Transform transform;
@@ -26,12 +29,16 @@ namespace core {
 
         void update(float dt);
         void start();
+        void stop();
         void imgui(float dt);
+        void event(Event& event);
 
         void deleteComponents();
+
         std::string getName();
         int getZIndex();
         void setZIndex(int zIndex);
+        bool IsRunning() const { return running; }
 
         DataPool::DISPLAYMODE displayMode;
 

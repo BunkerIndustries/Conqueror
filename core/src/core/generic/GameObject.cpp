@@ -6,7 +6,7 @@
 #include "utils/DataPool.h"
 
 #include "imgui/ImGuiLayer.h"
-
+#include "event/Event.h"
 
 
 namespace core {
@@ -64,6 +64,8 @@ namespace core {
         // iterate through components array and delete the component regarding this sprite that equals to the desired component type
         for (int i = 0; i < components.size(); i++) {
             if (components[i] == delComponent) {
+                if (running)
+					components[i]->stop();
                 delete components[i];
                 components[i] = nullptr;
                 return true;
@@ -101,8 +103,17 @@ namespace core {
 
     void GameObject::start() {
         // start all components
+        running = true;
         for (auto component : components) {
             component->start();
+        }
+    }
+
+    void GameObject::stop()
+    {
+        running = false;
+        for (auto component : components) {
+            component->stop();
         }
     }
 
@@ -110,6 +121,8 @@ namespace core {
         // delete all components
         for (auto comp : components)
         {
+            if (running) 
+				comp->stop();
             delete comp;
             comp = nullptr;
         }
@@ -143,4 +156,14 @@ namespace core {
         }
     }
 
+    void GameObject::event(Event& event)
+    {
+        for (Component* component : components)
+        {
+	        if (!event.handled)
+	        {
+                component->event(event);
+	        }
+        }
+    }
 }
