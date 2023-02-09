@@ -3,6 +3,8 @@
 #include "functions.h"
 #include <vector>
 
+#include "components/movement.h"
+
 using namespace core;
 
 StartScene::StartScene() {
@@ -23,7 +25,13 @@ void StartScene::loadResources() {
     //sound_layer = new SoundLayer;
 
     //Grid creation
-    std::vector<std::vector<GameObject*>> enemy_grid = CreateGrid(5, 5, 2.0f, glm::vec2(0.0f, 0.0f), foreground_layer); 
+    std::vector<std::vector<GameObject*>> enemy_grid = CreateGrid(5, 5, 2.0f, glm::vec2(0.0f, 0.0f), foreground_layer);
+
+    test = new GameObject("test", Transform(glm::vec2(1.0f, 1.0f), glm::vec2(0.5f, 0.5f)));
+    test->addComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));
+    test->addComponent(new Movement());
+    
+    foreground_layer->AddGameObjectToLayer(test);
 }
 void StartScene::init() {
     //Application::AddLayer(background_layer);
@@ -48,7 +56,11 @@ void StartScene::update(float dt) {
         camera->position.x -= cameraMoveSpeed * dt;
     }
 
-    this->renderer->render(Application::GetLayerStack(), dt);
+    if (Input::IsKeyPressed(KEY_M)) {
+        ((Movement*)test->getComponent("movement"))->MoveTo(glm::vec2(5.0f, 5.0f), 0.1f);
+    }
+
+    this->renderer->render(dt);
 }
 
 void StartScene::imgui(float dt) {

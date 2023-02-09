@@ -11,6 +11,8 @@ private:
 	BackgroundLayer* background_layer;
 	ForegroundLayer* foreground_layer;
 	SoundLayer* sound_layer;
+
+	GameObject* test;
 public:
 	StartScene();
 	virtual ~StartScene() override;
