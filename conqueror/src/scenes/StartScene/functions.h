@@ -7,7 +7,7 @@ using namespace core;
 
 
 // TODO: Change to vec2 2D-vector, cubes are placeholders for debugging and visualisation
-std::vector<std::vector<GameObject*>> CreateGrid(const uint8_t x_size, const uint8_t y_size, const float offset, const glm::vec2 mid_pos, Layer *layer) {
+inline std::vector<std::vector<GameObject*>> CreateGrid(const uint8_t x_size, const uint8_t y_size, const float offset, const glm::vec2 mid_pos, Layer *layer) {
 
 	std::vector<std::vector<GameObject*>> grid;	//create 2D vector
 	float cube_rad = 0.25f;

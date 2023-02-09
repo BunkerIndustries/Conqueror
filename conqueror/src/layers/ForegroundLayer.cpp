@@ -4,18 +4,18 @@
 
 void ForegroundLayer::OnAttach()
 {
-	GameObject *character1 = new GameObject("character1", Transform(glm::vec2(1.0f, -4.0f)));
-	GameObject* character2 = new GameObject("character2", Transform(glm::vec2(-1.0f, -4.0f)));
+	//GameObject* character1 = new GameObject("character1", Transform(glm::vec2(0.0f, 0.0f)));
+	//GameObject* character2 = new GameObject("character2", Transform(glm::vec2(2.0f, 0.0f)));
 	/*GameObject *character2 = new GameObject("character2");
 	GameObject *object1 = new GameObject("object1", Transform(glm::vec2(-3, -4), glm::vec2(1.0f, 3.0f)));*/
 
-	character1->addComponent(new SpriteRenderer(new Sprite(DataPool::getTexture("IMG_0131.jpg"))));
-	character2->addComponent(new SpriteRenderer(new Sprite(DataPool::getTexture("antimarx.png"))));
+	//character1->addComponent(new SpriteRenderer(new Sprite(DataPool::getTexture("IMG_0131.jpg"))));
+	//character2->addComponent(new SpriteRenderer(new Sprite(DataPool::getTexture("antimarx.png"))));
 	/*character2->addComponent(new SpriteRenderer(new Sprite(DataPool::getTexture("antimarx.png"))));
 	object1->addComponent(new SpriteRenderer(new Sprite(DataPool::getTexture("server-icon.png"))));*/
 
-	this->AddGameObjectToLayer(character1);
-	this->AddGameObjectToLayer(character2);
+	//this->AddGameObjectToLayer(character1);
+	//this->AddGameObjectToLayer(character2);
 	/*this->AddGameObjectToLayer(character2);
 	this->AddGameObjectToLayer(object1);*/
 

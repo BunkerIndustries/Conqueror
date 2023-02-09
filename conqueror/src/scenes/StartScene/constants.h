@@ -1,6 +1,6 @@
 #pragma once
 
-float cameraScrollSpeed = 15.0f;
-float cameraMoveSpeed = 2.0f;
-float minCameraZPos = 2.0f;
-float maxCameraZPos = 10.0f;
+inline float cameraScrollSpeed = 15.0f;
+inline float cameraMoveSpeed = 2.0f;
+inline float minCameraZPos = 2.0f;
+inline float maxCameraZPos = 10.0f;
