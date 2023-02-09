@@ -57,7 +57,8 @@ void StartScene::update(float dt) {
     }
 
     if (Input::IsKeyPressed(KEY_M)) {
-        ((Movement*)test->getComponent("movement"))->MoveTo(glm::vec2(5.0f, 5.0f), 0.1f);
+        
+        ((Movement*)test->getComponent("movement"))->target_pos = glm::vec2(5.0f, 5.0f);
     }
 
     this->renderer->render(dt);
