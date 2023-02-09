@@ -30,9 +30,3 @@ std::vector<std::vector<GameObject*>> CreateGrid(const uint8_t x_size, const uin
 	}
 	return grid;
 }
-
-
-
-//glm::vec2 CreateGrid(const uint8_t x_size, const uint8_t y_size, const float space, const glm::vec2 mid_pos) {
-//
-//}
