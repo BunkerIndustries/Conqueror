@@ -4,12 +4,15 @@
 
 #include "event/Event.h"
 
+#include "generic/GameObject.h"
+
 namespace core {
 
     class Component {
-    public:
     protected:
         std::string typeID;
+        GameObject* gameObject;
+
     public:
         Component(std::string typeID)
 	        :typeID(typeID) { }
@@ -22,6 +25,10 @@ namespace core {
         virtual void update(float dt) = 0;
         virtual void event(Event& event) = 0;
         virtual void imgui(float dt) { }
+
+        GameObject* GetGameObject() const { return gameObject; }
+
+        friend class GameObject;
     };
 
 }

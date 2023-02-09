@@ -42,16 +42,17 @@ namespace core {
     void SpriteRenderer::start() {
         // change values from the previous frame in order to check if the gameObject changed values
         // the local lastTransform variable always holds the old values, in order to be compared to the 'new' value
-        lastTransform = core::GameObject::CGMap[this]->transform.copy();
+        lastTransform = gameObject->transform.copy();
     }
 
     void SpriteRenderer::update(float dt) {
         // check if there have been made changes to the sprite (transform of the gameObject)
-        if (!(core::GameObject::CGMap[this]->transform.equals(*lastTransform)))
+        if (!(gameObject->transform.equals(*lastTransform)))
         {
             // if it is not equal, save it to the local transform and
             // set the dirty bit (variable that is being checked in order to display changes)
-            core::GameObject::CGMap[this]->transform.copy(*this->lastTransform);
+            //core::GameObject::CGMap[this]->transform.copy(*this->lastTransform);
+            gameObject->transform.copy(*this->lastTransform);
             isDirty = true;
         }
     }

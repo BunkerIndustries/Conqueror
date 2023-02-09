@@ -11,8 +11,6 @@
 
 namespace core {
 
-    std::unordered_map<core::Component*, core::GameObject*> core::GameObject::CGMap;
-
     GameObject::GameObject(std::string name) {
         // create gameObject with name and create a standard transform object
         this->name = name;
@@ -88,7 +86,7 @@ namespace core {
         }
         if (!exists) {
             components.push_back(component);
-            CGMap[component] = this;
+            component->gameObject = this;
             return true;
         }
         return false;
