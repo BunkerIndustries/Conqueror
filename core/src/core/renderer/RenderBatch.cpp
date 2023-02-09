@@ -260,20 +260,20 @@ namespace core {
         };
         */
 
-        float xAdd = 0.0f;
-        float yAdd = 0.0f;
+        float xAdd = -0.5f;
+        float yAdd = -0.5f;
         for (int i = 0; i < 4; i++)
         {
             switch (i)
             {
             case 1:
-                xAdd = 1.0f;
+                xAdd = 0.5f;
                 break;
             case 2:
-                yAdd = 1.0f;
+                yAdd = 0.5f;
                 break;
             case 3:
-                xAdd = 0.0f;
+                xAdd = -0.5f;
                 break;
             default:
                 break;
