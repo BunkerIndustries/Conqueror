@@ -23,16 +23,15 @@ inline std::vector<std::vector<GameObject*>> CreateGrid(const uint8_t x_size, co
 
 			y_row.at(y)->addComponent(new SpriteRenderer(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)));	// add SpriteRenderer
 			layer->AddGameObjectToLayer(y_row.at(y));
-			std::cout << "x:" << std::to_string(x) << " y:" << std::to_string(y) << std::endl;
-			std::cout << "xPos: " << std::to_string(start_pos.x + x * (offset + 2 * cube_rad)) << " yPos:" << std::to_string(start_pos.y + y * (offset + 2.0f * cube_rad)) << std::endl;
 		}
 		grid.emplace_back(y_row);	// add y_row to grid at index x
 	}
 	return grid;
 }
 
-
-
-//glm::vec2 CreateGrid(const uint8_t x_size, const uint8_t y_size, const float space, const glm::vec2 mid_pos) {
-//
-//}
+void RoundVec2(glm::vec2& vec) {
+	// rounds to 2 decimal places
+	vec.x = std::round(vec.x * pow(10, 2)) / pow(10, 2);	
+	vec.y = std::round(vec.y * pow(10, 2)) / pow(10, 2);
+	// written by chatGPT 0_0
+}

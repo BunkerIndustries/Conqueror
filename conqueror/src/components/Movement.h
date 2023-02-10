@@ -14,5 +14,5 @@ public:
 	void MoveTo(glm::vec2 pos, float speed);
 
 	glm::vec2 target_pos;
-	float movement_speed = 0.1f;
+	float movement_speed;
 };

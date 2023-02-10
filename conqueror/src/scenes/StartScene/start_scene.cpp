@@ -1,6 +1,6 @@
 #include "start_scene.h"
-#include "constants.h"
-#include "functions.h"
+#include "required/constants.h"
+#include "required/functions.h"
 #include <vector>
 
 #include "components/movement.h"
@@ -27,10 +27,11 @@ void StartScene::loadResources() {
     //Grid creation
     std::vector<std::vector<GameObject*>> enemy_grid = CreateGrid(5, 5, 2.0f, glm::vec2(0.0f, 0.0f), foreground_layer);
 
-    test = new GameObject("test", Transform(glm::vec2(1.0f, 1.0f), glm::vec2(0.5f, 0.5f)));
+    test = new GameObject("test", Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0, 1.0f)));
     test->addComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));
     test->addComponent(new Movement());
-    
+    LOG_DEBUG("Start x pos: {0}", test->transform.position.x);
+    ((Movement*)test->getComponent("movement"));
     foreground_layer->AddGameObjectToLayer(test);
 }
 void StartScene::init() {
@@ -56,7 +57,7 @@ void StartScene::update(float dt) {
         camera->position.x -= cameraMoveSpeed * dt;
     }
 
-    if (Input::IsKeyPressed(KEY_M)) {
+    if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         
         ((Movement*)test->getComponent("movement"))->target_pos = glm::vec2(5.0f, 5.0f);
     }
