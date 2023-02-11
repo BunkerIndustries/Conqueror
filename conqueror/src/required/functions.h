@@ -29,9 +29,9 @@ inline std::vector<std::vector<GameObject*>> CreateGrid(const uint8_t x_size, co
 	return grid;
 }
 
-void RoundVec2(glm::vec2& vec) {
+inline void RoundVec2(glm::vec2& vec) {
 	// rounds to 2 decimal places
-	vec.x = std::round(vec.x * pow(10, 2)) / pow(10, 2);	
-	vec.y = std::round(vec.y * pow(10, 2)) / pow(10, 2);
+	vec.x = std::roundf(vec.x * powf(10, 2)) / powf(10, 2);	
+	vec.y = std::roundf(vec.y * powf(10, 2)) / powf(10, 2);
 	// written by chatGPT 0_0
 }

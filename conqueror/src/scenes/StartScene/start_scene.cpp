@@ -57,9 +57,9 @@ void StartScene::update(float dt) {
         camera->position.x -= cameraMoveSpeed * dt;
     }
 
-    if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        
-        ((Movement*)test->getComponent("movement"))->target_pos = glm::vec2(5.0f, 5.0f);
+    if (Input::IsKeyPressed(KEY_M)) {
+        LOG_DEBUG("M-PRESSED-------------------");
+        ((Movement*)test->getComponent("movement"))->target_position = glm::vec2(5.0f, 5.0f);
     }
 
     this->renderer->render(dt);
