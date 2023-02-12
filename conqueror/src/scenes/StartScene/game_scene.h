@@ -7,7 +7,7 @@
 
 #include <vector>
 
-class StartScene : public core::Scene
+class GameScene : public core::Scene
 {
 private:
 	BackgroundLayer* background_layer;
@@ -16,8 +16,8 @@ private:
 
 	GameObject* test;
 public:
-	StartScene();
-	virtual ~StartScene() override;
+	GameScene();
+	virtual ~GameScene() override;
 	void loadResources() override;
 	void init() override;
 	void update(float dt) override;
@@ -26,7 +26,7 @@ public:
 	void OnEvent(Event& e) override
 	{
 		EventDispatcher dispatcher(e);
-		dispatcher.dispatch<MouseScrolledEvent>(BIND_EVENT_FN(StartScene::OnMouseScroll));
+		dispatcher.dispatch<MouseScrolledEvent>(BIND_EVENT_FN(GameScene::OnMouseScroll));
 	};
 	bool OnMouseScroll(MouseScrolledEvent& e);
 

@@ -1,4 +1,4 @@
-#include "start_scene.h"
+#include "game_scene.h"
 #include "required/constants.h"
 #include "required/functions.h"
 #include <vector>
@@ -8,16 +8,16 @@
 
 using namespace core;
 
-StartScene::StartScene() {
+GameScene::GameScene() {
 }
 
-StartScene::~StartScene() {
+GameScene::~GameScene() {
     //Application::RemoveLayer(background_layer);
     Application::RemoveLayer(foreground_layer);
     //Application::RemoveOverLay(sound_layer);
 }
 
-void StartScene::loadResources() {
+void GameScene::loadResources() {
     // set background color
     backcolor = glm::vec4(0.8f, 0.8f, 0.8f, 1.0f);
 
@@ -35,7 +35,7 @@ void StartScene::loadResources() {
     ((Movement*)test->getComponent("movement"));
     foreground_layer->AddGameObjectToLayer(test);
 }
-void StartScene::init() {
+void GameScene::init() {
     //Application::AddLayer(background_layer);
     Application::AddLayer(foreground_layer);
     //Application::AddOverLay(sound_layer);
@@ -44,7 +44,7 @@ void StartScene::init() {
 
 int selectedItem = 0;
 bool m_pressed = false;    // is needed that pressing M doesn't trigger multiple times
-void StartScene::update(float dt) {
+void GameScene::update(float dt) {
 
     if (Input::IsKeyPressed(KEY_S)) {
         camera->position.y -= cameraMoveSpeed * dt;
@@ -70,11 +70,11 @@ void StartScene::update(float dt) {
     this->renderer->render(dt);
 }
 
-void StartScene::imgui(float dt) {
+void GameScene::imgui(float dt) {
 
 }
 
-bool StartScene::OnMouseScroll(MouseScrolledEvent& e)
+bool GameScene::OnMouseScroll(MouseScrolledEvent& e)
 {
     //Checking if camera z position is inside wanted bounds
     if (getCamera()->position.z > maxCameraZPos && e.getYOffset() > 0) return false;

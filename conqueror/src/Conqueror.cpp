@@ -1,7 +1,7 @@
 #define INCLUDE_MAIN
 #include "Engine.h"
 
-#include "scenes/StartScene/start_scene.h"
+#include "scenes/StartScene/game_scene.h"
 
 class Conqueror : public core::Application {
 public:
@@ -14,7 +14,7 @@ public:
 	}
 
 	void init() override {
-		Application::changeScene(new StartScene());
+		Application::changeScene(new GameScene());
 	}
 
 };
