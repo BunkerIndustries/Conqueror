@@ -5,6 +5,8 @@
 #include "layers/ForegroundLayer.h"
 #include "layers/BackgroundLayer.h"
 
+#include <vector>
+
 class StartScene : public core::Scene
 {
 private:
@@ -27,4 +29,6 @@ public:
 		dispatcher.dispatch<MouseScrolledEvent>(BIND_EVENT_FN(StartScene::OnMouseScroll));
 	};
 	bool OnMouseScroll(MouseScrolledEvent& e);
+
+	std::vector<std::vector<GameObject*>> enemy_grid;
 };

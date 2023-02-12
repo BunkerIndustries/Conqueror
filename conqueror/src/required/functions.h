@@ -2,6 +2,7 @@
 #include "Engine.h"
 #include "layers/ForegroundLayer.h"
 #include <vector>
+#include <random>
 
 using namespace core;
 
@@ -29,9 +30,18 @@ inline std::vector<std::vector<GameObject*>> CreateGrid(const uint8_t x_size, co
 	return grid;
 }
 
-inline void RoundVec2(glm::vec2& vec) {
+inline void RoundVec2(glm::vec2& vec) {		// written by chatGPT 0_0
 	// rounds to 2 decimal places
 	vec.x = std::roundf(vec.x * powf(10, 2)) / powf(10, 2);	
 	vec.y = std::roundf(vec.y * powf(10, 2)) / powf(10, 2);
-	// written by chatGPT 0_0
+	
+}
+
+inline int RandomInt(const int from, const int to) {	// written by chatGPT 0_0
+	
+	std::random_device rd;  // Use a true random number source
+	std::mt19937 generator(rd());  // Use Mersenne Twister algorithm
+	std::uniform_int_distribution<> distribution(from, to);  // Distribute numbers evenly
+
+	return distribution(generator);  // Generate the random number and return it
 }

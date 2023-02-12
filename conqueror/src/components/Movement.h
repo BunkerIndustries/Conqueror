@@ -15,4 +15,5 @@ public:
 
 	glm::vec2 target_position;
 	float movement_speed;
+
 };
