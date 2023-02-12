@@ -1,10 +1,9 @@
 #include "game_scene.h"
-#include "required/constants.h"
-#include "required/functions.h"
 #include <vector>
 
-#include "components/movement.h"
 #include "required/constants.h"
+#include "required/functions.h"
+#include "components/movement.h"
 
 using namespace core;
 
