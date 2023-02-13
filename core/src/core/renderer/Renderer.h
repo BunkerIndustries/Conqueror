@@ -27,8 +27,8 @@ namespace core {
         void add(Layer* layer, int index);
         void add(SpriteRenderer* spriteRenderer, int index);
         // this function has to be called on every frame (update)
-        void render(LayerStack& layer_stack, float dt);
-        void updateGameObjects(float dt, std::vector<GameObject*>& gameObjects);
+        void render(float dt);
+        void updateGameObjects(float dt);
 
         FrameBuffer& GetFrameBuffer() const { return *frame_buffer; }
 

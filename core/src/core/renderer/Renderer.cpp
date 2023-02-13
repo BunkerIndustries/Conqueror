@@ -62,7 +62,7 @@ namespace core {
         }
         if (!added && !found) {
             // if there is no place for the spriterenderer, create a new renderbatch with the needed setup (functions)
-            RenderBatch* newBatch = new RenderBatch(MAX_BATCH_SIZE, index, core::GameObject::CGMap[spriteRenderer]->displayMode);
+            RenderBatch* newBatch = new RenderBatch(MAX_BATCH_SIZE, index, spriteRenderer->GetGameObject()->displayMode);
             newBatch->start();
             batches.push_back(newBatch);
             newBatch->addSprite(spriteRenderer);
@@ -70,7 +70,7 @@ namespace core {
         }
     }
 
-    void Renderer::render(LayerStack& layer_stack, const float dt) {
+    void Renderer::render(const float dt) {
         if (Application::GetImGuiEnabled())
 			frame_buffer->Bind();
         else
@@ -80,7 +80,7 @@ namespace core {
         Application::getCurrentScene()->getCamera()->calcCameraVectors();
 
         //update GameObjects
-        updateGameObjects(dt, Application::getCurrentScene()->gameObjects);
+        updateGameObjects(dt);
 
         int sprites_count_calc = 0;
         int vertices_count_calc = 0;
@@ -97,7 +97,7 @@ namespace core {
         frame_buffer->Unbind();
     }
 
-    void Renderer::updateGameObjects(float dt, std::vector<GameObject*>& gameObjects)
+    void Renderer::updateGameObjects(float dt)
     {
         // update the gameObjects so it displays the changes
 
@@ -105,6 +105,7 @@ namespace core {
         {
             for (GameObject* game_object : layer->GetGameObjects())
             {
+                if (!game_object->IsRunning()) continue;
                 game_object->update(dt);
             }
         }

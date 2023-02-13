@@ -7,9 +7,10 @@ namespace core {
 
     // SPRITE
 
-    Sprite::Sprite(std::shared_ptr<Texture> texture) {
-        this->typeID = std::string("sprite");
-        Sprite::texture = texture;
+    Sprite::Sprite(std::shared_ptr<Texture> texture)
+	    : Component("sprite")
+	{
+    Sprite::texture = texture;
         // standard texture coordinates (mostly used)
         int offset = 0;
         float xAdd = 0.0f;
@@ -38,9 +39,9 @@ namespace core {
 
 
     Sprite::Sprite(std::shared_ptr<Texture> texture, float texCoords[])
+	    : Component("sprite")
     {
-        this->typeID = std::string("sprite");
-        // set current texture to desired texture
+    // set current texture to desired texture
         Sprite::texture = texture;
         // get texCoords array and set the desired values (this is rarely being called) who the hell would want a flipped texture
         for (int i = 0; i < 8; i++) {

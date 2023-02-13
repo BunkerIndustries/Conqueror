@@ -2,16 +2,21 @@
 #include "_Core.h"
 #include "utility.h"
 
-#include "generic/Component.h"
 #include "generic/Transform.h"
 #include "utils/DataPool.h"
+#include "event/Event.h"
 
 namespace core {
+
+    class Component;
+
     class CORE_API GameObject {
     private:
         std::string name;
         std::vector<Component*> components;
         int zIndex;
+
+        bool running = false;
 
     public:
         Transform transform;
@@ -26,16 +31,18 @@ namespace core {
 
         void update(float dt);
         void start();
+        void stop();
         void imgui(float dt);
+        void event(Event& event);
 
         void deleteComponents();
+
         std::string getName();
         int getZIndex();
         void setZIndex(int zIndex);
+        bool IsRunning() const { return running; }
 
         DataPool::DISPLAYMODE displayMode;
-
-        static std::unordered_map<Component*, GameObject*> CGMap;
     };
 
     

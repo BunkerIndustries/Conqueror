@@ -282,8 +282,8 @@ namespace core {
             // set the first values to the according positions
 
             if (vertices.size() > offset + 8) {
-                vertices[offset + 0] = GameObject::CGMap[sprite]->transform.position.x + xAdd * GameObject::CGMap[sprite]->transform.scale.x;
-                vertices[offset + 1] = GameObject::CGMap[sprite]->transform.position.y + yAdd * GameObject::CGMap[sprite]->transform.scale.y;
+                vertices[offset + 0] = sprite->GetGameObject()->transform.position.x + xAdd * sprite->GetGameObject()->transform.scale.x;
+                vertices[offset + 1] = sprite->GetGameObject()->transform.position.y + yAdd * sprite->GetGameObject()->transform.scale.y;
 
                 // set colors
                 vertices[offset + 2] = color.x;
@@ -299,8 +299,8 @@ namespace core {
                 vertices[offset + 8] = texID;
             }
             else {
-                vertices.emplace(vertices.begin() + offset + 0, GameObject::CGMap[sprite]->transform.position.x + xAdd * GameObject::CGMap[sprite]->transform.scale.x);
-                vertices.emplace(vertices.begin() + offset + 1, GameObject::CGMap[sprite]->transform.position.y + yAdd * GameObject::CGMap[sprite]->transform.scale.y);
+                vertices.emplace(vertices.begin() + offset + 0, sprite->GetGameObject()->transform.position.x + xAdd * sprite->GetGameObject()->transform.scale.x);
+                vertices.emplace(vertices.begin() + offset + 1, sprite->GetGameObject()->transform.position.y + yAdd * sprite->GetGameObject()->transform.scale.y);
 
                 // set colors
                 vertices.emplace(vertices.begin() + offset + 2, color.x);

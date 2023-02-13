@@ -21,15 +21,15 @@ namespace core {
 
         virtual ~SpriteRenderer();
 
-        /* troll */
-        // setup function
         void start() override;
-        // update function call on every update (frame)
+        void stop() override { }
         void update(float dt) override;
         void imgui(float dt) override;
+        void event(Event& event) override { }
+
         glm::vec4 getColor();
         std::shared_ptr<Texture> getTexture();
-        float* getTexCoords();
+    	float* getTexCoords();
 
         void setSprite(Sprite* sprite);
         void setColor(glm::vec4 color);

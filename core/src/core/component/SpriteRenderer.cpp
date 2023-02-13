@@ -12,19 +12,19 @@ namespace core {
 
 
     //SPRITERENDERER
-    SpriteRenderer::SpriteRenderer(glm::vec4 color) {
-        this->typeID = std::string("sprite_renderer");
-        this->color = color;
+    SpriteRenderer::SpriteRenderer(glm::vec4 color)
+	    : Component("sprite_renderer")
+	{
+    	this->color = color;
         isDirty = true;
         // set newest sprite to no texture (symoblizes that this sprite only contains colors and no texture)
         this->sprite = new Sprite(nullptr);
     }
 
     SpriteRenderer::SpriteRenderer(Sprite* sprite)
+	    : Component("sprite_renderer")
     {
-        // set the renderer to SPRITERENDERER
-        this->typeID = std::string("sprite_renderer");
-        // our sprite is the sprite from the function call
+    	// our sprite is the sprite from the function call
         this->sprite = sprite;
         // set default colors
         this->color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
@@ -42,16 +42,17 @@ namespace core {
     void SpriteRenderer::start() {
         // change values from the previous frame in order to check if the gameObject changed values
         // the local lastTransform variable always holds the old values, in order to be compared to the 'new' value
-        lastTransform = core::GameObject::CGMap[this]->transform.copy();
+        lastTransform = gameObject->transform.copy();
     }
 
     void SpriteRenderer::update(float dt) {
         // check if there have been made changes to the sprite (transform of the gameObject)
-        if (!(core::GameObject::CGMap[this]->transform.equals(*lastTransform)))
+        if (!(gameObject->transform.equals(*lastTransform)))
         {
             // if it is not equal, save it to the local transform and
             // set the dirty bit (variable that is being checked in order to display changes)
-            core::GameObject::CGMap[this]->transform.copy(*this->lastTransform);
+            //core::GameObject::CGMap[this]->transform.copy(*this->lastTransform);
+            gameObject->transform.copy(*this->lastTransform);
             isDirty = true;
         }
     }
