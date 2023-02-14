@@ -15,6 +15,7 @@ private:
 	SoundLayer* sound_layer;
 
 	GameObject* test;
+	GameObject* clicked_go;
 public:
 	GameScene();
 	virtual ~GameScene() override;
@@ -27,8 +28,10 @@ public:
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.dispatch<MouseScrolledEvent>(BIND_EVENT_FN(GameScene::OnMouseScroll));
+		dispatcher.dispatch<GameObjectPressedEvent>(BIND_EVENT_FN(GameScene::GameObjectPressed));
 	};
 	bool OnMouseScroll(MouseScrolledEvent& e);
+	bool GameObjectPressed(GameObjectPressedEvent& e);
 
 	std::vector<std::vector<GameObject*>> enemy_grid;
 };

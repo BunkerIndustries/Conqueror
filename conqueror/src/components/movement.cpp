@@ -18,7 +18,10 @@ void Movement::stop() {
 }
 
 void Movement::update(float dt) {
-	MoveTo(target_position, movement_speed);
+
+	if (target_position != gameObject->transform.position) {
+		MoveTo(target_position, movement_speed);
+	}
 }
 
 void Movement::MoveTo(glm::vec2 target_pos, float speed) {

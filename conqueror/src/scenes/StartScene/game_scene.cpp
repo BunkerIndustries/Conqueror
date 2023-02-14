@@ -82,3 +82,10 @@ bool GameScene::OnMouseScroll(MouseScrolledEvent& e)
 
     return true;
 }
+
+bool GameScene::GameObjectPressed(GameObjectPressedEvent& e) {
+
+    clicked_go = e.GetGameObject();
+
+    return true;
+}
