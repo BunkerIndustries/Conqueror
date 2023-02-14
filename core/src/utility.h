@@ -22,3 +22,7 @@
 
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
 
+namespace core
+{
+	using core_id = uint32_t;
+}

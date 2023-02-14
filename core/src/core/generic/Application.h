@@ -22,13 +22,13 @@ namespace core {
 		ImGuiLayer* imguilayer = nullptr;
 		Scene* current_scene = nullptr;
 		Scene* queued_scene = nullptr;
+		std::vector<Event*> eventQueue;
 		float dt;
 		long int frames_rendered = 0;
 		bool game_running = true;
 		bool imgui_enabled = true; int imgui_enabled_queue = 0;
 
 		bool onWindowClose(WindowCloseEvent& e);
-		bool onWindowResize(WindowResizeEvent& e);
 		bool onKeyPressed(KeyPressedEvent& e);
 
 		void ProcessQueues();
@@ -51,24 +51,22 @@ namespace core {
 		static void RemoveLayer(Layer* layer);
 		static void RemoveOverLay(Layer* layer);
 
-		void changeScene(Scene* new_scene);
+		static void ChangeScene(Scene* new_scene);
 
 		void exit() { game_running = false; }
 
-		static Application* Get() { return instance; }
+		static void QueueEvents(Event* event);
+		static Application* GetInstance() { return instance; }
 
-		static long int GetFramesRendered() { return Get()->frames_rendered; }
-		static bool GetImGuiEnabled() { return Get()->imgui_enabled; }
-		static float GetDT() { return Get()->dt; }
-		static void setEventCallback(const EventCallbackFunction& callback_function) { Get()->window->setEventCallback(callback_function); }
-		static void Debug_TrackVariable(std::string name, void* variable);
+		static long int GetFramesRendered() { return GetInstance()->frames_rendered; }
+		static bool GetImGuiEnabled() { return GetInstance()->imgui_enabled; }
+		static float GetDT() { return GetInstance()->dt; }
+		static void SetEventCallback(const EventCallbackFunction& callback_function) { GetInstance()->window->setEventCallback(callback_function); }
 
-
-		static Window* getWindow() { return Get()->window; }
-		static Scene* getCurrentScene() { return Get()->current_scene; }
-		static ImGuiLayer& IMGUI() { return *Get()->imguilayer; }
-		static LayerStack& GetLayerStack() { return Get()->layer_stack; }
-
+		static Window* GetWindow() { return GetInstance()->window; }
+		static Scene* GetCurrentScene() { return GetInstance()->current_scene; }
+		static ImGuiLayer& GetImGuiLayer() { return *GetInstance()->imguilayer; }
+		static LayerStack& GetLayerStack() { return GetInstance()->layer_stack; }
 	};
 	
 	//defined by client

@@ -21,7 +21,7 @@ namespace core {
 
         this->target = glm::vec3(this->position.x, this->position.y, 0.0f);
         // move every gameObject that is orthographic before the camera moves
-        for (auto& go : Application::getCurrentScene()->getGameObjects()) {
+        for (auto& go : Application::GetCurrentScene()->getGameObjects()) {
             if (go->displayMode == DataPool::DISPLAYMODE::ORTHOGRAPHIC) {
                 go->transform.position.x = target.x + 1;
                 go->transform.position.y = target.y + 1;
@@ -51,7 +51,7 @@ namespace core {
 
     glm::mat4 Camera::getProjectionMatrix() {
         // get aspect ratio because we need it in order to project the camera correctly
-        float aspect = (float)Application::getWindow()->getWidth() / (float)Application::getWindow()->getHeight();
+        float aspect = (float)Application::GetWindow()->getWidth() / (float)Application::GetWindow()->getHeight();
         return glm::perspective(fov, aspect, 0.1f, 1000.0f);
     }
 

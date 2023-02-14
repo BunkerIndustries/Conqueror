@@ -12,9 +12,9 @@ namespace core {
 		int button;
 
 	public:
+		MouseButtonPressedEvent() = default;
 		MouseButtonPressedEvent(int button)
 			:button(button) { }
-
 
 		inline int getButton() const { return button; }
 
@@ -35,6 +35,7 @@ namespace core {
 		int button;
 
 	public:
+		MouseButtonReleasedEvent() = default;
 		MouseButtonReleasedEvent(int button)
 			:button(button) { }
 
@@ -56,7 +57,8 @@ namespace core {
 		float mouseX, mouseY;
 
 	public:
-		MouseMovedEvent(const float x, const float y) 
+		MouseMovedEvent() = default;
+		MouseMovedEvent(const float x, const float y)
 			: mouseX(x), mouseY(y) { }
 
 		inline float getX() const { return mouseX; }
@@ -80,6 +82,7 @@ namespace core {
 		float yOff;
 
 	public:
+		MouseScrolledEvent() = default;
 		MouseScrolledEvent(float xOff, float yOff)
 			: xOff(xOff), yOff(yOff) { }
 

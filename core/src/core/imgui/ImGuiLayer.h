@@ -30,7 +30,10 @@ namespace core {
         void InspectorPanel(const float dt, bool first);
         void ViewPortPanel(const float dt, bool first);
 
-        glm::vec2 viewport_size;
+        glm::vec2 viewportSize;
+        glm::vec2 viewportBounds[2];
+
+        glm::ivec2 mousePosViewportRelative;
 
         GameObject* selected_gameobject = nullptr;
 
@@ -44,7 +47,7 @@ namespace core {
 
         void OnAttach() override;
         void OnDetach() override;
-        void update(const float dt) override { }
+        void update(const float dt) override;
         void imgui(const float dt) override;
         void OnEvent(Event& e) override { }
 
@@ -54,13 +57,16 @@ namespace core {
         void DockPanel(std::string name, ImGuiID dock_id);
         void AddVariable(std::string name, void* variable);
 
-        ImGuiID getDockspaceMAIN() const { return dock_id_main; }
-        ImGuiID getDockspaceTOP() const { return dock_id_top; }
-        ImGuiID getDockspaceBOTTOM() const { return dock_id_down; }
-        ImGuiID getDockspaceLEFT() const { return dock_id_left; }
-        ImGuiID getDockspaceRIGHT() const { return dock_id_right; }
-        ImGuiID getDockspaceRIGHT2() const { return dock_id_right2; }
-        ImGuiID getDockspaceLEFT_BOTTOM() const { return dock_id_left_bottom; }
+        glm::ivec2 GetMousePosViewportRelative() const { return mousePosViewportRelative; }
+        bool IsMouseInsideViewport() const { return mousePosViewportRelative.x >= 0 && mousePosViewportRelative.y >= 0 && mousePosViewportRelative.x < viewportSize.x&& mousePosViewportRelative.y < viewportSize.y; }
+
+        ImGuiID GetDockspaceMain() const { return dock_id_main; }
+        ImGuiID GetDockspaceTop() const { return dock_id_top; }
+        ImGuiID GetDockspaceBottom() const { return dock_id_down; }
+        ImGuiID GetDockspaceLeft() const { return dock_id_left; }
+        ImGuiID GetDockspaceRight() const { return dock_id_right; }
+        ImGuiID GetDockspaceRight2() const { return dock_id_right2; }
+        ImGuiID GetDockspaceLeftBottom() const { return dock_id_left_bottom; }
 
     };
 

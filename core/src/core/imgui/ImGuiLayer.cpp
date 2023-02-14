@@ -2,6 +2,8 @@
 #include "utility.h"
 
 #include "imgui/ImGuiLayer.h"
+
+#include "event/Input.h"
 #include "generic/Application.h"
 #include "renderer/Renderer.h"
 #include "renderer/RenderBatch.h"
@@ -91,7 +93,7 @@ namespace core {
         fontConfig.MergeMode = true;
 
         //init backend
-        ImGui_ImplGlfw_InitForOpenGL(Application::getWindow()->getNativeWindow(), true);
+        ImGui_ImplGlfw_InitForOpenGL(Application::GetWindow()->getNativeWindow(), true);
         ImGui_ImplOpenGL3_Init("#version 410");
     }
 
@@ -106,7 +108,7 @@ namespace core {
     void ImGuiLayer::begin(const float dt)
     {
         ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2(Application::getWindow()->getWidth(), Application::getWindow()->getHeight());
+        io.DisplaySize = ImVec2(Application::GetWindow()->getWidth(), Application::GetWindow()->getHeight());
         io.DeltaTime = dt;
 
         ImGui_ImplOpenGL3_NewFrame();
@@ -117,7 +119,7 @@ namespace core {
     void ImGuiLayer::end()
     {
         ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2(Application::getWindow()->getWidth(), Application::getWindow()->getHeight());
+        io.DisplaySize = ImVec2(Application::GetWindow()->getWidth(), Application::GetWindow()->getHeight());
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -130,6 +132,7 @@ namespace core {
             glfwMakeContextCurrent(context_current);
         }
     }
+
 
 
     void ImGuiLayer::DockPanel(std::string name, ImGuiID dock_id)
@@ -152,6 +155,21 @@ namespace core {
             ImGui::EndTooltip();
         }
     }
+
+    void ImGuiLayer::update(const float dt)
+    {
+        if (Application::GetImGuiEnabled()) {
+            mousePosViewportRelative = *(glm::vec2*)&ImGui::GetMousePos();
+            mousePosViewportRelative.x -= viewportBounds[0].x;
+            mousePosViewportRelative.y -= viewportBounds[0].y - 24;
+            glm::vec2 viewportSize = viewportBounds[1] - viewportBounds[0];
+
+            mousePosViewportRelative.y = viewportSize.y - mousePosViewportRelative.y;
+
+        }
+        
+    }
+
 
     static bool p_open = true;
     void ImGuiLayer::imgui(const float dt)
@@ -182,7 +200,7 @@ namespace core {
             initialized = true;
             ImGui::DockBuilderRemoveNode(dockspace_id);
             ImGui::DockBuilderAddNode(dockspace_id, ImGuiDockNodeFlags_DockSpace);
-            ImGui::DockBuilderSetNodeSize(dockspace_id, ImVec2(Application::getWindow()->getWidth() + 500, Application::getWindow()->getHeight() + 500));
+            ImGui::DockBuilderSetNodeSize(dockspace_id, ImVec2(Application::GetWindow()->getWidth() + 500, Application::GetWindow()->getHeight() + 500));
 
             dock_id_main = dockspace_id;
             dock_id_right = ImGui::DockBuilderSplitNode(dock_id_main, ImGuiDir_Right, 0.2f, nullptr, &dock_id_main);
@@ -218,7 +236,7 @@ namespace core {
         const char* name = "Application: ";
         std::stringstream stream;
         if (first) 
-            Application::IMGUI().DockPanel(name, Application::IMGUI().getDockspaceRIGHT());
+            Application::GetImGuiLayer().DockPanel(name, Application::GetImGuiLayer().GetDockspaceRight());
 
         ImGui::Begin(name);
 
@@ -267,7 +285,7 @@ namespace core {
 
 		    static bool vsync = true;
 		    ImGui::Checkbox("V-Sync", &vsync);
-		    Application::getWindow()->setVSync(vsync);
+		    Application::GetWindow()->setVSync(vsync);
 
 		    
 
@@ -323,7 +341,7 @@ namespace core {
         std::stringstream stream;
 
         if (first)
-			Application::IMGUI().DockPanel(name, Application::IMGUI().getDockspaceBOTTOM());
+			Application::GetImGuiLayer().DockPanel(name, Application::GetImGuiLayer().GetDockspaceBottom());
 
         ImGui::Begin(name);
         ImGui::End();
@@ -335,7 +353,7 @@ namespace core {
         std::stringstream stream;
 
         if (first)
-			Application::IMGUI().DockPanel(name, Application::IMGUI().getDockspaceLEFT());
+			Application::GetImGuiLayer().DockPanel(name, Application::GetImGuiLayer().GetDockspaceLeft());
 
         ImGui::Begin(name);
 
@@ -348,7 +366,7 @@ namespace core {
                 {
                     for (int i = 0; i < gameobjects.size(); i++)
                     {
-                        if (ImGui::Selectable((gameobjects[i]->getName() + std::string("##" + std::to_string(i))).c_str(), gameobjects[i] == selected_gameobject)) {
+                        if (ImGui::Selectable((gameobjects[i]->getName() + std::string(" (ObjectID = " + std::to_string(gameobjects[i]->GetObjectID()) + std::string(")")) + std::string("##" + std::to_string(i))).c_str(), gameobjects[i] == selected_gameobject)) {
                             selected_gameobject = gameobjects[i];
                         }
                     }
@@ -368,7 +386,7 @@ namespace core {
         std::stringstream stream;
 
         if (first)
-            Application::IMGUI().DockPanel(name, Application::IMGUI().getDockspaceLEFT_BOTTOM());
+            Application::GetImGuiLayer().DockPanel(name, Application::GetImGuiLayer().GetDockspaceLeftBottom());
 
         ImGui::Begin(name);
         if (selected_gameobject != nullptr) {
@@ -383,20 +401,32 @@ namespace core {
         std::stringstream stream;
 
         if (first)
-			Application::IMGUI().DockPanel(name, Application::IMGUI().getDockspaceMAIN());
+			Application::GetImGuiLayer().DockPanel(name, Application::GetImGuiLayer().GetDockspaceMain());
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
         ImGui::Begin(name);
 
-        ImVec2 viewport_panel_size = ImGui::GetContentRegionAvail();
-        if (viewport_size != *(glm::vec2*)&viewport_panel_size)
-        {
-            viewport_size = { viewport_panel_size.x, viewport_panel_size.y };
-            Application::getCurrentScene()->GetRenderer().GetFrameBuffer().Resize(viewport_size.x, viewport_size.y);
-        }
-        uint32_t textureID = Application::getCurrentScene()->GetRenderer().GetFrameBuffer().GetColorID();
+        auto viewportOffset = ImGui::GetCursorPos();
 
-        ImGui::Image((void*)textureID, ImVec2(viewport_size.x, viewport_size.y), ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+        ImVec2 viewport_panel_size = ImGui::GetContentRegionAvail();
+        if (viewportSize != *(glm::vec2*)&viewport_panel_size)
+        {
+            viewportSize = { viewport_panel_size.x, viewport_panel_size.y };
+            Application::GetCurrentScene()->GetRenderer().GetFrameBuffer().Resize(viewportSize.x, viewportSize.y);
+        }
+        uint32_t textureID = Application::GetCurrentScene()->GetRenderer().GetFrameBuffer().GetColorID(0);
+
+        ImGui::Image((void*)textureID, ImVec2(viewportSize.x, viewportSize.y), ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+
+        auto windowSize = ImGui::GetWindowSize();
+        ImVec2 minBound = ImGui::GetWindowPos();
+        minBound.x += viewportOffset.x;
+        minBound.y += viewportOffset.y;
+        
+        ImVec2 maxBound = { minBound.x + windowSize.x, minBound.y + windowSize.y };
+        
+        viewportBounds[0] = { minBound.x, minBound.y };
+        viewportBounds[1] = { maxBound.x, maxBound.y };
 
         ImGui::End();
         ImGui::PopStyleVar();

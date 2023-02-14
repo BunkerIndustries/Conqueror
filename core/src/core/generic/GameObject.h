@@ -10,7 +10,7 @@ namespace core {
 
     class Component;
 
-    class CORE_API GameObject {
+    class GameObject {
     private:
         std::string name;
         std::vector<Component*> components;
@@ -18,6 +18,9 @@ namespace core {
 
         bool running = false;
 
+        core_id objectID;
+
+        static std::unordered_map<core_id, GameObject*> IDMap;
     public:
         Transform transform;
         GameObject(std::string name);
@@ -40,9 +43,12 @@ namespace core {
         std::string getName();
         int getZIndex();
         void setZIndex(int zIndex);
+        core_id GetObjectID() const { return objectID; }
         bool IsRunning() const { return running; }
 
         DataPool::DISPLAYMODE displayMode;
+
+        static GameObject* GetGameObjectByID(core_id id);
     };
 
     
