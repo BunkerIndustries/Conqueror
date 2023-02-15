@@ -78,9 +78,9 @@ namespace core {
 	        {
 	            case GLFW_PRESS:
                 {
-	            		KeyPressedEvent event(key, 0);
-	            		data.callback(event);
-	            		break;
+	            	KeyPressedEvent event(key, 0);
+	            	data.callback(event);
+	            	break;
                 }
                 case GLFW_RELEASE:
                 {

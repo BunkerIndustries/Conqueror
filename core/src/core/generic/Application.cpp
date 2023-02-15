@@ -44,7 +44,7 @@ namespace core {
 		{
 			if (event.handled)
 				break;
-			(*--it)->OnEvent(event);
+			(*--it)->event(event);
 		}
 		if (!event.handled)
 		{

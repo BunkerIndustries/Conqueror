@@ -10,15 +10,11 @@ namespace core {
 
     class Component {
     protected:
-        std::string typeID;
         GameObject* gameObject = nullptr;
 
     public:
-        Component(std::string typeID)
-	        :typeID(typeID) { }
-        virtual ~Component() = default;
-
-    	std::string getTypeID() const { return typeID; }
+        Component() = default;
+    	virtual ~Component() = default;
 
         virtual void start() = 0;
         virtual void stop() = 0;
