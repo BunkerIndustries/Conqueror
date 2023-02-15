@@ -15,7 +15,7 @@ private:
 	SoundLayer* sound_layer;
 
 	GameObject* test;
-	GameObject* clicked_go;
+	GameObject* active_go;
 public:
 	GameScene();
 	virtual ~GameScene() override;

@@ -85,7 +85,11 @@ bool GameScene::OnMouseScroll(MouseScrolledEvent& e)
 
 bool GameScene::GameObjectPressed(GameObjectPressedEvent& e) {
 
-    clicked_go = e.GetGameObject();
+    // if tag == gameobject 
+    active_go = e.GetGameObject();
+
+    // else if not tag == gameobject
+    // if active_go exists: target_pos = clicked_object.position
 
     return true;
 }
