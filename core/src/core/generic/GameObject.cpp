@@ -13,41 +13,25 @@ namespace core {
 
 	std::unordered_map<core_id, GameObject*> GameObject::IDMap;
 
-    GameObject::GameObject(std::string name) {
-        // create gameObject with name and create a standard transform object
-        this->name = name;
-        this->transform = Transform();
-        this->zIndex = 0;
-        this->displayMode = DataPool::DISPLAYMODE::PERSPECTIVE;
+	void GameObject::StopComponentIndex(uint32_t index)
+	{
+        components[index]->stop();
+	}
 
-        objectID = Core::RequestID();
-        IDMap.emplace(objectID, this);
-    }
+	void GameObject::DeleteComponentIndex(uint32_t index)
+	{
+        delete components[index];
+	}
 
-    GameObject::GameObject(std::string name, Transform transform) {
-        // create gameObject with name and a specific transform object
-        // this is being called if you want specific coordinates (you would want this most of the time)
-        this->name = name;
-        this->transform = transform;
-        this->zIndex = 0;
-        this->displayMode = DataPool::DISPLAYMODE::PERSPECTIVE;
-
-        objectID = Core::RequestID();
-        IDMap.emplace(objectID, this);
-
-    }
-
-    GameObject::GameObject(std::string name, Transform transform, DataPool::DISPLAYMODE displaymode)
+    GameObject::GameObject(std::string name, Transform& transform, ProjectionMode mode)
+        : name(name), transform(transform), mode(mode)
     {
-        this->name = name;
-        this->transform = transform;
         this->zIndex = 0;
-        this->displayMode = displaymode;
 
         objectID = Core::RequestID();
         IDMap.emplace(objectID, this);
-
     }
+
 
     GameObject::~GameObject()
     {
@@ -55,61 +39,30 @@ namespace core {
     }
 
 
-    Component* GameObject::getComponent(std::string componentTypeID) {
-        // iterate through components vector and return the component if it fits to the desired component type (renderer type)
-        for (auto component : components)
+    bool GameObject::AddComponent(Component* component)
+	{
+        for (const auto i : components) 
         {
-            if (componentTypeID == component->getTypeID())
+            if (i == component) 
             {
-                return component;
+                return false;
             }
         }
-        // if there is nothing, go to las vegas
-        return nullptr;
+        components.push_back(component);
+        component->gameObject = this;
+        return true;
     }
 
-    bool GameObject::removeComponent(Component* delComponent) {
-        // iterate through components array and delete the component regarding this sprite that equals to the desired component type
-        for (int i = 0; i < components.size(); i++) {
-            if (components[i] == delComponent) {
-                if (running)
-					components[i]->stop();
-                delete components[i];
-                components[i] = nullptr;
-                return true;
-            }
-        }
-        // return false if there was no such component
-        return false;
-    }
-    // add components to component list, render them by calling 
-    bool GameObject::addComponent(Component* component) {
-        // if the component exists, set bool to true and
-        // return false because it already exists
-
-        // if it does not exist, create it at the next place that has not been used in the vector
-        bool exists = false;
-        for (auto i : components) {
-            if (i == component) {
-                exists = true;
-            }
-        }
-        if (!exists) {
-            components.push_back(component);
-            component->gameObject = this;
-            return true;
-        }
-        return false;
-    }
-
-    void GameObject::update(float dt) {
+    void GameObject::update(float dt)
+	{
         // update gameObject, in order to display moving changes
         for (auto component : components) {
             component->update(dt);
         }
     }
 
-    void GameObject::start() {
+    void GameObject::start()
+	{
         // start all components
         running = true;
         for (auto component : components) {
@@ -120,12 +73,14 @@ namespace core {
     void GameObject::stop()
     {
         running = false;
-        for (auto component : components) {
+        for (auto component : components) 
+        {
             component->stop();
         }
     }
 
-    void GameObject::deleteComponents() {
+    void GameObject::deleteComponents()
+	{
         // delete all components
         for (auto comp : components)
         {
@@ -137,20 +92,47 @@ namespace core {
         components.clear();
     }
 
-    std::string GameObject::getName() {
-        // return name
-        return this->name;
-    }
-
-    int GameObject::getZIndex() {
-        // return ZIndex (screen priority)
-        return this->zIndex;
-    }
-
-    void GameObject::setZIndex(int zIndex)
+    GameObject* GameObject::AddTag(std::string tag)
     {
-        this->zIndex = zIndex;
+        std::transform(tag.begin(), tag.end(), tag.begin(), ::toupper);
+        if (std::find(tagList.begin(), tagList.end(), tag) != tagList.end())
+        {
+            LOG_CORE_WARN("Adding a tag to a GameObject which it already has: '" + tag + "'");
+            return this;
+        }
+        tagList.emplace_back(tag);
+        return this;
     }
+
+    GameObject* GameObject::AddTag(std::initializer_list<std::string> tags)
+    {
+        for (std::string tag : tags) {
+            std::transform(tag.begin(), tag.end(), tag.begin(), ::toupper);
+            AddTag(tag);
+        }
+        return this;
+    }
+
+    bool GameObject::RemoveTag(std::string tag)
+    {
+        std::transform(tag.begin(), tag.end(), tag.begin(), ::toupper);
+        std::vector<std::string>::iterator it = std::find(tagList.begin(), tagList.end(), tag);
+        if (it == tagList.end())
+        {
+            LOG_CORE_WARN("Removing a tag from a GameObject which it doesn't have: '" + tag + "'");
+            return false;
+        }
+        tagList.erase(it);
+        return true;
+    }
+
+    bool GameObject::HasTag(std::string tag)
+    {
+        std::transform(tag.begin(), tag.end(), tag.begin(), ::toupper);
+        std::vector<std::string>::iterator it = std::find(tagList.begin(), tagList.end(), tag);
+        return it != tagList.end();
+    }
+
 
     void GameObject::event(Event& event)
     {
@@ -161,16 +143,16 @@ namespace core {
     }
 
 
-    void GameObject::imgui(float dt) {
-        ImGui::Text("Generic stuff:");
-        ImGui::SliderFloat(std::string("X:").c_str(), &this->transform.position.x, -10.0f, 10.0f, 0);
-        ImGui::SliderFloat(std::string("Y:").c_str(), &this->transform.position.y, -10.0f, 10.0f, 0);
-        ImGui::SliderFloat(std::string("Width:").c_str(), &this->transform.scale.x, 0.0f, 10.0f, 0);
-        ImGui::SliderFloat(std::string("Height:").c_str(), &this->transform.scale.y, 0.0f, 10.0f, 0);
-        
-        for (auto component : components) {
-            component->imgui(dt);
-        }
+	void GameObject::imgui(float dt) {
+		ImGui::Text("Generic stuff:");
+		ImGui::SliderFloat(std::string("X:").c_str(), &this->transform.position.x, -10.0f, 10.0f, 0);
+		ImGui::SliderFloat(std::string("Y:").c_str(), &this->transform.position.y, -10.0f, 10.0f, 0);
+		ImGui::SliderFloat(std::string("Width:").c_str(), &this->transform.scale.x, 0.0f, 10.0f, 0);
+		ImGui::SliderFloat(std::string("Height:").c_str(), &this->transform.scale.y, 0.0f, 10.0f, 0);
+
+		for (auto component : components) {
+		    component->imgui(dt);
+		}
     }
 
     GameObject* GameObject::GetGameObjectByID(core_id id)
@@ -182,5 +164,6 @@ namespace core {
         return nullptr;
     }
 
+    
 
 }

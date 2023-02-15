@@ -59,7 +59,7 @@ namespace core {
         //change the objects transform, so it maches the transform from the mesh
         gameObject->transform.position = glm::vec2(this->transform.position.x + x * 1.1f, this->transform.position.y + y * 1.1f);
         gameObject->transform.scale = this->transform.scale;
-        gameObject->setZIndex(this->zIndex);
+        gameObject->SetZIndex(this->zIndex);
 
 
         coord.getMap()[coord.ZERO_OFFSET_X + x][coord.ZERO_OFFSET_Y + y] = gameObject; //ERROR TODO: HERE IS ERROR MAYBE BECAUSE OF COPYING INSTEAD OF REFERENCE

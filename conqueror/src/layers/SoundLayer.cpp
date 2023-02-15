@@ -26,30 +26,35 @@ bool SoundLayer::OnKeyPressed(core::KeyPressedEvent& e)
     {
         soundSel.playSound();
         volume = soundSel.getVolume();
+        return true;
     }
 
     if (e.getKeyCode() == KEY_Q && !e.getRepeated())
     {
         soundTroll.playSound();
+        return true;
     }
 
     if (e.getKeyCode() == KEY_H && !e.getRepeated())
     {
         soundSel.stopSound();
+        return true;
     }
 
     if (e.getKeyCode() == KEY_J && !e.getRepeated())
     {
         volume += 0.1f;
         soundSel.setVolume(volume);
+        return true;
     }
 
     if (e.getKeyCode() == KEY_K && !e.getRepeated())
     {
         volume -= 0.1f;
         soundSel.setVolume(volume);
+        return true;
     }
-    return true;
+    return false;
 }
 
 

@@ -36,8 +36,8 @@ namespace core {
     void Renderer::add(Layer* layer, int index) {
         for (GameObject* game_object : layer->GetGameObjects()) {
             // create spriterenderer with the coponent spriterneder if a spriterenderer exists
-            SpriteRenderer* spriteRenderer = (SpriteRenderer*)game_object->getComponent(std::string("sprite_renderer"));
-            if (spriteRenderer != nullptr) {
+            SpriteRenderer* spriteRenderer = game_object->GetComponent<SpriteRenderer>();
+            if (spriteRenderer) {
                 add(spriteRenderer, index);
             }
         }
@@ -67,7 +67,7 @@ namespace core {
         }
         if (!added && !found) {
             // if there is no place for the spriterenderer, create a new renderbatch with the needed setup (functions)
-            RenderBatch* newBatch = new RenderBatch(MAX_BATCH_SIZE, index, spriteRenderer->GetGameObject()->displayMode);
+            RenderBatch* newBatch = new RenderBatch(MAX_BATCH_SIZE, index, spriteRenderer->GetGameObject()->mode);
             newBatch->start();
             batches.push_back(newBatch);
             newBatch->addSprite(spriteRenderer);

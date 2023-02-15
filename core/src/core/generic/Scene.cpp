@@ -67,7 +67,7 @@ namespace core {
 
     void Scene::sceneImgui(float dt) {
         if (activeGameObject != nullptr) {
-            ImGui::Begin(std::string("Inspector - " + activeGameObject->getName()).c_str());
+            ImGui::Begin(std::string("Inspector - " + activeGameObject->GetName()).c_str());
             activeGameObject->imgui(dt);
             ImGui::End();
         }

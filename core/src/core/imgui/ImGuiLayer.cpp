@@ -366,7 +366,7 @@ namespace core {
                 {
                     for (int i = 0; i < gameobjects.size(); i++)
                     {
-                        if (ImGui::Selectable((gameobjects[i]->getName() + std::string(" (ObjectID = " + std::to_string(gameobjects[i]->GetObjectID()) + std::string(")")) + std::string("##" + std::to_string(i))).c_str(), gameobjects[i] == selected_gameobject)) {
+                        if (ImGui::Selectable((gameobjects[i]->GetName() + std::string(" (ObjectID = " + std::to_string(gameobjects[i]->GetObjectID()) + std::string(")")) + std::string("##" + std::to_string(i))).c_str(), gameobjects[i] == selected_gameobject)) {
                             selected_gameobject = gameobjects[i];
                         }
                     }

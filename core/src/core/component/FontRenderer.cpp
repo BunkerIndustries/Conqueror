@@ -6,7 +6,6 @@ namespace core {
 
     //FONTRENDERER
     FontRenderer::FontRenderer()
-	    : Component("font_renderer")
 	{
         // pascal you are funny
         LOG_CORE_DEBUG("FOUND FONT RENDERER");

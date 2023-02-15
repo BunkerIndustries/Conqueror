@@ -12,6 +12,7 @@ namespace core {
         std::shared_ptr<Texture> texture;
         float texCoords[8];
     public:
+        Sprite();
         Sprite(std::shared_ptr<Texture> texture);
         Sprite(std::shared_ptr<Texture> texture, float* texCoords);
         virtual ~Sprite();

@@ -11,17 +11,14 @@
 
 namespace core {
 
-    RenderBatch::RenderBatch(int maxBatchSize, int zIndex, DataPool::DISPLAYMODE displaymode)
+    RenderBatch::RenderBatch(int maxBatchSize, int zIndex, ProjectionMode mode)
+        : zIndex(zIndex), maxBatchSize(maxBatchSize), mode(mode)
     {
-        // set local and current values
-        this->zIndex = zIndex;
-        this->maxBatchSize = maxBatchSize;
         this->elements = new unsigned int[maxBatchSize * 6];
-        this->displayMode = displaymode;
         numSprites = 0;
 
         // menu gui mode needs a special shader because of uProjection is aPos basically
-        if (displaymode == DataPool::DISPLAYMODE::NONE)
+        if (mode == ProjectionMode::SCREEN)
         {
             shader = DataPool::getShader("menu");
         }
@@ -153,15 +150,15 @@ namespace core {
         // use the shader and upload the shader variables
         shader->use();
 
-        if (displayMode == DataPool::DISPLAYMODE::ORTHOGRAPHIC)
+        if (mode == ProjectionMode::ORTHOGRAPHIC)
         {
             shader->uploadMat4f("uProjection", Application::GetCurrentScene()->getCamera()->getOrthographicMatrix());
         }
-        else if (displayMode == DataPool::DISPLAYMODE::PERSPECTIVE)
+        else if (mode == ProjectionMode::PERSPECTIVE)
         {
             shader->uploadMat4f("uProjection", Application::GetCurrentScene()->getCamera()->getProjectionMatrix());
         }
-        else if (displayMode == DataPool::DISPLAYMODE::NONE)
+        else if (mode == ProjectionMode::SCREEN)
         {
             shader->uploadVec2f("uProjection", glm::vec2(vertices[POS_OFFSET], vertices[POS_OFFSET + 1]));
         }

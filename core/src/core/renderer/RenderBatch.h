@@ -58,7 +58,7 @@ namespace core {
 
     public:
 
-        RenderBatch(int maxBatchSize, int zIndex, DataPool::DISPLAYMODE displaymode);
+        RenderBatch(int maxBatchSize, int zIndex, ProjectionMode mode);
         ~RenderBatch();
         void start();
         void addSprite(SpriteRenderer* sprite_renderer);
@@ -71,7 +71,7 @@ namespace core {
 
         int getZIndex();
 
-        DataPool::DISPLAYMODE displayMode;
+        ProjectionMode mode;
 
         int GetSpritesCount() const;
         int GetVertexCount() const; 

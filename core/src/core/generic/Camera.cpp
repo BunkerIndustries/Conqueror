@@ -19,14 +19,7 @@ namespace core {
         //set vectors
         // the camera has to look somewhere (just set it to 0 because we are making it absolute)
 
-        this->target = glm::vec3(this->position.x, this->position.y, 0.0f);
-        // move every gameObject that is orthographic before the camera moves
-        for (auto& go : Application::GetCurrentScene()->getGameObjects()) {
-            if (go->displayMode == DataPool::DISPLAYMODE::ORTHOGRAPHIC) {
-                go->transform.position.x = target.x + 1;
-                go->transform.position.y = target.y + 1;
-            }
-        }
+        this->target = glm::vec3(this->position.x, this->position.y, 0.0f);       
 
         // this is being used for pointing upwards (y globally, e.g. in the world)
         glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);

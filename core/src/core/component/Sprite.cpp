@@ -5,12 +5,9 @@
 
 namespace core {
 
-    // SPRITE
-
     Sprite::Sprite(std::shared_ptr<Texture> texture)
-	    : Component("sprite")
 	{
-    Sprite::texture = texture;
+        this->texture = texture;
         // standard texture coordinates (mostly used)
         int offset = 0;
         float xAdd = 0.0f;
@@ -39,8 +36,7 @@ namespace core {
 
 
     Sprite::Sprite(std::shared_ptr<Texture> texture, float texCoords[])
-	    : Component("sprite")
-    {
+	{
     // set current texture to desired texture
         Sprite::texture = texture;
         // get texCoords array and set the desired values (this is rarely being called) who the hell would want a flipped texture
