@@ -14,13 +14,15 @@ namespace core {
         const int COLOR_SIZE = 4;
         const int TEX_COORDS_SIZE = 2;
         const int TEX_ID_SIZE = 1;
+        const int CORE_ID_SIZE = 1;
 
         const int POS_OFFSET = 0;
         const int COLOR_OFFSET = sizeof(float) * (POS_SIZE);
         const int TEX_COORDS_OFFSET = sizeof(float) * (POS_SIZE + COLOR_SIZE);
         const int TEX_ID_OFFSET = sizeof(float) * (POS_SIZE + COLOR_SIZE + TEX_COORDS_SIZE);
+        const int CORE_ID_OFFSET = sizeof(float) * (POS_SIZE + COLOR_SIZE + TEX_COORDS_SIZE + TEX_ID_SIZE);
 
-        const int VERTEX_SIZE = POS_SIZE + COLOR_SIZE + TEX_COORDS_SIZE + TEX_ID_SIZE;
+        const int VERTEX_SIZE = POS_SIZE + COLOR_SIZE + TEX_COORDS_SIZE + TEX_ID_SIZE + CORE_ID_SIZE;
         const int VERTEX_SIZE_BYTES = sizeof(float) * VERTEX_SIZE;
 
         bool hasRoom_bool = false;
@@ -47,6 +49,8 @@ namespace core {
         void loadVertexProperties(int index);
         void generateIndices(unsigned int* element);
         void loadElementIndices(unsigned int* arrayElements, int index);
+
+
 
         inline static int draw_calls = 0;
         inline static bool enable_polygon = false;

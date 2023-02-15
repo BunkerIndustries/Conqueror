@@ -5,6 +5,7 @@
 #include "event/Input.h"
 
 #include "glad/glad.h"
+#include "utils/Core.h"
 
 namespace core {
 
@@ -15,7 +16,7 @@ namespace core {
 		Log::init();
 
 		window = Window::createWindow();
-		setEventCallback(BIND_EVENT_FN(Application::onEvent));
+		SetEventCallback(BIND_EVENT_FN(Application::onEvent));
 
 		imguilayer = new ImGuiLayer();
 	}
@@ -27,13 +28,17 @@ namespace core {
 
 	void Application::init() { }
 
+	void Application::QueueEvents(Event* event)
+	{
+		GetInstance()->eventQueue.emplace(GetInstance()->eventQueue.begin(), event);
+	}
+
+
 	void Application::onEvent(Event& event)
 	{
 		EventDispatcher dispatcher(event);
 		dispatcher.dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::onWindowClose));
-		dispatcher.dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::onWindowResize));
 		dispatcher.dispatch<KeyPressedEvent>(BIND_EVENT_FN(Application::onKeyPressed));
-
 
 		for (auto it = layer_stack.end(); it != layer_stack.begin(); )
 		{
@@ -51,11 +56,6 @@ namespace core {
 	{
 		game_running = false;
 		return true;
-	}
-
-	bool Application::onWindowResize(WindowResizeEvent& e)
-	{
-		return false;
 	}
 
 	bool Application::onKeyPressed(KeyPressedEvent& e)
@@ -76,6 +76,13 @@ namespace core {
 			imgui_enabled = imgui_enabled_queue - 1;
 			imgui_enabled_queue = 0;
 		}
+
+		for (Event* event : eventQueue)
+		{
+			onEvent(*event);
+			delete event;
+		}
+		eventQueue.clear();
 	}
 
 	void Application::run() 
@@ -84,6 +91,8 @@ namespace core {
 		init();
 
 		AddOverLay(imguilayer, false);
+
+		Core::Init();
 
 		//set start scene
 		if (queued_scene) {
@@ -95,7 +104,6 @@ namespace core {
 		// start of the calculations
 		float begin_time = static_cast<float>(glfwGetTime());
 		dt = 0.0167f;
-		Application::Debug_TrackVariable("dt", &dt);
 		bool warn = true;
 
 		while (game_running)
@@ -109,7 +117,7 @@ namespace core {
 				const glm::vec4 scene_backcolor = current_scene->getBackcolor();
 				//clear color buffer
 				glClearColor(scene_backcolor.x, scene_backcolor.y, scene_backcolor.z, scene_backcolor.w);
-				glClear(GL_COLOR_BUFFER_BIT);
+				//glClear(GL_COLOR_BUFFER_BIT);
 
 				if (dt >= 0) {
 					if (queued_scene != nullptr) {
@@ -127,22 +135,25 @@ namespace core {
 					}
 
 
-					for (Layer* layer : layer_stack)
-						layer->update(dt);
-
-
-					current_scene->update(dt);
+					
+					imguilayer->begin(dt);
 
 					if (imgui_enabled) {
 
-						imguilayer->begin(dt);
 						for (Layer* layer : layer_stack) {
 							layer->imgui(dt);
 						}
-							
-						imguilayer->end();
 					}
+
+					for (Layer* layer : layer_stack)
+						layer->update(dt);
+
+					current_scene->update(dt);
+
+					imguilayer->end();
+					
 					frames_rendered++;
+
 				}
 			}
 			else if (warn) {
@@ -160,36 +171,32 @@ namespace core {
 		delete window;
 	}
 
-	void Application::changeScene(Scene* new_scene)
+	void Application::ChangeScene(Scene* new_scene)
 	{
-		queued_scene = new_scene;
+		GetInstance()->queued_scene = new_scene;
 	}
 
 	void Application::AddLayer(Layer* layer, bool add_to_renderer)
 	{
-		Get()->layer_stack.addLayer(layer);
+		GetInstance()->layer_stack.addLayer(layer);
 		layer->attach(add_to_renderer);
 	}
 
 	void Application::AddOverLay(Layer* layer, bool add_to_renderer)
 	{
-		Get()->layer_stack.addOverlay(layer);
+		GetInstance()->layer_stack.addOverlay(layer);
 		layer->attach(add_to_renderer);
 	}
 
 	void Application::RemoveLayer(Layer* layer)
 	{
 		layer->detach();
-		Get()->layer_stack.removeLayer(layer);
+		GetInstance()->layer_stack.removeLayer(layer);
 	}
 
 	void Application::RemoveOverLay(Layer* layer)
 	{
 		layer->detach();
-		Get()->layer_stack.removeOverlay(layer);
-	}
-
-	void Application::Debug_TrackVariable(std::string name, void* variable) {
-		Get()->imguilayer->AddVariable(name, variable);
+		GetInstance()->layer_stack.removeOverlay(layer);
 	}
 }

@@ -11,7 +11,7 @@ namespace core {
     class Component {
     protected:
         std::string typeID;
-        GameObject* gameObject;
+        GameObject* gameObject = nullptr;
 
     public:
         Component(std::string typeID)

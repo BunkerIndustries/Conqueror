@@ -3,13 +3,14 @@
 #include "utility.h"
 
 namespace core {
-
+	
 	enum class EventType {
 		None = 0,
 		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
 		AppTick, AppUpdate, AppRender,
 		KeyPressed, KeyReleased, KeyTyped,
-		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
+		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled,
+		GameObjectPressed, GameObjectReleased, GameObjectHoverBegin, GameObjectHoverEnd
 	};
 
 	enum EventCategory {
@@ -18,7 +19,9 @@ namespace core {
 		EventCategoryInput			= BIT(1),
 		EventCategoryKeyBoard		= BIT(2),
 		EventCategoryMouse			= BIT(3),
-		EventCategoryMouseButton	= BIT(4)
+		EventCategoryMouseButton	= BIT(4),
+		EventCategoryGame			= BIT(5),
+		EventCategoryGameObject		= BIT(6)
 	};
 
 #define EVENT_CLASS_TYPE(type) static EventType getStaticEventType() { return EventType::##type; }\
@@ -65,7 +68,7 @@ namespace core {
 	inline std::ostream& operator<<(std::ostream& os, const Event& event) {
 		return os << event.toString();
 	}
-
+	using EventCallbackFunction = std::function<void(Event&)>;
 }
 
 

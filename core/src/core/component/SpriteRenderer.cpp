@@ -98,7 +98,7 @@ namespace core {
                 std::shared_ptr<Texture> texture = DataPool::getTexture(texturePaths[i]);
 
                 const int IMGSIZE_HEIGHT = 100;
-                Utils::XY ratio = Utils::calculateAspectRatioFit(texture->getWidth(), texture->getHeight(), texture->getWidth() + IMGSIZE_HEIGHT, IMGSIZE_HEIGHT);
+                Utils::Size ratio = Utils::calculateAspectRatioFit(texture->getWidth(), texture->getHeight(), texture->getWidth() + IMGSIZE_HEIGHT, IMGSIZE_HEIGHT);
 
                 ImGui::PushID(i);
                 if (ImGui::ImageButton((void*)texture->getID(), ImVec2(ratio.width, ratio.height), ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f), 2, ImColor(0, 0, 0, 1))) {

@@ -4,22 +4,18 @@
 #include "utility.h"
 
 namespace core {
-
-    class CORE_API Utils {
-    public:
-        static std::string getSystemDateInString();
-        static std::string getSystemTimeInString();
+	namespace Utils
+	{
+        std::string getSystemDateInString();
+        std::string getSystemTimeInString();
         // random function
-        static float randRange(int min, int max);
+		float randRange(int min, int max);
 
-        struct XY {
+        struct Size {
             float width;
             float height;
         };
-        static XY calculateAspectRatioFit(float srcWidth, float srcHeight, float maxWidth, float maxHeight);
+		Size calculateAspectRatioFit(float srcWidth, float srcHeight, float maxWidth, float maxHeight);
 
-        static std::string getClass(std::string object);
-        static std::string getClass(const std::type_info& typeInfo);
-    };
-
+	}
 }
