@@ -10,12 +10,8 @@
 class GameScene : public core::Scene
 {
 private:
-	BackgroundLayer* background_layer;
-	ForegroundLayer* foreground_layer;
-	SoundLayer* sound_layer;
-
 	GameObject* test;
-	GameObject* active_go;
+	GameObject* active_go{ nullptr };
 public:
 	GameScene();
 	virtual ~GameScene() override;

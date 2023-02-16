@@ -1,7 +1,9 @@
 #include "movement.h"
 #include "required/functions.h"
+#include "required/constants.h"
 
-Movement::Movement()
+Movement::Movement(float movement_speed)
+	:movement_speed(movement_speed)
 {
 	
 }
@@ -9,7 +11,6 @@ Movement::Movement()
 void Movement::start() {
 	target_position = gameObject->transform.position;	// Do not move when initialised
 	LOG_DEBUG("Target x pos: {0}", target_position.x);
-	movement_speed = 1.0f;
 }
 
 void Movement::stop() {
@@ -36,8 +37,10 @@ void Movement::MoveTo(glm::vec2 target_pos, float speed) {
 	LOG_DEBUG("dir_vector x:{0},y:{1}", dir.x, dir.y);
 	LOG_DEBUG("x:{0} , y:{1}", gameObject->transform.position.x, gameObject->transform.position.y);
 	
-	gameObject->transform.position.x += dir.x * speed * Application::GetDT();	// apply movement in direction with speed to x position
-	gameObject->transform.position.y += dir.y * speed * Application::GetDT();	// apply movement in direction with speed to y position
+	gameObject->transform.position += dir * speed * Application::GetDT();
+
+	//gameObject->transform.position.x += dir.x * speed * Application::GetDT();	// apply movement in direction with speed to x position
+	//gameObject->transform.position.y += dir.y * speed * Application::GetDT();	// apply movement in direction with speed to y position
 	RoundVec2(gameObject->transform.position);
 
 	//RoundVec2(gameObject->transform.position);

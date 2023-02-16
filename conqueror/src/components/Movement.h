@@ -3,7 +3,7 @@
 
 class Movement : public Component {
 public:
-	Movement();
+	Movement(float movement_speed);
 	virtual ~Movement() = default;
 
 	void start() override;
@@ -15,5 +15,4 @@ public:
 
 	glm::vec2 target_position;
 	float movement_speed;
-
 };
