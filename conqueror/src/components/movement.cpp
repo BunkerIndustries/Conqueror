@@ -2,7 +2,6 @@
 #include "required/functions.h"
 
 Movement::Movement()
-	:Component("movement")
 {
 	
 }

@@ -22,7 +22,7 @@ inline std::vector<std::vector<GameObject*>> CreateGrid(const uint8_t x_size, co
 				Transform(glm::vec2(start_pos.x + x * (offset + 2.0f * cube_rad), start_pos.y - y * (offset + 2.0f * cube_rad)), 
 				glm::vec2(2 * cube_rad))));	// add gameobjects to it
 
-			y_row.at(y)->addComponent(new SpriteRenderer(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)));	// add SpriteRenderer
+			y_row.at(y)->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)));	// add SpriteRenderer
 			layer->AddGameObjectToLayer(y_row.at(y));
 		}
 		grid.emplace_back(y_row);	// add y_row to grid at index x
