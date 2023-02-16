@@ -82,6 +82,7 @@ namespace core {
         for (Component* com : components)
         {
             derived = dynamic_cast<T*>(com);
+            if (derived != nullptr) break;
         }
         return derived;
     }
