@@ -25,7 +25,7 @@ void Movement::update(float dt) {
 }
 
 void Movement::MoveTo(glm::vec2 target_pos, float speed) {
-	LOG_DEBUG("MoveTo called with target_pos={0},{1}", target_pos.x, target_pos.y);
+	//LOG_DEBUG("MoveTo called with target_pos={0},{1}", target_pos.x, target_pos.y);
 
 	glm::vec2 dir = target_pos - gameObject->transform.position;	// calculate direction (pos2 - pos1)
 
@@ -34,8 +34,8 @@ void Movement::MoveTo(glm::vec2 target_pos, float speed) {
 	dir = glm::normalize(dir);
 	//dir = glm::vec2(std::sqrtf(-(dir.x * dir.x)), -std::sqrtf(-(dir.y * dir.y)));	  // does not work
 	
-	LOG_DEBUG("dir_vector x:{0},y:{1}", dir.x, dir.y);
-	LOG_DEBUG("x:{0} , y:{1}", gameObject->transform.position.x, gameObject->transform.position.y);
+	/*LOG_DEBUG("dir_vector x:{0},y:{1}", dir.x, dir.y);
+	LOG_DEBUG("x:{0} , y:{1}", gameObject->transform.position.x, gameObject->transform.position.y);*/
 	
 	gameObject->transform.position += dir * speed * Application::GetDT();
 
