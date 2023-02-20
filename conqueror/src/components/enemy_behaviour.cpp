@@ -10,7 +10,6 @@ EnemyBehaviour::EnemyBehaviour() {
 }
 
 
-Movement* move_component;	// not in header file because of avoidable include
 void EnemyBehaviour::start() {
 	move_component = gameObject->GetComponent<Movement>();
 
@@ -26,7 +25,6 @@ void EnemyBehaviour::stop() {
 }
 
 void EnemyBehaviour::update(float dt) {
-	
 	if (is_waiting) {
 		dt_time_counter += dt;
 		if (time_over) {

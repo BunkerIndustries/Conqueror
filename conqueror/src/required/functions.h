@@ -22,7 +22,7 @@ inline std::vector<std::vector<GameObject*>> CreateGrid(const uint8_t x_size, co
 		std::vector<GameObject*> y_row;	// create new y row vector 
 		for (size_t y = 0; y < y_size; y++) {	
 			y_row.push_back(new GameObject(std::to_string(x) + std::to_string(y), 
-				Transform(glm::vec2(start_pos.x + x * (offset + 2.0f * cube_rad), start_pos.y - y * (offset + 2.0f * cube_rad)), 
+				Transform(glm::vec2(start_pos.x + x * (offset + cube_rad * 2.0f), start_pos.y - y * (offset + 2.0f * cube_rad)), 
 				glm::vec2(2 * cube_rad))));	// add gameobjects to it
 
 			y_row.at(y)->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)));	// add SpriteRenderer
@@ -81,9 +81,9 @@ inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 	return character_go;
 }
 
-inline GameObject* CreateEnemy(glm::vec2 spawn_pos) {
-	GameObject* enemy_go = new GameObject("enemy", Transform(spawn_pos, enemy_scale));
-
+inline GameObject* CreateEnemy(std::string name, glm::vec2 spawn_pos) {
+	GameObject* enemy_go = new GameObject(name, Transform(spawn_pos, enemy_scale));
+	
 	enemy_go->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
 	enemy_go->AddComponent(new Movement(enemy_movement_speed));
 	enemy_go->AddComponent(new EnemyBehaviour());

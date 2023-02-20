@@ -201,7 +201,7 @@ namespace core {
     void Renderer::updateGameObjects(float dt)
     {
         // update the gameObjects so it displays the changes
-
+        int i = 0;
         for (Layer* layer : Application::GetLayerStack())
         {
             for (GameObject* game_object : layer->GetGameObjects())

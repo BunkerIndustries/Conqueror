@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.h"
+#include "movement.h"
 
 class EnemyBehaviour : public Component {
 public:
@@ -12,6 +13,7 @@ public:
 	void event(Event& event) override {};
 
 private:
+	Movement* move_component;
 	bool is_waiting;
 	bool time_over;
 	bool time_running;

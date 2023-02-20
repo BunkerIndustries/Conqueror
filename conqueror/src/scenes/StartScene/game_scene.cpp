@@ -29,8 +29,8 @@ void GameScene::loadResources() {
     GameObject* character = CreateCharacter("soldier", glm::vec2(0.0f, 0.0f));
     //GameObject* character2 = CreateCharacter("soldier", glm::vec2(1.0f, 1.0f));
 
-    GameObject* enemy = CreateEnemy(glm::vec2(1.0f, 0.0f));
-    GameObject* enemy2 = CreateEnemy(glm::vec2(-1.0f, 0.0f));
+    GameObject* enemy = CreateEnemy("enemy 1", glm::vec2(1.0f, 0.0f));
+    GameObject* enemy2 = CreateEnemy("enemy 2", glm::vec2(-1.0f, 0.0f));
 
 }
 void GameScene::init() {
