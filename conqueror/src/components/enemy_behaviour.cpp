@@ -26,10 +26,7 @@ void EnemyBehaviour::stop() {
 }
 
 void EnemyBehaviour::update(float dt) {
-	// if he is not on the way and finished waiting at a node, he will move to another node
 	
-	
-
 	if (is_waiting) {
 		dt_time_counter += dt;
 		if (time_over) {

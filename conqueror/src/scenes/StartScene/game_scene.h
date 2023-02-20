@@ -10,8 +10,6 @@
 class GameScene : public core::Scene
 {
 private:
-	GameObject* character;
-	GameObject* character2;
 	GameObject* active_go{ nullptr };
 public:
 	GameScene();

@@ -26,17 +26,12 @@ void GameScene::loadResources() {
     //Grid creation
     enemy_grid = CreateGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
 
-    character = CreateCharacter("soldier", glm::vec2(0.0f, 0.0f));
-    character2 = CreateCharacter("soldier", glm::vec2(1.0f, 1.0f));
+    GameObject* character = CreateCharacter("soldier", glm::vec2(0.0f, 0.0f));
+    //GameObject* character2 = CreateCharacter("soldier", glm::vec2(1.0f, 1.0f));
 
-    GameObject* enemy = CreateEnemy(glm::vec2(0.0f, 0.0f));
+    GameObject* enemy = CreateEnemy(glm::vec2(1.0f, 0.0f));
+    GameObject* enemy2 = CreateEnemy(glm::vec2(-1.0f, 0.0f));
 
-    /*test = new GameObject("test", Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0, 1.0f)));
-    test->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));
-    test->AddComponent(new Movement());
-    test->AddTag("character"); test->AddTag("soldier");
-    LOG_DEBUG("Start x pos: {0}", test->transform.position.x);
-    foreground_layer->AddGameObjectToLayer(test);*/
 }
 void GameScene::init() {
     //Application::AddLayer(background_layer);

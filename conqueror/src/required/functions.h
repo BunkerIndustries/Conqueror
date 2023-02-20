@@ -64,7 +64,7 @@ inline float RandomF(float min_float, float max_float) {	// written by chatGPT 0
 inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 	float movement_speed;
 	std::string sprite_path;
-	GameObject* character = new GameObject(type, Transform(spawn_pos, character_scale));
+	GameObject* character_go = new GameObject(type, Transform(spawn_pos, character_scale));
 
 	// set paths and movement speeds regarding the type of the character
 	if (type == "soldier") { movement_speed = soldier_movement_speed; sprite_path = soldier_sprite_path; }
@@ -72,24 +72,24 @@ inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 	else if (type == "engineer") { movement_speed = engineer_movement_speed; sprite_path = engineer_sprite_path; }
 	else LOG_DEBUG("WARNING: probably no valid 'type'-arg at CreateCharacter(); sofore movement_speed is not initialised");
 
-	character->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
-	character->AddComponent(new Movement(movement_speed));
-	character->AddTag("character"); character->AddTag(type);
+	character_go->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
+	character_go->AddComponent(new Movement(movement_speed));
+	character_go->AddTag("character"); character_go->AddTag(type);
 
-	foreground_layer->AddGameObjectToLayer(character);
+	foreground_layer->AddGameObjectToLayer(character_go);
 	
-	return character;
+	return character_go;
 }
 
 inline GameObject* CreateEnemy(glm::vec2 spawn_pos) {
-	GameObject* enemy = new GameObject("enemy", Transform(spawn_pos, enemy_scale));
+	GameObject* enemy_go = new GameObject("enemy", Transform(spawn_pos, enemy_scale));
 
-	enemy->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
-	enemy->AddComponent(new Movement(enemy_movement_speed));
-	enemy->AddComponent(new EnemyBehaviour());
-	enemy->AddTag("enemy");
+	enemy_go->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
+	enemy_go->AddComponent(new Movement(enemy_movement_speed));
+	enemy_go->AddComponent(new EnemyBehaviour());
+	enemy_go->AddTag("enemy");
 
-	foreground_layer->AddGameObjectToLayer(enemy);
+	foreground_layer->AddGameObjectToLayer(enemy_go);
 
-	return enemy;
+	return enemy_go;
 }
