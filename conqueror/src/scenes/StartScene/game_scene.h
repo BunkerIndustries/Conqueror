@@ -10,8 +10,8 @@
 class GameScene : public core::Scene
 {
 private:
-	GameObject* test;
-	GameObject* test2;
+	GameObject* character;
+	GameObject* character2;
 	GameObject* active_go{ nullptr };
 public:
 	GameScene();
@@ -30,5 +30,4 @@ public:
 	bool OnMouseScroll(MouseScrolledEvent& e);
 	bool GameObjectPressed(GameObjectPressedEvent& e);
 
-	std::vector<std::vector<GameObject*>> enemy_grid;
 };

@@ -11,4 +11,9 @@ public:
 	void update(float dt) override;
 	void event(Event& event) override {};
 
+	void LockTarget();
+	void Shoot();
+private:
+	GameObject* target;
+
 };

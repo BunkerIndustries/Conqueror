@@ -3,6 +3,7 @@
 #include "layers/ForegroundLayer.h"
 #include "required/constants.h"
 #include "components/movement.h"
+#include "components/enemy_behaviour.h"
 #include <vector>
 #include <random>
 
@@ -49,6 +50,16 @@ inline int RandomInt(const int from, const int to) {	// written by chatGPT 0_0
 	return distribution(generator);  // Generate the random number and return it
 }
 
+inline float RandomF(float min_float, float max_float) {	// written by chatGPT 0_0
+	static bool initialized = false;
+	if (!initialized) {
+		srand(time(nullptr)); // set seed based on current time, only once
+		initialized = true;
+	}
+	float random = ((float)rand()) / (float)RAND_MAX; // generate random float between 0 and 1
+	float range = max_float - min_float; // calculate range
+	return (random * range) + min_float; // scale and shift the random number to the desired range
+}
 
 inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 	float movement_speed;
@@ -61,11 +72,24 @@ inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 	else if (type == "engineer") { movement_speed = engineer_movement_speed; sprite_path = engineer_sprite_path; }
 	else LOG_DEBUG("WARNING: probably no valid 'type'-arg at CreateCharacter(); sofore movement_speed is not initialised");
 
-	character->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_paths
+	character->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
 	character->AddComponent(new Movement(movement_speed));
 	character->AddTag("character"); character->AddTag(type);
 
 	foreground_layer->AddGameObjectToLayer(character);
 	
 	return character;
+}
+
+inline GameObject* CreateEnemy(glm::vec2 spawn_pos) {
+	GameObject* enemy = new GameObject("enemy", Transform(spawn_pos, enemy_scale));
+
+	enemy->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
+	enemy->AddComponent(new Movement(enemy_movement_speed));
+	enemy->AddComponent(new EnemyBehaviour());
+	enemy->AddTag("enemy");
+
+	foreground_layer->AddGameObjectToLayer(enemy);
+
+	return enemy;
 }
