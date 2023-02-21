@@ -4,6 +4,8 @@
 #include "required/constants.h"
 #include "components/movement.h"
 #include "components/enemy_behaviour.h"
+#include "components/shooting.h"
+#include "components/node.h"
 #include <vector>
 #include <random>
 
@@ -11,7 +13,7 @@ using namespace core;
 
 
 // TODO: Change to vec2 2D-vector, cubes are placeholders for debugging and visualisation
-inline std::vector<std::vector<GameObject*>> CreateGrid(const uint8_t x_size, const uint8_t y_size, const float offset, const glm::vec2 mid_pos) {
+inline std::vector<std::vector<GameObject*>> CreateEnemyGrid(const uint8_t x_size, const uint8_t y_size, const float offset, const glm::vec2 mid_pos) {
 
 	std::vector<std::vector<GameObject*>> grid;	//create 2D vector
 	float cube_rad = 0.25f;
@@ -26,7 +28,8 @@ inline std::vector<std::vector<GameObject*>> CreateGrid(const uint8_t x_size, co
 				glm::vec2(2 * cube_rad))));	// add gameobjects to it
 
 			y_row.at(y)->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)));	// add SpriteRenderer
-			y_row.at(y)->AddTag("move_node");
+			y_row.at(y)->AddComponent(new Node());
+			//y_row.at(y)->AddTag("move_node");
 			foreground_layer->AddGameObjectToLayer(y_row.at(y));
 		}
 		grid.emplace_back(y_row);	// add y_row to grid at index x
@@ -87,6 +90,7 @@ inline GameObject* CreateEnemy(std::string name, glm::vec2 spawn_pos) {
 	enemy_go->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
 	enemy_go->AddComponent(new Movement(enemy_movement_speed));
 	enemy_go->AddComponent(new EnemyBehaviour());
+	enemy_go->AddComponent(new Shooting());
 	enemy_go->AddTag("enemy");
 
 	foreground_layer->AddGameObjectToLayer(enemy_go);

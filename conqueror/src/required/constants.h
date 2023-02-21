@@ -26,10 +26,10 @@ inline std::string engineer_sprite_path = "";
 inline std::string enemy_sprite_path = "";
 
 // enemy grid constants
-inline int enemy_grid_x = 5;
-inline int enemy_grid_y = 3;
-inline float enemy_grid_offset = 2.0f;
-inline glm::vec2 enemy_grid_startpos = glm::vec2(0.0f, 0.0f);
+inline int enemy_grid_x = 10;
+inline int enemy_grid_y = 6;
+inline float enemy_grid_offset = 0.5f;
+inline glm::vec2 enemy_grid_startpos = glm::vec2(0.0f, 2.0f);
 
 // enemy behaviour constants
 inline float min_enemy_waiting_time = 0.5f;

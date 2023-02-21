@@ -20,4 +20,9 @@ private:
 
 	float time_to_wait;
 	float dt_time_counter;
+
+	size_t y_index;
+	size_t x_index;
+
+	glm::vec2 ChoosePos();
 };

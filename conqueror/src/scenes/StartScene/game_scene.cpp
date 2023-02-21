@@ -24,7 +24,7 @@ void GameScene::loadResources() {
     //sound_layer = new SoundLayer;
 
     //Grid creation
-    enemy_grid = CreateGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
+    enemy_grid = CreateEnemyGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
 
     GameObject* character = CreateCharacter("soldier", glm::vec2(0.0f, 0.0f));
     //GameObject* character2 = CreateCharacter("soldier", glm::vec2(1.0f, 1.0f));
@@ -91,7 +91,7 @@ bool GameScene::GameObjectPressed(GameObjectPressedEvent& e) {
         active_go = e.GetGameObject();
     }
     // Else if a move_node was clicked: set the active_gameobject's target_position to the move_node's position
-    else if (clicked_go->HasTag("move_node") && active_go != nullptr) {
+    else if (clicked_go->HasTag("move_node") && !clicked_go->GetComponent<Node>()->is_occupied && active_go != nullptr) {
         active_go->GetComponent<Movement>()->target_position = clicked_go->transform.position;
     }
 

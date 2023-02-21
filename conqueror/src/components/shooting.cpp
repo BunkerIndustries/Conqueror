@@ -3,6 +3,10 @@
 #include "required/stands.h"
 
 
+Shooting::Shooting() {
+
+}
+
 void Shooting::start() {
 
 }
@@ -15,12 +19,16 @@ void Shooting::update(float dt) {
 
 }
 
-void Shooting::LockTarget() {
-	// random choose out of stands with calculated possibilities
+void Shooting::Shoot() {
+	// first lock target randomly
+	//target = LockTarget();
 
+	// calculate hit-probability and hit-accuracy
+
+	// instantiate bullet
 }
 
-void Shooting::Shoot() {
-	// shoot at locked target and hit with certain possibility
+GameObject* LockTarget() {
 
+	return nullptr;
 }

@@ -15,9 +15,14 @@ void EnemyBehaviour::start() {
 
 	dt_time_counter = 0.0f;
 
-	is_waiting = true;
+	is_waiting = false;
 	time_over = true;
 	time_running = false;
+
+	size_t random_x_pos = RandomInt(0, enemy_grid_x - 1);
+	move_component->target_position = enemy_grid.at(random_x_pos).at(0)->transform.position;
+	y_index = 0;
+	x_index = random_x_pos;
 }
 
 void EnemyBehaviour::stop() {
@@ -63,3 +68,10 @@ void EnemyBehaviour::update(float dt) {
 
 }
 
+glm::vec2 EnemyBehaviour::ChoosePos() {
+
+	glm::vec2 pos;
+
+
+	return pos;
+}
