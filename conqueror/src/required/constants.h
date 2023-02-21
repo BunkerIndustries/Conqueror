@@ -37,6 +37,10 @@ inline float max_enemy_waiting_time = 2.0f;
 inline float enemy_movement_speed = 1.0f;
 inline float enemy_waiting_time_factor = 4.0f;
 inline glm::vec2 enemy_scale = glm::vec2(0.7f, 1.0f);
+inline uint8_t enemy_random_movement_sum = 5;
+inline uint8_t enemy_move_left_probability = 1;
+inline uint8_t enemy_move_mid_probability = 3;
+inline uint8_t enemy_move_right_probability = 1;
 
 // character constants
 inline float soldier_movement_speed = 1.2f;
@@ -44,7 +48,7 @@ inline float medic_movement_speed = 1.4f;
 inline float engineer_movement_speed = 0.9f;
 inline glm::vec2 character_scale = glm::vec2(0.9f, 1.2f);
 
-// stands constants (probilities have to be choose_probability_sum in total)
+// stands constants (probabilities have to be choose_probability_sum in total)
 inline uint8_t choose_probability_sum = 100;
 inline uint8_t front_choose_probability = 45;
 inline uint8_t mg_choose_probability = 20;

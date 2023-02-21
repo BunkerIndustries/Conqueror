@@ -24,5 +24,5 @@ private:
 	size_t y_index;
 	size_t x_index;
 
-	glm::vec2 ChoosePos();
+	void ChoosePosAndMove();
 };
