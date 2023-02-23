@@ -12,6 +12,8 @@ public:
 	void update(float dt) override;
 	void event(Event& event) override {};
 
+	size_t GetYIndex();
+
 private:
 	Movement* move_component;
 	bool is_waiting;
@@ -21,8 +23,8 @@ private:
 	float time_to_wait;
 	float dt_time_counter;
 
-	size_t y_index;
 	size_t x_index;
+	size_t y_index;		// used for calculating hit possibility
 
 	void ChoosePosAndMove();
 };

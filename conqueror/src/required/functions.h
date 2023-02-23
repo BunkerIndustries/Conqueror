@@ -2,10 +2,12 @@
 #include "Engine.h"
 #include "layers/ForegroundLayer.h"
 #include "required/constants.h"
+#include "required/stands.h"
 #include "components/movement.h"
 #include "components/enemy_behaviour.h"
-#include "components/shooting.h"
 #include "components/node.h"
+#include "components/enemy_shooting.h"
+#include "components/character_shooting.h"
 #include <vector>
 #include <random>
 
@@ -64,6 +66,10 @@ inline float RandomF(float min_float, float max_float) {	// written by chatGPT 0
 	return (random * range) + min_float; // scale and shift the random number to the desired range
 }
 
+inline int SumTo(int n) {
+	return n * (n + 1) / 2;
+}
+
 inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 	float movement_speed;
 	std::string sprite_path;
@@ -90,10 +96,22 @@ inline GameObject* CreateEnemy(std::string name, glm::vec2 spawn_pos) {
 	enemy_go->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
 	enemy_go->AddComponent(new Movement(enemy_movement_speed));
 	enemy_go->AddComponent(new EnemyBehaviour());
-	enemy_go->AddComponent(new Shooting());
+	enemy_go->AddComponent(new EnemyShooting());
 	enemy_go->AddTag("enemy");
 
 	foreground_layer->AddGameObjectToLayer(enemy_go);
 
 	return enemy_go;
+}
+
+inline GameObject* CreateNode(glm::vec2 position, Stand& stand) {
+	GameObject* node_go = new GameObject("node", Transform(position, node_size));
+
+	node_go->AddComponent(new SpriteRenderer(*stand.color));
+	node_go->AddComponent(new Node());
+	node_go->AddTag("move_node");
+
+	foreground_layer->AddGameObjectToLayer(node_go);
+
+	return node_go;
 }

@@ -57,9 +57,27 @@ inline uint8_t hiding_choose_probability = 8;
 inline uint8_t artillerie_choose_probability = 12;
 
 // shooting constants
-inline uint8_t hit_probability_sum = 100;
-inline uint8_t front_hit_probability = 80;
-inline uint8_t mg_hit_probability = 60;
-inline uint8_t trench_hit_probability = 50;
-inline uint8_t hiding_hit_probability = 40;
-inline uint8_t artillerie_hit_probability = 60;
+inline uint8_t max_hit_probability = 10;
+inline uint8_t front_hit_probability = 8;
+inline uint8_t mg_hit_probability = 6;
+inline uint8_t trench_hit_probability = 5;
+inline uint8_t hiding_hit_probability = 4;
+inline uint8_t artillerie_hit_probability = 6;
+
+// bullet constants
+inline float bullet_speed = 20.0f;
+inline glm::vec4 bullet_color = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
+inline glm::vec2 bullet_size = glm::vec2(0.1f, 0.1f);
+inline float min_inaccuracy = 0.1f;
+inline float max_inaccuracy = 0.4f;
+
+// node constants
+inline glm::vec2 node_size = glm::vec2(0.5f, 0.5f);
+inline float node_alpha = 0.8f;
+inline glm::vec4 node_front_color = glm::vec4(0.9f, 0.0f, 0.0f, node_alpha);
+inline glm::vec4 node_mg_color = glm::vec4(0.9f, 0.2f, 0.0f, node_alpha);
+inline glm::vec4 node_trench_color = glm::vec4(0.9f, 0.0f, 0.0f, node_alpha);
+inline glm::vec4 node_hiding_color = glm::vec4(0.5f, 0.0f, 0.5f, node_alpha);
+inline glm::vec4 node_artillerie_color = glm::vec4(0.6f, 0.4f, 0.2f, node_alpha);
+inline glm::vec4 node_bunker_color = glm::vec4(0.0f, 0.9f, 0.0f, node_alpha);
+inline glm::vec4 node_waiting_color = glm::vec4(0.0f, 0.4f, 0.4f, node_alpha);

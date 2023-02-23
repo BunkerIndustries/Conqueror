@@ -2,11 +2,16 @@
 
 #include "required/constants.h"
 #include "required/functions.h"
+#include "required/stands.h"
 #include "components/movement.h"
 
 
 EnemyBehaviour::EnemyBehaviour() {
 
+}
+
+size_t EnemyBehaviour::GetYIndex() {
+	return y_index;
 }
 
 
@@ -21,8 +26,10 @@ void EnemyBehaviour::start() {
 
 	size_t random_x_pos = RandomInt(0, enemy_grid_x - 1);
 	move_component->target_position = enemy_grid.at(random_x_pos).at(0)->transform.position;
+	enemy_stands.at(y_index).emplace_back(&gameObject);
 	y_index = 0;
 	x_index = random_x_pos;
+
 }
 
 void EnemyBehaviour::stop() {
@@ -83,27 +90,43 @@ void EnemyBehaviour::ChoosePosAndMove() {
 
 	GameObject* move_node_go;
 
+	int8_t x_offset = 0;
+	int8_t y_offset;
+
 	// calculates the probabilities for each move-possibility and sets the move_node_go to the randomly selected node
 	if (random <= enemy_move_left_probability && x_index != 0) {
 		move_node_go = enemy_grid.at(x_index - 1).at(y_index + 1);
-		x_index -= 1;
-		y_index += 1;
+		x_offset = -1;
+		y_offset = 1;
 	}
 	else if (random <= enemy_move_left_probability + enemy_move_right_probability && x_index != enemy_grid_x - 1) {
 		move_node_go = enemy_grid.at(x_index + 1).at(y_index + 1);
-		x_index += 1;
-		y_index += 1;
+		x_offset = 1;
+		y_offset = 1;
 	}
 	else{
 		move_node_go = enemy_grid.at(x_index).at(y_index + 1);
-		y_index += 1;
+		y_offset = 1;
 	}
 
 	// if this node is already occupied, do nothing
 	if (move_node_go->GetComponent<Node>()->is_occupied) return;
 
+	enemy_grid.at(x_index).at(y_index)->GetComponent<Node>()->is_occupied = false;
+	int id = gameObject->GetObjectID();
+
+	// deletes the gameobject from the vector
+	for (size_t i = 0; i < enemy_stands.at(y_index).size() - 1; i++) {
+		if (enemy_stands.at(y_index).at(i) == gameObject) {
+			enemy_stands.at(y_index).erase(enemy_stands.at(y_index).begin() + i);
+		}
+	}
+	
+	x_index += x_offset;
+	y_index += y_offset;
+
 	// now move to the selected node and occupy it
 	move_component->target_position = move_node_go->transform.position;
 	enemy_grid.at(x_index).at(y_index)->GetComponent<Node>()->is_occupied = true;
-
+	enemy_stands.at(y_index).emplace_back(&gameObject);
 }
