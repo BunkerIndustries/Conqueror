@@ -26,8 +26,8 @@ inline std::string engineer_sprite_path = "";
 inline std::string enemy_sprite_path = "";
 
 // enemy grid constants
-inline int enemy_grid_x = 10;
-inline int enemy_grid_y = 6;
+inline const int enemy_grid_x = 10;
+inline const int enemy_grid_y = 6;
 inline float enemy_grid_offset = 0.5f;
 inline glm::vec2 enemy_grid_startpos = glm::vec2(0.0f, 2.0f);
 

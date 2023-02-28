@@ -26,6 +26,7 @@ void GameScene::loadResources() {
 
     //Grid creation
     enemy_grid = CreateEnemyGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
+    InitEnemyStands();
 
     GameObject* character = CreateCharacter("soldier", glm::vec2(0.0f, 0.0f));
     //GameObject* character2 = CreateCharacter("soldier", glm::vec2(1.0f, 1.0f));
@@ -34,7 +35,7 @@ void GameScene::loadResources() {
     GameObject* enemy2 = CreateEnemy("enemy 2", glm::vec2(-1.0f, 0.0f));
 
     GameObject* node = CreateNode(glm::vec2(0.0f, -3.0f), front_stand);
-    GameObject * node2 = CreateNode(glm::vec2(1.0f, -3.0f), mg_stand);
+    GameObject* node2 = CreateNode(glm::vec2(1.0f, -3.0f), mg_stand);
     GameObject* node3 = CreateNode(glm::vec2(2.0f, -3.0f), trench_stand);
     GameObject* node4 = CreateNode(glm::vec2(3.0f, -3.0f), hiding_stand);
     GameObject* node5 = CreateNode(glm::vec2(4.0f, -3.0f), artillerie_stand);

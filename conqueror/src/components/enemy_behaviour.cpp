@@ -25,11 +25,14 @@ void EnemyBehaviour::start() {
 	time_running = false;
 
 	size_t random_x_pos = RandomInt(0, enemy_grid_x - 1);
-	move_component->target_position = enemy_grid.at(random_x_pos).at(0)->transform.position;
-	enemy_stands.at(y_index).emplace_back(gameObject);
 	y_index = 0;
 	x_index = random_x_pos;
 
+	move_component->target_position = enemy_grid.at(random_x_pos).at(0)->transform.position;
+
+	// ERROR
+	enemy_stands[y_index].push_back(gameObject);
+	
 }
 
 void EnemyBehaviour::stop() {
@@ -113,7 +116,6 @@ void EnemyBehaviour::ChoosePosAndMove() {
 	if (move_node_go->GetComponent<Node>()->is_occupied) return;
 
 	enemy_grid.at(x_index).at(y_index)->GetComponent<Node>()->is_occupied = false;
-	int id = gameObject->GetObjectID();
 
 	// removes the gameobject from the vector
 	for (size_t i = 0; i < enemy_stands.at(y_index).size() - 1; i++) {
@@ -128,5 +130,5 @@ void EnemyBehaviour::ChoosePosAndMove() {
 	// now move to the selected node and occupy it
 	move_component->target_position = move_node_go->transform.position;
 	enemy_grid.at(x_index).at(y_index)->GetComponent<Node>()->is_occupied = true;
-	enemy_stands.at(y_index).emplace_back(gameObject);
+	enemy_stands[y_index].push_back(gameObject);
 }
