@@ -118,7 +118,9 @@ inline GameObject* CreateNode(glm::vec2 position, Stand& stand) {
 
 // sets each x_row of enemy_stands to the predefined size
 inline void InitEnemyStands() {
-	for (size_t i = 0; i < enemy_grid_y; i++) {
-		enemy_stands[i].resize(enemy_grid_x);
-	}
+	/*for (size_t y = 0; y < enemy_grid_y; y++) {
+		for (size_t x = 0; x < enemy_grid_x; x++) {
+			enemy_stands[y].push_back(nullptr);
+		}
+	}*/
 }
