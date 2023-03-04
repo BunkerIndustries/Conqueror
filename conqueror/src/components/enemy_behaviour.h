@@ -24,7 +24,7 @@ private:
 	float dt_time_counter;
 
 	size_t x_index;
-	size_t y_index;		// used for calculating hit possibility
+	size_t y_index;
 
 	void ChoosePosAndMove();
 };

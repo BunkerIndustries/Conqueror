@@ -5,6 +5,7 @@
 #include "required/functions.h"
 #include "required/stands.h"
 #include "components/movement.h"
+#include "components/soldier_behaviour.h"
 
 using namespace core;
 
@@ -26,7 +27,6 @@ void GameScene::loadResources() {
 
     //Grid creation
     enemy_grid = CreateEnemyGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
-    InitEnemyStands();
 
     GameObject* character = CreateCharacter("soldier", glm::vec2(0.0f, 0.0f));
     //GameObject* character2 = CreateCharacter("soldier", glm::vec2(1.0f, 1.0f));
@@ -93,17 +93,17 @@ bool GameScene::OnMouseScroll(MouseScrolledEvent& e)
 
 bool GameScene::GameObjectPressed(GameObjectPressedEvent& e) {
 
+    // select character or move it
     GameObject* clicked_go = e.GetGameObject();
 
     // If a character was clicked: active_gameobject that's supposed to move is set to that
-    if (clicked_go->HasTag("character")) {
+    if (clicked_go->HasTag("soldier")) {
         active_go = e.GetGameObject();
     }
     // Else if a move_node was clicked: set the active_gameobject's target_position to the move_node's position
     else if (clicked_go->HasTag("move_node") && !clicked_go->GetComponent<Node>()->is_occupied && active_go != nullptr) {
-        active_go->GetComponent<Movement>()->target_position = clicked_go->transform.position;
+        active_go->GetComponent<SoldierBehaviour>()->SoldierMove(clicked_go);
     }
 
-    //delete clicked_go;
     return true;
 }

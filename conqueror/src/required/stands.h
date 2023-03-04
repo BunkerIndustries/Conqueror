@@ -24,6 +24,4 @@ inline std::vector<Stand> shootable_stands = {
 	front_stand, mg_stand, trench_stand, hiding_stand, artillerie_stand
 };
 
-
-
-inline std::vector<std::vector<GameObject*>> enemy_stands;	// has to be initialised in enemy_behaviour component
+inline GameObject* enemy_stands[enemy_grid_y][enemy_grid_x];

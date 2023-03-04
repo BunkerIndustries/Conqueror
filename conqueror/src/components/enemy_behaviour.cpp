@@ -30,8 +30,7 @@ void EnemyBehaviour::start() {
 
 	move_component->target_position = enemy_grid.at(random_x_pos).at(0)->transform.position;
 
-	std::vector<GameObject*>* push_vec = &enemy_stands.at(y_index);
-	push_vec->push_back(gameObject);
+	enemy_stands[y_index][x_index] = gameObject;
 	
 }
 
@@ -67,10 +66,9 @@ void EnemyBehaviour::update(float dt) {
 					time_over = true;
 					dt_time_counter = 0.0f;
 
-					// shoot
+					gameObject->GetComponent<EnemyShooting>()->Shoot();
 				}
 			}
-			
 		}
 	}
 	else {
@@ -118,9 +116,9 @@ void EnemyBehaviour::ChoosePosAndMove() {
 	enemy_grid.at(x_index).at(y_index)->GetComponent<Node>()->is_occupied = false;
 
 	// removes the gameobject from the vector
-	for (size_t i = 0; i < enemy_stands.at(y_index).size() - 1; i++) {
-		if (enemy_stands.at(y_index).at(i) == gameObject) {
-			enemy_stands.at(y_index).erase(enemy_stands.at(y_index).begin() + i);
+	for (size_t i = 0; i < enemy_grid_y - 1; i++) {
+		if (enemy_stands[y_index][i] == gameObject) {
+			enemy_stands[y_index][i] = nullptr;
 		}
 	}
 	
@@ -130,6 +128,5 @@ void EnemyBehaviour::ChoosePosAndMove() {
 	// now move to the selected node and occupy it
 	move_component->target_position = move_node_go->transform.position;
 	enemy_grid.at(x_index).at(y_index)->GetComponent<Node>()->is_occupied = true;
-	std::vector<GameObject*>* push_vec = &enemy_stands.at(y_index);
-	push_vec->push_back(gameObject);
+	enemy_stands[y_index][x_index] = gameObject;
 }

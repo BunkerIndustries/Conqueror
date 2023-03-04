@@ -7,7 +7,8 @@
 #include "components/enemy_behaviour.h"
 #include "components/node.h"
 #include "components/enemy_shooting.h"
-#include "components/character_shooting.h"
+#include "components/soldier_shooting.h"
+#include "components/soldier_behaviour.h"
 #include <vector>
 #include <random>
 
@@ -30,7 +31,7 @@ inline std::vector<std::vector<GameObject*>> CreateEnemyGrid(const uint8_t x_siz
 				glm::vec2(2 * cube_rad))));	// add gameobjects to it
 
 			y_row.at(y)->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)));	// add SpriteRenderer
-			y_row.at(y)->AddComponent(new Node());
+			y_row.at(y)->AddComponent(new Node(nullptr));
 			//y_row.at(y)->AddTag("move_node");
 			foreground_layer->AddGameObjectToLayer(y_row.at(y));
 		}
@@ -76,14 +77,22 @@ inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 	GameObject* character_go = new GameObject(type, Transform(spawn_pos, character_scale));
 
 	// set paths and movement speeds regarding the type of the character
-	if (type == "soldier") { movement_speed = soldier_movement_speed; sprite_path = soldier_sprite_path; }
-	else if (type == "medic") { movement_speed = medic_movement_speed; sprite_path = medic_sprite_path; }
-	else if (type == "engineer") { movement_speed = engineer_movement_speed; sprite_path = engineer_sprite_path; }
+	if (type == "soldier") { 
+		movement_speed = soldier_movement_speed; sprite_path = soldier_sprite_path; 
+		character_go->AddComponent(new SoldierBehaviour());
+		character_go->AddComponent(new SoldierShooting());
+	}
+	else if (type == "medic") { 
+		movement_speed = medic_movement_speed; sprite_path = medic_sprite_path; 
+	}
+	else if (type == "engineer") { 
+		movement_speed = engineer_movement_speed; sprite_path = engineer_sprite_path; 
+	}
 	else LOG_DEBUG("WARNING: probably no valid 'type'-arg at CreateCharacter(); sofore movement_speed is not initialised");
 
 	character_go->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
 	character_go->AddComponent(new Movement(movement_speed));
-	character_go->AddTag("character"); character_go->AddTag(type);
+	character_go->AddTag(type);
 
 	foreground_layer->AddGameObjectToLayer(character_go);
 	
@@ -104,23 +113,15 @@ inline GameObject* CreateEnemy(std::string name, glm::vec2 spawn_pos) {
 	return enemy_go;
 }
 
-inline GameObject* CreateNode(glm::vec2 position, Stand& stand) {
+inline GameObject* CreateNode(glm::vec2 position, Stand& node_stand) {
 	GameObject* node_go = new GameObject("node", Transform(position, node_size));
 
-	node_go->AddComponent(new SpriteRenderer(*stand.color));
-	node_go->AddComponent(new Node());
-	node_go->AddTag("move_node");
+	node_go->AddComponent(new SpriteRenderer(*node_stand.color));
+	node_go->AddComponent(new Node(node_stand.stand));
 
+	if(node_stand.stand != waiting_stand.stand) node_go->AddTag("move_node");
+	
 	foreground_layer->AddGameObjectToLayer(node_go);
 
 	return node_go;
-}
-
-// sets each x_row of enemy_stands to the predefined size
-inline void InitEnemyStands() {
-	for (size_t y = 0; y < enemy_grid_y; y++) {
-		for (size_t x = 0; x < enemy_grid_x; x++) {
-			enemy_stands[y].push_back(nullptr);
-		}
-	}
 }

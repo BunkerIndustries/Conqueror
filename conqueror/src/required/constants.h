@@ -43,10 +43,14 @@ inline uint8_t enemy_move_mid_probability = 3;
 inline uint8_t enemy_move_right_probability = 1;
 
 // character constants
-inline float soldier_movement_speed = 1.2f;
 inline float medic_movement_speed = 1.4f;
 inline float engineer_movement_speed = 0.9f;
-inline glm::vec2 character_scale = glm::vec2(0.9f, 1.2f);
+inline glm::vec2 character_scale = glm::vec2(0.9f, 1.2f);	// probably temporary
+
+//soldier constants
+inline float soldier_movement_speed = 1.2f;
+inline float min_soldier_shoot_waiting_time = 0.5f;
+inline float max_soldier_shoot_waiting_time = 1.5f;
 
 // stands constants (probabilities have to be choose_probability_sum in total)
 inline uint8_t choose_probability_sum = 100;

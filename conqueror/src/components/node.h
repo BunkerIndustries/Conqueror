@@ -3,7 +3,7 @@
 
 class Node : public Component {
 public:
-	Node();
+	Node(std::vector<GameObject*>* stand);
 	virtual ~Node() = default;
 
 	void start() override;
@@ -12,4 +12,6 @@ public:
 	void event(Event& event) override {};
 
 	bool is_occupied;
+
+	std::vector<GameObject*>* stand;
 };

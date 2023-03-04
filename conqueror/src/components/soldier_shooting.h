@@ -1,10 +1,10 @@
 #pragma once
 #include "Engine.h"
 
-class CharacterShooting : public Component {
+class SoldierShooting : public Component {
 public:
-	CharacterShooting();
-	virtual ~CharacterShooting() = default;
+	SoldierShooting();
+	virtual ~SoldierShooting() = default;
 
 	void start() override;
 	void stop() override;
@@ -12,8 +12,10 @@ public:
 	void event(Event& event) override {};
 
 	void Shoot();
+
 private:
 	bool LockTarget();
+
 	GameObject* target;
 	uint8_t* hit_probability;
 };
