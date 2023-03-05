@@ -4,7 +4,7 @@
 class Bullet : public Component {
 public:
 	Bullet(GameObject* target, bool is_hit);
-	virtual ~Bullet() = default;
+	virtual ~Bullet();
 
 	void start() override;
 	void stop() override;

@@ -35,7 +35,7 @@ inline glm::vec2 enemy_grid_startpos = glm::vec2(0.0f, 2.0f);
 inline float min_enemy_waiting_time = 0.5f;
 inline float max_enemy_waiting_time = 2.0f;
 inline float enemy_movement_speed = 1.0f;
-inline float waiting_time_factor = 4.0f;
+inline uint8_t max_enemy_lock_target_tries = 3;
 inline glm::vec2 enemy_scale = glm::vec2(0.7f, 1.0f);
 inline uint8_t enemy_random_movement_sum = 5;
 inline uint8_t enemy_move_left_probability = 1;
@@ -85,3 +85,6 @@ inline glm::vec4 node_hiding_color = glm::vec4(0.5f, 0.0f, 0.5f, node_alpha);
 inline glm::vec4 node_artillerie_color = glm::vec4(0.6f, 0.4f, 0.2f, node_alpha);
 inline glm::vec4 node_bunker_color = glm::vec4(0.0f, 0.9f, 0.0f, node_alpha);
 inline glm::vec4 node_waiting_color = glm::vec4(0.0f, 0.4f, 0.4f, node_alpha);
+
+// time constants
+inline float waiting_time_factor = 4.0f;

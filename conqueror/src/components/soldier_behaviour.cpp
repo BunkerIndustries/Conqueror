@@ -46,17 +46,20 @@ void SoldierBehaviour::update(float dt) {
 
 void SoldierBehaviour::SoldierMove(GameObject* move_node) {
 
-	gameObject->GetComponent<Movement>()->target_position = move_node->transform.position;
+	Movement* move_component = gameObject->GetComponent<Movement>();
+
+	if (move_component->target_position == move_node->transform.position) return;
+
+	move_component->target_position = move_node->transform.position;
 	travelling = true;
 
-	std::vector<GameObject*>* old_stand = this->stand;
-	this->stand = move_node->GetComponent<Node>()->stand;
-	
-	for (size_t i = 0; i < old_stand->size() - 1; i++) {
-		if (old_stand->at(i) == gameObject) {
-			old_stand->erase(old_stand->begin() + i);
+	for (size_t i = 0; i < stand->size(); i++) {
+		if (stand->at(i) == gameObject) {
+			stand->erase(stand->begin() + i);
 			break;
 		}
 	}
-	this->stand->push_back(gameObject);
+
+	this->stand = move_node->GetComponent<Node>()->stand;
+	
 }
