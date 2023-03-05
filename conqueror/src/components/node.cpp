@@ -8,7 +8,6 @@ Node::Node(std::vector<GameObject*>* stand)
 
 void Node::start() {
 	is_occupied = false;
-	stand = nullptr;
 }
 
 void Node::stop() {

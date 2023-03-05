@@ -13,7 +13,7 @@ SoldierBehaviour::SoldierBehaviour() {
 
 void SoldierBehaviour::start() {
 	can_shoot = false;
-	time_to_wait = RandomF(min_soldier_shoot_waiting_time, max_soldier_shoot_waiting_time);
+	time_to_wait = RandomF(min_soldier_shoot_waiting_time, max_soldier_shoot_waiting_time) * waiting_time_factor;
 	stand = waiting_stand.stand;
 }
 
@@ -50,16 +50,13 @@ void SoldierBehaviour::SoldierMove(GameObject* move_node) {
 	travelling = true;
 
 	std::vector<GameObject*>* old_stand = this->stand;
-
-	// ERROR: node-component is nullptr
-	Node* n = move_node->GetComponent<Node>();
 	this->stand = move_node->GetComponent<Node>()->stand;
-
-	for (size_t i = 0; i <= old_stand->size() - 1; i++) {
+	
+	for (size_t i = 0; i < old_stand->size() - 1; i++) {
 		if (old_stand->at(i) == gameObject) {
 			old_stand->erase(old_stand->begin() + i);
 			break;
 		}
 	}
-
+	this->stand->push_back(gameObject);
 }

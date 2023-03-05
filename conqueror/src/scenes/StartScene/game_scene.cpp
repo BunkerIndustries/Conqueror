@@ -28,11 +28,11 @@ void GameScene::loadResources() {
     //Grid creation
     enemy_grid = CreateEnemyGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
 
-    GameObject* character = CreateCharacter("soldier", glm::vec2(0.0f, 0.0f));
+    GameObject* character = CreateCharacter("soldier", glm::vec2(0.0f, 5.0f));
     //GameObject* character2 = CreateCharacter("soldier", glm::vec2(1.0f, 1.0f));
 
     GameObject* enemy = CreateEnemy("enemy 1", glm::vec2(1.0f, 0.0f));
-    GameObject* enemy2 = CreateEnemy("enemy 2", glm::vec2(-1.0f, 0.0f));
+    //GameObject* enemy2 = CreateEnemy("enemy 2", glm::vec2(-1.0f, 0.0f));
 
     GameObject* node = CreateNode(glm::vec2(0.0f, -3.0f), front_stand);
     GameObject* node2 = CreateNode(glm::vec2(1.0f, -3.0f), mg_stand);
@@ -101,8 +101,11 @@ bool GameScene::GameObjectPressed(GameObjectPressedEvent& e) {
         active_go = e.GetGameObject();
     }
     // Else if a move_node was clicked: set the active_gameobject's target_position to the move_node's position
-    else if (clicked_go->HasTag("move_node") && !clicked_go->GetComponent<Node>()->is_occupied && active_go != nullptr) {
-        active_go->GetComponent<SoldierBehaviour>()->SoldierMove(clicked_go);
+    else if (clicked_go->HasTag("move_node") && active_go != nullptr) {
+        if (!clicked_go->GetComponent<Node>()->is_occupied) {
+            active_go->GetComponent<SoldierBehaviour>()->SoldierMove(clicked_go);
+        }
+        
     }
 
     return true;

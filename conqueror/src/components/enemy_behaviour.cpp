@@ -58,8 +58,8 @@ void EnemyBehaviour::update(float dt) {
 				time_running = true;
 
 				// random calculation of time to wait
-				time_to_wait = RandomF(min_enemy_waiting_time, max_enemy_waiting_time) * enemy_waiting_time_factor;
-				LOG_DEBUG("time_to_wait: {0}", time_to_wait);
+				time_to_wait = RandomF(min_enemy_waiting_time, max_enemy_waiting_time) * waiting_time_factor;
+				//LOG_DEBUG("time_to_wait: {0}", time_to_wait);
 			}
 			else {
 				if (dt_time_counter >= time_to_wait) {

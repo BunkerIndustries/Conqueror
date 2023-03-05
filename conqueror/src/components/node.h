@@ -3,7 +3,7 @@
 
 class Node : public Component {
 public:
-	Node(std::vector<GameObject*>* stand);
+	Node(std::vector<GameObject*>* stand = nullptr);
 	virtual ~Node() = default;
 
 	void start() override;

@@ -9,8 +9,6 @@
 
 class GameScene : public core::Scene
 {
-private:
-	GameObject* active_go{ nullptr };
 public:
 	GameScene();
 	virtual ~GameScene() override;
@@ -28,4 +26,6 @@ public:
 	bool OnMouseScroll(MouseScrolledEvent& e);
 	bool GameObjectPressed(GameObjectPressedEvent& e);
 
+private:
+	GameObject* active_go{ nullptr };
 };

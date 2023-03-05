@@ -41,16 +41,19 @@ bool EnemyShooting::LockTarget() {
 	std::vector<GameObject*>* chosen_stand;
 
 	int random = RandomInt(0, choose_probability_sum);
+	LOG_DEBUG("random: {0}",random);
 
 	uint8_t prob = 0;
 	size_t i;
 	for (i = 0; i < shootable_stands.size(); i++) {
 		prob += *shootable_stands.at(i).choose_probability;
+		LOG_DEBUG("prob: {0}", prob);
 		if (random <= prob) {
 			chosen_stand = shootable_stands.at(i).stand;
+			LOG_DEBUG("chosen stand: {0}", i);
 			break;
 		}
-		LOG_DEBUG("chosen_stand is uninitialised - something is wrong with choosing it randomly");
+		
 	}
 
 	if (chosen_stand->size() == 0) {
