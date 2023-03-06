@@ -22,6 +22,8 @@ void SoldierShooting::update(float dt) {
 }
 
 void SoldierShooting::Shoot() {
+
+	// TODO: update to same state as in enemy_shooting
 	if (!LockTarget()) return;
 
 	GameObject bullet = GameObject("bullet", Transform(gameObject->transform.position, bullet_size));
@@ -40,15 +42,16 @@ bool SoldierShooting::LockTarget() {
 
 	std::vector<GameObject*> enemy_row_vec;
 
+	// used for choosing the enemy-row randomly
 	int random = RandomInt(0, SumTo(enemy_grid_y));
 	size_t prob = SumTo(enemy_grid_y);
 
+	// choose 1 random row of the enemy grid
 	int y_row;
-	// choose 1 random row of the enemy grid (probability increases from top to bottom)
-	for (size_t i = enemy_grid_y - 1; i >= 0; i--) {
-		prob -= i;
-		if (random >= prob) {
-			y_row = i;
+	for (size_t i = 1; i <= enemy_grid_y; i++) {
+		prob += i;
+		if (random <= prob) {
+			y_row = i-1;
 			*hit_probability = i;
 			break;
 		}
@@ -59,14 +62,14 @@ bool SoldierShooting::LockTarget() {
 		if (enemy_stands[y_row][i] != nullptr) enemy_row_vec.push_back(enemy_stands[y_row][i]);
 	}
 
-	// if this vector contains no enemies => no enemy get's locked
+	// if this vector contains no enemies => no target is set, try unsuccessful
 	if (enemy_row_vec.size() == 0) {
 		return false;
 	}
 
-	// if it contains enemies
+	// if it contains enemies => a target is set, try successful
 	else {
-		target = enemy_row_vec.at(RandomInt(0, enemy_row_vec.size()-1));	// set a target
+		target = enemy_row_vec.at(RandomInt(0, enemy_row_vec.size()-1));
 		return true;
 	}
 

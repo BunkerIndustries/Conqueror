@@ -21,4 +21,5 @@ private:
 	float time_to_wait;
 
 	std::vector<GameObject*>* stand;
+	GameObject* old_node;
 };
