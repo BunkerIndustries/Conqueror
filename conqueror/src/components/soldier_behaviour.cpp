@@ -7,7 +7,9 @@
 #include "soldier_shooting.h"
 
 
-SoldierBehaviour::SoldierBehaviour() {
+SoldierBehaviour::SoldierBehaviour(GameObject* start_node) 
+	:old_node(start_node)
+{
 
 }
 
@@ -17,6 +19,8 @@ void SoldierBehaviour::start() {
 	can_shoot = false;
 	time_to_wait = RandomF(min_soldier_shoot_waiting_time, max_soldier_shoot_waiting_time) * waiting_time_factor;
 	stand = waiting_stand.stand;
+
+	SoldierMove(old_node);
 }
 
 void SoldierBehaviour::stop() {
@@ -65,7 +69,10 @@ void SoldierBehaviour::SoldierMove(GameObject* move_node) {
 
 	// make the clicked node occupied and the recent unoccupied
 	node_component->is_occupied = true;
-	old_node->GetComponent<Node>()->is_occupied = false;
+
+	if (old_node != nullptr) {
+		old_node->GetComponent<Node>()->is_occupied = false;
+	}
 
 	// move the gameobject
 	move_component->target_position = move_node->transform.position;

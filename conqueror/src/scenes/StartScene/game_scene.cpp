@@ -43,7 +43,11 @@ void GameScene::loadResources() {
     GameObject* node4 = CreateNode(glm::vec2(3.0f, -3.0f), hiding_stand);
     GameObject* node5 = CreateNode(glm::vec2(4.0f, -3.0f), artillerie_stand);
     GameObject* node6 = CreateNode(glm::vec2(5.0f, -3.0f), bunker_stand);
-    GameObject* node7 = CreateNode(glm::vec2(6.0f, -3.0f), waiting_stand);
+
+    GameObject* node7 = CreateNode(glm::vec2(-1.0f, -0.0f), waiting_stand);
+    GameObject* node8 = CreateNode(glm::vec2(-1.0f, -1.0f), waiting_stand);
+    GameObject* node9 = CreateNode(glm::vec2(-2.0f, -0.0f), waiting_stand);
+    GameObject* node10 = CreateNode(glm::vec2(-2.0f, -1.0f), waiting_stand);
 }
 void GameScene::init() {
     //Application::AddLayer(background_layer);

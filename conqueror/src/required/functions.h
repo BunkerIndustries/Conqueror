@@ -79,8 +79,14 @@ inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 	// set paths and movement speeds regarding the type of the character
 	if (type == "soldier") { 
 		movement_speed = soldier_movement_speed; sprite_path = soldier_sprite_path; 
+
+		GameObject* free_waiting_node;
+		for()
+
 		character_go->AddComponent(new SoldierBehaviour());
 		character_go->AddComponent(new SoldierShooting());
+
+		
 	}
 	else if (type == "medic") { 
 		movement_speed = medic_movement_speed; sprite_path = medic_sprite_path; 
@@ -120,6 +126,9 @@ inline GameObject* CreateNode(glm::vec2 position, Stand& node_stand) {
 	node_go->AddComponent(new Node(node_stand.stand));
 
 	if(node_stand.stand != waiting_stand.stand) node_go->AddTag("move_node");
+	else {
+		waiting_nodes.push_back(node_go);
+	}
 	
 	foreground_layer->AddGameObjectToLayer(node_go);
 
