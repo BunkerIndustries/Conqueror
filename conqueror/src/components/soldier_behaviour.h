@@ -16,6 +16,8 @@ public:
 	bool on_spawn_pos;
 
 private:
+	float health;
+
 	bool can_shoot;
 	bool travelling;
 

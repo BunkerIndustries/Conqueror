@@ -14,6 +14,8 @@ SoldierBehaviour::SoldierBehaviour()
 
 void SoldierBehaviour::start() {
 
+	health = 
+
 	// start configuration
 	on_spawn_pos = true;
 	travelling = false;

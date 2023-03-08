@@ -25,7 +25,12 @@ void SoldierShooting::Shoot() {
 
 	if (!LockTarget()) return;
 	LOG_DEBUG("Shoot");
+
 	bullet = new GameObject("bullet", Transform(gameObject->transform.position, bullet_size));
+	
+	foreground_layer->AddGameObjectToLayer(bullet);
+
+	gameObject->AddComponent(new SpriteRenderer(bullet_color));
 
 	// if the hit has hit
 	if (RandomInt(0, max_hit_probability) <= hit_probability) {
@@ -34,7 +39,7 @@ void SoldierShooting::Shoot() {
 	else {
 		bullet->AddComponent(new Bullet(target, false));
 	}
-
+	
 }
 
 #define ld LOG_DEBUG

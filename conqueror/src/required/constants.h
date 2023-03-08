@@ -69,7 +69,7 @@ inline uint8_t hiding_hit_probability = 4;
 inline uint8_t artillerie_hit_probability = 6;
 
 // bullet constants
-inline float bullet_speed = 20.0f;
+inline float bullet_speed = 3.0f;
 inline glm::vec4 bullet_color = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
 inline glm::vec2 bullet_size = glm::vec2(0.1f, 0.1f);
 inline float min_inaccuracy = 0.1f;
