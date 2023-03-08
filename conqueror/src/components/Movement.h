@@ -11,12 +11,11 @@ public:
 	void update(float dt) override;
 	void event(Event& event) override {};
 
-	void MoveTo(glm::vec2 pos, float speed);
-
 	glm::vec2 target_position;
 	
 	bool has_arrived;
 
 private:
 	float movement_speed;
+	void MoveTo(glm::vec2 pos, float speed);
 };

@@ -36,15 +36,15 @@ void EnemyShooting::Shoot() {
 			LOG_DEBUG("hit_probability: {0}", *hit_probability);*/
 
 			// if the hit is supposed to hit => create new bullet and let it hit the enemy
-			if (r <= *hit_probability) {
-				LOG_DEBUG("Shoot and hit");
-				bullet->AddComponent(new Bullet(target, true));
+			if (r <= hit_probability) {
+				//LOG_DEBUG("Shoot and hit");
+				//bullet->AddComponent(new Bullet(target, true));
 			}
 
 			// if the hit is not supposed to hit => create new bullet and let it miss the enemy
 			else {
-				LOG_DEBUG("Shoot and miss");
-				bullet->AddComponent(new Bullet(target, false));
+				//LOG_DEBUG("Shoot and miss");
+				//bullet->AddComponent(new Bullet(target, false));
 			}
 
 			break;
@@ -68,6 +68,7 @@ bool EnemyShooting::LockTarget() {
 		
 		if (random <= prob) {
 			chosen_stand = shootable_stands.at(i).stand;
+			break;
 		}
 		
 	}
@@ -79,9 +80,9 @@ bool EnemyShooting::LockTarget() {
 
 	// if the randomly chosen stand contains characters => target is set, try successful
 	else {
-		std::cout << "target found at " << &chosen_stand << std::endl;
+		//std::cout << "target found at " << &chosen_stand << std::endl;
 		target = chosen_stand->at(RandomInt(0, chosen_stand->size() - 1));
-		hit_probability = shootable_stands.at(i).hit_probability;
+		hit_probability = *shootable_stands.at(i).hit_probability;
 		return true;
 	}
 	

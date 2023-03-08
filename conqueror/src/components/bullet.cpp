@@ -11,9 +11,10 @@ Bullet::Bullet(GameObject* target, bool is_hit)
 	}
 	else {
 		target_position.y = target->transform.position.y;
-		target_position.x = target->transform.position.x + RandomF(min_inaccuracy, max_inaccuracy) * RandomInt(-1, 1);	// + inaccuracy
+		target_position.x = target->transform.position.x + RandomF(min_inaccuracy, max_inaccuracy) * RandomInt(-1, 1);
 	}
 
+	
 	LOG_DEBUG("Bullet ctor()");
 }
 
@@ -27,7 +28,6 @@ void Bullet::start() {
 
 	gameObject->AddComponent(new SpriteRenderer(bullet_color));
 	foreground_layer->AddGameObjectToLayer(gameObject);
-
 	LOG_DEBUG("Bullet start()");
 }
 

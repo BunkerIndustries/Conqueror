@@ -78,15 +78,12 @@ inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 
 	// set paths and movement speeds regarding the type of the character
 	if (type == "soldier") { 
-		movement_speed = soldier_movement_speed; sprite_path = soldier_sprite_path; 
 
-		GameObject* free_waiting_node;
-		for()
+		movement_speed = soldier_movement_speed; sprite_path = soldier_sprite_path; 
 
 		character_go->AddComponent(new SoldierBehaviour());
 		character_go->AddComponent(new SoldierShooting());
 
-		
 	}
 	else if (type == "medic") { 
 		movement_speed = medic_movement_speed; sprite_path = medic_sprite_path; 

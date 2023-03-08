@@ -16,6 +16,7 @@ public:
 private:
 	bool LockTarget();
 
+	GameObject* bullet;
 	GameObject* target;
-	uint8_t* hit_probability;
+	uint8_t hit_probability;
 };
