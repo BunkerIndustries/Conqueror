@@ -24,6 +24,7 @@ Bullet::~Bullet() {
 
 void Bullet::start() {
 	gameObject->AddComponent(new Movement(bullet_speed));
+	gameObject->GetComponent<Movement>()->target_position = target_position;
 	LOG_DEBUG("Bullet start()");
 }
 
@@ -39,6 +40,6 @@ void Bullet::update(float dt) {
 			LOG_DEBUG("on target position");
 			// target.MakeDamage()
 		}
-		//delete gameObject;
+		stop();
 	}
 }
