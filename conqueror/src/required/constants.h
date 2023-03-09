@@ -43,12 +43,12 @@ inline uint8_t enemy_move_mid_probability = 3;
 inline uint8_t enemy_move_right_probability = 1;
 
 // character constants
+inline float soldier_movement_speed = 1.2f;
 inline float medic_movement_speed = 1.4f;
 inline float engineer_movement_speed = 0.9f;
 inline glm::vec2 character_scale = glm::vec2(0.9f, 1.2f);	// probably temporary
 
 //soldier constants
-inline float soldier_movement_speed = 1.2f;
 inline float min_soldier_shoot_waiting_time = 0.5f;
 inline float max_soldier_shoot_waiting_time = 1.5f;
 
@@ -67,6 +67,11 @@ inline uint8_t mg_hit_probability = 6;
 inline uint8_t trench_hit_probability = 5;
 inline uint8_t hiding_hit_probability = 4;
 inline uint8_t artillerie_hit_probability = 6;
+
+// health constants
+inline float soldier_health = 100.0f;
+inline float medic_health = 50.0f;
+inline float engineer_health = 200.0f;
 
 // bullet constants
 inline float bullet_speed = 3.0f;

@@ -9,6 +9,7 @@
 #include "components/enemy_shooting.h"
 #include "components/soldier_shooting.h"
 #include "components/soldier_behaviour.h"
+#include "components/health.h"
 #include <vector>
 #include <random>
 
@@ -91,14 +92,17 @@ inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 	else if (type == "engineer") { 
 		movement_speed = engineer_movement_speed; sprite_path = engineer_sprite_path; 
 	}
-	else LOG_DEBUG("WARNING: probably no valid 'type'-arg at CreateCharacter(); sofore movement_speed is not initialised");
+	else LOG_DEBUG("WARNING: probably no existing type given when creating a character");
 
+	character_go->AddTag(type);
 	character_go->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
 	character_go->AddComponent(new Movement(movement_speed));
-	character_go->AddTag(type);
 
 	foreground_layer->AddGameObjectToLayer(character_go);
 	
+	// gameobject is null when trying to access it in health-component
+	// character_go->AddComponent(new Health());
+
 	return character_go;
 }
 

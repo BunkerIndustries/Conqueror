@@ -40,6 +40,6 @@ void Bullet::update(float dt) {
 			LOG_DEBUG("on target position");
 			// target.MakeDamage()
 		}
-		stop();
+		delete this;
 	}
 }
