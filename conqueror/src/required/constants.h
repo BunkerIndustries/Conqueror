@@ -66,7 +66,12 @@ inline uint8_t trench_hit_probability = 5;
 inline uint8_t hiding_hit_probability = 4;
 inline uint8_t artillerie_hit_probability = 6;
 
+// damage constants
+inline uint8_t soldier_damage = 35;
+inline uint8_t enemy_damage = 35;
+
 // health constants
+inline float enemy_health = 100.0f;
 inline float soldier_health = 100.0f;
 inline float medic_health = 50.0f;
 inline float engineer_health = 200.0f;

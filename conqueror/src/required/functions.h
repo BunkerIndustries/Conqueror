@@ -97,6 +97,7 @@ inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 	character_go->AddTag(type);
 	character_go->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
 	character_go->AddComponent(new Movement(movement_speed));
+	character_go->AddComponent(new Health());
 
 	foreground_layer->AddGameObjectToLayer(character_go);
 	
@@ -108,13 +109,14 @@ inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 
 inline GameObject* CreateEnemy(std::string name, glm::vec2 spawn_pos) {
 	GameObject* enemy_go = new GameObject(name, Transform(spawn_pos, enemy_scale));
-	
+
+	enemy_go->AddTag("enemy");
 	enemy_go->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
 	enemy_go->AddComponent(new Movement(enemy_movement_speed));
 	enemy_go->AddComponent(new EnemyBehaviour());
 	enemy_go->AddComponent(new EnemyShooting());
-	enemy_go->AddTag("enemy");
-
+	enemy_go->AddComponent(new Health());
+	
 	foreground_layer->AddGameObjectToLayer(enemy_go);
 
 	return enemy_go;
