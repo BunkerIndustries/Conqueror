@@ -6,6 +6,7 @@
 #include "required/stands.h"
 #include "components/movement.h"
 #include "components/soldier_behaviour.h"
+#include "required/map_creation.h"
 
 using namespace core;
 
@@ -37,17 +38,7 @@ void GameScene::loadResources() {
     GameObject* enemy = CreateEnemy("enemy 1", glm::vec2(1.0f, 0.0f));
     //GameObject* enemy2 = CreateEnemy("enemy 2", glm::vec2(-1.0f, 0.0f));
 
-    GameObject* node = CreateNode(glm::vec2(0.0f, -3.0f), front_stand);
-    GameObject* node2 = CreateNode(glm::vec2(1.0f, -3.0f), mg_stand);
-    GameObject* node3 = CreateNode(glm::vec2(2.0f, -3.0f), trench_stand);
-    GameObject* node4 = CreateNode(glm::vec2(3.0f, -3.0f), hiding_stand);
-    GameObject* node5 = CreateNode(glm::vec2(4.0f, -3.0f), artillerie_stand);
-    GameObject* node6 = CreateNode(glm::vec2(5.0f, -3.0f), bunker_stand);
-
-    GameObject* node7 = CreateNode(glm::vec2(-1.0f, -3.0f), waiting_stand);
-    GameObject* node8 = CreateNode(glm::vec2(-1.0f, -4.0f), waiting_stand);
-    GameObject* node9 = CreateNode(glm::vec2(-2.0f, -3.0f), waiting_stand);
-    GameObject* node10 = CreateNode(glm::vec2(-2.0f, -4.0f), waiting_stand);
+    CreateGameMap(standard_map);
 }
 void GameScene::init() {
     //Application::AddLayer(background_layer);
