@@ -1,9 +1,14 @@
 #include "_Core.h"
 
 #include "generic/GameObject.h"
+
+#include "Application.h"
 #include "generic/Component.h"
 #include "generic/Transform.h"
 #include "utils/DataPool.h"
+#include "layer/Layer.h"
+
+#include "component/SpriteRenderer.h"
 
 #include "imgui/ImGuiLayer.h"
 #include "utils/Core.h"
@@ -23,7 +28,12 @@ namespace core {
         delete components[index];
 	}
 
-    GameObject::GameObject(std::string name, Transform& transform, ProjectionMode mode)
+	void GameObject::SetLayer(Layer* layer)
+	{
+        this->layer = layer;
+	}
+
+	GameObject::GameObject(std::string name, Transform& transform, ProjectionMode mode)
         : name(name), transform(transform), mode(mode)
     {
         this->zIndex = 0;
@@ -35,7 +45,7 @@ namespace core {
 
     GameObject::~GameObject()
     {
-        deleteComponents();
+        CORE_ASSERT(deleted, "you may not delete a GameObject, use the 'Delete' function of it instead");
     }
 
 
@@ -57,7 +67,9 @@ namespace core {
 	{
         // update gameObject, in order to display moving changes
         for (auto component : components) {
-            component->update(dt);
+            if (component && !deleted) {
+                component->update(dt);
+            }
         }
     }
 
@@ -142,8 +154,27 @@ namespace core {
 	    }
     }
 
+    void GameObject::Delete()
+    {
+        this->running = false;
+        this->deleted = true;
+        transform.scale.x = 0.0f;
+        transform.scale.y = 0.0f;
+        if (auto* renderer = GetComponent<SpriteRenderer>()) renderer->update(Application::GetDT());
+        layer->GetGameObjects()->erase(std::find(layer->GetGameObjects()->begin(), layer->GetGameObjects()->end(), this));
+		for (size_t i = 0; i < components.size(); i++)
+		{
+			if (GetComponent<SpriteRenderer>() != components[i])
+			{
+                delete components[i];
+                components.erase(i + components.begin());
+			}
+ 		}
+        delete this;
+    }
 
-	void GameObject::imgui(float dt) {
+
+    void GameObject::imgui(float dt) {
 		ImGui::Text("Generic stuff:");
 		ImGui::SliderFloat(std::string("X:").c_str(), &this->transform.position.x, -10.0f, 10.0f, 0);
 		ImGui::SliderFloat(std::string("Y:").c_str(), &this->transform.position.y, -10.0f, 10.0f, 0);

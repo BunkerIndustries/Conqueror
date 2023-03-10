@@ -1,13 +1,11 @@
 #pragma once
 #include "layers/ForegroundLayer.h"
-#include "layers/BackgroundLayer.h"
 #include "layers/SoundLayer.h"
 
 // TODO: May split this up to multiple files, so that not everything has to be inline
 
 // layers
 inline ForegroundLayer* foreground_layer = new ForegroundLayer();
-inline BackgroundLayer* background_layer = new BackgroundLayer();
 inline SoundLayer* sound_layer = new SoundLayer();
 
 // enemy movement grid
@@ -43,12 +41,12 @@ inline uint8_t enemy_move_mid_probability = 3;
 inline uint8_t enemy_move_right_probability = 1;
 
 // character constants
+inline float soldier_movement_speed = 1.2f;
 inline float medic_movement_speed = 1.4f;
 inline float engineer_movement_speed = 0.9f;
 inline glm::vec2 character_scale = glm::vec2(0.9f, 1.2f);	// probably temporary
 
 //soldier constants
-inline float soldier_movement_speed = 1.2f;
 inline float min_soldier_shoot_waiting_time = 0.5f;
 inline float max_soldier_shoot_waiting_time = 1.5f;
 
@@ -68,9 +66,19 @@ inline uint8_t trench_hit_probability = 5;
 inline uint8_t hiding_hit_probability = 4;
 inline uint8_t artillerie_hit_probability = 6;
 
+// damage constants
+inline uint8_t soldier_damage = 35;
+inline uint8_t enemy_damage = 35;
+
+// health constants
+inline float enemy_health = 100.0f;
+inline float soldier_health = 100.0f;
+inline float medic_health = 50.0f;
+inline float engineer_health = 200.0f;
+
 // bullet constants
-inline float bullet_speed = 20.0f;
-inline glm::vec4 bullet_color = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
+inline float bullet_speed = 15.0f;
+inline glm::vec4 bullet_color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
 inline glm::vec2 bullet_size = glm::vec2(0.1f, 0.1f);
 inline float min_inaccuracy = 0.1f;
 inline float max_inaccuracy = 0.4f;

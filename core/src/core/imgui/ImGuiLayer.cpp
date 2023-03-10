@@ -359,7 +359,7 @@ namespace core {
 
         for (Layer* layer : Application::GetLayerStack()) 
         {
-            std::vector<GameObject*> gameobjects = layer->GetGameObjects();
+            std::vector<GameObject*> gameobjects = *layer->GetGameObjects();
             if (ImGui::TreeNode(layer->GetName().c_str())) 
             {
                 if (ImGui::TreeNode("Objects: "))

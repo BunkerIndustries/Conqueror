@@ -3,7 +3,7 @@
 
 class Bullet : public Component {
 public:
-	Bullet(GameObject* target, bool is_hit);
+	Bullet(GameObject* target, bool is_hit, float damage);
 	virtual ~Bullet();
 
 	void start() override;
@@ -13,5 +13,7 @@ public:
 
 private:
 	glm::vec2 target_position;
+	GameObject* target;
 	bool is_hit;
+	float damage;
 };

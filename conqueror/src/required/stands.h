@@ -25,3 +25,4 @@ inline std::vector<Stand> shootable_stands = {
 };
 
 inline GameObject* enemy_stands[enemy_grid_y][enemy_grid_x];
+inline std::vector<GameObject*> waiting_nodes;

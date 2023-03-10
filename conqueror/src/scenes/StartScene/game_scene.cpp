@@ -28,11 +28,11 @@ void GameScene::loadResources() {
     //Grid creation
     enemy_grid = CreateEnemyGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
 
-    GameObject* character = CreateCharacter("soldier", glm::vec2(0.0f, 1.0f));
-    GameObject* character2 = CreateCharacter("soldier", glm::vec2(1.5f, 1.0f));
+    GameObject* character = CreateCharacter("soldier", glm::vec2(0.0f, -5.0f));
+    /*GameObject* character2 = CreateCharacter("soldier", glm::vec2(1.5f, 1.0f));
     GameObject* character3 = CreateCharacter("soldier", glm::vec2(2.0f, 1.0f));
     GameObject* character4 = CreateCharacter("soldier", glm::vec2(2.5f, 1.0f));
-    GameObject* character5 = CreateCharacter("soldier", glm::vec2(3.0f, 1.0f));
+    GameObject* character5 = CreateCharacter("soldier", glm::vec2(3.0f, 1.0f));*/
 
     GameObject* enemy = CreateEnemy("enemy 1", glm::vec2(1.0f, 0.0f));
     //GameObject* enemy2 = CreateEnemy("enemy 2", glm::vec2(-1.0f, 0.0f));
@@ -43,7 +43,11 @@ void GameScene::loadResources() {
     GameObject* node4 = CreateNode(glm::vec2(3.0f, -3.0f), hiding_stand);
     GameObject* node5 = CreateNode(glm::vec2(4.0f, -3.0f), artillerie_stand);
     GameObject* node6 = CreateNode(glm::vec2(5.0f, -3.0f), bunker_stand);
-    GameObject* node7 = CreateNode(glm::vec2(6.0f, -3.0f), waiting_stand);
+
+    GameObject* node7 = CreateNode(glm::vec2(-1.0f, -3.0f), waiting_stand);
+    GameObject* node8 = CreateNode(glm::vec2(-1.0f, -4.0f), waiting_stand);
+    GameObject* node9 = CreateNode(glm::vec2(-2.0f, -3.0f), waiting_stand);
+    GameObject* node10 = CreateNode(glm::vec2(-2.0f, -4.0f), waiting_stand);
 }
 void GameScene::init() {
     //Application::AddLayer(background_layer);
@@ -100,7 +104,7 @@ bool GameScene::GameObjectPressed(GameObjectPressedEvent& e) {
     GameObject* clicked_go = e.GetGameObject();
 
     // If a character was clicked: active_gameobject that's supposed to move is set to that
-    if (clicked_go->HasTag("soldier")) {
+    if (clicked_go->HasTag("soldier") && !clicked_go->GetComponent<SoldierBehaviour>()->on_spawn_pos) {
         active_go = e.GetGameObject();
     }
     // Else if a move_node was clicked: set the active_gameobject's target_position to the move_node's position
