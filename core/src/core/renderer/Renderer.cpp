@@ -34,7 +34,7 @@ namespace core {
     }
 
     void Renderer::add(Layer* layer, int index) {
-        for (GameObject* game_object : layer->GetGameObjects()) {
+        for (GameObject* game_object : *layer->GetGameObjects()) {
             // create spriterenderer with the coponent spriterneder if a spriterenderer exists
             SpriteRenderer* spriteRenderer = game_object->GetComponent<SpriteRenderer>();
             if (spriteRenderer) {
@@ -203,7 +203,7 @@ namespace core {
         // update the gameObjects so it displays the changes
         for (Layer* layer : Application::GetLayerStack())
         {
-            for (GameObject* game_object : layer->GetGameObjects())
+            for (GameObject* game_object : *layer->GetGameObjects())
             {
                 if (!game_object->IsRunning()) continue;
                 game_object->update(dt);

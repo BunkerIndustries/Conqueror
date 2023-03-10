@@ -54,6 +54,7 @@ namespace core
 		else {
 			game_objects.push_back(game_object);
 		}
+		game_object->SetLayer(this);
 	}
 
 }
