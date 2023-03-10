@@ -67,7 +67,9 @@ namespace core {
 	{
         // update gameObject, in order to display moving changes
         for (auto component : components) {
-            component->update(dt);
+            if (component && !deleted) {
+                component->update(dt);
+            }
         }
     }
 
