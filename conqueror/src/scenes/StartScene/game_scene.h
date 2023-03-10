@@ -3,7 +3,6 @@
 #include "Engine.h"
 #include "layers/SoundLayer.h"
 #include "layers/ForegroundLayer.h"
-#include "layers/BackgroundLayer.h"
 
 #include <vector>
 

@@ -1,13 +1,11 @@
 #pragma once
 #include "layers/ForegroundLayer.h"
-#include "layers/BackgroundLayer.h"
 #include "layers/SoundLayer.h"
 
 // TODO: May split this up to multiple files, so that not everything has to be inline
 
 // layers
 inline ForegroundLayer* foreground_layer = new ForegroundLayer();
-inline BackgroundLayer* background_layer = new BackgroundLayer();
 inline SoundLayer* sound_layer = new SoundLayer();
 
 // enemy movement grid
