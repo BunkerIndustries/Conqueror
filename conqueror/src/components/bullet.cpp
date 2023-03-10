@@ -40,6 +40,7 @@ void Bullet::update(float dt) {
 			LOG_DEBUG("on target position");
 			target->GetComponent<Health>()->TakeDamage(damage);
 		}
+		gameObject->deleteComponents();
 		gameObject->Delete();
 	}
 }
