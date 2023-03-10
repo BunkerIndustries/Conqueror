@@ -3,6 +3,10 @@
 #include "required/constants.h"
 
 Health::Health() {
+	
+}
+
+void Health::start() {
 	if (gameObject->HasTag("soldier")) {
 		hp = soldier_health;
 	}
@@ -12,11 +16,10 @@ Health::Health() {
 	else if (gameObject->HasTag("engineer")) {
 		hp = engineer_health;
 	}
+	else if (gameObject->HasTag("enemy")) {
+		hp = enemy_health;
+	}
 	else LOG_DEBUG("Health not initialised");
-}
-
-void Health::start() {
-
 }
 
 void Health::stop() {
@@ -33,7 +36,5 @@ void Health::TakeDamage(float damage) {
 }
 
 void Health::Die() {
-	
-	
-	// delete this gameobject
+	gameObject->Delete();
 }

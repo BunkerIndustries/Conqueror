@@ -3,8 +3,8 @@
 #include "required/functions.h"
 #include "components/movement.h"
 
-Bullet::Bullet(GameObject* target, bool is_hit) 
-	:is_hit(is_hit)
+Bullet::Bullet(GameObject* target, bool is_hit, float damage) 
+	:is_hit(is_hit), target(target), damage(damage)
 {
 	if (is_hit) {
 		target_position = target->transform.position;
@@ -38,8 +38,8 @@ void Bullet::update(float dt) {
 	if (gameObject->transform.position == target_position) {
 		if (is_hit) {
 			LOG_DEBUG("on target position");
-			// target.MakeDamage()
+			target->GetComponent<Health>()->TakeDamage(damage);
 		}
-		delete this;
+		gameObject->Delete();
 	}
 }

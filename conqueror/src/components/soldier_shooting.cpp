@@ -32,10 +32,10 @@ void SoldierShooting::Shoot() {
 
 	// if the hit has hit
 	if (RandomInt(0, max_hit_probability) <= hit_probability) {
-		bullet->AddComponent(new Bullet(target, true));
+		bullet->AddComponent(new Bullet(target, true, soldier_damage));
 	}
 	else {
-		bullet->AddComponent(new Bullet(target, false));
+		bullet->AddComponent(new Bullet(target, false, soldier_damage));
 	}
 	foreground_layer->AddGameObjectToLayer(bullet);
 }
