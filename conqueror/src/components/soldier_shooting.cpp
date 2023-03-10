@@ -27,7 +27,7 @@ void SoldierShooting::Shoot() {
 	LOG_DEBUG("Shoot");
 
 	bullet = new GameObject("bullet", Transform(gameObject->transform.position, bullet_size));
-
+	
 	bullet->AddComponent(new SpriteRenderer(bullet_color));
 
 	// if the hit has hit
