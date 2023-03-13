@@ -22,25 +22,31 @@ void SoldierShooting::update(float dt) {
 }
 
 void SoldierShooting::Shoot() {
+	LOG_DEBUG("Shoot() called");
+	for (uint8_t i = 0; i < max_soldier_lock_target_tries; i++) {
 
-	if (!LockTarget()) return;
-	LOG_DEBUG("Shoot");
+		if (!LockTarget()) continue;
+		LOG_DEBUG("Shoot at try {0}", i);
 
-	bullet = new GameObject("bullet", Transform(gameObject->transform.position, bullet_size));
+		bullet = new GameObject("bullet", Transform(gameObject->transform.position, bullet_size));
+
+		bullet->AddComponent(new SpriteRenderer(bullet_color));
+
+		// if the hit has hit
+		if (RandomInt(0, max_hit_probability) <= hit_probability) {
+			bullet->AddComponent(new Bullet(target, true, soldier_damage));
+		}
+		else {
+			bullet->AddComponent(new Bullet(target, false, soldier_damage));
+		}
+
+		foreground_layer->AddGameObjectToLayer(bullet);
+
+		break;
+	}
 	
-	bullet->AddComponent(new SpriteRenderer(bullet_color));
-
-	// if the hit has hit
-	if (RandomInt(0, max_hit_probability) <= hit_probability) {
-		bullet->AddComponent(new Bullet(target, true, soldier_damage));
-	}
-	else {
-		bullet->AddComponent(new Bullet(target, false, soldier_damage));
-	}
-	foreground_layer->AddGameObjectToLayer(bullet);
 }
 
-#define ld LOG_DEBUG
 bool SoldierShooting::LockTarget() {
 
 	// has the effect that a soldier remains on one target if it has chosen it before
@@ -70,14 +76,14 @@ bool SoldierShooting::LockTarget() {
 
 	// if this vector contains no enemies => no target is set, try unsuccessful
 	if (enemy_row_vec.size() == 0) {
-		LOG_DEBUG("chosen row contains no enemies");
+		//LOG_DEBUG("chosen row contains no enemies");
 		return false;
 	}
 
 	// if it contains enemies => a target is set, try successful
 	else {
 		target = enemy_row_vec.at(RandomInt(0, enemy_row_vec.size()-1));
-		LOG_DEBUG("Target found");
+		//LOG_DEBUG("Target found");
 		return true;
 	}
 
