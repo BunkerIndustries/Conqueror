@@ -203,7 +203,8 @@ namespace core {
         // update the gameObjects so it displays the changes
         for (Layer* layer : Application::GetLayerStack())
         {
-            for (GameObject* game_object : *layer->GetGameObjects())
+            std::vector<GameObject*> gos = *layer->GetGameObjects();
+            for (GameObject* game_object : gos)
             {
                 if (!game_object->IsRunning()) continue;
                 game_object->update(dt);

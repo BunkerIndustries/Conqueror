@@ -14,7 +14,7 @@ void SoldierShooting::start() {
 }
 
 void SoldierShooting::stop() {
-
+	
 }
 
 void SoldierShooting::update(float dt) {
@@ -22,9 +22,10 @@ void SoldierShooting::update(float dt) {
 }
 
 void SoldierShooting::Shoot() {
+	
 	LOG_DEBUG("Shoot() called");
 	for (uint8_t i = 0; i < max_soldier_lock_target_tries; i++) {
-
+		LOG_DEBUG("try: {0}", i);
 		if (!LockTarget()) continue;
 		LOG_DEBUG("Shoot at try {0}", i);
 

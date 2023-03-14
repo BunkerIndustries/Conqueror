@@ -22,7 +22,13 @@ void SoldierBehaviour::start() {
 }
 
 void SoldierBehaviour::stop() {
-
+	// delete the gameobject from the recent stand
+	for (size_t i = 0; i < stand->size(); i++) {
+		if (stand->at(i) == gameObject) {
+			stand->erase(stand->begin() + i);
+			break;
+		}
+	}
 }
 
 void SoldierBehaviour::update(float dt) {

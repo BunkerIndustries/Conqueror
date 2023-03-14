@@ -35,7 +35,12 @@ void EnemyBehaviour::start() {
 }
 
 void EnemyBehaviour::stop() {
-
+	// removes the gameobject from the array
+	for (size_t i = 0; i < enemy_grid_y - 1; i++) {
+		if (enemy_stands[y_index][i] == gameObject) {
+			enemy_stands[y_index][i] = nullptr;
+		}
+	}
 }
 
 void EnemyBehaviour::update(float dt) {
@@ -115,7 +120,7 @@ void EnemyBehaviour::ChoosePosAndMove() {
 
 	enemy_grid.at(x_index).at(y_index)->GetComponent<Node>()->is_occupied = false;
 
-	// removes the gameobject from the vector
+	// removes the gameobject from the array
 	for (size_t i = 0; i < enemy_grid_y - 1; i++) {
 		if (enemy_stands[y_index][i] == gameObject) {
 			enemy_stands[y_index][i] = nullptr;

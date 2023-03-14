@@ -7,7 +7,7 @@ private:
 	GameObject* character2;
 	GameObject* object1;*/
 
-	GameObject* test_go;
+	//GameObject* test_go;
 
 	//int speed = 2;
 
