@@ -3,7 +3,7 @@
 
 class Health : public Component {
 public:
-	Health();
+	Health(float hp);
 	virtual ~Health() = default;
 
 	void start() override;

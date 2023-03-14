@@ -74,6 +74,7 @@ inline int SumTo(int n) {
 
 inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 	float movement_speed;
+	float health;
 	std::string sprite_path;
 	GameObject* character_go = new GameObject(type, Transform(spawn_pos, character_scale));
 
@@ -81,6 +82,7 @@ inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 	if (type == "soldier") { 
 
 		movement_speed = soldier_movement_speed; sprite_path = soldier_sprite_path; 
+		health = soldier_health;
 
 		character_go->AddComponent(new SoldierBehaviour());
 		character_go->AddComponent(new SoldierShooting());
@@ -88,21 +90,20 @@ inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 	}
 	else if (type == "medic") { 
 		movement_speed = medic_movement_speed; sprite_path = medic_sprite_path; 
+		health = medic_health;
 	}
 	else if (type == "engineer") { 
 		movement_speed = engineer_movement_speed; sprite_path = engineer_sprite_path; 
+		health = engineer_health;
 	}
 	else LOG_DEBUG("WARNING: probably no existing type given when creating a character");
 
 	character_go->AddTag(type);
 	character_go->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
 	character_go->AddComponent(new Movement(movement_speed));
-	character_go->AddComponent(new Health());
+	character_go->AddComponent(new Health(health));
 
 	foreground_layer->AddGameObjectToLayer(character_go);
-	
-	// gameobject is null when trying to access it in health-component
-	// character_go->AddComponent(new Health());
 
 	return character_go;
 }
@@ -115,7 +116,7 @@ inline GameObject* CreateEnemy(std::string name, glm::vec2 spawn_pos) {
 	enemy_go->AddComponent(new Movement(enemy_movement_speed));
 	enemy_go->AddComponent(new EnemyBehaviour());
 	enemy_go->AddComponent(new EnemyShooting());
-	enemy_go->AddComponent(new Health());
+	enemy_go->AddComponent(new Health(enemy_health));
 	
 	foreground_layer->AddGameObjectToLayer(enemy_go);
 

@@ -67,14 +67,11 @@ void SoldierBehaviour::update(float dt) {
 
 	// if he arrived at the new node => the stand the node it's in get's extended by the gameobject
 	else {
-		/*if (gameObject->GetComponent<Movement>()->has_arrived) {
-			travelling = false;
-			this->stand->push_back(gameObject);
-		}*/
 		if (gameObject->transform.position == target_position) {
 			travelling = false;
 			this->stand->push_back(gameObject);
 			RestartTimer();
+			LOG_DEBUG("soldier arrived");
 		}
 	}
 }

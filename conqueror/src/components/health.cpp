@@ -2,24 +2,14 @@
 
 #include "required/constants.h"
 
-Health::Health() {
+Health::Health(float hp) 
+	:hp(hp)
+{
 	
 }
 
 void Health::start() {
-	if (gameObject->HasTag("soldier")) {
-		hp = soldier_health;
-	}
-	else if (gameObject->HasTag("medic")) {
-		hp = medic_health;
-	}
-	else if (gameObject->HasTag("engineer")) {
-		hp = engineer_health;
-	}
-	else if (gameObject->HasTag("enemy")) {
-		hp = enemy_health;
-	}
-	else LOG_DEBUG("Health not initialised");
+
 }
 
 void Health::stop() {
