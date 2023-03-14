@@ -11,9 +11,8 @@ public:
 	void update(float dt) override;
 	void event(Event& event) override {};
 
-	void TakeDamage(float damage);
+	bool TakeDamage(float damage);
 
 private:
 	float hp;
-	void Die();
 };

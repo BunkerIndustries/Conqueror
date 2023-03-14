@@ -20,11 +20,14 @@ void Health::update(float dt) {
 
 }
 
-void Health::TakeDamage(float damage) {
+bool Health::TakeDamage(float damage) {
+	if (this == nullptr) return true;
 	hp -= damage;
-	if (hp <= 0.0f) Die();
-}
-
-void Health::Die() {
-	gameObject->Delete();
+	if (hp <= 0.0f) {
+		gameObject->Delete();
+		LOG_DEBUG("gameobject deleted");
+		return true;
+	}
+	return false;
+	// return true means dead	
 }

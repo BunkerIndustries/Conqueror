@@ -11,6 +11,7 @@ SoldierShooting::SoldierShooting() {
 
 void SoldierShooting::start() {
 	target = nullptr;
+	//bullet = nullptr;
 }
 
 void SoldierShooting::stop() {
@@ -27,14 +28,14 @@ void SoldierShooting::Shoot() {
 	for (uint8_t i = 0; i < max_soldier_lock_target_tries; i++) {
 		LOG_DEBUG("try: {0}", i);
 		if (!LockTarget()) continue;
-		LOG_DEBUG("Shoot at try {0}", i);
+		LOG_DEBUG("LockTarget() returned true");
 
 		bullet = new GameObject("bullet", Transform(gameObject->transform.position, bullet_size));
 
 		bullet->AddComponent(new SpriteRenderer(bullet_color));
 
 		// if the hit has hit
-		if (RandomInt(0, max_hit_probability) <= hit_probability) {
+		if (RandomInt(0, enemy_grid_y + soldier_miss_points) <= hit_probability) {
 			bullet->AddComponent(new Bullet(target, true, soldier_damage));
 		}
 		else {
@@ -50,7 +51,7 @@ void SoldierShooting::Shoot() {
 
 bool SoldierShooting::LockTarget() {
 
-	// has the effect that a soldier remains on one target if it has chosen it before
+	// the soldier will stay on the preselected target if it's still existing
 	if (target != nullptr) return true;
 
 	std::vector<GameObject*> enemy_row_vec;
@@ -75,12 +76,20 @@ bool SoldierShooting::LockTarget() {
 		if (enemy_stands[y_row][i] != nullptr) enemy_row_vec.push_back(enemy_stands[y_row][i]);
 	}
 
+
 	// if this vector contains no enemies => no target is set, try unsuccessful
 	if (enemy_row_vec.size() == 0) {
-		//LOG_DEBUG("chosen row contains no enemies");
-		return false;
-	}
 
+		return false;
+		// if no new target is found, remain on the old one
+		//if (target != nullptr) {
+		//	return true;
+		//}
+		//else {
+		//	return false;
+		//}
+		
+	}
 	// if it contains enemies => a target is set, try successful
 	else {
 		target = enemy_row_vec.at(RandomInt(0, enemy_row_vec.size()-1));

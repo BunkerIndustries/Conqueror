@@ -3,7 +3,7 @@
 
 class Bullet : public Component {
 public:
-	Bullet(GameObject* target, bool is_hit, float damage);
+	Bullet(GameObject*& target, bool is_hit, float damage);
 	virtual ~Bullet();
 
 	void start() override;

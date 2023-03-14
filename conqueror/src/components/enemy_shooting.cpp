@@ -34,18 +34,16 @@ void EnemyShooting::Shoot() {
 		bullet->AddComponent(new SpriteRenderer(bullet_color));
 
 		int r = RandomInt(0, max_hit_probability);
-		LOG_DEBUG("r: {0}", r);
-		LOG_DEBUG("hit_probability: {0}", hit_probability);
 
 		// if the hit is supposed to hit => create new bullet and let it hit the enemy
 		if (r <= hit_probability) {
-			LOG_DEBUG("Shoot and hit");
+			//LOG_DEBUG("Shoot and hit");
 			bullet->AddComponent(new Bullet(target, true, enemy_damage));
 		}
 
 		// if the hit is not supposed to hit => create new bullet and let it miss the enemy
 		else {
-			LOG_DEBUG("Shoot and miss");
+			//LOG_DEBUG("Shoot and miss");
 			bullet->AddComponent(new Bullet(target, false, enemy_damage));
 		}
 

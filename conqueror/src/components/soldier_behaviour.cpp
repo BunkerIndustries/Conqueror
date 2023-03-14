@@ -71,7 +71,6 @@ void SoldierBehaviour::update(float dt) {
 			travelling = false;
 			this->stand->push_back(gameObject);
 			RestartTimer();
-			LOG_DEBUG("soldier arrived");
 		}
 	}
 }
