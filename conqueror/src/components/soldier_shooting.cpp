@@ -33,11 +33,14 @@ void SoldierShooting::Shoot() {
 
 		bullet->AddComponent(new SpriteRenderer(bullet_color));
 
+
 		// if the hit has hit
 		if (RandomInt(0, enemy_grid_y + soldier_miss_points) <= hit_probability) {
+			LOG_DEBUG("Bullet sent with hit=true");
 			bullet->AddComponent(new Bullet(target, true, soldier_damage));
 		}
 		else {
+			LOG_DEBUG("Bullet sent with hit=false");
 			bullet->AddComponent(new Bullet(target, false, soldier_damage));
 		}
 

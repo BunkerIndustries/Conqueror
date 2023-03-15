@@ -13,6 +13,7 @@ Bullet::Bullet(GameObject*& target, bool is_hit, float damage)
 		target_position.y = target->transform.position.y;
 		target_position.x = target->transform.position.x + RandomF(min_inaccuracy, max_inaccuracy) * RandomInt(-1, 1);
 	}
+	RoundVec2(target_position);
 	//LOG_DEBUG("target_position: x:{0}, y:{1}", target_position.x, target_position.y);
 }
 
