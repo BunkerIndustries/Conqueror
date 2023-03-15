@@ -56,7 +56,7 @@ void SoldierBehaviour::update(float dt) {
 						RestartTimer();
 					}
 				}
-				else {
+				else if(this->stand != bunker_stand.stand){
 					gameObject->GetComponent<SoldierShooting>()->Shoot();
 					RestartTimer();
 				}

@@ -11,7 +11,7 @@ SoldierShooting::SoldierShooting() {
 
 void SoldierShooting::start() {
 	target = nullptr;
-	//bullet = nullptr;
+	bullet = nullptr;
 }
 
 void SoldierShooting::stop() {
@@ -24,11 +24,10 @@ void SoldierShooting::update(float dt) {
 
 void SoldierShooting::Shoot() {
 	
-	LOG_DEBUG("Shoot() called");
 	for (uint8_t i = 0; i < max_soldier_lock_target_tries; i++) {
-		LOG_DEBUG("try: {0}", i);
 		if (!LockTarget()) continue;
-		LOG_DEBUG("LockTarget() returned true");
+		LOG_DEBUG("LockTarget() returned true at try {0}", i);
+		std::cout << "target:" << target << std::endl;
 
 		bullet = new GameObject("bullet", Transform(gameObject->transform.position, bullet_size));
 
@@ -52,7 +51,6 @@ void SoldierShooting::Shoot() {
 bool SoldierShooting::LockTarget() {
 
 	// the soldier will stay on the preselected target if it's still existing
-	std::cout << "target:" << target << std::endl;
 	if (target != nullptr) return true;
 
 	std::vector<GameObject*> enemy_row_vec;

@@ -29,5 +29,5 @@ bool Health::TakeDamage(float damage) {
 		return true;
 	}
 	return false;
-	// return true means dead	
+	// return true means dead
 }

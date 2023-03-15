@@ -81,7 +81,7 @@ inline float engineer_health = 200.0f;
 // bullet constants
 inline float bullet_speed = 15.0f;
 inline glm::vec4 bullet_color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
-inline glm::vec2 bullet_size = glm::vec2(0.1f, 0.1f);
+inline glm::vec2 bullet_size = glm::vec2(0.5f, 0.5f);
 inline float min_inaccuracy = 0.1f;
 inline float max_inaccuracy = 0.4f;
 

@@ -36,9 +36,8 @@ void Bullet::update(float dt) {
 			if (target != nullptr) {
 				// if he is dead
 				if (target->GetComponent<Health>()->TakeDamage(damage)) {
-					//delete target;
+					delete target;
 					target = nullptr;
-					std::cout << "target in bullet:" << target << std::endl;
 				}
 			}
 		}
