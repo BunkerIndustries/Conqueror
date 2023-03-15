@@ -49,6 +49,8 @@ namespace core
 	{
 		if (attached) {
 			game_objects.push_back(game_object);
+			if (game_object->GetComponent<SpriteRenderer>())
+				Application::GetCurrentScene()->GetRenderer().add(game_object->GetComponent<SpriteRenderer>(), Application::GetLayerStack().GetPlace(this));
 			game_object->start();
 		}
 		else {
