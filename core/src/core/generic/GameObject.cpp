@@ -169,6 +169,7 @@ namespace core {
 					components[i]->stop();
                 delete components[i];
                 components.erase(i + components.begin());
+                i--;
 			}
  		}
         delete this;

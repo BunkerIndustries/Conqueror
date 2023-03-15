@@ -15,16 +15,16 @@ public:
 	size_t GetYIndex();
 
 private:
-	Movement* move_component;
-	bool is_waiting;
-	bool time_over;
-	bool time_running;
+	Movement* move_component = nullptr;
+	bool is_waiting = false;
+	bool time_over = false;
+	bool time_running = false;
 
-	float time_to_wait;
-	float dt_time_counter;
+	float time_to_wait = 0.0f;
+	float dt_time_counter = 0.0f;
 
-	size_t x_index;
-	size_t y_index;
+	size_t x_index = 0;
+	size_t y_index = 0;
 
 	void ChoosePosAndMove();
 };

@@ -3,8 +3,8 @@
 #include "required/functions.h"
 #include "components/movement.h"
 
-Bullet::Bullet(GameObject*& target, bool is_hit, float damage) 
-	:is_hit(is_hit), target(target), damage(damage)
+Bullet::Bullet(GameObject* target, GameObject* parent, bool is_hit, float damage) 
+	:is_hit(is_hit), target(target), parent(parent), damage(damage)
 {
 	if (is_hit) {
 		target_position = target->transform.position;
@@ -37,8 +37,11 @@ void Bullet::update(float dt) {
 			if (target != nullptr) {
 				// if he is dead
 				if (target->GetComponent<Health>()->TakeDamage(damage)) {
-					delete target;
 					target = nullptr;
+					if (parent->GetComponent<SoldierShooting>())
+						parent->GetComponent<SoldierShooting>()->NullTarget();
+					if (parent->GetComponent<EnemyShooting>())
+						parent->GetComponent<EnemyShooting>()->NullTarget();
 				}
 			}
 		}

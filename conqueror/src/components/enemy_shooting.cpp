@@ -37,14 +37,14 @@ void EnemyShooting::Shoot() {
 
 		// if the hit is supposed to hit => create new bullet and let it hit the enemy
 		if (r <= hit_probability) {
-			//LOG_DEBUG("Shoot and hit");
-			bullet->AddComponent(new Bullet(target, true, enemy_damage));
+			LOG_DEBUG("enemy Shoot and hit");
+			bullet->AddComponent(new Bullet(target, this->gameObject, true, enemy_damage));
 		}
 
 		// if the hit is not supposed to hit => create new bullet and let it miss the enemy
 		else {
-			//LOG_DEBUG("Shoot and miss");
-			bullet->AddComponent(new Bullet(target, false, enemy_damage));
+			LOG_DEBUG("ememy Shoot and miss");
+			bullet->AddComponent(new Bullet(target, this->gameObject, false, enemy_damage));
 		}
 
 		foreground_layer->AddGameObjectToLayer(bullet);

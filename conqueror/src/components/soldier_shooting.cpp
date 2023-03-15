@@ -27,7 +27,7 @@ void SoldierShooting::Shoot() {
 	for (uint8_t i = 0; i < max_soldier_lock_target_tries; i++) {
 		if (!LockTarget()) continue;
 		LOG_DEBUG("LockTarget() returned true at try {0}", i);
-		std::cout << "target:" << target << std::endl;
+		std::cout << "target: " << target << std::endl;
 
 		bullet = new GameObject("bullet", Transform(gameObject->transform.position, bullet_size));
 
@@ -36,12 +36,12 @@ void SoldierShooting::Shoot() {
 
 		// if the hit has hit
 		if (RandomInt(0, enemy_grid_y + soldier_miss_points) <= hit_probability) {
-			LOG_DEBUG("Bullet sent with hit=true");
-			bullet->AddComponent(new Bullet(target, true, soldier_damage));
+			LOG_DEBUG("soldier Bullet sent with hit=true");
+			bullet->AddComponent(new Bullet(target, this->gameObject, true, soldier_damage));
 		}
 		else {
-			LOG_DEBUG("Bullet sent with hit=false");
-			bullet->AddComponent(new Bullet(target, false, soldier_damage));
+			LOG_DEBUG("soldier Bullet sent with hit=false");
+			bullet->AddComponent(new Bullet(target, this->gameObject, false, soldier_damage));
 		}
 
 		foreground_layer->AddGameObjectToLayer(bullet);
@@ -63,7 +63,7 @@ bool SoldierShooting::LockTarget() {
 	size_t prob = 0;
 
 	// choose 1 random row of the enemy grid
-	int y_row;
+	int y_row = 0;
 	for (uint8_t i = 1; i <= enemy_grid_y; i++) {
 		prob += i;
 		if (random <= prob) {

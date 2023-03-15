@@ -13,6 +13,11 @@ public:
 
 	void Shoot();
 
+	void NullTarget()
+	{
+		target = nullptr;
+	}
+
 private:
 	bool LockTarget();
 

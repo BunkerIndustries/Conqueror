@@ -12,8 +12,13 @@ public:
 	void event(Event& event) override {};
 
 	void Shoot();
+
+	void NullTarget()
+	{
+		target = nullptr;
+	};
 private:
 	bool LockTarget();
-	GameObject* target;
-	uint8_t hit_probability;
+	GameObject* target = nullptr;
+	uint8_t hit_probability = 0;
 };
