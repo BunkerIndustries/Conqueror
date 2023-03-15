@@ -15,7 +15,7 @@ inline std::vector<std::vector<GameObject*>> enemy_grid;
 inline float cameraScrollSpeed = 15.0f;
 inline float cameraMoveSpeed = 2.0f;
 inline float minCameraZPos = 2.0f;
-inline float maxCameraZPos = 10.0f;
+inline float maxCameraZPos = 20.0f;
 
 // all sprite paths
 inline std::string soldier_sprite_path = "";
