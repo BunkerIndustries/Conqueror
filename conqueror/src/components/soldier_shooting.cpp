@@ -52,6 +52,7 @@ void SoldierShooting::Shoot() {
 bool SoldierShooting::LockTarget() {
 
 	// the soldier will stay on the preselected target if it's still existing
+	std::cout << "target:" << target << std::endl;
 	if (target != nullptr) return true;
 
 	std::vector<GameObject*> enemy_row_vec;
