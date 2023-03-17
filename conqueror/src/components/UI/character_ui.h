@@ -21,6 +21,7 @@ public:
 
 private:
 	void CreateBackground();
+	void CreateHeader();
 	void DeleteUI();
 
 	bool ui_toggled = false;
