@@ -90,13 +90,14 @@ bool GameScene::OnMouseScroll(MouseScrolledEvent& e)
 }
 
 bool GameScene::GameObjectPressed(GameObjectPressedEvent& e) {
-
+    LOG_DEBUG("GameObjectPressed()");
     // select character or move it
     GameObject* clicked_go = e.GetGameObject();
 
     // If a character was clicked: active_gameobject that's supposed to move is set to that
     if (clicked_go->HasTag("soldier") && !clicked_go->GetComponent<SoldierBehaviour>()->on_spawn_pos) {
         active_go = e.GetGameObject();
+        active_go->GetComponent<CharacterUI>()->ToggleUI();
     }
     // Else if a move_node was clicked: set the active_gameobject's target_position to the move_node's position
     else if (clicked_go->HasTag("move_node") && active_go != nullptr) {

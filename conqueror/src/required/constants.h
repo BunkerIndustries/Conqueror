@@ -98,3 +98,7 @@ inline glm::vec4 node_waiting_color = glm::vec4(0.0f, 0.4f, 0.4f, node_alpha);
 
 // time constants
 inline float waiting_time_factor = 4.0f;
+
+// ui constants
+inline glm::vec2 ui_position = glm::vec2(0.5f, 0.0f);
+inline glm::vec4 ui_background_color = glm::vec4(0.2f, 0.2f, 0.2f, 0.6f);
