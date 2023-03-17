@@ -19,24 +19,27 @@ void CharacterUI::update(float dt) {
 }
 
 void CharacterUI::ToggleUI() {
+	LOG_DEBUG("ui_elements.size() = {0}", ui_elements.size());
 	if (ui_toggled) {
 		DeleteUI(); 
+		ui_toggled = false;
 		return;
 	}
 		
 	CreateBackground();
 	CreateHeader();
 
-	LOG_DEBUG("ui_elements.size() = {0}", ui_elements.size());
 	for (auto& ui_element : ui_elements) {
 		foreground_layer->AddGameObjectToLayer(ui_element);
 	}
-	ui_toggled = !ui_toggled;
+	ui_toggled = true;
 }
 
 void CharacterUI::CreateBackground() {
-	LOG_DEBUG("CreateBackground()");
-	GameObject* background = new GameObject("ui_background", Transform(ui_position, glm::vec2(1.0f, 1.0f)), ProjectionMode::SCREEN);
+	glm::vec2 background_position = glm::vec2(
+		1.0f - ui_background_size.x / 2.0f - screen_right_padding,
+		0.0f);
+	GameObject* background = new GameObject("ui_background", Transform(background_position, ui_background_size), ProjectionMode::SCREEN);
 	background->AddComponent(new SpriteRenderer(ui_background_color));
 	ui_elements.push_back(background);
 }
