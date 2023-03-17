@@ -5,11 +5,13 @@ layout (location = 0) in vec2 aPos; // the position variable has attribute posit
 layout (location = 1) in vec4 aColor; //the color of the vector
 layout (location = 2) in vec2 aTexCoord; //the coords of the texture
 layout (location = 3) in float aTexID; //The slot of the texture
+layout (location = 4) in float aCoreID;
 
 // declare vertex variables that are being piped to fragment
 out vec4 fColor;
 out vec2 fTexCoord;
-out float fTexID;
+flat out float fTexID;
+flat out float fCoreID;
 
 void main()
 {
@@ -18,63 +20,32 @@ void main()
     fColor = aColor; // set the output variable to a dark-red color
     fTexCoord = aTexCoord; // set texCoord from the array within the code
     fTexID = aTexID; // pipe texID to fragment
+    fCoreID = aCoreID;
 }
 
 #type fragment
 #version 330 core
 
+layout(location = 0) out vec4 display;
+layout(location = 1) out int objectID;
+
+
 in vec4 fColor; // get color from vertex
 in vec2 fTexCoord; // get texCoord from vertex
-in float fTexID; // get texID from vertex
-
-uniform sampler2D uTexture0;
-uniform sampler2D uTexture1;
-uniform sampler2D uTexture2;
-uniform sampler2D uTexture3;
-uniform sampler2D uTexture4;
-uniform sampler2D uTexture5;
-uniform sampler2D uTexture6;
-uniform sampler2D uTexture7;
+flat in float fTexID; // get texID from vertex
+flat in float fCoreID;
 
 
-out vec4 display;
+uniform sampler2D uTexture[8];
 
 void main()
 {
-    // if there is a desired texture, load it
-    if (fTexID >= 0) {
-        switch(int(fTexID)) {
-            case 0:
-                display = texture(uTexture0, fTexCoord);
-                break;
-            case 1:
-                display = texture(uTexture1, fTexCoord);
-                break;
-            case 2:
-                display = texture(uTexture2, fTexCoord);
-                break;
-            case 3:
-                display = texture(uTexture3, fTexCoord);
-                break;
-            case 4:
-                display = texture(uTexture4, fTexCoord);
-                break;
-            case 5:
-                display = texture(uTexture5, fTexCoord);
-                break;
-            case 6:
-                display = texture(uTexture6, fTexCoord);
-                break;
-            case 7:
-                display = texture(uTexture7, fTexCoord);
-                break;
-            default:
-            break;
-        }
-
+    if (int(fTexID) >= 0) {
+        display = texture(uTexture[int(fTexID)], fTexCoord);
     }
     else {
         // if there is no texture, display the colors
         display = fColor;
     }
+    objectID = int(fCoreID);
 }

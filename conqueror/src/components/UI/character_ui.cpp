@@ -36,7 +36,7 @@ void CharacterUI::ToggleUI() {
 
 void CharacterUI::CreateBackground() {
 	LOG_DEBUG("CreateBackground()");
-	GameObject* background = new GameObject("ui_background", Transform(ui_position, glm::vec2(4.0f, 5.0f)), ProjectionMode::SCREEN);
+	GameObject* background = new GameObject("ui_background", Transform(ui_position, glm::vec2(1.0f, 1.0f)), ProjectionMode::SCREEN);
 	background->AddComponent(new SpriteRenderer(ui_background_color));
 	ui_elements.push_back(background);
 }

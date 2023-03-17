@@ -107,5 +107,5 @@ bool GameScene::GameObjectPressed(GameObjectPressedEvent& e) {
         
     }
 
-    return true;
+    return false;
 }

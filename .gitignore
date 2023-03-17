@@ -6,3 +6,4 @@ Conqueror.sln
 *.filters
 *.user
 imgui.ini
+**/.idea/**

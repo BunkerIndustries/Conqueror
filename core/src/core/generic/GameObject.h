@@ -11,13 +11,6 @@ namespace core {
     class Component;
     class Layer;
 
-    struct GOSpec {
-        std::string name = "GameObject";
-        std::initializer_list<std::string> tags;
-        Transform transform = Transform();
-        ProjectionMode mode = ProjectionMode::PERSPECTIVE;
-    };
-
     class GameObject {
     private:
         std::string name;
