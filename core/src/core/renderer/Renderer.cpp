@@ -54,7 +54,7 @@ namespace core {
         }
         for (int i = 0; !found && i < batches.size(); i++) {
             
-            if (batches[i]->hasRoom() && index == batches[i]->getZIndex())
+            if (batches[i]->hasRoom() && index == batches[i]->getZIndex() &&  spriteRenderer->GetGameObject()->mode == batches[i]->mode)
             {
                 std::shared_ptr<Texture> texture = spriteRenderer->getTexture();
                 if (texture == nullptr || (batches[i]->hasTexture(texture) || batches[i]->hasTextureRoom()))
