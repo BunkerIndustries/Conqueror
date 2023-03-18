@@ -63,6 +63,7 @@ void CharacterUI::DeleteUI() {
 		ui_element->Delete();
 	}
 	ui_elements.clear();
+	ui_toggled = false;
 }
 
 bool CharacterUI::UIElementPressed(GameObjectPressedEvent& e) {

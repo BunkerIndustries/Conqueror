@@ -96,8 +96,7 @@ bool GameScene::GameObjectPressed(GameObjectPressedEvent& e) {
 
     // If a character was clicked: active_gameobject that's supposed to move is set to that
     if (clicked_go->HasTag("soldier") && !clicked_go->GetComponent<SoldierBehaviour>()->on_spawn_pos) {
-        if (active_go != nullptr && active_go->HasTag("soldier")) {
-            clicked_go->GetComponent<CharacterUI>()->DeleteUI();
+        if (active_go != nullptr && active_go->HasTag("soldier") && active_go != clicked_go) {
             active_go->GetComponent<CharacterUI>()->DeleteUI();
         }
 
