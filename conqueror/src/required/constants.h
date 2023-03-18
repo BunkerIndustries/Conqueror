@@ -1,6 +1,7 @@
 #pragma once
 #include "layers/ForegroundLayer.h"
 #include "layers/SoundLayer.h"
+#include "components/medic_management.h"
 
 // TODO: May split this up to multiple files, so that not everything has to be inline
 
@@ -82,8 +83,8 @@ inline float engineer_health = 200.0f;
 inline float bullet_speed = 30.0f;
 inline glm::vec4 bullet_color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
 inline glm::vec2 bullet_size = glm::vec2(0.5f, 0.5f);
-inline float min_inaccuracy = 0.1f;
-inline float max_inaccuracy = 0.4f;
+inline float min_inaccuracy = 0.8f;
+inline float max_inaccuracy = 1.4f;
 
 // node constants
 inline glm::vec2 node_size = glm::vec2(0.5f, 0.5f);
@@ -98,3 +99,7 @@ inline glm::vec4 node_waiting_color = glm::vec4(0.0f, 0.4f, 0.4f, node_alpha);
 
 // time constants
 inline float waiting_time_factor = 4.0f;
+
+// medics constants
+inline uint8_t medic_count = 15;
+inline MedicManagement* medic_management = new MedicManagement(medic_count);

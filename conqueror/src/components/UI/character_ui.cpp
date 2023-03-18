@@ -19,7 +19,6 @@ void CharacterUI::update(float dt) {
 }
 
 void CharacterUI::ToggleUI() {
-	LOG_DEBUG("ui_elements.size() = {0}", ui_elements.size());
 	if (ui_toggled) {
 		DeleteUI(); 
 		ui_toggled = false;
@@ -28,6 +27,7 @@ void CharacterUI::ToggleUI() {
 		
 	CreateBackground();
 	CreateHeader();
+	CreateButtons();
 
 	for (auto& ui_element : ui_elements) {
 		foreground_layer->AddGameObjectToLayer(ui_element);
@@ -58,6 +58,21 @@ void CharacterUI::CreateHeader() {
 	ui_elements.push_back(header_placeholder);
 }
 
+void CharacterUI::CreateButtons() {
+	glm::vec2 call_medic_button_position = glm::vec2(
+		ui_elements.at(0)->transform.position.x,
+		ui_elements.at(1)->transform.position.y - ui_elements.at(1)->transform.scale.y / 2.0f - ui_elements_margin - button_height / 2.0f);
+	
+	glm::vec2 call_medic_button_scale = glm::vec2(
+		ui_elements.at(0)->transform.scale.x * button_length_from_background - 2.0f * ui_background_padding,
+		button_height);
+
+	GameObject* call_medic_button = new GameObject("call_medic_button", Transform(call_medic_button_position, call_medic_button_scale), ProjectionMode::SCREEN);
+	call_medic_button->AddComponent(new SpriteRenderer(call_medic_button_color));
+	call_medic_button->AddTag("call_medic_button");
+	ui_elements.push_back(call_medic_button);
+}
+
 void CharacterUI::DeleteUI() {
 	for (auto& ui_element : ui_elements) {
 		ui_element->Delete();
@@ -68,5 +83,9 @@ void CharacterUI::DeleteUI() {
 
 bool CharacterUI::UIElementPressed(GameObjectPressedEvent& e) {
 
-	return false;
+	LOG_DEBUG("UIElementPressed()");
+	if (!e.GetGameObject()->HasTag("call_medic_button")) return false;
+	
+	LOG_DEBUG("call medic");
+	return true;
 }

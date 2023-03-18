@@ -23,6 +23,7 @@ public:
 private:
 	void CreateBackground();
 	void CreateHeader();
+	void CreateButtons();
 
 	bool ui_toggled = false;
 	std::vector<GameObject*> ui_elements;
