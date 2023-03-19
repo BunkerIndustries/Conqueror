@@ -38,6 +38,8 @@ void GameScene::loadResources() {
     GameObject* enemy = CreateEnemy("enemy 1", glm::vec2(1.0f, 10.0f));
     GameObject* enemy2 = CreateEnemy("enemy 2", glm::vec2(-1.0f, 10.0f));
 
+    GameObject* medic_building = CreateBuilding(glm::vec2(12.0f, -5.0f), "medic");
+
     CreateGameMap(standard_map);
 }
 void GameScene::init() {

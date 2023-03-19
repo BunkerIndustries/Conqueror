@@ -31,3 +31,5 @@ bool Health::TakeDamage(float damage) {
 	return false;
 	// return true means dead
 }
+
+float Health::GetHp() { return hp; }

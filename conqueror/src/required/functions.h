@@ -140,3 +140,23 @@ inline GameObject* CreateNode(glm::vec2 position, Stand& node_stand) {
 
 	return node_go;
 }
+
+inline GameObject* CreateBuilding(glm::vec2 position, std::string type) {
+	
+	GameObject* building = new GameObject(type + "-building", Transform(position, building_size));
+
+	if (type == "medic") {
+		building->AddComponent(medic_management);
+		building->AddComponent(new SpriteRenderer(glm::vec4(0.05f, 0.05f, 0.05f, 1.0f)));	// temp: replace with correct sprite-path
+	}
+	else if (type == "engineer") {
+
+	}
+	else {
+		LOG_DEBUG("WARNING: probably no existing type given when creating a building");
+	}
+	
+	foreground_layer->AddGameObjectToLayer(building);
+
+	return building;
+}

@@ -1,6 +1,7 @@
 #include "character_ui.h"
 #include "required/constants.h"
 #include "components/UI/ui_constants.h"
+#include "components/health.h"
 
 CharacterUI::CharacterUI() {
 
@@ -83,9 +84,10 @@ void CharacterUI::DeleteUI() {
 
 bool CharacterUI::UIElementPressed(GameObjectPressedEvent& e) {
 
-	LOG_DEBUG("UIElementPressed()");
-	if (!e.GetGameObject()->HasTag("call_medic_button")) return false;
-	
+	//LOG_DEBUG("UIElementPressed()");
+	if (!e.GetGameObject()->HasTag("call_medic_button") || gameObject->GetComponent<Health>()->GetHp() == soldier_health) return false;	// if the clicked button is not call_medic_button or the soldier is full health
+	medic_management->SendMedic(gameObject);
+
 	LOG_DEBUG("call medic");
 	return true;
 }

@@ -12,7 +12,7 @@ public:
 	void event(Event& event) override {};
 
 	bool TakeDamage(float damage);
-
+	float GetHp();
 private:
 	float hp;
 };

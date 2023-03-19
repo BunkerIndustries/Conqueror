@@ -71,7 +71,7 @@ void EnemyBehaviour::update(float dt) {
 					time_over = true;
 					dt_time_counter = 0.0f;
 
-					//gameObject->GetComponent<EnemyShooting>()->Shoot();
+					gameObject->GetComponent<EnemyShooting>()->Shoot();
 				}
 			}
 		}
