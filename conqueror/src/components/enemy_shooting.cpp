@@ -28,7 +28,7 @@ void EnemyShooting::Shoot() {
 
 		// if a target is found => instantiate bullet and calulate whether it will hit or not, stop target-searching-process
 		if (!LockTarget()) continue;
-		LOG_DEBUG("LockTarget() returned true");
+		//LOG_DEBUG("LockTarget() returned true");
 		GameObject* bullet = new GameObject("bullet", Transform(gameObject->transform.position, bullet_size));
 
 		bullet->AddComponent(new SpriteRenderer(bullet_color));
@@ -37,13 +37,13 @@ void EnemyShooting::Shoot() {
 
 		// if the hit is supposed to hit => create new bullet and let it hit the enemy
 		if (r <= hit_probability) {
-			LOG_DEBUG("enemy Shoot and hit");
+			//LOG_DEBUG("enemy Shoot and hit");
 			bullet->AddComponent(new Bullet(target, this->gameObject, true, enemy_damage));
 		}
 
 		// if the hit is not supposed to hit => create new bullet and let it miss the enemy
 		else {
-			LOG_DEBUG("ememy Shoot and miss");
+			//LOG_DEBUG("ememy Shoot and miss");
 			bullet->AddComponent(new Bullet(target, this->gameObject, false, enemy_damage));
 		}
 

@@ -26,8 +26,14 @@ void MedicManagement::SendMedic(GameObject* healing_target) {
 	
 	available_medics--;
 
-	GameObject* medic = CreateCharacter("medic", gameObject->transform.position);
+	GameObject* medic = new GameObject("medic", Transform(gameObject->transform.position, character_scale));
+	medic->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
+	medic->AddComponent(new Movement(medic_movement_speed));
+	medic->AddComponent(new Health(medic_health));
+	medic->AddComponent(new CharacterUI());
 	medic->AddComponent(new MedicBehaviour(healing_target));
+
+	foreground_layer->AddGameObjectToLayer(medic);
 
 }
 

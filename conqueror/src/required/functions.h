@@ -89,10 +89,6 @@ inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 		character_go->AddComponent(new SoldierShooting());
 
 	}
-	else if (type == "medic") { 
-		movement_speed = medic_movement_speed; sprite_path = medic_sprite_path; 
-		health = medic_health;
-	}
 	else if (type == "engineer") { 
 		movement_speed = engineer_movement_speed; sprite_path = engineer_sprite_path; 
 		health = engineer_health;

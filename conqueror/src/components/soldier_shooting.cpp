@@ -26,7 +26,7 @@ void SoldierShooting::Shoot() {
 	
 	for (uint8_t i = 0; i < max_soldier_lock_target_tries; i++) {
 		if (!LockTarget()) continue;
-		LOG_DEBUG("LockTarget() returned true at try {0}", i);
+		//LOG_DEBUG("LockTarget() returned true at try {0}", i);
 		std::cout << "target: " << target << std::endl;
 
 		bullet = new GameObject("bullet", Transform(gameObject->transform.position, bullet_size));
@@ -36,11 +36,11 @@ void SoldierShooting::Shoot() {
 
 		// if the hit has hit
 		if (RandomInt(0, enemy_grid_y + soldier_miss_points) <= hit_probability) {
-			LOG_DEBUG("soldier Bullet sent with hit=true");
+			//LOG_DEBUG("soldier Bullet sent with hit=true");
 			bullet->AddComponent(new Bullet(target, this->gameObject, true, soldier_damage));
 		}
 		else {
-			LOG_DEBUG("soldier Bullet sent with hit=false");
+			//LOG_DEBUG("soldier Bullet sent with hit=false");
 			bullet->AddComponent(new Bullet(target, this->gameObject, false, soldier_damage));
 		}
 

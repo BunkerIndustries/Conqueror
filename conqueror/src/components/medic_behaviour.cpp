@@ -10,9 +10,11 @@ MedicBehaviour::MedicBehaviour(GameObject* healing_target)
 }
 
 void MedicBehaviour::start() {
-	gameObject->GetComponent<Movement>()->target_position = healing_target->transform.position + medic_healing_position_offset;
+	healing_target_position = healing_target->transform.position + medic_healing_position_offset;
+	gameObject->GetComponent<Movement>()->target_position = healing_target_position;
 	healing = false;
 	going_back = false;
+	LOG_DEBUG("healing_target_position: x:{0}", healing_target_position.x);
 }
 
 
