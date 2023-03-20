@@ -14,4 +14,8 @@ public:
 private:
 	GameObject* healing_target;
 	glm::vec2 healing_target_position;
+
+	bool healing;
+	bool going_back;
+	float heal_time;
 };

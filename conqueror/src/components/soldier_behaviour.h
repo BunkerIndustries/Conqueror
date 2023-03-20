@@ -14,6 +14,7 @@ public:
 	void SoldierMove(GameObject* node);
 
 	bool on_spawn_pos;
+	bool is_healed;
 
 private:
 	float health;

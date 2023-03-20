@@ -16,6 +16,7 @@ void SoldierBehaviour::start() {
 
 	// start configuration
 	on_spawn_pos = true;
+	is_healed = false;
 	travelling = false;
 	time_to_wait = RandomF(min_soldier_shoot_waiting_time, max_soldier_shoot_waiting_time) * waiting_time_factor;
 	dt_counter = 0.0f;
@@ -77,6 +78,8 @@ void SoldierBehaviour::update(float dt) {
 
 void SoldierBehaviour::SoldierMove(GameObject* move_node) {
 
+	if (is_healed) return;
+
 	// get the for this function required components
 	Movement* move_component = gameObject->GetComponent<Movement>();
 	Node* node_component = move_node->GetComponent<Node>();
@@ -110,7 +113,7 @@ void SoldierBehaviour::SoldierMove(GameObject* move_node) {
 bool SoldierBehaviour::SoldierTryMoveToWaitingNode() {
 
 	// choose a free waiting node
-	for (auto node : waiting_nodes) {
+	for (auto& node : waiting_nodes) {
 		if (!node->GetComponent<Node>()->is_occupied) {
 
 			// move the gameobject to the chosen waiting node 
