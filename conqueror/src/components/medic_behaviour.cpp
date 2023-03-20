@@ -14,7 +14,7 @@ void MedicBehaviour::start() {
 	gameObject->GetComponent<Movement>()->target_position = healing_target_position;
 	healing = false;
 	going_back = false;
-	LOG_DEBUG("healing_target_position: x:{0}", healing_target_position.x);
+	dt_counter = 0.0f;
 }
 
 
@@ -25,7 +25,10 @@ void MedicBehaviour::stop() {
 void MedicBehaviour::update(float dt) {
 
 	if (going_back) {
-		if (gameObject->transform.position == medic_management->GetGameObject()->transform.position) gameObject->Delete();
+		if (gameObject->transform.position == medic_management->GetGameObject()->transform.position) {
+			medic_management->MedicArrived();
+			gameObject->Delete();
+		}
 		return;
 	}
 
@@ -43,7 +46,13 @@ void MedicBehaviour::update(float dt) {
 		heal_time = (soldier_health - healing_target->GetComponent<Health>()->GetHp()) * waiting_time_per_hp * waiting_time_factor;
 	}
 	else if (healing == true) {
-
+		if (dt_counter >= heal_time) {
+			healing = false;
+			going_back = true;
+			healing_target->GetComponent<Health>()->GetHealed();
+			gameObject->GetComponent<Movement>()->target_position = medic_management->GetGameObject()->transform.position;
+		}
+		dt_counter += dt;
 	}
 
 }

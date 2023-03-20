@@ -13,6 +13,7 @@ public:
 
 	bool TakeDamage(float damage);
 	float GetHp();
+	void GetHealed();
 private:
 	float hp;
 };

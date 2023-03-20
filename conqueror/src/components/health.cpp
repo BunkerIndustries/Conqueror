@@ -33,3 +33,7 @@ bool Health::TakeDamage(float damage) {
 }
 
 float Health::GetHp() { return hp; }
+
+void Health::GetHealed() {
+	hp = soldier_health;
+}

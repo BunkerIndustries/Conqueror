@@ -18,4 +18,5 @@ private:
 	bool healing;
 	bool going_back;
 	float heal_time;
+	float dt_counter;
 };
