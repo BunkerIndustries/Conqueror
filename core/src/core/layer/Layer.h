@@ -21,7 +21,7 @@ namespace core
 		Layer(const std::string& name = "Layer")
 			: name(name) { }
 
-		virtual ~Layer() = default;
+		virtual ~Layer();
 
 		void Attach();
 		void Detach();
@@ -33,6 +33,7 @@ namespace core
 		virtual void OnEvent(Event& event) = 0;
 
 		void LayerEvent(Event& event);
+		bool IsAttached() const { return attached; }
 
 		void AddGameObjectToLayer(GameObject* game_object);
 

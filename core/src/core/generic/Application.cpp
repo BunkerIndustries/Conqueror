@@ -152,7 +152,10 @@ namespace core {
 					imguiLayer->Begin(dt);
 
 					for (Layer* layer : layerStack)
-						layer->Update(dt);
+					{
+						if (layer->IsAttached())
+							layer->Update(dt);
+					}
 
 					currentScene->OnUpdate();
 

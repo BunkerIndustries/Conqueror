@@ -34,6 +34,7 @@ namespace core {
         //updating gameobjects and its components
         for (Layer* layer : Application::GetLayerStack())
         {
+            if (!layer->IsAttached()) continue;
             for (GameObject* gameObject : layer->GetGameObjects())
             {
                 if (!gameObject->IsRunning()) continue;

@@ -45,7 +45,22 @@ namespace core {
 
     GameObject::~GameObject()
     {
-        CORE_ASSERT(deleted, "you may not delete a GameObject, use the 'Delete' function of it instead");
+        this->deleted = true;
+        std::vector<GameObject*>::iterator it = std::find(layer->GetGameObjects().begin(), layer->GetGameObjects().end(), this);
+        if (it != layer->GetGameObjects().end())
+        {
+            layer->GetGameObjects().erase(it);
+        }
+        const int componentSize = components.size();
+        for (int i = 0; i < componentSize; i++)
+        {
+            if (components.size() <= 0) break;
+
+            if (running)
+                components[0]->OnStop();
+            delete components[0];
+            components.erase(components.begin());
+        }
     }
 
 
@@ -153,21 +168,6 @@ namespace core {
 	    {
             component->OnEvent(event);
 	    }
-    }
-
-    void GameObject::Delete()
-    {
-        this->deleted = true;
-        layer->GetGameObjects().erase(std::find(layer->GetGameObjects().begin(), layer->GetGameObjects().end(), this));
-		for (size_t i = 0; i < components.size(); i++)
-		{
-	        if (running)
-				components[0]->OnStop();
-            delete components[0];
-            components.erase(components.begin());
-			
- 		}
-        delete this;
     }
 
 
