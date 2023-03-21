@@ -30,7 +30,9 @@ void CharacterUI::ToggleUI() {
 		
 	CreateBackground();
 	CreateHeader();
-	CreateButtons();
+	if (gameObject->HasTag("soldier")) {
+		CreateButtons();
+	}
 
 	for (auto& ui_element : ui_elements) {
 		foreground_layer->AddGameObjectToLayer(ui_element);
