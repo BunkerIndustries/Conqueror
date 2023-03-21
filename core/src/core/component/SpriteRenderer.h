@@ -3,40 +3,53 @@
 #include "utility.h"
 
 #include "generic/Component.h"
-#include "generic/Transform.h"
-#include "component/Sprite.h"
+#include "event/Event.h"
 
 namespace core {
 
-    class CORE_API SpriteRenderer : public Component {
+    enum class Geometry
+    {
+        NONE,
+        RECTANGLE,
+        TRIANGLE,
+        CIRCLE
+    };
+
+    class SpriteRenderer : public Component {
+    public:
+        
+        SpriteRenderer(glm::vec4 color, Geometry geometry);
+        SpriteRenderer(glm::vec4 color, Shr<Texture> texture, Geometry geometry);
+
+        ~SpriteRenderer() override { }
+
+        void Init(glm::vec4 color, Shr<Texture> texture, Geometry geometry);
+
+        void OnStart() override { }
+        void OnStop() override { }
+        void OnUpdate() override;
+        void OnImgui(float dt) override;
+        void OnEvent(Event& event) override { }
+
+        void SetColor(glm::vec4 color) { this->color = color; }
+        void SetTexture(Shr<Texture> texture) { this->texture = texture; }
+        void SetTexCoords(glm::vec2 texCoords[4])
+        {
+            for (int i = 0; i < 4; i++)
+            {
+				this->texCoords[i] = texCoords[i];
+            }
+        }
+
+        glm::vec4 GetColor() const { return this->color; }
+        Shr<Texture> GetTexture() { return this->texture; }
+        glm::vec2* GetTexCoords() { return this->texCoords; }
+
     private:
         glm::vec4 color;
-        Sprite* sprite;
-        Transform* lastTransform;
-
-        bool isDirty = false;
-    public:
-        SpriteRenderer(glm::vec4 color);
-        SpriteRenderer(Sprite* sprite);
-
-        virtual ~SpriteRenderer();
-
-        /* troll */
-        // setup function
-        void start() override;
-        // update function call on every update (frame)
-        void update(float dt) override;
-        void imgui(float dt) override;
-        glm::vec4 getColor();
-        Texture* getTexture();
-        float* getTexCoords();
-
-        void setSprite(Sprite* sprite);
-        void setColor(glm::vec4 color);
-
-        bool getIsDirty();
-        void setClean();
-
+        Shr<Texture> texture;
+        glm::vec2 texCoords[4];
+        Geometry geometry;
     };
 
 }

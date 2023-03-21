@@ -2,7 +2,6 @@
 
 #include "utils/DataPool.h"
 #include "renderer/Texture.h"
-#include "generic/Shader.h"
 
 namespace core {
 
@@ -11,48 +10,65 @@ namespace core {
     //#include FT_FREETYPE_H
 
     // declare static maps in order to find a reference
-    std::unordered_map<std::string, std::shared_ptr<Shader>> DataPool::shaderPool;
-    std::unordered_map<std::string, Texture*> DataPool::texturePool;
+    Map DataPool::dataPool;
 
-    //struct CharacterTemplateS CharacterTemplate;
-
-    //std::map<char, CharacterTemplateS> DataPool::CharacterPool;
-
-    std::shared_ptr<Shader> DataPool::getShader(std::string shaderName) {
-        // we need a shared pointer because why not
+    std::shared_ptr<Shader> DataPool::GetShader(std::string shaderName) {
         // set default path
-        std::string path = "assets/shaders/";
+        std::string path = "assets/shaders/" + shaderName + ".glsl";
+        std::string shader_id = "shader_" + shaderName;
 
-        // search the map for shader string and return the shader if it exists
-        if (shaderPool.find(shaderName) != shaderPool.end()) {
-            return shaderPool.at(shaderName);
+        Map::iterator it = dataPool.find(shader_id);
+
+        std::shared_ptr<Shader> shader;
+
+        if (it == dataPool.end())
+        {
+            shader = Shader::CreateShader(path);
+            dataPool.emplace(shader_id, shader);
         }
-        // create the shader either way
-        shaderPool[shaderName] = std::make_shared<Shader>(path + shaderName + ".glsl");
-        // return it, if it did not exist
-        return shaderPool.at(shaderName);
+        else
+        {
+            shader = std::static_pointer_cast<Shader>(it->second);
+        }
+
+        return shader;
     }
 
-    Texture* DataPool::getTexture(std::string textureName, bool flipped) {
+    std::shared_ptr<Texture> DataPool::GetTexture(std::string textureName) {
         // set default path
-        std::string path = "assets/textures/";
-        // search for texture with texture name and return it if it exists
-        if (flipped) {
-            if (texturePool.find(textureName) != texturePool.end()) {
-                return texturePool.at(textureName);
-            }
-            // create the texture and return it
-            texturePool[textureName] = new Texture(path + textureName);
-            return texturePool.at(textureName);
+        std::string path = "assets/textures/" + textureName;
+
+        std::string texture_id = "texture_" + textureName;
+
+        Map::iterator it = dataPool.find(texture_id);
+
+        std::shared_ptr<Texture> texture;
+
+        if (it == dataPool.end())
+        {
+            texture = Texture::CreateTexture(path, textureName);
+            dataPool.emplace(texture_id, texture);
         }
-        else {
-            if (texturePool.find(textureName + "_notflipped") != texturePool.end()) {
-                return texturePool.at(textureName + "_notflipped");
-            }
-            // create the texture and return it
-            texturePool[textureName + "_notflipped"] = new Texture(path + textureName, false);
-            return texturePool.at(textureName + "_notflipped");
+        else
+        {
+            texture = std::static_pointer_cast<Texture>(it->second);
         }
+
+        return texture;
+    }
+
+    int ProjectionModeToInt(const ProjectionMode& mode)
+    {
+	    switch (mode)
+	    {
+	    case ProjectionMode::PERSPECTIVE:
+            return 0;
+	    case ProjectionMode::ORTHOGRAPHIC:
+            return 1;
+	    case ProjectionMode::SCREEN:
+            return 2;
+	    }
+        return -1;
     }
 
     // basically save our characters we need for rendering into the CharacterPool map

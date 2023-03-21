@@ -4,11 +4,8 @@
 
 #include "event/Event.h"
 
-
-#include <GLFW/glfw3.h>
-
 namespace core {
-	using EventCallbackFunction = std::function<void(Event&)>;
+	
 
     struct WindowProps
     {
@@ -20,38 +17,35 @@ namespace core {
     };
 
     class Window {
-    private:
-        GLFWwindow* glfw_window;
-        bool initialized = false;
-
-        struct WindowData
-        {
-            std::string title;
-            unsigned int width, height;
-            bool vsync;
-            EventCallbackFunction callback;
-        };
-
-        WindowData window_data;
-
-        Window(const WindowProps& window_props);
-
-        void init(const WindowProps& window_props);
-        void quit() const;
-
     public:
 
-        ~Window();
+        enum FRAMEWORK
+        {
+            NONE = 0,
+            GLFW
+        };
 
-    	static Window* createWindow(const WindowProps& window_props = WindowProps());
+        virtual ~Window() = default;
 
-        unsigned int getWidth() const { return window_data.width; }
-        unsigned int getHeight() const { return window_data.height; }
+        virtual void PollEvents() = 0;
+        virtual void SwapBuffers() = 0;
 
-    	void setEventCallback(const EventCallbackFunction& callback_function) { window_data.callback = callback_function; }
-        void setVSync(bool enabled);
-        bool isVSync() const { return window_data.vsync; }
+        virtual unsigned int GetWidth() const = 0;
+        virtual unsigned int GetHeight() const = 0;
 
-        GLFWwindow* getNativeWindow() const { return glfw_window; }
+        virtual float GetTime() const = 0;
+
+        virtual void SetEventCallback(const EventCallbackFunction& callback_function) = 0;
+        virtual void SetVSync(bool enabled) = 0;
+        virtual bool IsVSync() const = 0;
+
+        virtual void* GetNativeWindow() const = 0;
+
+        static FRAMEWORK GetFramework() { return framework; }
+
+    	static Shr<Window> Create(const WindowProps& windowProps = WindowProps());
+
+    private:
+        static FRAMEWORK framework;
     };
 }

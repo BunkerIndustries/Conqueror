@@ -6,7 +6,7 @@
 
 namespace core {
 
-    class CORE_API Sound
+    class Sound
     {
     private:
         std::string soundFile;
@@ -16,12 +16,12 @@ namespace core {
     public:
         Sound();
         ~Sound();
-        static void dataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount);
-        bool loadSound(std::string soundFile);
-        bool playSound();
-        bool stopSound();
-        void setVolume(float volume);
-        float getVolume();
+        static void DataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount);
+        bool LoadSound(std::string soundFile);
+        bool PlaySound();
+        bool StopSound();
+        void SetVolume(float volume);
+        float GetVolume();
     };
 
 }

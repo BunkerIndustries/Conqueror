@@ -30,13 +30,13 @@ namespace core {
         float fov;
 
         // update camera vectors
-        void calcCameraVectors();
+        void CalcCameraVectors();
 
-        glm::mat4 getViewMatrix();
-        glm::mat4 getReverseViewMatrix();
-        glm::mat4 getProjectionMatrix();
-        glm::mat4 getOrthographicMatrix();
-        glm::mat4 getReverseProjectionMatrix();
+        glm::mat4 GetViewMatrix();
+        glm::mat4 GetReverseViewMatrix();
+        glm::mat4 GetProjectionMatrix();
+        glm::mat4 GetOrthographicMatrix();
+        glm::mat4 GetReverseProjectionMatrix();
     };
 
 }

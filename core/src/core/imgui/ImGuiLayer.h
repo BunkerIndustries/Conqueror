@@ -21,38 +21,53 @@ namespace core {
         ImGuiID dock_id_left = 0;
         ImGuiID dock_id_right = 0;
         ImGuiID dock_id_right2 = 0;
+        ImGuiID dock_id_left_bottom = 0;
+        std::unordered_map<std::string, ImGuiID> dockPanelQueue;
 
-        std::unordered_map<std::string, ImGuiID> dock_panel_queue;
+        void ApplicationPanel(const float dt, bool first);
+        void CustomPanel(const float dt, bool first);
+        void LayerPanel(const float dt, bool first);
+        void InspectorPanel(const float dt, bool first);
+        void ViewPortPanel(const float dt, bool first);
 
-        void ApplicationPanel(const float dt);
-        void ScenePanel(const float dt);
-        void LayerPanel(const float dt);
-        void ViewPortPanel(const float dt);
+        glm::vec2 viewportSize;
+        glm::vec2 viewportBounds[2];
 
-        glm::vec2 viewport_size;
+        glm::ivec2 mousePosViewportRelative;
+
+        GameObject* selectedGameobject = nullptr;
+
+        std::unordered_map<std::string, void*> variablePool;
+
 
     public:
-        ImGuiLayer()
-	        : Layer("ImGuiLayer") { }
-        ~ImGuiLayer();
+        ImGuiLayer();
+    	~ImGuiLayer() override;
 
         void OnAttach() override;
         void OnDetach() override;
-        void update(const float dt) override { }
-        void imgui(const float dt) override;
+        void Update(const float dt) override;
+        void Imgui(const float dt) override;
         void OnEvent(Event& e) override { }
 
-        void begin(const float dt);
-        void end();
+        void Begin(const float dt);
+        void End();
+
+        void ScreenPanel();
 
         void DockPanel(std::string name, ImGuiID dock_id);
+        void AddVariable(std::string name, void* variable);
 
-        ImGuiID getDockspaceMAIN() const { return dock_id_main; }
-        ImGuiID getDockspaceTOP() const { return dock_id_top; }
-        ImGuiID getDockspaceBOTTOM() const { return dock_id_down; }
-        ImGuiID getDockspaceLEFT() const { return dock_id_left; }
-        ImGuiID getDockspaceRIGHT() const { return dock_id_right; }
-        ImGuiID getDockspaceRIGHT2() const { return dock_id_right2; }
+        glm::ivec2 GetMousePosViewportRelative() const { return mousePosViewportRelative; }
+        bool IsMouseInsideViewport() const { return mousePosViewportRelative.x >= 0 && mousePosViewportRelative.y >= 0 && mousePosViewportRelative.x < viewportSize.x&& mousePosViewportRelative.y < viewportSize.y; }
+
+        ImGuiID GetDockspaceMain() const { return dock_id_main; }
+        ImGuiID GetDockspaceTop() const { return dock_id_top; }
+        ImGuiID GetDockspaceBottom() const { return dock_id_down; }
+        ImGuiID GetDockspaceLeft() const { return dock_id_left; }
+        ImGuiID GetDockspaceRight() const { return dock_id_right; }
+        ImGuiID GetDockspaceRight2() const { return dock_id_right2; }
+        ImGuiID GetDockspaceLeftBottom() const { return dock_id_left_bottom; }
 
     };
 

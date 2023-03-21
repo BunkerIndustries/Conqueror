@@ -2,20 +2,29 @@
 #include "_Core.h"
 #include "utility.h"
 
+#include "event/Event.h"
+
+#include "generic/GameObject.h"
 
 namespace core {
 
-    class CORE_API Component {
-    public:
-        std::string getTypeID();
+    class Component {
     protected:
-        std::string typeID;
+        GameObject* gameObject = nullptr;
+
     public:
-        Component();
-        virtual ~Component();
-        virtual void start();
-        virtual void update(float dt);
-        virtual void imgui(float dt);
+        Component() = default;
+    	virtual ~Component() = default;
+
+        virtual void OnStart() = 0;
+        virtual void OnStop() = 0;
+        virtual void OnUpdate() = 0;
+        virtual void OnEvent(Event& event) = 0;
+        virtual void OnImgui(float dt) { }
+
+        GameObject* GetGameObject() const { return gameObject; }
+
+        friend class GameObject;
     };
 
 }

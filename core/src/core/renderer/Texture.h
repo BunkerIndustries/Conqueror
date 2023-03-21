@@ -2,34 +2,27 @@
 #include "_Core.h"
 #include "utility.h"
 
-#include <STB_IMAGE/stb_image.h>
-
 namespace core {
 
-    class CORE_API Texture {
+    class Texture {
     private:
-        std::string filePath;
-
-        unsigned int texID;
-        unsigned char* localBuffer;
-
-        int width;
-        int height;
-        int channels;
+        
 
     public:
-        // load texture with desired filePath
-        Texture(std::string filePath, bool flip = 1);
-        ~Texture();
-        // use texture slot
-        void bind(unsigned int slot);
+    	virtual void Bind(unsigned int slot) = 0;
+        virtual void Unbind() = 0;
 
-        // stop using texture slot
-        void unbind();
-        int getID();
-        int getWidth();
-        int getHeight();
-        std::string getFilePath();
+        virtual uint32_t GetID() const = 0;
+        virtual int GetWidth() = 0;
+        virtual int GetHeight() = 0;
+        virtual std::string GetFilePath() = 0;
+        virtual std::string GetName() = 0;
+
+        virtual bool operator==(const Texture& other) const = 0;
+
+        virtual ~Texture() = default;
+
+        static Shr<Texture> CreateTexture(std::string filePath, std::string name);
     };
 
 }

@@ -8,14 +8,14 @@
 namespace core
 {
 
-	class CORE_API Layer
+	class Layer
 	{
 	protected:
 		std::string name;
 		bool overlay = false;
 		bool attached = false;
 
-		std::vector<GameObject*> game_objects;
+		std::vector<GameObject*> gameObjects;
 
 	public:
 		Layer(const std::string& name = "Layer")
@@ -23,21 +23,23 @@ namespace core
 
 		virtual ~Layer() = default;
 
-		void attach(bool add_to_renderer);
-		void detach();
+		void Attach();
+		void Detach();
 
 		virtual void OnAttach() = 0;
 		virtual void OnDetach() = 0;
-		virtual void update(const float dt) = 0;
-		virtual void imgui(const float dt) = 0;
+		virtual void Update(const float dt) = 0;
+		virtual void Imgui(const float dt) { };
 		virtual void OnEvent(Event& event) = 0;
+
+		void LayerEvent(Event& event);
 
 		void AddGameObjectToLayer(GameObject* game_object);
 
-		void setOverlayStatus(bool overlay) { this->overlay = overlay; }
+		void SetOverlayStatus(bool overlay) { this->overlay = overlay; }
 
-		bool getOverlayStatus() { return overlay; }
-		std::vector<GameObject*> GetGameObjects() const { return game_objects; }
+		bool GetOverlayStatus() { return overlay; }
+		std::vector<GameObject*>& GetGameObjects() { return gameObjects; }
+		std::string GetName() { return name; }
 	};
 }
-

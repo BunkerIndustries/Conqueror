@@ -1,4 +1,5 @@
-.vs/**
+**/.vs/**
+**/.idea/**
 bin/**
 bin-int/**
 Conqueror.sln
@@ -6,3 +7,4 @@ Conqueror.sln
 *.filters
 *.user
 imgui.ini
+**/.idea/**
