@@ -1,20 +1,15 @@
 #pragma once
 
 #include "Engine.h"
-#include "layers/SoundLayer.h"
-#include "layers/ForegroundLayer.h"
 
-#include <vector>
-
-class GameScene : public core::Scene
+class GameScene : public Scene
 {
 public:
 	GameScene();
-	virtual ~GameScene() override;
+	~GameScene() override;
 	void LoadResources() override;
 	void Init() override;
 	void Update() override;
-	void Imgui(float dt) override;
 	
 	void OnEvent(Event& e) override
 	{

@@ -86,8 +86,8 @@ void CharacterUI::DeleteUI() {
 	ui_toggled = false;
 }
 
-bool CharacterUI::UIElementPressed(GameObjectPressedEvent& e) {
-
+bool CharacterUI::UIElementPressed(GameObjectPressedEvent& e)
+{
 	LOG_DEBUG("UIElementPressed()");
 
 	if (!(gameObject->HasTag("soldier") || gameObject->HasTag("medic") || gameObject->HasTag("engineer"))) return false;

@@ -1,12 +1,17 @@
 #include "_Game.h"
-#include "game_scene.h"
+#include "GameScene.h"
 
-#include "required/constants.h"
-#include "required/functions.h"
-#include "required/stands.h"
+#include "layers/AllyLayer.h"
+#include "layers/EnemyLayer.h"
+#include "layers/MapLayer.h"
+#include "layers/UILayer.h"
+
 #include "components/movement.h"
 #include "components/soldier_behaviour.h"
+#include "required/constants.h"
+#include "required/functions.h"
 #include "required/map_creation.h"
+#include "required/stands.h"
 
 using namespace core;
 
@@ -14,17 +19,12 @@ GameScene::GameScene() {
 }
 
 GameScene::~GameScene() {
-    //Application::RemoveLayer(background_layer);
     Application::RemoveLayer(foreground_layer);
-    //Application::RemoveOverLay(sound_layer);
 }
 
 void GameScene::LoadResources() {
     // set background color
     backcolor = glm::vec4(0.8f, 0.8f, 0.8f, 1.0f);
-
-    //background_layer = new BackgroundLayer();
-    //sound_layer = new SoundLayer;
 
     //Grid creation
     enemy_grid = CreateEnemyGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
@@ -43,28 +43,26 @@ void GameScene::LoadResources() {
     CreateGameMap(standard_map);
 }
 void GameScene::Init() {
-    //Application::AddLayer(background_layer);
     Application::AddLayer(foreground_layer);
-    //Application::AddOverLay(sound_layer);
+
+    Application::AddLayer(new MapLayer());
+    Application::AddLayer(new EnemyLayer());
+    Application::AddLayer(new AllyLayer());
+
+    Application::AddOverLay(new UILayer());
 }
 
 
-int selectedItem = 0;
-//bool m_pressed = false;    // is needed that pressing M doesn't trigger multiple times
 void GameScene::Update() {
-    float dt = Application::GetDT();
-    if (Input::IsKeyPressed(KEY_S)) {
+    const float dt = Application::GetDT();
+    if (Input::IsKeyPressed(KEY_S))
         camera->position.y -= cameraMoveSpeed * dt;
-    }
-    if (Input::IsKeyPressed(KEY_W)) {
+    if (Input::IsKeyPressed(KEY_W))
         camera->position.y += cameraMoveSpeed * dt;
-    }
-    if (Input::IsKeyPressed(KEY_D)) {
+    if (Input::IsKeyPressed(KEY_D))
         camera->position.x += cameraMoveSpeed * dt;
-    }
-    if (Input::IsKeyPressed(KEY_A)) {
+    if (Input::IsKeyPressed(KEY_A))
         camera->position.x -= cameraMoveSpeed * dt;
-    }
 
     //if (Input::IsKeyPressed(KEY_M) && m_pressed == false) {
     //    m_pressed = true;
@@ -73,10 +71,6 @@ void GameScene::Update() {
     //    test->GetComponent<Movement>()->target_position = random_pos;
     //}
     //else if(!Input::IsKeyPressed(KEY_M)) m_pressed = false;
-}
-
-void GameScene::Imgui(float dt) {
-
 }
 
 bool GameScene::OnMouseScroll(MouseScrolledEvent& e)
