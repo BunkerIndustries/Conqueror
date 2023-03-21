@@ -17,6 +17,11 @@ project "IMPLOT"
 		"implot_items.cpp"
 	}
 
+	disablewarnings
+	{
+		"26495"
+	}
+
 	filter "system:windows"
 		systemversion "latest"
 		cppdialect "C++17"

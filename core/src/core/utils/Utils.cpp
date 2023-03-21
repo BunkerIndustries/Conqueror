@@ -4,14 +4,14 @@
 
 namespace core {
     namespace Utils {
-        std::string Utils::getSystemDateInString() {
+        std::string Utils::GetSystemDateInString() {
             std::time_t end_time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
             char buf[26];
             ctime_s(buf, sizeof(buf), &end_time);
             return std::string(buf);
         }
 
-        std::string Utils::getSystemTimeInString() {
+        std::string Utils::GetSystemTimeInString() {
             time_t now = time(0);
             struct tm tstruct;
             localtime_s(&tstruct, &now);
@@ -30,7 +30,7 @@ namespace core {
             return (((double)(diff + 1) / RAND_MAX) * rand() + min); // math is powerful(!!)
         }
 
-        Size Utils::calculateAspectRatioFit(float srcWidth, float srcHeight, float maxWidth, float maxHeight) {
+        Size Utils::CalculateAspectRatioFit(float srcWidth, float srcHeight, float maxWidth, float maxHeight) {
 
             float ratio = fmin(maxWidth / srcWidth, maxHeight / srcHeight);
             Size xy;

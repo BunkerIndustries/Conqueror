@@ -10,66 +10,75 @@
 #include "event/ApplicationEvent.h"
 #include "event/KeyEvent.h"
 
-#include "ImGui/ImGuiLayer.h"
+
 
 namespace core {
 
-	class CORE_API Application
+	class ImGuiLayer;
+
+	class Application
 	{
 	private:
 		static Application* instance;
-		Window* window = nullptr;
-		ImGuiLayer* imguilayer = nullptr;
-		Scene* current_scene = nullptr;
-		Scene* queued_scene = nullptr;
+		Shr<Window> window = nullptr;
+		ImGuiLayer* imguiLayer = nullptr;
+		Scene* currentScene = nullptr;
+		Scene* queuedScene = nullptr;
 		std::vector<Event*> eventQueue;
 		float dt;
-		long int frames_rendered = 0;
-		bool game_running = true;
-		bool imgui_enabled = false; int imgui_enabled_queue = 0;
+		long int framesRendered = 0;
+		bool gameRunning = true;
+		bool resizing = false;
 
-		bool onWindowClose(WindowCloseEvent& e);
-		bool onKeyPressed(KeyPressedEvent& e);
+		//IMGUI
+		bool imguiEnabled = false; int imguiEnabledQueue = 0;
+		bool imguiEnabledBefore = imguiEnabled;
+
+		bool OnWindowClose(WindowCloseEvent& e);
+		bool OnWindowResize(WindowResizeEvent& e);
+		bool OnKeyPressed(KeyPressedEvent& e);
 
 		void ProcessQueues();
 
-		LayerStack layer_stack;
+		LayerStack layerStack;
 
 	public:
 
 		Application();
 		virtual ~Application();
 
-		virtual void init();
+		virtual void Init();
 		
-		void run();
+		void Run();
 
-		void onEvent(Event& event);
+		void OnEvent(Event& event);
 
-		static void AddLayer(Layer* layer, bool add_to_renderer = true);
-		static void AddOverLay(Layer* layer, bool add_to_renderer = true);
+		static void AddLayer(Layer* layer);
+		static void AddOverLay(Layer* layer);
 		static void RemoveLayer(Layer* layer);
 		static void RemoveOverLay(Layer* layer);
 
 		static void ChangeScene(Scene* new_scene);
 
-		void exit() { game_running = false; }
+		void Exit() { gameRunning = false; }
 
 		static void QueueEvents(Event* event);
 		static Application* GetInstance() { return instance; }
 
-		static long int GetFramesRendered() { return GetInstance()->frames_rendered; }
-		static bool GetImGuiEnabled() { return GetInstance()->imgui_enabled; }
+		static long int GetFramesRendered() { return GetInstance()->framesRendered; }
+		static bool GetImGuiEnabled() { return GetInstance()->imguiEnabled; }
+		static bool GetImGuiSwitched() { return GetInstance()->imguiEnabledBefore != GetInstance()->imguiEnabled; }
 		static float GetDT() { return GetInstance()->dt; }
-		static void SetEventCallback(const EventCallbackFunction& callback_function) { GetInstance()->window->setEventCallback(callback_function); }
+		static bool IsResizing() { return GetInstance()->resizing; }
+		static void SetEventCallback(const EventCallbackFunction& callbackFunction) { GetInstance()->window->SetEventCallback(callbackFunction); }
 
-		static Window* GetWindow() { return GetInstance()->window; }
-		static Scene* GetCurrentScene() { return GetInstance()->current_scene; }
-		static ImGuiLayer& GetImGuiLayer() { return *GetInstance()->imguilayer; }
-		static LayerStack& GetLayerStack() { return GetInstance()->layer_stack; }
+		static Shr<Window> GetWindow() { return GetInstance()->window; }
+		static Scene* GetActiveScene() { return GetInstance()->currentScene; }
+		static ImGuiLayer& GetImGuiLayer() { return *GetInstance()->imguiLayer; }
+		static LayerStack& GetLayerStack() { return GetInstance()->layerStack; }
 	};
-	
+
 	//defined by client
-	Application* createApplication();
+	Application* CreateApplication();
 }
 

@@ -6,8 +6,8 @@
 namespace core {
 	namespace Utils
 	{
-        std::string getSystemDateInString();
-        std::string getSystemTimeInString();
+        std::string GetSystemDateInString();
+        std::string GetSystemTimeInString();
         // random function
 		float randRange(int min, int max);
 
@@ -15,7 +15,7 @@ namespace core {
             float width;
             float height;
         };
-		Size calculateAspectRatioFit(float srcWidth, float srcHeight, float maxWidth, float maxHeight);
+		Size CalculateAspectRatioFit(float srcWidth, float srcHeight, float maxWidth, float maxHeight);
 
 	}
 }

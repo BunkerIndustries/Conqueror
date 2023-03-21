@@ -13,11 +13,15 @@ namespace core {
 
     class GameObject {
     private:
-        std::string name;
+        std::string id;
         std::vector<Component*> components;
         int zIndex;
         Layer* layer;
         bool deleted = false;
+
+        std::string name = "GameObject";
+        std::initializer_list<std::string> tags;
+        ProjectionMode mode;
 
         bool running = false;
 
@@ -47,15 +51,15 @@ namespace core {
 
         bool AddComponent(Component* component);
 
-        void update(float dt);
-        void start();
-        void stop();
-        void imgui(float dt);
-        void event(Event& event);
+        void Update();
+        void Start();
+        void Stop();
+        void Imgui(float dt);
+        void OnEvent(Event& event);
 
         void Delete();
 
-        void deleteComponents();
+        void DeleteComponents();
 
         GameObject* AddTag(std::string tag);
         GameObject* AddTag(std::initializer_list<std::string> tags);
@@ -68,7 +72,10 @@ namespace core {
         core_id GetObjectID() const { return objectID; }
         bool IsRunning() const { return running; }
 
-        ProjectionMode mode;
+        ProjectionMode GetProjectionMode() const
+        {
+            return mode;
+        }
 
         static GameObject* GetGameObjectByID(core_id id);
 

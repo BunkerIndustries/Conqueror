@@ -2,7 +2,6 @@
 
 #include "utils/DataPool.h"
 #include "renderer/Texture.h"
-#include "generic/Shader.h"
 
 namespace core {
 
@@ -11,21 +10,21 @@ namespace core {
     //#include FT_FREETYPE_H
 
     // declare static maps in order to find a reference
-    Map DataPool::data_pool;
+    Map DataPool::dataPool;
 
-    std::shared_ptr<Shader> DataPool::getShader(std::string shaderName) {
+    std::shared_ptr<Shader> DataPool::GetShader(std::string shaderName) {
         // set default path
         std::string path = "assets/shaders/" + shaderName + ".glsl";
         std::string shader_id = "shader_" + shaderName;
 
-        Map::iterator it = data_pool.find(shader_id);
+        Map::iterator it = dataPool.find(shader_id);
 
         std::shared_ptr<Shader> shader;
 
-        if (it == data_pool.end())
+        if (it == dataPool.end())
         {
-            shader = std::make_shared<Shader>(path);
-            data_pool.emplace(shader_id, shader);
+            shader = Shader::CreateShader(path);
+            dataPool.emplace(shader_id, shader);
         }
         else
         {
@@ -35,20 +34,20 @@ namespace core {
         return shader;
     }
 
-    std::shared_ptr<Texture> DataPool::getTexture(std::string textureName) {
+    std::shared_ptr<Texture> DataPool::GetTexture(std::string textureName) {
         // set default path
         std::string path = "assets/textures/" + textureName;
 
         std::string texture_id = "texture_" + textureName;
 
-        Map::iterator it = data_pool.find(texture_id);
+        Map::iterator it = dataPool.find(texture_id);
 
         std::shared_ptr<Texture> texture;
 
-        if (it == data_pool.end())
+        if (it == dataPool.end())
         {
-            texture = std::make_shared<Texture>(path);
-            data_pool.emplace(texture_id, texture);
+            texture = Texture::CreateTexture(path, textureName);
+            dataPool.emplace(texture_id, texture);
         }
         else
         {
@@ -56,6 +55,20 @@ namespace core {
         }
 
         return texture;
+    }
+
+    int ProjectionModeToInt(const ProjectionMode& mode)
+    {
+	    switch (mode)
+	    {
+	    case ProjectionMode::PERSPECTIVE:
+            return 0;
+	    case ProjectionMode::ORTHOGRAPHIC:
+            return 1;
+	    case ProjectionMode::SCREEN:
+            return 2;
+	    }
+        return -1;
     }
 
     // basically save our characters we need for rendering into the CharacterPool map

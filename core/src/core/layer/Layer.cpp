@@ -1,41 +1,38 @@
 #include "_Core.h"
 
 #include "layer/Layer.h"
-#include "generic/Application.h"
 #include "event/Event.h"
 
 namespace core
 {
-	void Layer::attach(bool add_to_renderer)
+	void Layer::Attach()
 	{
 		attached = true;
-		for (GameObject* game_object : game_objects)
+		for (GameObject* game_object : gameObjects)
 		{
-			game_object->start();
+			game_object->Start();
 		}
 		OnAttach();
-		if (add_to_renderer)
-			Application::GetCurrentScene()->GetRenderer().add(this, Application::GetLayerStack().GetPlace(this));
 	}
 
-	void Layer::detach()
+	void Layer::Detach()
 	{
 		attached = false;
-		for (GameObject* game_object : game_objects)
+		for (GameObject* game_object : gameObjects)
 		{
-			game_object->stop();
+			game_object->Stop();
 		}
 		OnDetach();
 	}
 
-	void Layer::event(Event& event)
+	void Layer::LayerEvent(Event& event)
 	{
-		for (GameObject* gm : game_objects)
+		for (GameObject* gm : gameObjects)
 		{
 			if (!gm->IsRunning()) continue;
 			if (!event.handled)
 			{
-				gm->event(event);
+				gm->OnEvent(event);
 			}
 		}
 		if (!event.handled)
@@ -45,18 +42,16 @@ namespace core
 	}
 
 
-	void Layer::AddGameObjectToLayer(GameObject* game_object)
+	void Layer::AddGameObjectToLayer(GameObject* gameObject)
 	{
 		if (attached) {
-			game_objects.push_back(game_object);
-			if (game_object->GetComponent<SpriteRenderer>())
-				Application::GetCurrentScene()->GetRenderer().add(game_object->GetComponent<SpriteRenderer>(), Application::GetLayerStack().GetPlace(this));
-			game_object->start();
+			gameObjects.push_back(gameObject);
+			gameObject->Start();
 		}
 		else {
-			game_objects.push_back(game_object);
+			gameObjects.push_back(gameObject);
 		}
-		game_object->SetLayer(this);
+		gameObject->SetLayer(this);
 	}
 
 }

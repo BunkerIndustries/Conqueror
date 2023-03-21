@@ -9,18 +9,19 @@ namespace core {
 	class KeyPressedEvent : public Event {
 	private:
 		bool repeated;
-		int key_code;
-	public:
-		KeyPressedEvent() = default;
-		KeyPressedEvent(const int key_code, const int repeat_count)
-			: repeated(repeat_count > 0), key_code(key_code) { }
+		int keyCode;
+		int mods;
+	public: 
+		KeyPressedEvent(const int key_code, const int repeat_count, const int mods)
+			: repeated(repeat_count > 0), keyCode(key_code), mods(mods) { }
 
-		inline int getKeyCode() const { return key_code; }
+		inline int getKeyCode() const { return keyCode; }
 		inline bool getRepeated() const { return repeated; }
+		inline bool IsModPressed(const int mod) const { return mods & mod; }
 
-		std::string toString() const override {
+		std::string ToString() const override {
 			std::stringstream string;
-			string << "KeyPressedEvent: " << key_code << " | Repeated: " << repeated;
+			string << "KeyPressedEvent: " << keyCode << " | Repeated: " << repeated;
 			return string.str();
 		}
 
@@ -31,17 +32,18 @@ namespace core {
 
 	class KeyReleasedEvent : public Event {
 	private:
-		int key_code;
+		int keyCode;
+		int mods;
 	public:
-		KeyReleasedEvent() = default;
-		KeyReleasedEvent(const int key_code)
-			: key_code(key_code) { }
+		KeyReleasedEvent(const int keyCode, const int mods)
+			: keyCode(keyCode), mods(mods) { }
 
-		inline int getKeyCode() const { return key_code; }
+		inline int getKeyCode() const { return keyCode; }
+		inline bool IsModPressed(const int mod) const { return mods & mod; }
 
-		std::string toString() const override {
+		std::string ToString() const override {
 			std::stringstream string;
-			string << "KeyReleasedEvent: " << key_code;
+			string << "KeyReleasedEvent: " << keyCode;
 			return string.str();
 		}
 
@@ -52,18 +54,17 @@ namespace core {
 
 	class KeyTypedEvent : public Event {
 	private:
-		int key_code;
+		int keyCode;
 	public:
 		KeyTypedEvent() = default;
 		KeyTypedEvent(const int key_code)
-			: key_code(key_code) { }
+			: keyCode(key_code) { }
 
-		inline int getKeyCode() const { return key_code; }
+		inline int getKeyCode() const { return keyCode; }
 
-
-		std::string toString() const override {
+		std::string ToString() const override {
 			std::stringstream string;
-			string << "KeyPressedEvent: " << key_code;
+			string << "KeyPressedEvent: " << keyCode;
 			return string.str();
 		}
 

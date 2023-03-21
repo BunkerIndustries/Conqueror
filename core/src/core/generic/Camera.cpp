@@ -7,7 +7,7 @@ namespace core {
 
     Camera::Camera() {
         // standard position of the camera
-        position = glm::vec3(0.0f, 0.0f, 5.0f);
+        position = glm::vec3(0.0f, 0.0f, 10.0f);
         // standard fov
         fov = 45.0f;
     }
@@ -15,11 +15,12 @@ namespace core {
     Camera::~Camera() {}
 
 
-    void Camera::calcCameraVectors() {
+    void Camera::CalcCameraVectors() {
         //set vectors
         // the camera has to look somewhere (just set it to 0 because we are making it absolute)
 
-        this->target = glm::vec3(this->position.x, this->position.y, 0.0f);       
+
+        this->target = glm::vec3(this->position.x, this->position.y, 0.0f);
 
         // this is being used for pointing upwards (y globally, e.g. in the world)
         glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
@@ -33,30 +34,30 @@ namespace core {
         cameraViewMatrix = glm::lookAt(position, target, up);
     }
 
-    glm::mat4 Camera::getViewMatrix() {
+    glm::mat4 Camera::GetViewMatrix() {
         // give camera an "eye"
         return cameraViewMatrix;
     }
 
-    glm::mat4 Camera::getReverseViewMatrix() {
-        return glm::inverse(Camera::getViewMatrix());
+    glm::mat4 Camera::GetReverseViewMatrix() {
+        return glm::inverse(Camera::GetViewMatrix());
     }
 
-    glm::mat4 Camera::getProjectionMatrix() {
+    glm::mat4 Camera::GetProjectionMatrix() {
         // get aspect ratio because we need it in order to project the camera correctly
-        float aspect = (float)Application::GetWindow()->getWidth() / (float)Application::GetWindow()->getHeight();
+        float aspect = (float)Application::GetWindow()->GetWidth() / (float)Application::GetWindow()->GetHeight();
         return glm::perspective(fov, aspect, 0.1f, 1000.0f);
     }
 
-    glm::mat4 Camera::getOrthographicMatrix()
+    glm::mat4 Camera::GetOrthographicMatrix()
     {
         // ortograhpic camera is basically a custom coordinate system with one's own units
         // every gameobject has the option to be rendered relative to orthographic or to projection
         return glm::ortho(0.0f, 2.0f, 0.0f, 2.0f, 0.0f, 10000000.0f);
     }
 
-    glm::mat4 Camera::getReverseProjectionMatrix() {
-        return glm::inverse(Camera::getProjectionMatrix());
+    glm::mat4 Camera::GetReverseProjectionMatrix() {
+        return glm::inverse(Camera::GetProjectionMatrix());
     }
 
 }

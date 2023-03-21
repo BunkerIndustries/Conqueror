@@ -47,35 +47,26 @@ namespace core {
 	};
 
 	
-	class FrameBuffer
+	class Framebuffer
 	{
-	private:
-		FramebufferSpecification specification;
-		unsigned int fboID = 0;
-
-		std::vector<FramebufferTexSpecification> colorAttachmentSpec; // color specifications
-		FramebufferTexSpecification depthAttachmentSpec = FramebufferTexFormat::None; //depth specification
-		
-		std::vector<uint32_t> colorAttachmentsID; // texture id's
-		uint32_t depthAttachmentID;
-
 	public:
-		FrameBuffer(const FramebufferSpecification& specification);
-		~FrameBuffer();
+		virtual ~Framebuffer() = default;
 
-		uint32_t GetColorID(uint32_t index = 0) const { CORE_ASSERT(index < colorAttachmentsID.size(), ""); return colorAttachmentsID[index]; }
+		virtual uint32_t GetColorID(uint32_t index = 0) = 0; 
 
-		void Invalidate();
-		void Resize(unsigned int width, unsigned int height);
-		int ReadPixel(uint32_t attachmentIndex, glm::ivec2 pos);
+		virtual void Invalidate() = 0;
+		virtual void Resize(unsigned int width, unsigned int height) = 0;
 
-		void ClearAttachment(uint32_t attachmentIndex, int value);
+		virtual int ReadPixel(uint32_t attachmentIndex, glm::ivec2 pos) = 0;
 
-		void Bind();
-		void Unbind();
+		virtual void ClearAttachment(uint32_t attachmentIndex, int value) = 0;
+		virtual void ProjectToScreen(uint32_t attachmentIndex, uint32_t width, uint32_t height) = 0;
 
-		FramebufferSpecification& GetProperties() { return specification; }
+		virtual void SetViewPort() = 0;
+		virtual void Bind() = 0;
+		virtual void Unbind() = 0;
+
+		virtual FramebufferSpecification& GetSpecification() = 0;
+		static Shr<Framebuffer> CreateBuffer(const FramebufferSpecification& specification);
 	};
 }
-
-

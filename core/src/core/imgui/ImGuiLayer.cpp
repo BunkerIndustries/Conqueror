@@ -3,10 +3,11 @@
 
 #include "imgui/ImGuiLayer.h"
 
-#include "event/Input.h"
 #include "generic/Application.h"
 #include "renderer/Renderer.h"
-#include "renderer/RenderBatch.h"
+#include "renderer/FrameBuffer.h"
+
+#include <GLFW/glfw3.h>
 
 
 
@@ -54,9 +55,15 @@ namespace core {
     }
 
 
+    ImGuiLayer::ImGuiLayer()
+		: Layer("ImGuiLayer")
+    {
+        this->viewportSize = glm::vec2();
+    }
+
     ImGuiLayer::~ImGuiLayer()
     {
-        detach();
+        Detach();
     }
 
     void ImGuiLayer::OnAttach()
@@ -93,7 +100,7 @@ namespace core {
         fontConfig.MergeMode = true;
 
         //init backend
-        ImGui_ImplGlfw_InitForOpenGL(Application::GetWindow()->getNativeWindow(), true);
+        ImGui_ImplGlfw_InitForOpenGL((GLFWwindow*)Application::GetWindow()->GetNativeWindow(), true);
         ImGui_ImplOpenGL3_Init("#version 410");
     }
 
@@ -105,10 +112,10 @@ namespace core {
         ImGui::DestroyContext();
     }
 
-    void ImGuiLayer::begin(const float dt)
+    void ImGuiLayer::Begin(const float dt)
     {
         ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2(Application::GetWindow()->getWidth(), Application::GetWindow()->getHeight());
+        io.DisplaySize = ImVec2(Application::GetWindow()->GetWidth(), Application::GetWindow()->GetHeight());
         io.DeltaTime = dt;
 
         ImGui_ImplOpenGL3_NewFrame();
@@ -116,10 +123,10 @@ namespace core {
         ImGui::NewFrame();
     }
 
-    void ImGuiLayer::end()
+    void ImGuiLayer::End()
     {
         ImGuiIO& io = ImGui::GetIO();
-        io.DisplaySize = ImVec2(Application::GetWindow()->getWidth(), Application::GetWindow()->getHeight());
+        io.DisplaySize = ImVec2(Application::GetWindow()->GetWidth(), Application::GetWindow()->GetHeight());
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
@@ -137,9 +144,9 @@ namespace core {
 
     void ImGuiLayer::DockPanel(std::string name, ImGuiID dock_id)
     {
-        if (dock_panel_queue.find(name) == dock_panel_queue.end())
+        if (dockPanelQueue.find(name) == dockPanelQueue.end())
         {
-            dock_panel_queue.emplace(name, dock_id);
+            dockPanelQueue.emplace(name, dock_id);
         }
     }
 
@@ -156,7 +163,7 @@ namespace core {
         }
     }
 
-    void ImGuiLayer::update(const float dt)
+    void ImGuiLayer::Update(const float dt)
     {
         if (Application::GetImGuiEnabled()) {
             mousePosViewportRelative = *(glm::vec2*)&ImGui::GetMousePos();
@@ -172,9 +179,8 @@ namespace core {
 
 
     static bool p_open = true;
-    void ImGuiLayer::imgui(const float dt)
+    void ImGuiLayer::Imgui(const float dt)
     {
-
         ImGuiDockNodeFlags dockflags = ImGuiDockNodeFlags_PassthruCentralNode;//ImGuiDockNodeFlags_None; 
 
         ImGuiWindowFlags window_flags = ImGuiWindowFlags_None;
@@ -200,7 +206,7 @@ namespace core {
             initialized = true;
             ImGui::DockBuilderRemoveNode(dockspace_id);
             ImGui::DockBuilderAddNode(dockspace_id, ImGuiDockNodeFlags_DockSpace);
-            ImGui::DockBuilderSetNodeSize(dockspace_id, ImVec2(Application::GetWindow()->getWidth() + 500, Application::GetWindow()->getHeight() + 500));
+            ImGui::DockBuilderSetNodeSize(dockspace_id, ImVec2(Application::GetWindow()->GetWidth() + 500, Application::GetWindow()->GetHeight() + 500));
 
             dock_id_main = dockspace_id;
             dock_id_right = ImGui::DockBuilderSplitNode(dock_id_main, ImGuiDir_Right, 0.2f, nullptr, &dock_id_main);
@@ -213,11 +219,11 @@ namespace core {
 
             ImGui::DockBuilderFinish(dockspace_id);
         }
-        for (auto [key, val] : dock_panel_queue)
+        for (auto [key, val] : dockPanelQueue)
         {
             ImGui::DockBuilderDockWindow(key.c_str(), val);
         }
-        dock_panel_queue.clear();
+        dockPanelQueue.clear();
 
         ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockflags);
         ImGui::End();
@@ -242,21 +248,20 @@ namespace core {
 
         static float time = 0;
         static float timehelper = -1;
-        static float history = 3;
+        static float history = 5;
         static int flags = ImPlotAxisFlags_NoTickLabels;
-        static ScrollingBuffer sbuff_dt(3000), sbuff_fps(3000);
+        static ScrollingBuffer sbuff_dt(300);// , sbuff_fps(300);
 
         if (timehelper >= 0.016f || timehelper == -1) {
             timehelper = 0;
             sbuff_dt.AddPoint(time, 1000 * dt);
-            sbuff_fps.AddPoint(time, (1 / dt));
         }
         timehelper += dt;
         time += dt;
 
         if (ImGui::TreeNode("Time"))
         {
-		    ImGui::SliderFloat("Time", &history, 1, 50, "%.1f");
+		    ImGui::SliderFloat("Time", &history, 1, 5, "%.1f");
 
 		    stream << "ms per frame: " << 1000 * dt;
 		    ImGui::Text(stream.str().c_str()); stream.str("");
@@ -271,21 +276,21 @@ namespace core {
 
 		    stream << "frames per sec: " << 1 / dt;
 		    ImGui::Text(stream.str().c_str()); stream.str("");
-		    if (ImPlot::BeginPlot("##frames_per_second", ImVec2(-1, 100))) {
-		        ImPlot::SetupAxes(NULL, NULL, flags, flags);
-		        ImPlot::SetupAxisLimits(ImAxis_X1, time - history, time, ImGuiCond_Always);
-		        ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1000);
-		        ImPlot::SetNextFillStyle(ImVec4(1.0f, 0.0f, 0.0f, -1.0f), 0.5f);
-		        ImPlot::PlotLine("##frames", &sbuff_fps.Data[0].x, &sbuff_fps.Data[0].y, sbuff_fps.Data.size(), 0, sbuff_fps.Offset, 2 * sizeof(float));
-		        ImPlot::EndPlot();
-		    }
+		    //if (ImPlot::BeginPlot("##frames_per_second", ImVec2(-1, 100))) {
+		    //    ImPlot::SetupAxes(NULL, NULL, flags, flags);
+		    //    ImPlot::SetupAxisLimits(ImAxis_X1, time - history, time, ImGuiCond_Always);
+		    //    ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 1000);
+		    //    ImPlot::SetNextFillStyle(ImVec4(1.0f, 0.0f, 0.0f, -1.0f), 0.5f);
+		    //    ImPlot::PlotLine("##frames", &sbuff_fps.Data[0].x, &sbuff_fps.Data[0].y, sbuff_fps.Data.size(), 0, sbuff_fps.Offset, 2 * sizeof(float));
+		    //    ImPlot::EndPlot();
+		    //}
 		    
 		    stream << "Frames rendered: " << Application::GetFramesRendered();
 		    ImGui::BulletText(stream.str().c_str()); stream.str("");
 
 		    static bool vsync = true;
 		    ImGui::Checkbox("V-Sync", &vsync);
-		    Application::GetWindow()->setVSync(vsync);
+		    Application::GetWindow()->SetVSync(vsync);
 
 		    
 
@@ -294,18 +299,21 @@ namespace core {
         }
 
 
-        if (ImGui::TreeNode("Renderer"))
+        if (ImGui::TreeNode("Render Stats"))
         {
-            stream << "Draw calls: " << RenderBatch::GetDrawCalls();
+            stream << "Draw calls: " << Renderer::GetStats().drawCalls;
             ImGui::BulletText(stream.str().c_str()); stream.str("");
 
-        	stream << "Batch count: " << Renderer::GetBatchCount();
+            stream << "Object count: " << Renderer::GetStats().objectCount;
             ImGui::BulletText(stream.str().c_str()); stream.str("");
 
-            stream << "Vertex count: " << Renderer::GetVerticesCount();
+            stream << "Data size: " << Renderer::GetStats().dataSize << " Bytes";
             ImGui::BulletText(stream.str().c_str()); stream.str("");
 
-            stream << "Sprite count: " << Renderer::GetSpriteCount();
+            stream << "Vertex count: " << Renderer::GetStats().vertexCount;
+            ImGui::BulletText(stream.str().c_str()); stream.str("");
+
+            stream << "Indices count: " << Renderer::GetStats().elementCount;
             ImGui::BulletText(stream.str().c_str()); stream.str("");
 
             ImGui::Text("");
@@ -320,7 +328,23 @@ namespace core {
                 selected = 6912;
             if (ImGui::Selectable("LINE", selected == 6913))
                 selected = 6913;
-            RenderBatch::setPolygonMode(selected);
+            //RenderBatch::SetPolygonMode(selected);
+
+            ImGui::BeginDisabled();
+            if (ImGui::TreeNode("Textures in use"))
+            {
+                /*
+	            for (Shr<Texture> texture : Renderer::GetTexturesInUse())
+	            {
+                    
+	            	ImGui::Selectable(texture->GetName().c_str(), false);
+                    
+	            }
+                */
+	            ImGui::Text("");
+	            ImGui::TreePop();
+            }
+            ImGui::EndDisabled();
 
 
             ImGui::TreePop();
@@ -330,8 +354,8 @@ namespace core {
     }
 
     void ImGuiLayer::AddVariable(std::string name, void* variable) {
-        if (variable_pool.find(name) == variable_pool.end()) {
-            variable_pool.emplace(name, variable);
+        if (variablePool.find(name) == variablePool.end()) {
+            variablePool.emplace(name, variable);
         }
     }
 
@@ -359,15 +383,15 @@ namespace core {
 
         for (Layer* layer : Application::GetLayerStack()) 
         {
-            std::vector<GameObject*> gameobjects = *layer->GetGameObjects();
+            std::vector<GameObject*> gameobjects = layer->GetGameObjects();
             if (ImGui::TreeNode(layer->GetName().c_str())) 
             {
                 if (ImGui::TreeNode("Objects: "))
                 {
                     for (int i = 0; i < gameobjects.size(); i++)
                     {
-                        if (ImGui::Selectable((gameobjects[i]->GetName() + std::string(" (ObjectID = " + std::to_string(gameobjects[i]->GetObjectID()) + std::string(")")) + std::string("##" + std::to_string(i))).c_str(), gameobjects[i] == selected_gameobject)) {
-                            selected_gameobject = gameobjects[i];
+                        if (ImGui::Selectable((gameobjects[i]->GetName() + std::string(" (ObjectID = " + std::to_string(gameobjects[i]->GetObjectID()) + std::string(")")) + std::string("##" + std::to_string(i))).c_str(), gameobjects[i] == selectedGameobject)) {
+                            selectedGameobject = gameobjects[i];
                         }
                     }
                     ImGui::TreePop();
@@ -389,14 +413,15 @@ namespace core {
             Application::GetImGuiLayer().DockPanel(name, Application::GetImGuiLayer().GetDockspaceLeftBottom());
 
         ImGui::Begin(name);
-        if (selected_gameobject != nullptr) {
-            selected_gameobject->imgui(dt);
+        if (selectedGameobject != nullptr) {
+            selectedGameobject->Imgui(dt);
         }
         ImGui::End();
     }
 
     void ImGuiLayer::ViewPortPanel(const float dt, bool first)
     {
+        
         const char* name = "ViewPort: ";
         std::stringstream stream;
 
@@ -408,15 +433,20 @@ namespace core {
 
         auto viewportOffset = ImGui::GetCursorPos();
 
+    	Renderer::GetFramebuffer()->Bind();
         ImVec2 viewport_panel_size = ImGui::GetContentRegionAvail();
-        if (viewportSize != *(glm::vec2*)&viewport_panel_size)
+        if (viewportSize != *(glm::vec2*)&viewport_panel_size || Application::GetImGuiSwitched())
         {
             viewportSize = { viewport_panel_size.x, viewport_panel_size.y };
-            Application::GetCurrentScene()->GetRenderer().GetFrameBuffer().Resize(viewportSize.x, viewportSize.y);
+            Renderer::GetFramebuffer()->Resize(viewportSize.x, viewportSize.y);
+            Renderer::GetFramebuffer()->SetViewPort();
         }
-        uint32_t textureID = Application::GetCurrentScene()->GetRenderer().GetFrameBuffer().GetColorID(0);
-
-        ImGui::Image((void*)textureID, ImVec2(viewportSize.x, viewportSize.y), ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+        else 
+        {
+            uint32_t textureID = Renderer::GetFramebuffer()->GetColorID(0);
+            ImGui::Image((void*)textureID, ImVec2(viewportSize.x, viewportSize.y), ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+        }
+    	Renderer::GetFramebuffer()->Unbind();
 
         auto windowSize = ImGui::GetWindowSize();
         ImVec2 minBound = ImGui::GetWindowPos();
@@ -430,6 +460,44 @@ namespace core {
 
         ImGui::End();
         ImGui::PopStyleVar();
+        
+    }
+
+    void ImGuiLayer::ScreenPanel()
+    {
+        ImGuiWindowFlags window_flags = ImGuiWindowFlags_None;
+        window_flags |= ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoBackground;// | ImGuiWindowFlags_MenuBar;
+        window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+        window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+
+        ImGuiViewport& viewport = *ImGui::GetMainViewport();
+        ImGui::SetNextWindowPos(viewport.Pos);
+        ImGui::SetNextWindowSize(viewport.Size);
+        ImGui::SetNextWindowViewport(viewport.ID);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+
+        ImGui::Begin(" ", nullptr, window_flags);
+        ImGui::PopStyleVar(3);
+
+    	Renderer::GetFramebuffer()->Bind();
+        ImVec2 viewport_panel_size = ImGui::GetContentRegionAvail();
+        if (viewportSize != *(glm::vec2*)&viewport_panel_size || Application::GetImGuiSwitched())
+        {
+            viewportSize = { viewport_panel_size.x, viewport_panel_size.y };
+            Renderer::GetFramebuffer()->Resize(viewportSize.x, viewportSize.y);
+            Renderer::GetFramebuffer()->SetViewPort();
+        }
+        else
+        {
+            uint32_t textureID = Renderer::GetFramebuffer()->GetColorID(0);
+
+            ImGui::Image((void*)textureID, ImVec2(viewportSize.x, viewportSize.y), ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+        }
+    	Renderer::GetFramebuffer()->Unbind();
+
+        ImGui::End();
     }
 
 }

@@ -1,46 +1,62 @@
 #pragma once
 #include "utility.h"
 
-#include "renderer/RenderBatch.h"
+#include "generic/Camera.h"
 #include "renderer/FrameBuffer.h"
-#include "generic/GameObject.h"
-#include "component/SpriteRenderer.h"
-#include "layer/LayerStack.h"
+#include "renderer/Texture.h"
+#include "utils/DataPool.h"
 
 namespace core {
-    
-    class CORE_API Renderer {
-    private:
-        static Renderer* instance;
-
-        const int MAX_BATCH_SIZE = 1000;
-        std::vector<RenderBatch*> batches;
-        std::vector<GameObject*> game_objects_in_use;
-        FramebufferSpecification properties;
-        FrameBuffer* frame_buffer = nullptr;
-
-        int mouseHoverID[2] = { -1, -1 };
-        int mouseClickedID[2] = { -1, -1 };
-        bool pressed = false;
-
-        inline static int sprites_count = 0;
-        inline static int vertex_count = 0;
-
-        glm::vec2 viewportSize;
+    class Renderer {
     public:
-        Renderer();
-        ~Renderer();
-        void add(Layer* layer, int index);
-        void add(SpriteRenderer* spriteRenderer, int index);
-        // this function has to be called on every frame (update)
-        void render(float dt);
-        void updateGameObjects(float dt);
+        static void Init();
+        static void Shutdown();
 
-        FrameBuffer& GetFrameBuffer() const { return *frame_buffer; }
+        static void ResizeWindow(uint32_t width, uint32_t height);
 
-        inline static int GetVerticesCount() { return vertex_count; }
-        inline static int GetSpriteCount() { return sprites_count; }
-        inline static int GetBatchCount() { return instance->batches.size(); }
+        static void BeginRender(const Camera& camera);
+        static void EndRender();
+
+        static void Render();
+
+        static void DrawRectangle(glm::vec2 position, glm::vec2 size, float rotation, glm::vec4 color, ProjectionMode mode, core_id coreID = -1);
+        static void DrawRectangle(glm::vec2 position, glm::vec2 size, float rotation, Shr<Texture>& texture, float tilingFactor = 1.0f, glm::vec4 color = glm::vec4(1.0f), 
+            ProjectionMode mode = ProjectionMode::PERSPECTIVE, core_id coreID = -1);
+
+        static void DrawTriangle(glm::vec2 position, glm::vec2 size, float rotation, glm::vec4 color, ProjectionMode mode, core_id coreID = -1);
+        static void DrawTriangle(glm::vec2 position, glm::vec2 size, float rotation, Shr<Texture>& texture, float tilingFactor = 1.0f, glm::vec4 color = glm::vec4(1.0f), 
+            ProjectionMode mode = ProjectionMode::PERSPECTIVE, core_id coreID = -1);
+
+
+
+
+    	//static void DrawCircle();
+        //static void DrawLine();
+        //static void DrawGlyphs();
+
+        struct Stats
+        {
+            uint32_t drawCalls = 0;
+            uint32_t objectCount = 0;
+            uint32_t dataSize = 0;
+            uint32_t vertexCount = 0;
+            uint32_t elementCount = 0;
+        };
+        static Stats GetStats();
+        static void ClearStats();
+
+        static Shr<Framebuffer> GetFramebuffer();
+
+    private:
+
+        static void StartBatch();
+        static void NextBatch();
+
+        static void DrawRectangle(glm::mat4 transform, glm::vec4 color, ProjectionMode mode, core_id coreID);
+        static void DrawRectangle(glm::mat4 transform, Shr<Texture>& texture, float tilingFactor, glm::vec4 color, ProjectionMode mode, core_id coreID);
+
+        static void DrawTriangle(glm::mat4 transform, glm::vec4 color, ProjectionMode mode, core_id coreID);
+        static void DrawTriangle(glm::mat4 transform, Shr<Texture>& texture, float tilingFactor, glm::vec4 color, ProjectionMode mode, core_id coreID);
     };
 
 }

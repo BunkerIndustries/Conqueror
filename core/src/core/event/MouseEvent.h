@@ -7,18 +7,20 @@
 //MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 
 namespace core {
-	class MouseButtonPressedEvent : public Event {
+	class MouseButtonPressedEvent final : public Event {
 	private:
 		int button;
+		int mods;
 
 	public:
-		MouseButtonPressedEvent() = default;
-		MouseButtonPressedEvent(int button)
-			:button(button) { }
+		MouseButtonPressedEvent(int button, int mods)
+			:button(button), mods(mods) { }
 
-		inline int getButton() const { return button; }
+		inline int GetButton() const { return button; }
+		inline bool IsModPressed(const int mod) const { return mods & mod; }
 
-		std::string toString() const override {
+
+		std::string ToString() const override {
 			std::stringstream string;
 			string << "MouseButtonPressedEvent: " << button;
 			return string.str();
@@ -30,18 +32,18 @@ namespace core {
 
 	};
 
-	class MouseButtonReleasedEvent : public Event {
+	class MouseButtonReleasedEvent final : public Event {
 	private:
 		int button;
-
+		int mods;
 	public:
-		MouseButtonReleasedEvent() = default;
-		MouseButtonReleasedEvent(int button)
-			:button(button) { }
+		MouseButtonReleasedEvent(const int button, const int mods)
+			:button(button), mods(mods) { }
 
-		inline int getButton() const { return button; }
+		inline int GetButton() const { return button; }
+		inline bool IsModPressed(const int mod) const { return mods & mod; }
 
-		std::string toString() const override {
+		std::string ToString() const override {
 			std::stringstream string;
 			string << "MouseButtonReleasedEvent: " << button;
 			return string.str();
@@ -52,7 +54,7 @@ namespace core {
 		EVENT_CLASS_TYPE(MouseButtonReleased)
 	};
 
-	class MouseMovedEvent : public Event {
+	class MouseMovedEvent final : public Event {
 	private:
 		float mouseX, mouseY;
 
@@ -61,10 +63,10 @@ namespace core {
 		MouseMovedEvent(const float x, const float y)
 			: mouseX(x), mouseY(y) { }
 
-		inline float getX() const { return mouseX; }
-		inline float getY() const { return mouseY; }
+		inline float GetX() const { return mouseX; }
+		inline float GetY() const { return mouseY; }
 
-		std::string toString() const override {
+		std::string ToString() const override {
 			std::stringstream string;
 			string << "MouseMovedEvent X: " << mouseX << " Y: " << mouseY;
 			return string.str();
@@ -75,7 +77,7 @@ namespace core {
 		EVENT_CLASS_TYPE(MouseMoved)
 	};
 
-	class MouseScrolledEvent : public Event
+	class MouseScrolledEvent final : public Event
 	{
 	private:
 		float xOff;
@@ -86,12 +88,12 @@ namespace core {
 		MouseScrolledEvent(float xOff, float yOff)
 			: xOff(xOff), yOff(yOff) { }
 
-		inline float getXOffset() const { return xOff; }
-		inline float getYOffset() const { return yOff; }
+		inline float GetXOffset() const { return xOff; }
+		inline float GetYOffset() const { return yOff; }
 
-		std::string toString() const override {
+		std::string ToString() const override {
 			std::stringstream string;
-			string << "MouseScrolledEvent X-Offset: " << xOff << " Y: " << yOff;
+			string << "MouseScrolledEvent X-Offset: " << xOff << " Y-Offset: " << yOff;
 			return string.str();
 		}
 

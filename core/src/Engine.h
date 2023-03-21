@@ -1,6 +1,5 @@
 #pragma once
 
-#include "core/component/Sprite.h"
 #include "core/component/SpriteRenderer.h"
 
 #include "core/event/KeyEvent.h"
@@ -26,12 +25,9 @@
 
 #include "core/renderer/Texture.h"
 
+
 #include "core/utils/Log.h"
 #include "core/utils/Utils.h"
 
 #include "utility.h"
-
-//EntryPoint
-#include "core/EntryPoint.h"
-
 using namespace core;

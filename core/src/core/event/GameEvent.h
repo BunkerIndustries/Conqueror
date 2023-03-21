@@ -17,7 +17,7 @@ namespace core
 
 		inline GameObject* GetGameObject() const { return gameObject; }
 
-		std::string toString() const override {
+		std::string ToString() const override {
 			std::stringstream string;
 			string << "GameObjectPressedEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetObjectID();
 			return string.str();
@@ -38,7 +38,7 @@ namespace core
 
 		inline GameObject* GetGameObject() const { return gameObject; }
 
-		std::string toString() const override {
+		std::string ToString() const override {
 			std::stringstream string;
 			string << "GameObjectReleasedEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetObjectID();
 			return string.str();
@@ -59,7 +59,7 @@ namespace core
 
 		inline GameObject* GetGameObject() const { return gameObject; }
 
-		std::string toString() const override {
+		std::string ToString() const override {
 			std::stringstream string;
 			string << "GameObjectHoverBeginEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetObjectID();
 			return string.str();
@@ -80,7 +80,7 @@ namespace core
 
 		inline GameObject* GetGameObject() const { return gameObject; }
 
-		std::string toString() const override {
+		std::string ToString() const override {
 			std::stringstream string;
 			string << "GameObjectHoverEndEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetObjectID();
 			return string.str();

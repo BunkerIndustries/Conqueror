@@ -17,8 +17,8 @@ public:
 
 	void OnAttach() override;
 	void OnDetach() override;
-	void update(const float dt) override;
-	void imgui(const float dt) override;
+	void Update(const float dt) override;
+	void Imgui(const float dt) override;
 	void OnEvent(Event& event) override;
 
 };

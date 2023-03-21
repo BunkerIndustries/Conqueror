@@ -18,19 +18,19 @@ namespace core
 		layers.clear();
 	}
 
-	void LayerStack::addLayer(Layer* layer)
+	void LayerStack::AddLayer(Layer* layer)
 	{
 		layers.emplace(layers.begin() + insertLayerIndex, layer);
 		insertLayerIndex++;
 	}
 
-	void LayerStack::addOverlay(Layer* layer)
+	void LayerStack::AddOverlay(Layer* layer)
 	{
 		layers.emplace_back(layer);
-		layer->setOverlayStatus(true);
+		layer->SetOverlayStatus(true);
 	}
 
-	void LayerStack::removeLayer(Layer* layer)
+	void LayerStack::RemoveLayer(Layer* layer)
 	{
 		auto it = std::find(layers.begin(), layers.begin() + insertLayerIndex, layer);
 		if (it != layers.begin() + insertLayerIndex)
@@ -40,7 +40,7 @@ namespace core
 		}
 	}
 
-	void LayerStack::removeOverlay(Layer* layer)
+	void LayerStack::RemoveOverlay(Layer* layer)
 	{
 		auto it = std::find(layers.begin() + insertLayerIndex, layers.end(), layer);
 		if (it != layers.end()) 

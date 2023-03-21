@@ -16,7 +16,7 @@ namespace core {
         ma_engine_uninit(&engine);
     }
 
-    void Sound::dataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount)
+    void Sound::DataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount)
     {
         // callback function, this is being called when playSound is issued, but as a background thread
         ma_decoder* pDecoder = (ma_decoder*)pDevice->pUserData;
@@ -30,7 +30,7 @@ namespace core {
         (void)pInput;
     }
 
-    bool Sound::loadSound(std::string soundFile)
+    bool Sound::LoadSound(std::string soundFile)
     {
         Sound::soundFile = soundFile;
 
@@ -52,7 +52,7 @@ namespace core {
         return true;
     }
 
-    bool Sound::playSound()
+    bool Sound::PlaySound()
     {
         // TODO: make the function add different sound ,,objects'' ma_sound sound = ma_sound_init_from_file ...
         // play sound and specify a sound group (different sound groups can be used to specify their volumes)
@@ -66,7 +66,7 @@ namespace core {
         return true;
     }
 
-    bool Sound::stopSound()
+    bool Sound::StopSound()
     {
         if (ma_sound_stop(&currentSound) != MA_SUCCESS)
         {
@@ -76,12 +76,12 @@ namespace core {
         return true;
     }
 
-    void Sound::setVolume(float volume)
+    void Sound::SetVolume(float volume)
     {
         ma_sound_set_volume(&currentSound, volume);
     }
 
-    float Sound::getVolume()
+    float Sound::GetVolume()
     {
         return ma_sound_get_volume(&currentSound);
     }

@@ -16,11 +16,11 @@ namespace core {
         Component() = default;
     	virtual ~Component() = default;
 
-        virtual void start() = 0;
-        virtual void stop() = 0;
-        virtual void update(float dt) = 0;
-        virtual void event(Event& event) = 0;
-        virtual void imgui(float dt) { }
+        virtual void OnStart() = 0;
+        virtual void OnStop() = 0;
+        virtual void OnUpdate() = 0;
+        virtual void OnEvent(Event& event) = 0;
+        virtual void OnImgui(float dt) { }
 
         GameObject* GetGameObject() const { return gameObject; }
 
