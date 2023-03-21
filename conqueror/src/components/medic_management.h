@@ -7,10 +7,10 @@ public:
 	MedicManagement(uint8_t number_of_medics);
 	virtual ~MedicManagement() = default;
 
-	void start() override;
-	void stop() override;
-	void update(float dt) override;
-	void event(Event& event) override {};
+	void OnStart() override;
+	void OnStop() override;
+	void OnUpdate() override;
+	void OnEvent(Event& event) override {};
 
 	void SendMedic(GameObject* healing_target);
 	void MedicArrived();

@@ -1,3 +1,4 @@
+#include "_Game.h"
 #include "bullet.h"
 #include "required/constants.h"
 #include "required/functions.h"
@@ -19,15 +20,15 @@ Bullet::Bullet(GameObject* target, GameObject* parent, bool is_hit, float damage
 Bullet::~Bullet() {
 }
 
-void Bullet::start() {
+void Bullet::OnStart() {
 	gameObject->AddComponent(new Movement(bullet_speed));
 	gameObject->GetComponent<Movement>()->target_position = target_position;
 }
 
-void Bullet::stop() {
+void Bullet::OnStop() {
 }
 
-void Bullet::update(float dt) {
+void Bullet::OnUpdate() {
 	//LOG_DEBUG("transform.position: x:{0}, y:{1}", gameObject->transform.position.x, gameObject->transform.position.y);
 	if (gameObject->transform.position == target_position) {
 		//LOG_DEBUG("Bullet at target position: x:{0}, y:{1}", gameObject->transform.position.x, gameObject->transform.position.y);

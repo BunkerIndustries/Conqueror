@@ -1,3 +1,4 @@
+#include "_Game.h"
 #include "enemy_behaviour.h"
 
 #include "required/constants.h"
@@ -15,7 +16,7 @@ size_t EnemyBehaviour::GetYIndex() {
 }
 
 
-void EnemyBehaviour::start() {
+void EnemyBehaviour::OnStart() {
 	move_component = gameObject->GetComponent<Movement>();
 
 	dt_time_counter = 0.0f;
@@ -34,7 +35,7 @@ void EnemyBehaviour::start() {
 	
 }
 
-void EnemyBehaviour::stop() {
+void EnemyBehaviour::OnStop() {
 	// removes the gameobject from the array
 	for (size_t i = 0; i < enemy_grid_y - 1; i++) {
 		if (enemy_stands[y_index][i] == gameObject) {
@@ -43,11 +44,11 @@ void EnemyBehaviour::stop() {
 	}
 }
 
-void EnemyBehaviour::update(float dt) {
+void EnemyBehaviour::OnUpdate() {
 
 	// handles the complete movement and shoot behaviour of the enemies 
 	if (is_waiting) {
-		dt_time_counter += dt;
+		dt_time_counter += Application::GetDT();
 		if (time_over) {
 			is_waiting = false;
 			time_running = false;

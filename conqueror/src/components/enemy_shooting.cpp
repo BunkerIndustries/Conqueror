@@ -1,3 +1,4 @@
+#include "_Game.h"
 #include "enemy_shooting.h"
 #include "required/constants.h"
 #include "required/functions.h"
@@ -9,15 +10,15 @@ EnemyShooting::EnemyShooting() {
 
 }
 
-void EnemyShooting::start() {
+void EnemyShooting::OnStart() {
 
 }
 
-void EnemyShooting::stop() {
+void EnemyShooting::OnStop() {
 
 }
 
-void EnemyShooting::update(float dt) {
+void EnemyShooting::OnUpdate() {
 
 }
 
@@ -31,7 +32,7 @@ void EnemyShooting::Shoot() {
 		//LOG_DEBUG("LockTarget() returned true");
 		GameObject* bullet = new GameObject("bullet", Transform(gameObject->transform.position, bullet_size));
 
-		bullet->AddComponent(new SpriteRenderer(bullet_color));
+		bullet->AddComponent(new SpriteRenderer(bullet_color, Geometry::RECTANGLE));
 
 		int r = RandomInt(0, max_hit_probability);
 

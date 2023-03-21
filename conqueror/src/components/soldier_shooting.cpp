@@ -1,3 +1,4 @@
+#include "_Game.h"
 #include "soldier_shooting.h"
 #include "required/constants.h"
 #include "required/functions.h"
@@ -9,16 +10,16 @@ SoldierShooting::SoldierShooting() {
 
 }
 
-void SoldierShooting::start() {
+void SoldierShooting::OnStart() {
 	target = nullptr;
 	bullet = nullptr;
 }
 
-void SoldierShooting::stop() {
+void SoldierShooting::OnStop() {
 	
 }
 
-void SoldierShooting::update(float dt) {
+void SoldierShooting::OnUpdate() {
 
 }
 
@@ -31,7 +32,7 @@ void SoldierShooting::Shoot() {
 
 		bullet = new GameObject("bullet", Transform(gameObject->transform.position, bullet_size));
 
-		bullet->AddComponent(new SpriteRenderer(bullet_color));
+		bullet->AddComponent(new SpriteRenderer(bullet_color, Geometry::RECTANGLE));
 
 
 		// if the hit has hit

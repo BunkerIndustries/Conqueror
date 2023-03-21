@@ -7,15 +7,17 @@
 
 namespace core {
 
+    enum class Geometry
+    {
+        NONE,
+        RECTANGLE,
+        TRIANGLE,
+        CIRCLE
+    };
+
     class SpriteRenderer : public Component {
     public:
-        enum Geometry
-        {
-	        NONE,
-            RECTANGLE,
-            TRIANGLE,
-            CIRCLE
-        };
+        
         SpriteRenderer(glm::vec4 color, Geometry geometry);
         SpriteRenderer(glm::vec4 color, Shr<Texture> texture, Geometry geometry);
 

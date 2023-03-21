@@ -1,3 +1,4 @@
+#include "_Game.h"
 #include "movement.h"
 #include "required/functions.h"
 #include "required/constants.h"
@@ -8,17 +9,17 @@ Movement::Movement(float movement_speed)
 	
 }
 
-void Movement::start() {
+void Movement::OnStart() {
 	target_position = gameObject->transform.position;	// Do not move when initialised
 	has_arrived = false;
 	//LOG_DEBUG("Target x pos: {0}", target_position.x);
 }
 
-void Movement::stop() {
+void Movement::OnStop() {
 
 }
 
-void Movement::update(float dt) {
+void Movement::OnUpdate() {
 
 	if (target_position != gameObject->transform.position) {
 		has_arrived = false;

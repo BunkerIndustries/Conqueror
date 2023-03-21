@@ -32,7 +32,7 @@ inline std::vector<std::vector<GameObject*>> CreateEnemyGrid(const uint8_t x_siz
 				Transform(glm::vec2(start_pos.x + x * (offset + cube_rad * 2.0f), start_pos.y - y * (offset + 2.0f * cube_rad)), 
 				glm::vec2(2 * cube_rad))));	// add gameobjects to it
 
-			y_row.at(y)->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f)));	// add SpriteRenderer
+			y_row.at(y)->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), Geometry::RECTANGLE));	// add SpriteRenderer
 			y_row.at(y)->AddComponent(new Node(nullptr));
 			//y_row.at(y)->AddTag("move_node");
 			foreground_layer->AddGameObjectToLayer(y_row.at(y));
@@ -96,7 +96,7 @@ inline GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos) {
 	else LOG_WARN("WARNING: probably no existing type given when creating a character");
 
 	character_go->AddTag(type);
-	character_go->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
+	character_go->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), Geometry::RECTANGLE));		// TODO: Change to sprite_path
 	character_go->AddComponent(new Movement(movement_speed));
 	character_go->AddComponent(new Health(health));
 	character_go->AddComponent(new CharacterUI());
@@ -110,7 +110,7 @@ inline GameObject* CreateEnemy(std::string name, glm::vec2 spawn_pos) {
 	GameObject* enemy_go = new GameObject(name, Transform(spawn_pos, enemy_scale));
 
 	enemy_go->AddTag("enemy");
-	enemy_go->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
+	enemy_go->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), Geometry::RECTANGLE));		// TODO: Change to sprite_path
 	enemy_go->AddComponent(new Movement(enemy_movement_speed));
 	enemy_go->AddComponent(new EnemyBehaviour());
 	enemy_go->AddComponent(new EnemyShooting());
@@ -124,7 +124,7 @@ inline GameObject* CreateEnemy(std::string name, glm::vec2 spawn_pos) {
 inline GameObject* CreateNode(glm::vec2 position, Stand& node_stand) {
 	GameObject* node_go = new GameObject("node", Transform(position, node_size));
 
-	node_go->AddComponent(new SpriteRenderer(*node_stand.color));
+	node_go->AddComponent(new SpriteRenderer(*node_stand.color, Geometry::RECTANGLE));
 	node_go->AddComponent(new Node(node_stand.stand));
 
 	if(node_stand.stand != waiting_stand.stand) node_go->AddTag("move_node");
@@ -143,7 +143,7 @@ inline GameObject* CreateBuilding(glm::vec2 position, std::string type) {
 
 	if (type == "medic") {
 		building->AddComponent(medic_management);
-		building->AddComponent(new SpriteRenderer(glm::vec4(0.05f, 0.05f, 0.05f, 1.0f)));	// temp: replace with correct sprite-path
+		building->AddComponent(new SpriteRenderer(glm::vec4(0.05f, 0.05f, 0.05f, 1.0f), Geometry::RECTANGLE));	// temp: replace with correct sprite-path
 	}
 	else if (type == "engineer") {
 

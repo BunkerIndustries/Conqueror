@@ -1,3 +1,4 @@
+#include "_Game.h"
 #include "character_ui.h"
 #include "required/constants.h"
 #include "components/UI/ui_constants.h"
@@ -8,15 +9,15 @@ CharacterUI::CharacterUI() {
 
 }
 
-void CharacterUI::start() {
+void CharacterUI::OnStart() {
 
 }
 
-void CharacterUI::stop() {
+void CharacterUI::OnStop() {
 
 }
 
-void CharacterUI::update(float dt) {
+void CharacterUI::OnUpdate() {
 
 }
 
@@ -42,7 +43,7 @@ void CharacterUI::CreateBackground() {
 		1.0f - ui_background_size.x / 2.0f - screen_right_padding,
 		0.0f);
 	GameObject* background = new GameObject("ui_background", Transform(background_position, ui_background_size), ProjectionMode::SCREEN);
-	background->AddComponent(new SpriteRenderer(ui_background_color));
+	background->AddComponent(new SpriteRenderer(ui_background_color, Geometry::RECTANGLE));
 	ui_elements.push_back(background);
 }
 
@@ -56,7 +57,7 @@ void CharacterUI::CreateHeader() {
 		header_placeholder_height);
 
 	GameObject* header_placeholder = new GameObject("header_placeholder", Transform(header_placeholder_position, header_placeholder_scale), ProjectionMode::SCREEN);
-	header_placeholder->AddComponent(new SpriteRenderer(header_placeholder_color));
+	header_placeholder->AddComponent(new SpriteRenderer(header_placeholder_color, Geometry::RECTANGLE));
 	ui_elements.push_back(header_placeholder);
 }
 
@@ -70,7 +71,7 @@ void CharacterUI::CreateButtons() {
 		button_height);
 
 	GameObject* call_medic_button = new GameObject("call_medic_button", Transform(call_medic_button_position, call_medic_button_scale), ProjectionMode::SCREEN);
-	call_medic_button->AddComponent(new SpriteRenderer(call_medic_button_color));
+	call_medic_button->AddComponent(new SpriteRenderer(call_medic_button_color, Geometry::RECTANGLE));
 	call_medic_button->AddTag("call_medic_button");
 	ui_elements.push_back(call_medic_button);
 }

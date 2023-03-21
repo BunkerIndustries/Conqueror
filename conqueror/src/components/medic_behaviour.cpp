@@ -1,3 +1,4 @@
+#include "_Game.h"
 #include "medic_behaviour.h"
 #include "components/movement.h"
 #include "components/health.h"
@@ -9,7 +10,7 @@ MedicBehaviour::MedicBehaviour(GameObject* healing_target)
 
 }
 
-void MedicBehaviour::start() {
+void MedicBehaviour::OnStart() {
 	healing_target_position = healing_target->transform.position + medic_healing_position_offset;
 	gameObject->GetComponent<Movement>()->target_position = healing_target_position;
 	healing = false;
@@ -18,11 +19,11 @@ void MedicBehaviour::start() {
 }
 
 
-void MedicBehaviour::stop() {
+void MedicBehaviour::OnStop() {
 
 }
 
-void MedicBehaviour::update(float dt) {
+void MedicBehaviour::OnUpdate() {
 
 	if (going_back) {
 		if (gameObject->transform.position == medic_management->GetGameObject()->transform.position) {
@@ -52,7 +53,6 @@ void MedicBehaviour::update(float dt) {
 			healing_target->GetComponent<Health>()->GetHealed();
 			gameObject->GetComponent<Movement>()->target_position = medic_management->GetGameObject()->transform.position;
 		}
-		dt_counter += dt;
+		dt_counter += Application::GetDT();
 	}
-
 }

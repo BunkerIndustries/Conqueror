@@ -1,3 +1,4 @@
+#include "_Game.h"
 #include "health.h"
 
 #include "required/constants.h"
@@ -8,15 +9,15 @@ Health::Health(float hp)
 	
 }
 
-void Health::start() {
+void Health::OnStart() {
 
 }
 
-void Health::stop() {
+void Health::OnStop() {
 
 }
 
-void Health::update(float dt) {
+void Health::OnUpdate() {
 
 }
 

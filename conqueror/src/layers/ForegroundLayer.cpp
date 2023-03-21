@@ -1,6 +1,5 @@
+#include "_Game.h"
 #include "ForegroundLayer.h"
-#include <string>
-#include <vector>
 
 void ForegroundLayer::OnAttach()
 {
@@ -8,18 +7,18 @@ void ForegroundLayer::OnAttach()
 
 void ForegroundLayer::OnDetach()
 {
-	for (auto i : game_objects)
+	for (auto i : gameObjects)
 	{
 		i->Delete();
 	}
-	game_objects.clear();
+	gameObjects.clear();
 }
 
-void ForegroundLayer::update(const float dt)
+void ForegroundLayer::Update(const float dt)
 {
 }
 
-void ForegroundLayer::imgui(const float dt)
+void ForegroundLayer::Imgui(const float dt)
 {
 }
 

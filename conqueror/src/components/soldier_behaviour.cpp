@@ -1,3 +1,4 @@
+#include "_Game.h"
 #include "soldier_behaviour.h"
 
 #include "required/constants.h"
@@ -12,7 +13,7 @@ SoldierBehaviour::SoldierBehaviour()
 
 }
 
-void SoldierBehaviour::start() {
+void SoldierBehaviour::OnStart() {
 
 	// start configuration
 	on_spawn_pos = true;
@@ -22,7 +23,7 @@ void SoldierBehaviour::start() {
 	dt_counter = 0.0f;
 }
 
-void SoldierBehaviour::stop() {
+void SoldierBehaviour::OnStop() {
 	// delete the gameobject from the recent stand
 	for (size_t i = 0; i < stand->size(); i++) {
 		if (stand->at(i) == gameObject) {
@@ -32,7 +33,7 @@ void SoldierBehaviour::stop() {
 	}
 }
 
-void SoldierBehaviour::update(float dt) {
+void SoldierBehaviour::OnUpdate() {
 	
 	// if he's not walking
 	if (!travelling) {
@@ -42,7 +43,7 @@ void SoldierBehaviour::update(float dt) {
 
 			// if time is not over => increase dt-time-counter by dt
 			if (!(dt_counter >= time_to_wait)) {
-				dt_counter += dt;
+				dt_counter += Application::GetDT();
 				//ld("dt_counter: {0} ; time_to_wait: {1}", dt_counter, time_to_wait);
 			}
 

@@ -6,10 +6,10 @@ public:
 	Movement(float movement_speed);
 	virtual ~Movement() = default;
 
-	void start() override;
-	void stop() override;
-	void update(float dt) override;
-	void event(Event& event) override {};
+	void OnStart() override;
+	void OnStop() override;
+	void OnUpdate() override;
+	void OnEvent(Event& event) override {};
 
 	glm::vec2 target_position;
 	

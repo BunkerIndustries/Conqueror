@@ -6,11 +6,11 @@ public:
 	CharacterUI();
 	virtual ~CharacterUI() = default;
 
-	void start() override;
-	void stop() override;
-	void update(float dt) override;
+	void OnStart() override;
+	void OnStop() override;
+	void OnUpdate() override;
 
-	void event(Event& e) override
+	void OnEvent(Event& e) override
 	{
 		EventDispatcher dispatcher(e);
 		dispatcher.dispatch<GameObjectPressedEvent>(BIND_EVENT_FN(CharacterUI::UIElementPressed));

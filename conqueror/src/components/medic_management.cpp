@@ -1,3 +1,4 @@
+#include "_Game.h"
 #include "medic_management.h"
 #include "required/constants.h"
 #include "required/functions.h"
@@ -9,15 +10,15 @@ MedicManagement::MedicManagement(uint8_t number_of_medics)
 
 }
 
-void MedicManagement::start() {
+void MedicManagement::OnStart() {
 	
 }
 
-void MedicManagement::stop() {
+void MedicManagement::OnStop() {
 
 }
 
-void MedicManagement::update(float dt) {
+void MedicManagement::OnUpdate() {
 
 }
 
@@ -27,7 +28,7 @@ void MedicManagement::SendMedic(GameObject* healing_target) {
 	available_medics--;
 
 	GameObject* medic = new GameObject("medic", Transform(gameObject->transform.position, character_scale));
-	medic->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f)));		// TODO: Change to sprite_path
+	medic->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), Geometry::RECTANGLE));		// TODO: Change to sprite_path
 	medic->AddComponent(new Movement(medic_movement_speed));
 	medic->AddComponent(new Health(medic_health));
 	medic->AddComponent(new CharacterUI());

@@ -1,4 +1,6 @@
+#include "_Game.h"
 #define INCLUDE_MAIN
+#include "EntryPoint.h"
 #include "Engine.h"
 
 #include "scenes/StartScene/game_scene.h"
@@ -13,12 +15,12 @@ public:
 		
 	}
 
-	void init() override {
+	void Init() override {
 		Application::ChangeScene(new GameScene());
 	}
 
 };
 
-core::Application* core::createApplication() {
+core::Application* core::CreateApplication() {
 	return new Conqueror();
 }

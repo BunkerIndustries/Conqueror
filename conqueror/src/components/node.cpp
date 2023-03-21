@@ -1,3 +1,4 @@
+#include "_Game.h"
 #include "node.h"
 
 Node::Node(std::vector<GameObject*>* stand)
@@ -6,15 +7,15 @@ Node::Node(std::vector<GameObject*>* stand)
 
 }
 
-void Node::start() {
+void Node::OnStart() {
 	is_occupied = false;
 }
 
-void Node::stop() {
+void Node::OnStop() {
 
 }
 
-void Node::update(float dt) {
+void Node::OnUpdate() {
 
 }
 

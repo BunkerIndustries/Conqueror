@@ -6,10 +6,10 @@ public:
 	Node(std::vector<GameObject*>* stand = nullptr);
 	virtual ~Node() = default;
 
-	void start() override;
-	void stop() override;
-	void update(float dt) override;
-	void event(Event& event) override {};
+	void OnStart() override;
+	void OnStop() override;
+	void OnUpdate() override;
+	void OnEvent(Event& event) override {};
 
 	bool is_occupied;
 
