@@ -19,7 +19,7 @@ IncludeDir["IMPLOT"] = "lib/core/IMPLOT"
 IncludeDir["SPDLOG"] = "lib/SPDLOG/include"
 IncludeDir["MINIAUDIO"] = "lib/MINIAUDIO"
 
-group "dependcies"
+group "dependencies"
 include "lib/core/GLFW"
 include "lib/core/GLAD"
 include "lib/core/IMGUI_DOCKING"
