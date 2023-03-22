@@ -40,6 +40,12 @@ namespace core {
 
 		void ProcessQueues();
 
+		friend class Scene;
+		static void AddLayer(Layer* layer);
+		static void AddOverlay(Layer* layer);
+		static void RemoveLayer(Layer* layer);
+		static void RemoveOverlay(Layer* layer);
+
 		LayerStack layerStack;
 
 	public:
@@ -53,10 +59,7 @@ namespace core {
 
 		void OnEvent(Event& event);
 
-		static void AddLayer(Layer* layer);
-		static void AddOverLay(Layer* layer);
-		static void RemoveLayer(Layer* layer);
-		static void RemoveOverLay(Layer* layer);
+		
 
 		static void ChangeScene(Scene* new_scene);
 

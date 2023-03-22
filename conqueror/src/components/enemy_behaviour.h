@@ -1,6 +1,7 @@
 #pragma once
 #include "Engine.h"
-#include "movement.h"
+
+class Movement;
 
 class EnemyBehaviour : public Component {
 public:

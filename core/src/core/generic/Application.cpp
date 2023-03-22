@@ -108,7 +108,7 @@ namespace core {
 	{
 		Init();
 
-		AddOverLay(imguiLayer);
+		AddOverlay(imguiLayer);
 
 
 		//set start scene
@@ -203,7 +203,7 @@ namespace core {
 		layer->Attach();
 	}
 
-	void Application::AddOverLay(Layer* layer)
+	void Application::AddOverlay(Layer* layer)
 	{
 		GetInstance()->layerStack.AddOverlay(layer);
 		layer->Attach();
@@ -215,7 +215,7 @@ namespace core {
 		GetInstance()->layerStack.RemoveLayer(layer);
 	}
 
-	void Application::RemoveOverLay(Layer* layer)
+	void Application::RemoveOverlay(Layer* layer)
 	{
 		layer->Detach();
 		GetInstance()->layerStack.RemoveOverlay(layer);

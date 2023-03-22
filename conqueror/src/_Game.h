@@ -21,6 +21,7 @@
 #include <thread>
 #include <algorithm>
 #include <functional>
+#include <random>
 
 //C Libraries
 #include <stdio.h>
@@ -55,6 +56,9 @@
 
 //Core
 #include "Engine.h"
+
+//components
+#include "required/components.h"
 
 
 #ifdef CORE_PLATFORM_WINDOWS

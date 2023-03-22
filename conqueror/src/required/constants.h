@@ -1,13 +1,11 @@
 #pragma once
-#include "layers/ForegroundLayer.h"
-#include "layers/SoundLayer.h"
+#include "scenes/StartScene/layers/ForegroundLayer.h"
 #include "components/medic_management.h"
 
 // TODO: May split this up to multiple files, so that not everything has to be inline
 
 // layers
 inline ForegroundLayer* foreground_layer = new ForegroundLayer();
-inline SoundLayer* sound_layer = new SoundLayer();
 
 // enemy movement grid
 inline std::vector<std::vector<GameObject*>> enemy_grid;

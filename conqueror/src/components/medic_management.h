@@ -1,6 +1,5 @@
 #pragma once
 #include "Engine.h"
-#include <vector>
 
 class MedicManagement : public Component {
 public:

@@ -4,7 +4,7 @@
 class Bullet : public Component {
 public:
 	Bullet(GameObject* target, GameObject* parent, bool is_hit, float damage);
-	virtual ~Bullet();
+	~Bullet() override;
 
 	void OnStart() override;
 	void OnStop() override;

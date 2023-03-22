@@ -2,7 +2,7 @@
 #include "bullet.h"
 #include "required/constants.h"
 #include "required/functions.h"
-#include "components/movement.h"
+
 
 Bullet::Bullet(GameObject* target, GameObject* parent, bool is_hit, float damage) 
 	:is_hit(is_hit), target(target), parent(parent), damage(damage)
@@ -47,7 +47,7 @@ void Bullet::OnUpdate() {
 		}
 		else { LOG_DEBUG("bullet not hit"); }
 		
-		gameObject->Delete();
+		delete gameObject;
 		//LOG_DEBUG("Bullet deleted");
 	}
 }

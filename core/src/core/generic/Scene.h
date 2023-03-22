@@ -6,6 +6,7 @@ namespace core {
 
     class GameObject;
     class Camera;
+    class Layer;
 
     class Scene {
     private:
@@ -28,9 +29,15 @@ namespace core {
         void Disable();
         void InitGeneral();
         void OnUpdate();
+        void AddLayer(Layer* layer);
+        void AddOverlay(Layer* layer);
+        void RemoveLayer(Layer* layer) const;
+        void RemoveOverlay(Layer* layer) const;
 
         virtual void Update() = 0;
         virtual void OnEvent(Event& e) = 0;
+
+
     private:
         virtual void Imgui(float dt) {};
         virtual void Init() = 0;

@@ -7,6 +7,7 @@
 #include "generic/Transform.h"
 #include "utils/DataPool.h"
 #include "layer/Layer.h"
+#include "generic/Scene.h"
 
 #include "component/SpriteRenderer.h"
 

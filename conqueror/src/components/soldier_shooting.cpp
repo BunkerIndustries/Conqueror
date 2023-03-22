@@ -3,8 +3,6 @@
 #include "required/constants.h"
 #include "required/functions.h"
 #include "required/stands.h"
-#include "components/bullet.h"
-
 
 SoldierShooting::SoldierShooting() {
 
@@ -45,7 +43,7 @@ void SoldierShooting::Shoot() {
 			bullet->AddComponent(new Bullet(target, this->gameObject, false, soldier_damage));
 		}
 
-		foreground_layer->AddGameObjectToLayer(bullet);
+		//foreground_layer->AddGameObjectToLayer(bullet);
 
 		break;
 	}

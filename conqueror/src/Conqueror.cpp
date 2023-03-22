@@ -3,7 +3,7 @@
 #include "EntryPoint.h"
 #include "Engine.h"
 
-#include "scenes/StartScene/game_scene.h"
+#include "scenes/StartScene/GameScene.h"
 
 class Conqueror : public core::Application {
 public:

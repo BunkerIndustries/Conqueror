@@ -30,6 +30,6 @@ private:
 
 	glm::vec2 target_position;
 
-	std::vector<GameObject*>* stand;
-	GameObject* old_node;
+	std::vector<GameObject*>* stand = nullptr;
+	GameObject* old_node = nullptr;
 };

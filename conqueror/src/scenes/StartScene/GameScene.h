@@ -2,6 +2,11 @@
 
 #include "Engine.h"
 
+#include "layers/AllyLayer.h"
+#include "layers/EnemyLayer.h"
+#include "layers/MapLayer.h"
+#include "layers/UILayer.h"
+
 class GameScene : public Scene
 {
 public:
@@ -20,6 +25,13 @@ public:
 	bool OnMouseScroll(MouseScrolledEvent& e);
 	bool GameObjectPressed(GameObjectPressedEvent& e);
 
+	MapLayer* mapLayer = nullptr;
+	EnemyLayer* enemyLayer = nullptr;
+	AllyLayer* allyLayer = nullptr;
+	UILayer* uiLayer = nullptr;
+
 private:
-	GameObject* active_go{ nullptr };
+	GameObject* active_go = nullptr;
+
+	
 };

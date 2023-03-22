@@ -25,7 +25,7 @@ bool Health::TakeDamage(float damage) {
 	if (this == nullptr) return true;
 	hp -= damage;
 	if (hp <= 0.0f) {
-		gameObject->Delete();
+		delete gameObject;
 		LOG_DEBUG("gameobject deleted");
 		return true;
 	}

@@ -1,55 +1,32 @@
 #include "_Game.h"
 #include "GameScene.h"
 
-#include "layers/AllyLayer.h"
-#include "layers/EnemyLayer.h"
-#include "layers/MapLayer.h"
-#include "layers/UILayer.h"
-
-#include "components/movement.h"
-#include "components/soldier_behaviour.h"
 #include "required/constants.h"
-#include "required/functions.h"
-#include "required/map_creation.h"
-#include "required/stands.h"
-
-using namespace core;
 
 GameScene::GameScene() {
 }
 
 GameScene::~GameScene() {
-    Application::RemoveLayer(foreground_layer);
+    //RemoveLayer(foreground_layer);
 }
 
 void GameScene::LoadResources() {
     // set background color
     backcolor = glm::vec4(0.8f, 0.8f, 0.8f, 1.0f);
 
-    //Grid creation
-    enemy_grid = CreateEnemyGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
-
-    GameObject* character = CreateCharacter("soldier", glm::vec2(-5.0f, -5.0f));
-    GameObject* character2 = CreateCharacter("soldier", glm::vec2(-4.0f, -5.0f));
-    /*GameObject* character3 = CreateCharacter("soldier", glm::vec2(2.0f, 1.0f));
-    GameObject* character4 = CreateCharacter("soldier", glm::vec2(2.5f, 1.0f));
-    GameObject* character5 = CreateCharacter("soldier", glm::vec2(3.0f, 1.0f));*/
-
-    GameObject* enemy = CreateEnemy("enemy 1", glm::vec2(1.0f, 10.0f));
-    GameObject* enemy2 = CreateEnemy("enemy 2", glm::vec2(-1.0f, 10.0f));
-
-    GameObject* medic_building = CreateBuilding(glm::vec2(12.0f, -5.0f), "medic");
-
-    CreateGameMap(standard_map);
+    mapLayer = new MapLayer();
+    enemyLayer = new EnemyLayer();
+    allyLayer = new AllyLayer;
+    uiLayer = new UILayer(); 
 }
 void GameScene::Init() {
-    Application::AddLayer(foreground_layer);
+    //AddLayer(foreground_layer);
 
-    Application::AddLayer(new MapLayer());
-    Application::AddLayer(new EnemyLayer());
-    Application::AddLayer(new AllyLayer());
+    AddLayer(mapLayer);
+    AddLayer(enemyLayer);
+    AddLayer(allyLayer);
 
-    Application::AddOverLay(new UILayer());
+    AddOverlay(uiLayer);
 }
 
 
@@ -76,8 +53,8 @@ void GameScene::Update() {
 bool GameScene::OnMouseScroll(MouseScrolledEvent& e)
 {
     //Checking if camera z position is inside wanted bounds
-    if (GetCamera()->position.z > maxCameraZPos && e.GetYOffset() > 0) return false;
-    else if (GetCamera()->position.z < minCameraZPos && e.GetYOffset() < 0) return false;
+    if (GetCamera()->position.z > maxCameraZPos && e.GetYOffset() > 0) return true;
+    else if (GetCamera()->position.z < minCameraZPos && e.GetYOffset() < 0) return true;
     GetCamera()->position.z += cameraScrollSpeed * Application::GetDT() * e.GetYOffset();
 
     return true;

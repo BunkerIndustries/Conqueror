@@ -45,6 +45,28 @@ namespace core {
         Renderer::EndRender();
     }
 
+    void Scene::AddLayer(Layer* layer)
+    {
+        layer->SetScene(this);
+        Application::AddLayer(layer);
+    }
+
+    void Scene::AddOverlay(Layer* layer)
+    {
+        layer->SetScene(this);
+        Application::AddOverlay(layer);
+    }
+
+    void Scene::RemoveLayer(Layer* layer) const
+    {
+        Application::RemoveLayer(layer);
+    }
+
+    void Scene::RemoveOverlay(Layer* layer) const
+    {
+        Application::RemoveOverlay(layer);
+    }
+
     void Scene::Start() {
         isRunning = true;
     }

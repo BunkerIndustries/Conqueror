@@ -1,9 +1,6 @@
 #include "_Game.h"
 #include "character_ui.h"
 #include "required/constants.h"
-#include "components/UI/ui_constants.h"
-#include "components/health.h"
-#include "components/soldier_behaviour.h"
 
 CharacterUI::CharacterUI() {
 
@@ -80,7 +77,7 @@ void CharacterUI::CreateButtons() {
 
 void CharacterUI::DeleteUI() {
 	for (auto& ui_element : ui_elements) {
-		ui_element->Delete();
+		delete ui_element;
 	}
 	ui_elements.clear();
 	ui_toggled = false;

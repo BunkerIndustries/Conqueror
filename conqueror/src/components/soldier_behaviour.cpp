@@ -5,8 +5,6 @@
 #include "required/functions.h"
 #include "required/stands.h"
 
-#include "soldier_shooting.h"
-
 
 SoldierBehaviour::SoldierBehaviour() 
 {
@@ -25,6 +23,7 @@ void SoldierBehaviour::OnStart() {
 
 void SoldierBehaviour::OnStop() {
 	// delete the gameobject from the recent stand
+	if (!stand) return;
 	for (size_t i = 0; i < stand->size(); i++) {
 		if (stand->at(i) == gameObject) {
 			stand->erase(stand->begin() + i);
