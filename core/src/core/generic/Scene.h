@@ -34,6 +34,11 @@ namespace core {
         void RemoveLayer(Layer* layer) const;
         void RemoveOverlay(Layer* layer) const;
 
+        void AddLayer(Layer* layer);
+        void AddOverlay(Layer* layer);
+        void RemoveLayer(Layer* layer) const;
+        void RemoveOverlay(Layer* layer) const;
+
         virtual void Update() = 0;
         virtual void OnEvent(Event& e) = 0;
 

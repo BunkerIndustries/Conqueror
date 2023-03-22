@@ -17,7 +17,6 @@ namespace core {
 
     class SpriteRenderer : public Component {
     public:
-        
         SpriteRenderer(glm::vec4 color, Geometry geometry);
         SpriteRenderer(glm::vec4 color, Shr<Texture> texture, Geometry geometry);
 

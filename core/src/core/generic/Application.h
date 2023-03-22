@@ -59,8 +59,6 @@ namespace core {
 
 		void OnEvent(Event& event);
 
-		
-
 		static void ChangeScene(Scene* new_scene);
 
 		void Exit() { gameRunning = false; }
