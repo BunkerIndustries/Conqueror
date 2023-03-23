@@ -19,7 +19,7 @@ void SoldierBehaviour::OnStart() {
 	on_spawn_pos = true;
 	is_healed = false;
 	travelling = false;
-	time_to_wait = RandomF(min_soldier_shoot_waiting_time, max_soldier_shoot_waiting_time) * waiting_time_factor;
+	time_to_wait = RandomF(min_soldier_shoot_waiting_time, max_soldier_shoot_waiting_time) * game_time_factor;
 	dt_counter = 0.0f;
 }
 
@@ -133,5 +133,5 @@ bool SoldierBehaviour::SoldierTryMoveToWaitingNode() {
 
 void SoldierBehaviour::RestartTimer() {
 	dt_counter = 0.0f;
-	time_to_wait = RandomF(min_soldier_shoot_waiting_time, max_soldier_shoot_waiting_time) * waiting_time_factor;
+	time_to_wait = RandomF(min_soldier_shoot_waiting_time, max_soldier_shoot_waiting_time) * game_time_factor;
 }

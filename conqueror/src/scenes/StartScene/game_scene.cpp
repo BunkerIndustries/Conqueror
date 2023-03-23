@@ -6,6 +6,7 @@
 #include "required/stands.h"
 #include "components/movement.h"
 #include "components/soldier_behaviour.h"
+#include "components/wave_manager.h"
 #include "required/map_creation.h"
 
 using namespace core;
@@ -35,8 +36,12 @@ void GameScene::LoadResources() {
     GameObject* character4 = CreateCharacter("soldier", glm::vec2(2.5f, 1.0f));
     GameObject* character5 = CreateCharacter("soldier", glm::vec2(3.0f, 1.0f));*/
 
-    GameObject* enemy = CreateEnemy("enemy 1", glm::vec2(1.0f, 10.0f));
-    GameObject* enemy2 = CreateEnemy("enemy 2", glm::vec2(-1.0f, 10.0f));
+    /*GameObject* enemy = CreateEnemy("enemy 1", glm::vec2(1.0f, 10.0f));
+    GameObject* enemy2 = CreateEnemy("enemy 2", glm::vec2(-1.0f, 10.0f));*/
+
+    GameObject* empty_wave_manager = new GameObject("wave_manager", Transform(glm::vec2(0.0f), glm::vec2(0.0f)));
+    empty_wave_manager->AddComponent(new WaveManager());
+    foreground_layer->AddGameObjectToLayer(empty_wave_manager);
 
     GameObject* medic_building = CreateBuilding(glm::vec2(12.0f, -5.0f), "medic");
 
@@ -50,9 +55,14 @@ void GameScene::Init() {
 
 
 int selectedItem = 0;
-//bool m_pressed = false;    // is needed that pressing M doesn't trigger multiple times
 void GameScene::Update() {
+
     float dt = Application::GetDT();
+    
+    CameraMovement(dt);
+}
+
+void GameScene::CameraMovement(float dt) {
     if (Input::IsKeyPressed(KEY_S)) {
         camera->position.y -= cameraMoveSpeed * dt;
     }
@@ -65,15 +75,9 @@ void GameScene::Update() {
     if (Input::IsKeyPressed(KEY_A)) {
         camera->position.x -= cameraMoveSpeed * dt;
     }
-
-    //if (Input::IsKeyPressed(KEY_M) && m_pressed == false) {
-    //    m_pressed = true;
-    //    LOG_DEBUG("M-PRESSED-------------------");
-    //    glm::vec2 random_pos = enemy_grid.at(RandomInt(0, enemy_grid_x - 1)).at(RandomInt(0, enemy_grid_y - 1))->transform.position;      // needs to be changed if CreateGrid gets changed to returning an vec2-vector
-    //    test->GetComponent<Movement>()->target_position = random_pos;
-    //}
-    //else if(!Input::IsKeyPressed(KEY_M)) m_pressed = false;
 }
+
+
 
 void GameScene::Imgui(float dt) {
 
@@ -90,7 +94,7 @@ bool GameScene::OnMouseScroll(MouseScrolledEvent& e)
 }
 
 bool GameScene::GameObjectPressed(GameObjectPressedEvent& e) {
-    LOG_DEBUG("GameObjectPressed()");
+    //LOG_DEBUG("GameObjectPressed()");
     // select character or move it
     GameObject* clicked_go = e.GetGameObject();
 

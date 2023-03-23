@@ -44,7 +44,7 @@ void MedicBehaviour::OnUpdate() {
 	if ((gameObject->transform.position != healing_target_position) || going_back) return;	// if he has not arrived yet or is going back
 	else if (healing == false) {	// if he arrived and is not healing already
 		healing = true;
-		heal_time = (soldier_health - healing_target->GetComponent<Health>()->GetHp()) * waiting_time_per_hp * waiting_time_factor;
+		heal_time = (soldier_health - healing_target->GetComponent<Health>()->GetHp()) * waiting_time_per_hp * game_time_factor;
 	}
 	else if (healing == true) {
 		if (dt_counter >= heal_time) {

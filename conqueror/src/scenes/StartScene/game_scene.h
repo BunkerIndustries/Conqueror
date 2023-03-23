@@ -27,4 +27,5 @@ public:
 
 private:
 	GameObject* active_go{ nullptr };
+	void CameraMovement(float dt);
 };
