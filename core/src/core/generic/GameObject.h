@@ -57,8 +57,6 @@ namespace core {
         void Imgui(float dt);
         void OnEvent(Event& event);
 
-        void Delete();
-
         void DeleteComponents();
 
         GameObject* AddTag(std::string tag);

@@ -5,6 +5,17 @@
 
 namespace core
 {
+	Layer::~Layer()
+	{
+		const int layerSize = gameObjects.size();
+		for (int i = 0; i < layerSize; i++)
+		{
+			if (gameObjects.size() > 0)
+				delete gameObjects[0];
+		}
+		gameObjects.clear();
+	}
+
 	void Layer::Attach()
 	{
 		attached = true;

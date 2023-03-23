@@ -17,6 +17,7 @@ namespace core {
     SpriteRenderer::SpriteRenderer(glm::vec4 color, Shr<Texture> texture, Geometry geometry)
     { Init(color, texture, geometry); }
 
+
     void SpriteRenderer::Init(glm::vec4 color, Shr<Texture> texture, Geometry geometry)
     {
         this->color = color;

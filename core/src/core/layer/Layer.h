@@ -4,6 +4,7 @@
 
 #include "event/Event.h"
 #include "generic/GameObject.h"
+#include "generic/Scene.h"
 
 namespace core
 {
@@ -11,6 +12,7 @@ namespace core
 	class Layer
 	{
 	protected:
+		Scene* scene;
 		std::string name;
 		bool overlay = false;
 		bool attached = false;
@@ -21,7 +23,7 @@ namespace core
 		Layer(const std::string& name = "Layer")
 			: name(name) { }
 
-		virtual ~Layer() = default;
+		virtual ~Layer();
 
 		void Attach();
 		void Detach();
@@ -33,6 +35,17 @@ namespace core
 		virtual void OnEvent(Event& event) = 0;
 
 		void LayerEvent(Event& event);
+		bool IsAttached() const { return attached; }
+
+		void SetScene(Scene* scene) { this->scene = scene; }
+
+		template <class T>
+		T* GetScene()
+		{
+			T* tmpScene = dynamic_cast<T>(scene);
+			CORE_ASSERT(tmpScene, "this scene doesnt own this layer")
+				return tmpScene;
+		}
 
 		void AddGameObjectToLayer(GameObject* game_object);
 

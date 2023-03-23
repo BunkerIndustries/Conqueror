@@ -27,7 +27,7 @@ namespace core {
         static void DrawTriangle(glm::vec2 position, glm::vec2 size, float rotation, Shr<Texture>& texture, float tilingFactor = 1.0f, glm::vec4 color = glm::vec4(1.0f), 
             ProjectionMode mode = ProjectionMode::PERSPECTIVE, core_id coreID = -1);
 
-
+        static void DrawLine(glm::vec2 position, glm::vec2 size, glm::vec4 color, float thickness, ProjectionMode mode, core_id coreID = -1);
 
 
     	//static void DrawCircle();
@@ -57,6 +57,7 @@ namespace core {
 
         static void DrawTriangle(glm::mat4 transform, glm::vec4 color, ProjectionMode mode, core_id coreID);
         static void DrawTriangle(glm::mat4 transform, Shr<Texture>& texture, float tilingFactor, glm::vec4 color, ProjectionMode mode, core_id coreID);
+
     };
 
 }

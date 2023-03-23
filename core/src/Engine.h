@@ -1,6 +1,7 @@
 #pragma once
 
 #include "core/component/SpriteRenderer.h"
+#include "core/component/LineRenderer.h"
 
 #include "core/event/KeyEvent.h"
 #include "core/event/MouseEvent.h"
