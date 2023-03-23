@@ -28,7 +28,7 @@ void MedicBehaviour::OnUpdate() {
 	if (going_back) {
 		if (gameObject->transform.position == medic_management->GetGameObject()->transform.position) {
 			medic_management->MedicArrived();
-			gameObject->Delete();
+			delete gameObject;
 		}
 		return;
 	}

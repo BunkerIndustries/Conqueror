@@ -7,11 +7,6 @@ void ForegroundLayer::OnAttach()
 
 void ForegroundLayer::OnDetach()
 {
-	for (auto i : gameObjects)
-	{
-		i->Delete();
-	}
-	gameObjects.clear();
 }
 
 void ForegroundLayer::Update(const float dt)

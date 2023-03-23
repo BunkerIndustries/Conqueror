@@ -16,7 +16,7 @@ GameScene::GameScene() {
 
 GameScene::~GameScene() {
     //Application::RemoveLayer(background_layer);
-    Application::RemoveLayer(foreground_layer);
+    RemoveLayer(foreground_layer);
     //Application::RemoveOverLay(sound_layer);
 }
 
@@ -49,7 +49,7 @@ void GameScene::LoadResources() {
 }
 void GameScene::Init() {
     //Application::AddLayer(background_layer);
-    Application::AddLayer(foreground_layer);
+    AddLayer(foreground_layer);
     //Application::AddOverLay(sound_layer);
 }
 
