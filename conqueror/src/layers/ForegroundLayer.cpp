@@ -9,7 +9,7 @@ void ForegroundLayer::OnDetach()
 {
 	for (auto i : gameObjects)
 	{
-		i->Delete();
+		delete i;
 	}
 	gameObjects.clear();
 }

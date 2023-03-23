@@ -47,7 +47,7 @@ void Bullet::OnUpdate() {
 		}
 		else { LOG_DEBUG("bullet not hit"); }
 		
-		gameObject->Delete();
+		delete gameObject;
 		//LOG_DEBUG("Bullet deleted");
 	}
 }

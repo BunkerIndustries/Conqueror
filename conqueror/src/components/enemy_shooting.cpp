@@ -30,6 +30,8 @@ void EnemyShooting::Shoot() {
 		// if a target is found => instantiate bullet and calulate whether it will hit or not, stop target-searching-process
 		if (!LockTarget()) continue;
 		//LOG_DEBUG("LockTarget() returned true");
+
+		// SWITCH ---
 		GameObject* bullet = new GameObject("bullet", Transform(gameObject->transform.position, bullet_size));
 
 		bullet->AddComponent(new SpriteRenderer(bullet_color, Geometry::RECTANGLE));
@@ -49,6 +51,7 @@ void EnemyShooting::Shoot() {
 		}
 
 		foreground_layer->AddGameObjectToLayer(bullet);
+		// --- SWITCH
 
 		break;
 
