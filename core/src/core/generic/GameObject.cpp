@@ -35,10 +35,8 @@ namespace core {
 	}
 
 	GameObject::GameObject(std::string name, Transform& transform, ProjectionMode mode)
-        : name(name), transform(transform), mode(mode)
+        : name(name), mode(mode), transform(transform)
     {
-        this->zIndex = 0;
-
         objectID = Core::RequestID();
         IDMap.emplace(objectID, this);
     }

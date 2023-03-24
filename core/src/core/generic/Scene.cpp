@@ -31,15 +31,16 @@ namespace core {
         Renderer::ClearStats();
         Renderer::BeginRender(*camera);
 
-        //updating gameobjects and its components
-        for (Layer* layer : Application::GetLayerStack())
+        for (auto it = Application::GetLayerStack().end(); it != Application::GetLayerStack().begin(); )
         {
-            if (!layer->IsAttached()) continue;
-            for (GameObject* gameObject : layer->GetGameObjects())
+            --it;
+            if (!(*it)->IsAttached()) continue;
+            for (GameObject* gameObject : (*it)->GetGameObjects())
             {
                 if (!gameObject->IsRunning()) continue;
                 gameObject->Update();
             }
+            Renderer::NextBatch();
         }
 
         Renderer::EndRender();
