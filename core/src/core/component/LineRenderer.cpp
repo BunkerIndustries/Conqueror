@@ -2,6 +2,7 @@
 #include "utility.h"
 #include "LineRenderer.h"
 #include "renderer/Renderer.h"
+#include "layer/Layer.h"
 
 namespace core
 {

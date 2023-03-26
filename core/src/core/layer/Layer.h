@@ -12,7 +12,7 @@ namespace core
 	class Layer
 	{
 	protected:
-		Scene* scene;
+		Scene* scene = nullptr;
 		std::string name;
 		bool overlay = false;
 		bool attached = false;

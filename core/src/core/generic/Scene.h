@@ -13,7 +13,6 @@ namespace core {
         bool isRunning = false;
     protected:
         Camera* camera = nullptr;
-        GameObject* activeGameObject = nullptr;
         glm::vec4 backcolor = glm::vec4();
     public:
         std::vector<GameObject*> gameObjects;

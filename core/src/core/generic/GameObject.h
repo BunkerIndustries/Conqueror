@@ -15,7 +15,6 @@ namespace core {
     private:
         std::string id;
         std::vector<Component*> components;
-        int zIndex;
         Layer* layer;
         bool deleted = false;
 
@@ -64,9 +63,8 @@ namespace core {
         bool RemoveTag(std::string tag);
         bool HasTag(std::string tag);
 
-        std::string GetName() { return this->name; }
-        int GetZIndex() { return this->zIndex; }
-        void SetZIndex(int zIndex) { this->zIndex = zIndex; }
+        std::string GetName() const { return this->name; }
+        Layer* GetLayer() const { return this->layer; }
         core_id GetObjectID() const { return objectID; }
         bool IsRunning() const { return running; }
 

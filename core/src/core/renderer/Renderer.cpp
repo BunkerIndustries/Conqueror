@@ -634,6 +634,7 @@ namespace core {
         data.stats.objectCount++;
     }
 
+
     void Renderer::DrawLine(glm::vec2 p0, glm::vec2 p1, glm::vec4 color, float thickness, ProjectionMode mode, core_id coreID)
     {
         const uint32_t lineVertexCount = 2;
