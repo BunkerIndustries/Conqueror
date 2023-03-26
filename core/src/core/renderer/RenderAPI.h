@@ -27,8 +27,12 @@ namespace core {
 
 		virtual void DrawElements(Shr<VertexArray>& vertexArray, uint32_t elementCount = 0) = 0;
 		
+		virtual void DrawIndexed(const Shr<VertexArray>& vertexArray, uint32_t indexCount = 0) = 0;
+
 		virtual void DrawLines(Shr<VertexArray>& vertexArray, uint32_t vertexCount, float thicknesss) = 0;
 		virtual void SetLineWidth(float thickness) = 0;
+
+		//virtual void DrawCircles(float radius, float thickness, float fade) = 0;
 
 		static Shr<RenderAPI> CreateAPI();
 

@@ -38,6 +38,18 @@ namespace core {
         int coreID;
     };
 
+    struct CircleVertex
+    {
+        glm::vec2 WorldPosition;
+        glm::vec2 LocalPosition;
+        glm::vec4 color;
+
+        float thickness;
+        float fade;
+
+        int coreID;
+    };
+
     struct RenderData
     {
         static constexpr uint32_t MAX_VERTICES = 40000;
@@ -45,8 +57,8 @@ namespace core {
         static constexpr uint32_t MAX_TEXTURE_SLOTS = 32;
 
         Shr<Shader> edgeGeometryShader;
-
         Shr<Shader> lineGeometryShader;
+        Shr<Shader> circleGeometryShader;
 
         Shr<VertexArray> rectangleVertexArray;
         Shr<VertexBuffer> rectangleVertexBuffer;
@@ -57,6 +69,9 @@ namespace core {
         Shr<VertexArray> triangleVertexArray;
         Shr<VertexBuffer> triangleVertexBuffer;
 
+        Shr<VertexArray> circleVertexArray;
+        Shr<VertexBuffer> circleVertexBuffer;
+        
         uint32_t rectangleElementCount = 0;
         RectangleVertex* rectangleVertexBufferBase = nullptr;
         RectangleVertex* rectangleVertexBufferPtr = nullptr;
@@ -68,6 +83,10 @@ namespace core {
         uint32_t lineElementCount = 0;
         LineVertex* lineVertexBufferBase = nullptr;
         LineVertex* lineVertexBufferPtr = nullptr;
+
+        uint32_t circleElementCount = 0;
+        CircleVertex* circleVertexBufferBase = nullptr;
+        CircleVertex* circleVertexBufferPtr = nullptr;
 
         std::array<Shr<Texture>, MAX_TEXTURE_SLOTS> rectangleTextureSlots;
         uint32_t rectangleTextureSlotIndex = 0;
@@ -85,6 +104,10 @@ namespace core {
         Renderer::Stats stats;
 
         Shr<Framebuffer> framebuffer;
+
+        glm::vec4 QuadVertexPositions[4];
+
+        uint32_t circleIndexCount = 0;
     };
 
     static RenderData data;
@@ -111,11 +134,23 @@ namespace core {
             { GLSLDataType::INT , "aCoreID" }
         };
 
+        BufferLayout circleGeometryLayout = {
+            { GLSLDataType::FLOAT2, "aWorldPos" },
+            { GLSLDataType::FLOAT2, "aLocalPos" },
+            { GLSLDataType::FLOAT4, "aColor" },
+            { GLSLDataType::FLOAT,  "aThickness" },
+            { GLSLDataType::FLOAT,  "aFade" },
+            { GLSLDataType::INT,    "aCoreID" }
+        };
+
         data.edgeGeometryShader = DataPool::GetShader("EdgeGeometryShader");
         data.edgeGeometryShader->Compile();
 
         data.lineGeometryShader = DataPool::GetShader("LineGeometryShader");
         data.lineGeometryShader->Compile();
+
+        data.circleGeometryShader = DataPool::GetShader("CircleGeometryShader");
+        data.circleGeometryShader->Compile();
 
         data.rectangleVertexArray = VertexArray::CreateArray();
         data.rectangleVertexBuffer = VertexBuffer::CreateBuffer(edgeGeometryLayout, data.MAX_VERTICES * sizeof(RectangleVertex));
@@ -125,6 +160,10 @@ namespace core {
         data.triangleVertexBuffer = VertexBuffer::CreateBuffer(edgeGeometryLayout, data.MAX_VERTICES * sizeof(TriangleVertex));
         data.triangleVertexArray->SetVertexBuffer(data.triangleVertexBuffer);
 
+        data.circleVertexArray = VertexArray::CreateArray();
+        data.circleVertexBuffer = VertexBuffer::CreateBuffer(circleGeometryLayout, data.MAX_VERTICES * sizeof(CircleVertex));
+        data.circleGeometryShader->Compile();
+
         data.lineVertexArray = VertexArray::CreateArray();
         data.lineVertexBuffer = VertexBuffer::CreateBuffer(LineGeometryLayout, data.MAX_VERTICES * sizeof(LineVertex));
         data.lineVertexArray->SetVertexBuffer(data.lineVertexBuffer);
@@ -132,6 +171,8 @@ namespace core {
         data.rectangleVertexBufferBase = new RectangleVertex[data.MAX_VERTICES];
         
         data.triangleVertexBufferBase = new TriangleVertex[data.MAX_VERTICES];
+
+        data.circleVertexBufferBase = new CircleVertex[data.MAX_VERTICES];
 
         data.lineVertexBufferBase = new LineVertex[data.MAX_VERTICES];
 
@@ -191,6 +232,11 @@ namespace core {
         spec.width = Application::GetWindow()->GetWidth();
         spec.height = Application::GetWindow()->GetHeight();
         data.framebuffer = Framebuffer::CreateBuffer(spec);
+
+        data.QuadVertexPositions[0] = { -0.5f, -0.5f, 0.0f, 1.0f };
+        data.QuadVertexPositions[1] = { 0.5f, -0.5f, 0.0f, 1.0f };
+        data.QuadVertexPositions[2] = { 0.5f, 0.5f, 0.0f, 1.0f };
+        data.QuadVertexPositions[3] = { -0.5f, 0.5f, 0.0f, 1.0f };
     }
 
     void Renderer::Shutdown()
@@ -238,6 +284,9 @@ namespace core {
 
         data.lineElementCount = 0;
         data.lineVertexBufferPtr = data.lineVertexBufferBase;
+
+        data.circleElementCount = 0;
+        data.circleVertexBufferPtr = data.circleVertexBufferBase;
     }
 
     void Renderer::NextBatch()
@@ -297,6 +346,16 @@ namespace core {
                 data.triangleTextureSlots[i]->Unbind();
         }
 
+        if (data.circleIndexCount)
+        {
+            uint32_t dataSize = (uint32_t)((uint8_t*)data.circleVertexBufferPtr - (uint8_t*)data.circleVertexBufferBase);
+            data.circleVertexBuffer->AddData(data.circleVertexBufferBase, dataSize);
+
+            data.circleGeometryShader->Bind();
+            RenderCommand::DrawIndexed(data.circleVertexArray, data.circleIndexCount);
+            data.stats.drawCalls++;
+        }
+
         if (data.lineElementCount)
         {
             uint32_t dataSize = (uint32_t)((uint8_t*)data.lineVertexBufferPtr - (uint8_t*)data.lineVertexBufferBase);
@@ -330,6 +389,16 @@ namespace core {
             * glm::scale(glm::mat4(1.0f), glm::vec3(size, 1.0f));
 
         DrawRectangle(transform, texture, tilingFactor, color, mode, coreID);
+    }
+
+    // sprite sheet entry function
+    void Renderer::DrawRectangle(glm::vec2 position, glm::vec2 size, float rotation, glm::vec2 texCoordSprite[4], Shr<Texture>& texture, float tilingFactor, glm::vec4 color, ProjectionMode mode, core_id coreID)
+    {
+        glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(position, 0.0f))
+            * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
+            * glm::scale(glm::mat4(1.0f), glm::vec3(size, 1.0f));
+
+        DrawRectangle(transform, texture, tilingFactor, texCoordSprite, color, mode, coreID);
     }
 
     void Renderer::DrawRectangle(glm::mat4 transform, glm::vec4 color, ProjectionMode mode, core_id coreID)
@@ -399,6 +468,57 @@ namespace core {
             data.rectangleVertexBufferPtr->position = transform * data.rectangleVertexData[i];
             data.rectangleVertexBufferPtr->color = color;
             data.rectangleVertexBufferPtr->texCoords = texCoords[i];
+            data.rectangleVertexBufferPtr->tilingFactor = tilingFactor;
+            data.rectangleVertexBufferPtr->texIndex = texIndex;
+            data.rectangleVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
+            data.rectangleVertexBufferPtr->coreID = coreID;
+            data.rectangleVertexBufferPtr++;
+
+            data.stats.vertexCount++;
+        }
+
+        data.rectangleElementCount += 6;
+
+        data.stats.elementCount += 6;
+        data.stats.objectCount++;
+    }
+    
+    // mandatory for sprite sheets
+
+    void Renderer::DrawRectangle(glm::mat4 transform, Shr<Texture>& texture, float tilingFactor, glm::vec2 texCoordSprite[4], glm::vec4 color, ProjectionMode mode, core_id coreID)
+    {
+        const uint32_t rectangleVertexCount = 4;
+
+        if (data.rectangleElementCount >= data.MAX_ELEMENTS)
+        {
+            NextBatch();
+        }
+
+        int texIndex = -1;
+        for (uint32_t i = 0; i < data.rectangleTextureSlotIndex; i++)
+        {
+            if (*data.rectangleTextureSlots[i] == *texture)
+            {
+                texIndex = i;
+                break;
+            }
+        }
+
+        if (texIndex == -1)
+        {
+            if (data.rectangleTextureSlotIndex >= data.MAX_TEXTURE_SLOTS)
+                NextBatch();
+
+            texIndex = data.rectangleTextureSlotIndex;
+            data.rectangleTextureSlots[data.rectangleTextureSlotIndex] = texture;
+            data.rectangleTextureSlotIndex++;
+        }
+
+        for (int i = 0; i < rectangleVertexCount; i++)
+        {
+            data.rectangleVertexBufferPtr->position = transform * data.rectangleVertexData[i];
+            data.rectangleVertexBufferPtr->color = color;
+            data.rectangleVertexBufferPtr->texCoords = texCoordSprite[i];
             data.rectangleVertexBufferPtr->tilingFactor = tilingFactor;
             data.rectangleVertexBufferPtr->texIndex = texIndex;
             data.rectangleVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
@@ -543,6 +663,23 @@ namespace core {
         NextBatch();
     }
 
+    void Renderer::DrawCircle(glm::mat4 transform, glm::vec4 color, float rotation, float thickness, float fade, core_id coreID)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            data.circleVertexBufferPtr->WorldPosition = transform * data.QuadVertexPositions[i];
+            data.circleVertexBufferPtr->LocalPosition = data.QuadVertexPositions[i] * 2.0f;
+            data.circleVertexBufferPtr->color = color;
+            data.circleVertexBufferPtr->thickness = thickness;
+            data.circleVertexBufferPtr->fade = fade;
+            data.circleVertexBufferPtr->coreID = coreID;
+            data.circleVertexBufferPtr++;
+        }
+
+        data.circleIndexCount += 6;
+
+        data.stats.quadCount++;
+    }
 
     Renderer::Stats Renderer::GetStats()
     {

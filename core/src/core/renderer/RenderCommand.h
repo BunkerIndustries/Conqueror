@@ -46,6 +46,11 @@ namespace core {
 		{
 			rendererAPI->SetLineWidth(width);
 		}
+
+		static void DrawIndexed(const Shr<VertexArray>& vertexArray, uint32_t indexCount = 0)
+		{
+			rendererAPI->DrawIndexed(vertexArray, indexCount);
+		}
 	};
 
 }

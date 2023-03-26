@@ -49,7 +49,7 @@ namespace core
 
 	int OpenGLTexture::GetWidth()
 	{
-		return this->GetWidth();
+		return this->width;
 	}
 
 	int OpenGLTexture::GetHeight()
@@ -105,13 +105,13 @@ namespace core
 				LOG_CORE_ERROR("Unknown number of channel '" + std::to_string(channels) + "' by texture '" + path + "'");
 				return false;
 			}
+			glGenerateMipmap(GL_TEXTURE_2D);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 		else {
 			LOG_CORE_ERROR("Could not load image '" + path + "'");
 			return false;
 		}
-
 
 		stbi_image_free(localBuffer);
 		return true;
