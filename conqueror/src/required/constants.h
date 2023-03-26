@@ -81,12 +81,12 @@ inline float soldier_health = 100.0f;
 inline float medic_health = 50.0f;
 inline float engineer_health = 200.0f;
 
-// bullet constants
-inline float bullet_speed = 30.0f;
-inline glm::vec4 bullet_color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
-inline glm::vec2 bullet_size = glm::vec2(0.5f, 0.5f);
+// bullet trace constants
+inline glm::vec4 trace_color = glm::vec4(1.0f, 0.0f, 0.0f, 0.8f);
 inline float min_inaccuracy = 0.8f;
 inline float max_inaccuracy = 1.4f;
+inline float trace_thickness = 0.3f;
+inline float trace_lasting = 0.15f;
 
 // node constants
 inline glm::vec2 node_size = glm::vec2(0.5f, 0.5f);

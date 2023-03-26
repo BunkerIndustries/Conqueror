@@ -3,7 +3,6 @@
 #include "required/constants.h"
 #include "required/functions.h"
 #include "required/stands.h"
-#include "components/bullet.h"
 
 
 EnemyShooting::EnemyShooting() {
@@ -31,27 +30,22 @@ void EnemyShooting::Shoot() {
 		if (!LockTarget()) continue;
 		//LOG_DEBUG("LockTarget() returned true");
 
-		// SWITCH ---
-		GameObject* bullet = new GameObject("bullet", Transform(gameObject->transform.position, bullet_size));
 
-		bullet->AddComponent(new SpriteRenderer(bullet_color, Geometry::RECTANGLE));
+		glm::vec2 end_point;
 
 		int r = RandomInt(0, max_hit_probability);
-
-		// if the hit is supposed to hit => create new bullet and let it hit the enemy
 		if (r <= hit_probability) {
-			//LOG_DEBUG("enemy Shoot and hit");
-			bullet->AddComponent(new Bullet(target, this->gameObject, true, enemy_damage));
+			end_point = target->transform.position;
+			if (target->GetComponent<Health>()->TakeDamage(enemy_damage)) target = nullptr;
 		}
-
-		// if the hit is not supposed to hit => create new bullet and let it miss the enemy
 		else {
-			//LOG_DEBUG("ememy Shoot and miss");
-			bullet->AddComponent(new Bullet(target, this->gameObject, false, enemy_damage));
+			end_point = glm::vec2(target->transform.position.x + RandomF(min_inaccuracy, max_inaccuracy) * RandomInt(-1, 1), target->transform.position.y);
 		}
+		
+		GameObject* trace = new GameObject("bullet",Transform());
+		trace->AddComponent(new LineRenderer(gameObject->transform.position, end_point, trace_color, trace_thickness, trace_lasting * game_time_factor));
+		foreground_layer->AddGameObjectToLayer(trace);
 
-		foreground_layer->AddGameObjectToLayer(bullet);
-		// --- SWITCH
 
 		break;
 

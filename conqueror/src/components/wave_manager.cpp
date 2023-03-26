@@ -51,6 +51,5 @@ void WaveManager::OnUpdate() {
 		spawn_interval *= enemy_spawn_interval_gradient;
 		return;
 	}
-
 }
 
