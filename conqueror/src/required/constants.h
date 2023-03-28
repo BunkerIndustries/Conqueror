@@ -2,8 +2,7 @@
 #include "layers/ForegroundLayer.h"
 #include "layers/SoundLayer.h"
 #include "components/medic_management.h"
-
-// TODO: May split this up to multiple files, so that not everything has to be inline
+#include "components/engineer_management.h"
 
 // layers
 inline ForegroundLayer* foreground_layer = new ForegroundLayer();
@@ -107,6 +106,12 @@ inline uint8_t medic_count = 15;
 inline MedicManagement* medic_management = new MedicManagement(medic_count);
 inline glm::vec2 medic_healing_position_offset = glm::vec2(0.5f, 0.0f);
 inline float waiting_time_per_hp = 0.02f;
+
+// engineer constants
+inline uint8_t engineer_count = 5;
+inline EngineerManagement* engineer_management = new EngineerManagement(engineer_count);
+inline glm::vec2 engineer_building_position_offset = glm::vec2(0.5f, 0.0f);
+inline float building_time = 0.8f;
 
 // building constants
 inline glm::vec2 building_size = glm::vec2(3.0f, 3.3f);
