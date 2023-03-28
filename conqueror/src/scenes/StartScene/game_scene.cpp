@@ -30,11 +30,8 @@ void GameScene::LoadResources() {
     //Grid creation
     enemy_grid = CreateEnemyGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
 
-    GameObject* character = CreateCharacter("soldier", glm::vec2(-5.0f, -5.0f));
-    GameObject* character2 = CreateCharacter("soldier", glm::vec2(-4.0f, -5.0f));
-    /*GameObject* character3 = CreateCharacter("soldier", glm::vec2(2.0f, 1.0f));
-    GameObject* character4 = CreateCharacter("soldier", glm::vec2(2.5f, 1.0f));
-    GameObject* character5 = CreateCharacter("soldier", glm::vec2(3.0f, 1.0f));*/
+    GameObject* character = CreateSoldier(glm::vec2(-5.0f, -5.0f));
+    GameObject* character2 = CreateSoldier(glm::vec2(-4.0f, -5.0f));
 
     /*GameObject* enemy = CreateEnemy("enemy 1", glm::vec2(1.0f, 10.0f));
     GameObject* enemy2 = CreateEnemy("enemy 2", glm::vec2(-1.0f, 10.0f));*/
@@ -44,6 +41,7 @@ void GameScene::LoadResources() {
     foreground_layer->AddGameObjectToLayer(empty_wave_manager);
 
     GameObject* medic_building = CreateBuilding(glm::vec2(12.0f, -5.0f), "medic");
+    GameObject* engineer_building = CreateBuilding(glm::vec2(-12.0f, -5.0f), "engineer");
 
     CreateGameMap(standard_map);
 }

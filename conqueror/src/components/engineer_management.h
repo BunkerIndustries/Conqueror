@@ -11,6 +11,9 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
 
+	void SendEngineer(GameObject* building_node);
+	void EngineerArrived();
+
 private:
 	uint8_t available_engineers;
 };

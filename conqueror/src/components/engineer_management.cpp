@@ -1,5 +1,10 @@
+#include "_Game.h"
 #include "engineer_management.h"
 #include "required/constants.h"
+#include "components/engineer_behaviour.h"
+#include "components/movement.h"
+#include "components/health.h"
+#include "components/UI/character_ui.h"
 
 EngineerManagement::EngineerManagement(uint8_t number_of_engineers)
 	:available_engineers(number_of_engineers) 
@@ -19,7 +24,7 @@ void EngineerManagement::OnUpdate() {
 
 }
 
-void EngineerManagement::SendEngineer(GameObject* healing_target) {
+void EngineerManagement::SendEngineer(GameObject* building_node) {
 	if (available_engineers <= 0) return;
 
 	available_engineers--;
@@ -29,7 +34,7 @@ void EngineerManagement::SendEngineer(GameObject* healing_target) {
 	engineer->AddComponent(new Movement(engineer_movement_speed));
 	engineer->AddComponent(new Health(engineer_health));
 	engineer->AddComponent(new CharacterUI());
-	engineer->AddComponent(new EngineerBehaviour());
+	engineer->AddComponent(new EngineerBehaviour(building_node));
 
 	foreground_layer->AddGameObjectToLayer(engineer);
 

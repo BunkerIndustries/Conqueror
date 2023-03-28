@@ -4,7 +4,7 @@
 class EngineerBehaviour : public Component {
 public:
 	EngineerBehaviour(GameObject* building_node);
-	virtual ~MedicBehaviour() = default;
+	virtual ~EngineerBehaviour() = default;
 
 	void OnStart() override;
 	void OnStop() override;
@@ -12,11 +12,10 @@ public:
 	void OnEvent(Event& event) override {};
 
 private:
-	GameObject* building_Node;
+	GameObject* building_node;
 	glm::vec2 building_node_position;
 
 	bool building;
 	bool going_back;
-	float build_time;
 	float dt_counter;
 };

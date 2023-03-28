@@ -1,8 +1,10 @@
 #include "_Game.h"
 #include "medic_management.h"
 #include "required/constants.h"
-#include "required/functions.h"
 #include "components/medic_behaviour.h"
+#include "components/movement.h"
+#include "components/health.h"
+#include "components/UI/character_ui.h"
 
 MedicManagement::MedicManagement(uint8_t number_of_medics)
 	:available_medics(number_of_medics)
