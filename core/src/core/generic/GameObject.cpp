@@ -43,9 +43,6 @@ namespace core {
 
     GameObject::~GameObject()
     {
-        if (this->name == "bullet") {
-            LOG_CORE_WARN("deleted gameobject {0}", this->name);
-        }
         this->deleted = true;
         std::vector<GameObject*>::iterator it = std::find(layer->GetGameObjects().begin(), layer->GetGameObjects().end(), this);
         if (it != layer->GetGameObjects().end())
