@@ -55,7 +55,7 @@ namespace core
 
 	void Layer::AddGameObjectToLayer(GameObject* gameObject)
 	{
-		if (attached) {
+	if (attached) {
 			gameObjects.push_back(gameObject);
 			gameObject->Start();
 		}

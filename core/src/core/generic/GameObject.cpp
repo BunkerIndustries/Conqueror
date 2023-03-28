@@ -43,6 +43,9 @@ namespace core {
 
     GameObject::~GameObject()
     {
+        if (this->name == "bullet") {
+            LOG_CORE_WARN("deleted gameobject {0}", this->name);
+        }
         this->deleted = true;
         std::vector<GameObject*>::iterator it = std::find(layer->GetGameObjects().begin(), layer->GetGameObjects().end(), this);
         if (it != layer->GetGameObjects().end())
@@ -80,11 +83,14 @@ namespace core {
 	{
         // update gameObject, in order to display moving changes
         for (auto component : components) {
-            if (component && !deleted) {
+        	if (component && !deleted) {
                 component->OnUpdate();
             }
         }
-        transform.Update();
+        if (this && !deleted)
+        {
+			transform.Update();
+        }
     }
 
     void GameObject::Start()
