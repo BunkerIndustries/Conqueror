@@ -129,10 +129,12 @@ inline GameObject* CreateBuilding(glm::vec2 position, std::string type) {
 	if (type == "medic") {
 		building->AddComponent(medic_management);
 		building->AddComponent(new SpriteRenderer(glm::vec4(0.05f, 0.05f, 0.05f, 1.0f), Geometry::RECTANGLE));	// temp: replace with correct sprite-path
+		building->AddTag("medic_building");
 	}
 	else if (type == "engineer") {
 		building->AddComponent(engineer_management);
 		building->AddComponent(new SpriteRenderer(glm::vec4(0.3f, 0.3f, 0.3f, 1.0f), Geometry::RECTANGLE));
+		building->AddTag("engineer_building");
 	}
 	else {
 		LOG_DEBUG("WARNING: probably no existing type given when creating a building");
