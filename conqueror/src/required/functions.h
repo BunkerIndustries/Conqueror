@@ -11,6 +11,7 @@
 #include "components/soldier_behaviour.h"
 #include "components/health.h"
 #include "components/UI/character_ui.h"
+#include "components/UI/building_ui.h"
 #include <vector>
 #include <random>
 
@@ -139,6 +140,8 @@ inline GameObject* CreateBuilding(glm::vec2 position, std::string type) {
 	else {
 		LOG_DEBUG("WARNING: probably no existing type given when creating a building");
 	}
+
+	building->AddComponent(new BuildingUI());
 
 	foreground_layer->AddGameObjectToLayer(building);
 

@@ -98,6 +98,7 @@ bool GameScene::GameObjectPressed(GameObjectPressedEvent& e) {
 
     // If a character was clicked: active_gameobject that's supposed to move is set to that
     if (clicked_go->HasTag("soldier") && !clicked_go->GetComponent<SoldierBehaviour>()->on_spawn_pos) {
+
         if (active_go != nullptr && active_go->HasTag("soldier") && active_go != clicked_go) {
             active_go->GetComponent<CharacterUI>()->DeleteUI();
         }
@@ -105,6 +106,12 @@ bool GameScene::GameObjectPressed(GameObjectPressedEvent& e) {
         active_go = e.GetGameObject();
         active_go->GetComponent<CharacterUI>()->ToggleUI();
         
+        return true;
+    }
+    else if (clicked_go->HasTag("medic_building") || clicked_go->HasTag("engineer_building")) {
+        if (active_go != nullptr && (active_go->HasTag("medic_building") || active_go->HasTag("engineer_building"))) active_go->GetComponent<BuildingUI>()->DeleteUI();
+        clicked_go->GetComponent<BuildingUI>()->ToggleUI();
+        active_go = clicked_go;
         return true;
     }
     // Else if a move_node was clicked: set the active_gameobject's target_position to the move_node's position
