@@ -37,7 +37,7 @@ void EngineerBehaviour::OnUpdate() {
 	if ((gameObject->transform.position != building_node_position) || going_back) return;	// if he has not arrived yet or is going back return
 	else if (!building) {	// if he arrived and is not healing already
 		building = true;
-		CreateNode(building_node->transform.position, mg_stand);
+		//TODO: CreateNode(building_node->transform.position, mg_stand);
 		delete building_node;
 		// TODO: place mg
 	}

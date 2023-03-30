@@ -36,7 +36,7 @@ void EngineerManagement::SendEngineer(GameObject* building_node) {
 	engineer->AddComponent(new CharacterUI());
 	engineer->AddComponent(new EngineerBehaviour(building_node));
 
-	foreground_layer->AddGameObjectToLayer(engineer);
+	//TODO: foreground_layer->AddGameObjectToLayer(engineer);
 
 }
 

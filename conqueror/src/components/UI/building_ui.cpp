@@ -2,7 +2,6 @@
 #include "building_ui.h"
 #include "required/constants.h"
 #include "components/UI/ui_constants.h"
-#include "scenes/GameScene/game_scene.h"
 
 BuildingUI::BuildingUI() {
 
@@ -34,7 +33,7 @@ void BuildingUI::ToggleUI() {
 	}
 
 	for (auto& ui_element : ui_elements) {
-		foreground_layer->AddGameObjectToLayer(ui_element);
+		//TODO: fgl->AddGameObjectToLayer(ui_element);
 	}
 	ui_toggled = true;
 }

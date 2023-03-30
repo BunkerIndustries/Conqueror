@@ -6,6 +6,7 @@
 #include "layers/EnemyLayer.h"
 #include "layers/MapLayer.h"
 #include "layers/UILayer.h"
+#include "layers/ForegroundLayer.h"
 
 class GameScene : public Scene
 {
@@ -30,13 +31,10 @@ public:
 	AllyLayer* allyLayer = nullptr;
 	UILayer* uiLayer = nullptr;
 
+	ForegroundLayer* fgl = nullptr;
+
 private:
-<<<<<<<< HEAD:conqueror/src/scenes/GameScene/GameScene.h
 	GameObject* active_go = nullptr;
 
-	
-========
-	GameObject* active_go{ nullptr };
 	void CameraMovement(float dt);
->>>>>>>> origin/game_levi:conqueror/src/scenes/GameScene/game_scene.h
 };

@@ -37,7 +37,7 @@ void WaveManager::OnUpdate() {
 
 	if (global_dt_counter <= wave_duration) {
 		if (spawn_dt_counter >= spawn_interval) {
-			CreateEnemy("enemy", glm::vec2(RandomF(enemy_grid_startpos.x - enemy_spawn_random_x_radius, enemy_grid_startpos.x + enemy_spawn_random_x_radius), enemy_spawn_y_position));
+			//TODO: CreateEnemy("enemy", glm::vec2(RandomF(enemy_grid_startpos.x - enemy_spawn_random_x_radius, enemy_grid_startpos.x + enemy_spawn_random_x_radius), enemy_spawn_y_position));
 			spawn_dt_counter = 0.0f;
 		}
 		else {

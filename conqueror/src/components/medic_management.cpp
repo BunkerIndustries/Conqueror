@@ -33,7 +33,7 @@ void MedicManagement::SendMedic(GameObject* healing_target) {
 	medic->AddComponent(new CharacterUI());
 	medic->AddComponent(new MedicBehaviour(healing_target));
 
-	foreground_layer->AddGameObjectToLayer(medic);
+	//TODO: foreground_layer->AddGameObjectToLayer(medic);
 
 }
 

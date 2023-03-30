@@ -1,10 +1,6 @@
 #pragma once
-#include "scenes/StartScene/layers/ForegroundLayer.h"
 #include "components/medic_management.h"
 #include "components/engineer_management.h"
-
-// layers
-inline ForegroundLayer* foreground_layer = new ForegroundLayer();
 
 // enemy movement grid
 inline std::vector<std::vector<GameObject*>> enemy_grid;

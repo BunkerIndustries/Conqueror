@@ -32,7 +32,7 @@ void CharacterUI::ToggleUI() {
 	}
 
 	for (auto& ui_element : ui_elements) {
-		foreground_layer->AddGameObjectToLayer(ui_element);
+		//TODO: foreground_layer->AddGameObjectToLayer(ui_element);
 	}
 	ui_toggled = true;
 }
