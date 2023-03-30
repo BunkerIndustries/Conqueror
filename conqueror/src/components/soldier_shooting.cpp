@@ -26,28 +26,25 @@ void SoldierShooting::Shoot() {
 	for (uint8_t i = 0; i < max_soldier_lock_target_tries; i++) {
 		if (!LockTarget()) continue;
 		//LOG_DEBUG("LockTarget() returned true at try {0}", i);
-		std::cout << "target: " << target << std::endl;
+			
+		glm::vec2 end_point;
 
-		bullet = new GameObject("bullet", Transform(gameObject->transform.position, bullet_size));
-
-		bullet->AddComponent(new SpriteRenderer(bullet_color, Geometry::RECTANGLE));
-
-
-		// if the hit has hit
-		if (RandomInt(0, enemy_grid_y + soldier_miss_points) <= hit_probability) {
-			//LOG_DEBUG("soldier Bullet sent with hit=true");
-			bullet->AddComponent(new Bullet(target, this->gameObject, true, soldier_damage));
+		int r = RandomInt(0, enemy_grid_y + soldier_miss_points);
+		if (r <= hit_probability) {
+			end_point = target->transform.position;
+			if (target->GetComponent<Health>()->TakeDamage(enemy_damage)) target = nullptr;
 		}
 		else {
-			//LOG_DEBUG("soldier Bullet sent with hit=false");
-			bullet->AddComponent(new Bullet(target, this->gameObject, false, soldier_damage));
+			end_point = glm::vec2(target->transform.position.x + RandomF(min_inaccuracy, max_inaccuracy) * RandomInt(-1, 1), target->transform.position.y);
 		}
 
-		//foreground_layer->AddGameObjectToLayer(bullet);
+		GameObject* trace = new GameObject("bullet", Transform());
+		trace->AddComponent(new LineRenderer(gameObject->transform.position, end_point, trace_color, trace_thickness, trace_lasting * game_time_factor));
+		//foreground_layer->AddGameObjectToLayer(trace);
 
 		break;
 	}
-	
+
 }
 
 bool SoldierShooting::LockTarget() {

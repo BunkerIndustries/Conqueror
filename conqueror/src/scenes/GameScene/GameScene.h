@@ -31,7 +31,12 @@ public:
 	UILayer* uiLayer = nullptr;
 
 private:
+<<<<<<<< HEAD:conqueror/src/scenes/GameScene/GameScene.h
 	GameObject* active_go = nullptr;
 
 	
+========
+	GameObject* active_go{ nullptr };
+	void CameraMovement(float dt);
+>>>>>>>> origin/game_levi:conqueror/src/scenes/GameScene/game_scene.h
 };

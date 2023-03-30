@@ -1,8 +1,7 @@
 #pragma once
 #include "scenes/StartScene/layers/ForegroundLayer.h"
 #include "components/medic_management.h"
-
-// TODO: May split this up to multiple files, so that not everything has to be inline
+#include "components/engineer_management.h"
 
 // layers
 inline ForegroundLayer* foreground_layer = new ForegroundLayer();
@@ -38,6 +37,8 @@ inline uint8_t enemy_random_movement_sum = 5;
 inline uint8_t enemy_move_left_probability = 1;
 inline uint8_t enemy_move_mid_probability = 3;
 inline uint8_t enemy_move_right_probability = 1;
+inline float enemy_spawn_y_position = 15.0f;
+inline float enemy_spawn_random_x_radius = 5.0f;
 
 // character constants
 inline float soldier_movement_speed = 1.2f;
@@ -77,12 +78,12 @@ inline float soldier_health = 100.0f;
 inline float medic_health = 50.0f;
 inline float engineer_health = 200.0f;
 
-// bullet constants
-inline float bullet_speed = 30.0f;
-inline glm::vec4 bullet_color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
-inline glm::vec2 bullet_size = glm::vec2(0.5f, 0.5f);
+// bullet trace constants
+inline glm::vec4 trace_color = glm::vec4(1.0f, 0.0f, 0.0f, 0.8f);
 inline float min_inaccuracy = 0.8f;
 inline float max_inaccuracy = 1.4f;
+inline float trace_thickness = 0.3f;
+inline float trace_lasting = 0.15f;
 
 // node constants
 inline glm::vec2 node_size = glm::vec2(0.5f, 0.5f);
@@ -96,7 +97,7 @@ inline glm::vec4 node_bunker_color = glm::vec4(0.0f, 0.9f, 0.0f, node_alpha);
 inline glm::vec4 node_waiting_color = glm::vec4(0.0f, 0.4f, 0.4f, node_alpha);
 
 // time constants
-inline float waiting_time_factor = 4.0f;
+inline float game_time_factor = 3.0f;
 
 // medics constants
 inline uint8_t medic_count = 15;
@@ -104,5 +105,18 @@ inline MedicManagement* medic_management = new MedicManagement(medic_count);
 inline glm::vec2 medic_healing_position_offset = glm::vec2(0.5f, 0.0f);
 inline float waiting_time_per_hp = 0.02f;
 
+// engineer constants
+inline uint8_t engineer_count = 5;
+inline EngineerManagement* engineer_management = new EngineerManagement(engineer_count);
+inline glm::vec2 engineer_building_position_offset = glm::vec2(0.5f, 0.0f);
+inline float building_time = 0.8f;
+
 // building constants
 inline glm::vec2 building_size = glm::vec2(3.0f, 3.3f);
+
+// wave constants
+inline float start_preparation_time = 4.0f;
+inline float start_wave_duration = 4.0f;
+inline float wave_length_gradient = 1.5f;
+inline float enemy_start_spawn_interval = 2.0f;
+inline float enemy_spawn_interval_gradient = 0.9f;

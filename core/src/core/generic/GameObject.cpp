@@ -81,11 +81,14 @@ namespace core {
 	{
         // update gameObject, in order to display moving changes
         for (auto component : components) {
-            if (component && !deleted) {
+        	if (component && !deleted) {
                 component->OnUpdate();
             }
         }
-        transform.Update();
+        if (this && !deleted)
+        {
+			transform.Update();
+        }
     }
 
     void GameObject::Start()

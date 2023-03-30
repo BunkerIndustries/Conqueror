@@ -76,4 +76,11 @@ namespace core
 	{
 		glLineWidth(thickness);
 	}
+
+	void OpenGLRenderAPI::DrawIndexed(const Shr<VertexArray>& vertexArray, uint32_t indexCount)
+	{
+		vertexArray->Bind();
+		uint32_t count = indexCount ? indexCount : vertexArray->GetElementBuffer()->GetElementCount();
+		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
+	}
 }
