@@ -6,7 +6,6 @@
 #include "layers/EnemyLayer.h"
 #include "layers/MapLayer.h"
 #include "layers/UILayer.h"
-#include "layers/ForegroundLayer.h"
 
 #include "utils/WaveManager.h"
 
@@ -35,8 +34,6 @@ public:
 	EnemyLayer* enemyLayer = nullptr;
 	AllyLayer* allyLayer = nullptr;
 	UILayer* uiLayer = nullptr;
-
-	ForegroundLayer* fgl = nullptr;
 
 	WaveManager* waveManager = nullptr;
 

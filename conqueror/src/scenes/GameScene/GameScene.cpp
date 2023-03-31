@@ -25,13 +25,9 @@ void GameScene::LoadResources() {
     allyLayer = new AllyLayer;
     uiLayer = new UILayer();
 
-    fgl = new ForegroundLayer();
-
     waveManager = new WaveManager(this);
 }
 void GameScene::Init() {
-
-    AddLayer(fgl);
 
     AddLayer(mapLayer);
     AddLayer(enemyLayer);
