@@ -19,7 +19,7 @@ namespace core {
         bool deleted = false;
 
         std::string name = "GameObject";
-        std::initializer_list<std::string> tags;
+        //std::initializer_list<std::string> tags;
         ProjectionMode mode;
 
         bool running = false;

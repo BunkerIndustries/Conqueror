@@ -17,8 +17,8 @@ AllyLayer::~AllyLayer()
 
 void AllyLayer::OnAttach()
 {
-	CreateCharacter("soldier", glm::vec2(-5.0f, -5.0f));
-	CreateCharacter("soldier", glm::vec2(-4.0f, -5.0f));
+	CreateCharacter("soldier", Transform(glm::vec2(-5.0f, -5.0f), character_scale));
+	CreateCharacter("soldier", Transform(glm::vec2(-4.0f, -5.0f), character_scale));
 	/*CreateCharacter("soldier", glm::vec2(2.0f, 1.0f));
 	CreateCharacter("soldier", glm::vec2(2.5f, 1.0f));
 	CreateCharacter("soldier", glm::vec2(3.0f, 1.0f));*/

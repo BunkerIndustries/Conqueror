@@ -160,6 +160,7 @@ namespace core {
 
     bool GameObject::HasTag(std::string tag)
     {
+        if (tagList.size() <= 0) return false;
         std::transform(tag.begin(), tag.end(), tag.begin(), ::toupper);
         std::vector<std::string>::iterator it = std::find(tagList.begin(), tagList.end(), tag);
         return it != tagList.end();
