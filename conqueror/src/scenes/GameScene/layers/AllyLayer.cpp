@@ -60,6 +60,13 @@ GameObject* AllyLayer::CreateCharacter(std::string type, Transform transform) {
 		character->AddComponent(new Health(engineer_health));
 		character->AddComponent(new CharacterUI());
 	}
+	else if(type == "medic")
+	{ 
+		character->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), Geometry::RECTANGLE));		// TODO: Change to sprite_path
+		character->AddComponent(new Movement(medic_movement_speed));
+		character->AddComponent(new Health(medic_health));
+		character->AddComponent(new CharacterUI());
+	}
 	else LOG_WARN("WARNING: probably no existing type given when creating a character");
 
 	AddGameObjectToLayer(character);

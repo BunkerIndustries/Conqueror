@@ -1,5 +1,4 @@
 #pragma once
-#include "components/medic_management.h"
 #include "scenes/GameScene/GameScene.h"
 
 
@@ -101,7 +100,7 @@ inline float game_time_factor = 3.0f;
 
 // medics constants
 inline uint8_t medic_count = 15;
-inline MedicManagement* medic_management = new MedicManagement(medic_count);
+//inline MedicManagement* medic_management = new MedicManagement(medic_count);
 inline glm::vec2 medic_healing_position_offset = glm::vec2(0.5f, 0.0f);
 inline float waiting_time_per_hp = 0.02f;
 

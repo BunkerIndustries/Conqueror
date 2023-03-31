@@ -92,7 +92,7 @@ bool CharacterUI::UIElementPressed(GameObjectPressedEvent& e) {
 	//LOG_DEBUG("character which ui was clicked is a character");
 
 	if (!e.GetGameObject()->HasTag("call_medic_button") || (gameObject->HasTag("soldier") && gameObject->GetComponent<Health>()->GetHp() == soldier_health) || gameObject->GetComponent<SoldierBehaviour>()->is_healed) return false;	// if the clicked button is not call_medic_button or the soldier is full health
-	medic_management->SendMedic(gameObject);
+	//medic_management->SendMedic(gameObject);
 	gameObject->GetComponent<SoldierBehaviour>()->is_healed = true;
 	//LOG_DEBUG("call medic");
 	return true;
