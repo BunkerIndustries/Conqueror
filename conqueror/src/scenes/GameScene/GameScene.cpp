@@ -30,7 +30,6 @@ void GameScene::LoadResources() {
     waveManager = new WaveManager(this);
 }
 void GameScene::Init() {
-    Engineer::Init(this);
 
     AddLayer(fgl);
 

@@ -4,6 +4,7 @@
 #include "Engine.h"
 
 #include "scenes/GameScene/GameScene.h"
+#include "required/constants.h"
 
 class Conqueror : public core::Application {
 public:
@@ -16,7 +17,7 @@ public:
 	}
 
 	void Init() override {
-		Application::ChangeScene(new GameScene());
+		Application::ChangeScene(gameScene);
 	}
 
 };

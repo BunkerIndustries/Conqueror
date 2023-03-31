@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Engine.h"
+#include "_Game.h"
 
 #include "layers/AllyLayer.h"
 #include "layers/EnemyLayer.h"
@@ -27,6 +27,9 @@ public:
 	};
 	bool OnMouseScroll(MouseScrolledEvent& e);
 	bool GameObjectPressed(GameObjectPressedEvent& e);
+
+	GameObject* GetActiveGO() const { return active_go; }
+	void SetActiveGO(GameObject* gameObject) { active_go = gameObject; }
 
 	MapLayer* mapLayer = nullptr;
 	EnemyLayer* enemyLayer = nullptr;

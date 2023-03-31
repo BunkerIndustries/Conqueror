@@ -1,5 +1,10 @@
 #pragma once
 #include "components/medic_management.h"
+#include "scenes/GameScene/GameScene.h"
+
+
+//scenes
+inline GameScene* gameScene = new GameScene();
 
 // enemy movement grid
 inline std::vector<std::vector<GameObject*>> enemy_grid;

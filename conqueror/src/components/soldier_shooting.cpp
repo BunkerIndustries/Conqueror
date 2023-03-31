@@ -40,7 +40,7 @@ void SoldierShooting::Shoot() {
 
 		GameObject* trace = new GameObject("bullet", Transform());
 		trace->AddComponent(new LineRenderer(gameObject->transform.position, end_point, trace_color, trace_thickness, trace_lasting * game_time_factor));
-		//foreground_layer->AddGameObjectToLayer(trace);
+		gameScene->allyLayer->AddGameObjectToLayer(trace);
 
 		break;
 	}

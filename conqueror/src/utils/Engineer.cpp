@@ -5,13 +5,6 @@
 
 #include "required/constants.h"
 
-GameScene* Engineer::gameScene;
-
-void Engineer::Init(GameScene* scene)
-{
-	gameScene = scene;
-}
-
 void Engineer::AddBuilding(Transform transform, uint32_t engineerCount)
 {
 	GameObject* engineerBuilding = gameScene->mapLayer->CreateBuilding(transform, "engineer");

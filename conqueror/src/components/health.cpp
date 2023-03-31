@@ -25,8 +25,8 @@ bool Health::TakeDamage(float damage) {
 	if (this == nullptr) return true;
 	hp -= damage;
 	if (hp <= 0.0f) {
+		if (gameScene->GetActiveGO() == gameObject) gameScene->SetActiveGO(nullptr);
 		delete gameObject;
-		LOG_DEBUG("gameobject deleted");
 		return true;
 	}
 	return false;
