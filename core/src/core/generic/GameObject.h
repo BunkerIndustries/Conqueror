@@ -15,7 +15,7 @@ namespace core {
     private:
         std::string id;
         std::vector<Component*> components;
-        Layer* layer;
+        Layer* layer = nullptr;
         bool deleted = false;
 
         std::string name = "GameObject";

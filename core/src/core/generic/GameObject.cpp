@@ -45,10 +45,12 @@ namespace core {
     GameObject::~GameObject()
     {
         this->deleted = true;
-        std::vector<GameObject*>::iterator it = std::find(layer->GetGameObjects().begin(), layer->GetGameObjects().end(), this);
-        if (it != layer->GetGameObjects().end())
-        {
-            layer->GetGameObjects().erase(it);
+        if (layer) {
+            std::vector<GameObject*>::iterator it = std::find(layer->GetGameObjects().begin(), layer->GetGameObjects().end(), this);
+            if (it != layer->GetGameObjects().end())
+            {
+                layer->GetGameObjects().erase(it);
+            }
         }
         const int componentSize = components.size();
         for (int i = 0; i < componentSize; i++)
