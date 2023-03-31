@@ -3,6 +3,8 @@
 
 #include "required/constants.h"
 
+#include "utils/Engineer.h"
+
 GameScene::GameScene() {
 }
 
@@ -24,8 +26,12 @@ void GameScene::LoadResources() {
     uiLayer = new UILayer();
 
     fgl = new ForegroundLayer();
+
+    waveManager = new WaveManager(this);
 }
 void GameScene::Init() {
+    Engineer::Init(this);
+
     AddLayer(fgl);
 
     AddLayer(mapLayer);
@@ -33,15 +39,13 @@ void GameScene::Init() {
     AddLayer(allyLayer);
 
     AddOverlay(uiLayer);
-
-    GameObject* empty_wave_manager = new GameObject("wave_manager", Transform(glm::vec2(0.0f), glm::vec2(0.0f)));
-    empty_wave_manager->AddComponent(new WaveManager());
-    fgl->AddGameObjectToLayer(empty_wave_manager);
 }
 
 void GameScene::Update() {
     float dt = Application::GetDT();
     CameraMovement(dt);
+
+    waveManager->OnUpdate();
 }
 
 void GameScene::CameraMovement(float dt) {

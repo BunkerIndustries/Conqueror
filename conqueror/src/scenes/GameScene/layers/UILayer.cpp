@@ -23,6 +23,25 @@ void UILayer::Update(const float dt)
 {
 }
 
-void UILayer::OnEvent(Event& event)
+bool UILayer::OnGameObjectClick(GameObjectPressedEvent& e)
+{
+	//if (e.GetGameObject()->HasTag("UI"))
+	//	OnUIClick()
+	return false;
+}
+
+void UILayer::OnUIClick()
 {
 }
+
+void UILayer::OnGOClick(GameObject* gameObject)
+{
+}
+
+void UILayer::OnEvent(Event& event)
+{
+	EventDispatcher dispatcher(event);
+	dispatcher.dispatch<GameObjectPressedEvent>(BIND_EVENT_FN(UILayer::OnGameObjectClick));
+}
+
+

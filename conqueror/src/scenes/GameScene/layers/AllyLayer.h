@@ -15,5 +15,5 @@ public:
 	void OnEvent(Event& event) override;
 
 private:
-	GameObject* CreateCharacter(std::string type, glm::vec2 spawn_pos);
+	GameObject* CreateCharacter(std::string type, Transform transform);
 };

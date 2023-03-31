@@ -9,7 +9,7 @@
 #include "components/node.h"
 #include "components/soldier_behaviour.h"
 #include "components/soldier_shooting.h"
-#include "components/wave_manager.h"
 #include "components/UI/character_ui.h"
 #include "components/UI/ui_constants.h"
 #include "components/UI/building_ui.h"
+#include "components/EngineerComponent.h"

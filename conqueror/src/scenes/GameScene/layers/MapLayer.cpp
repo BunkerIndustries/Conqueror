@@ -5,15 +5,14 @@
 #include "required/maps.h"
 #include "required/stands.h"
 
+#include "utils/Engineer.h"
+
 
 
 MapLayer::MapLayer()
 	: Layer("MapLayer")
 {
-	CreateGameMap(standard_map);
-	CreateEnemyGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
 
-	CreateBuilding(glm::vec2(12.0f, -5.0f), "medic");
 }
 
 MapLayer::~MapLayer()
@@ -22,6 +21,12 @@ MapLayer::~MapLayer()
 
 void MapLayer::OnAttach()
 {
+	CreateGameMap(standard_map);
+	CreateEnemyGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
+
+	CreateBuilding(glm::vec2(12.0f, -5.0f), "medic");
+
+	Engineer::AddBuilding(Transform(glm::vec2(3.0f, -1.5f), glm::vec2(2.0f, 2.0f), -45.0f), engineer_count);
 }
 
 void MapLayer::OnDetach()
@@ -92,16 +97,18 @@ void MapLayer::CreateEnemyGrid(const uint8_t x_size, const uint8_t y_size, const
 	enemy_grid = grid;
 }
 
-GameObject* MapLayer::CreateBuilding(glm::vec2 position, std::string type) {
+GameObject* MapLayer::CreateBuilding(Transform transform, std::string type) {
 
-	GameObject* building = new GameObject(type + "-building", Transform(position, building_size));
+	GameObject* building = new GameObject(type + "-building", transform);
 
 	if (type == "medic") {
 		building->AddComponent(medic_management);
 		building->AddComponent(new SpriteRenderer(glm::vec4(0.05f, 0.05f, 0.05f, 1.0f), Geometry::RECTANGLE));	// temp: replace with correct sprite-path
 	}
 	else if (type == "engineer") {
-
+		//building->AddComponent(engineer_management);
+		building->AddComponent(new SpriteRenderer(glm::vec4(0.3f, 0.3f, 0.3f, 1.0f), Geometry::RECTANGLE));
+		building->AddTag("engineer_building");
 	}
 	else {
 		LOG_WARN("WARNING: probably no existing type given when creating a building");

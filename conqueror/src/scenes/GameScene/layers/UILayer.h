@@ -12,4 +12,10 @@ public:
 	void OnDetach() override;
 	void Update(const float dt) override;
 	void OnEvent(Event& event) override;
+
+private:
+	bool OnGameObjectClick(GameObjectPressedEvent& e);
+
+	void OnUIClick();
+	void OnGOClick(GameObject* gameObject);
 };

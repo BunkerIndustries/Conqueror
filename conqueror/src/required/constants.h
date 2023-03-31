@@ -1,6 +1,5 @@
 #pragma once
 #include "components/medic_management.h"
-#include "components/engineer_management.h"
 
 // enemy movement grid
 inline std::vector<std::vector<GameObject*>> enemy_grid;
@@ -103,7 +102,7 @@ inline float waiting_time_per_hp = 0.02f;
 
 // engineer constants
 inline uint8_t engineer_count = 5;
-inline EngineerManagement* engineer_management = new EngineerManagement(engineer_count);
+//inline EngineerManagement* engineer_management = new EngineerManagement(engineer_count);
 inline glm::vec2 engineer_building_position_offset = glm::vec2(0.5f, 0.0f);
 inline float building_time = 0.8f;
 

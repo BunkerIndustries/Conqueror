@@ -8,6 +8,8 @@
 #include "layers/UILayer.h"
 #include "layers/ForegroundLayer.h"
 
+#include "utils/WaveManager.h"
+
 class GameScene : public Scene
 {
 public:
@@ -32,6 +34,8 @@ public:
 	UILayer* uiLayer = nullptr;
 
 	ForegroundLayer* fgl = nullptr;
+
+	WaveManager* waveManager = nullptr;
 
 private:
 	GameObject* active_go = nullptr;

@@ -1,14 +1,14 @@
 #include "_Game.h"
-#include "wave_manager.h"
+#include "WaveManager.h"
+
+#include "scenes/GameScene/GameScene.h"
+
 #include "required/constants.h"
 #include "required/functions.h"
-#include "required/stands.h"
 
-WaveManager::WaveManager() {
-
-}
-
-void WaveManager::OnStart() {
+WaveManager::WaveManager(GameScene* gameScene)
+	: gameScene(gameScene)
+{
 	global_dt_counter = 0.0f;
 	spawn_dt_counter = 0.0f;
 	cooldown_state = true;
@@ -18,12 +18,8 @@ void WaveManager::OnStart() {
 	spawn_interval = enemy_start_spawn_interval * game_time_factor;
 }
 
-void WaveManager::OnStop() {
-
-}
-
 void WaveManager::OnUpdate() {
-	
+
 	float dt = Application::GetDT();
 	global_dt_counter += dt;
 
@@ -37,7 +33,7 @@ void WaveManager::OnUpdate() {
 
 	if (global_dt_counter <= wave_duration) {
 		if (spawn_dt_counter >= spawn_interval) {
-			//TODO: CreateEnemy("enemy", glm::vec2(RandomF(enemy_grid_startpos.x - enemy_spawn_random_x_radius, enemy_grid_startpos.x + enemy_spawn_random_x_radius), enemy_spawn_y_position));
+			gameScene->enemyLayer->CreateEnemy("enemy", glm::vec2(RandomF(enemy_grid_startpos.x - enemy_spawn_random_x_radius, enemy_grid_startpos.x + enemy_spawn_random_x_radius), enemy_spawn_y_position));
 			spawn_dt_counter = 0.0f;
 		}
 		else {

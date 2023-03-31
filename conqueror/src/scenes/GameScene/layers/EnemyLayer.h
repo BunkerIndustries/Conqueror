@@ -13,6 +13,5 @@ public:
 	void Update(const float dt) override;
 	void OnEvent(Event& event) override;
 
-private:
 	GameObject* CreateEnemy(std::string name, glm::vec2 spawn_pos);
 };
