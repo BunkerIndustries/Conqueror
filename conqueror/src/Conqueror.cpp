@@ -3,7 +3,7 @@
 #include "EntryPoint.h"
 #include "Engine.h"
 
-#include "scenes/GameScene/GameScene.h"
+#include "scenes/MenuScene/MenuScene.h"
 #include "required/constants.h"
 
 class Conqueror : public core::Application {
@@ -17,7 +17,7 @@ public:
 	}
 
 	void Init() override {
-		Application::ChangeScene(gameScene);
+		Application::ChangeScene(menuScene);
 	}
 
 };
