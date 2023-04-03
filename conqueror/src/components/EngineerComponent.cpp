@@ -20,7 +20,7 @@ EngineerCharacter::EngineerCharacter(GameObject* home_node, GameObject* building
 	: home_node(home_node), building_node(building_node)
 {
 	building_node_position = home_node->transform.position + engineer_building_position_offset;
-	gameObject->GetComponent<Movement>()->target_position = building_node_position;
+	gameObject->GetComponent<Movement>()->target_position = &building_node_position;
 	isBuilding = false;
 	going_back = false;
 	dt_counter = 0.0f;
@@ -44,7 +44,7 @@ void EngineerCharacter::OnUpdate() {
 		if (dt_counter >= building_time) {
 			isBuilding = false;
 			going_back = true;
-			gameObject->GetComponent<Movement>()->target_position = home_node->transform.position;
+			gameObject->GetComponent<Movement>()->target_position = &home_node->transform.position;
 		}
 		dt_counter += Application::GetDT();
 		return;

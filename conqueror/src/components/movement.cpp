@@ -10,7 +10,7 @@ Movement::Movement(float movement_speed)
 }
 
 void Movement::OnStart() {
-	target_position = gameObject->transform.position;	// Do not move when initialised
+	target_position = &gameObject->transform.position;	// Do not move when initialised
 	has_arrived = false;
 	//LOG_DEBUG("Target x pos: {0}", target_position.x);
 }
@@ -21,9 +21,9 @@ void Movement::OnStop() {
 
 void Movement::OnUpdate() {
 
-	if (target_position != gameObject->transform.position) {
+	if (*target_position != gameObject->transform.position) {
 		has_arrived = false;
-		MoveTo(target_position, movement_speed);
+		MoveTo(*target_position, movement_speed);
 	}
 	else {
 		has_arrived = true;
