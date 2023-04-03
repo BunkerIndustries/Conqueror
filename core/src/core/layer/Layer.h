@@ -49,6 +49,11 @@ namespace core
 		}
 
 		void AddGameObjectToLayer(GameObject* gameObject);
+
+		std::vector<GameObject*> GetGameObjectsByTag(std::initializer_list<std::string> tags);
+		std::vector<GameObject*> GetGameObjectsByTag(std::string tag);
+
+
 		void SetOverlayStatus(bool overlay) { this->overlay = overlay; }
 
 		bool GetOverlayStatus() { return overlay; }
