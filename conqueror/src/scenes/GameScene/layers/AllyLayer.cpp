@@ -2,6 +2,7 @@
 
 #include "AllyLayer.h"
 #include "required/constants.h"
+#include "utils/Medic.h"
 
 AllyLayer::AllyLayer()
 	: Layer("AllyLayer")
@@ -36,7 +37,16 @@ void AllyLayer::Update(const float dt)
 
 void AllyLayer::OnEvent(Event& event)
 {
-
+	EventDispatcher dispatcher(event);
+	dispatcher.dispatch<KeyPressedEvent>([this](KeyPressedEvent& e) 
+	{
+		if (e.getKeyCode() == KEY_K)
+		{
+			Medic::SendMedic(gameObjects[0]);
+			return true;
+		}
+		return false;
+	});
 }
 
 GameObject* AllyLayer::CreateCharacter(std::string type, Transform transform) {
@@ -62,7 +72,7 @@ GameObject* AllyLayer::CreateCharacter(std::string type, Transform transform) {
 	}
 	else if(type == "medic")
 	{ 
-		character->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), Geometry::RECTANGLE));		// TODO: Change to sprite_path
+		character->AddComponent(new SpriteRenderer(glm::vec4(0.5f, 0.5f, 0.0f, 0.8f), Geometry::RECTANGLE));		// TODO: Change to sprite_path
 		character->AddComponent(new Movement(medic_movement_speed));
 		character->AddComponent(new Health(medic_health));
 		character->AddComponent(new CharacterUI());

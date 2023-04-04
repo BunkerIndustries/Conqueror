@@ -85,7 +85,7 @@ void SoldierBehaviour::SoldierMove(GameObject* move_node) {
 	Node* node_component = move_node->GetComponent<Node>();
 
 	// if the target node is the same it is already on or it is already occupied (position-check is needed because clicking a node twice with the same selected gameobject will make it unoccupied)
-	if (move_component->target_position == move_node->transform.position || node_component->is_occupied) return;
+	if (*move_component->target_position == move_node->transform.position || node_component->is_occupied) return;
 
 	// make the clicked node occupied and the recent unoccupied
 	node_component->is_occupied = true;
@@ -93,7 +93,7 @@ void SoldierBehaviour::SoldierMove(GameObject* move_node) {
 	old_node->GetComponent<Node>()->is_occupied = false;
 
 	// move the gameobject
-	move_component->target_position = move_node->transform.position;
+	move_component->target_position = &move_node->transform.position;
 	this->target_position = move_node->transform.position;
 	travelling = true;
 
@@ -117,7 +117,7 @@ bool SoldierBehaviour::SoldierTryMoveToWaitingNode() {
 		if (!node->GetComponent<Node>()->is_occupied) {
 
 			// move the gameobject to the chosen waiting node 
-			gameObject->GetComponent<Movement>()->target_position = node->transform.position;
+			gameObject->GetComponent<Movement>()->target_position = &node->transform.position;
 			this->target_position = node->transform.position;
 			node->GetComponent<Node>()->is_occupied = true;
 			this->stand = waiting_stand.stand;

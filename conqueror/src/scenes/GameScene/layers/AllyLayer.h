@@ -14,6 +14,6 @@ public:
 	void Update(const float dt) override;
 	void OnEvent(Event& event) override;
 
-private:
 	GameObject* CreateCharacter(std::string type, Transform transform);
+private:
 };

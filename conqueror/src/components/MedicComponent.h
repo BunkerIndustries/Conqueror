@@ -11,7 +11,7 @@ public:
 	void OnUpdate() override { };
 	void OnEvent(Event& event) override {};
 
-	void SendMedic(GameObject* healing_target);
+	void SendMedic();
 	void ReturnMedic();
 
 private:

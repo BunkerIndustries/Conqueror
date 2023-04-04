@@ -9,7 +9,7 @@ MedicBuilding::MedicBuilding(uint32_t number_of_medics)
 
 }
 
-void MedicBuilding::SendMedic(GameObject* healing_target) {
+void MedicBuilding::SendMedic() {
 	if (available_medics <= 0) return;
 
 	available_medics--;
@@ -28,7 +28,6 @@ MedicCharacter::MedicCharacter(GameObject* home_node, GameObject* healing_target
 	:home_node(home_node), healing_target(healing_target)
 {
 	healing_target_position = healing_target->transform.position + medic_healing_position_offset;
-	gameObject->GetComponent<Movement>()->target_position = healing_target_position;
 	healing = false;
 	going_back = false;
 	dt_counter = 0.0f;
@@ -49,7 +48,7 @@ void MedicCharacter::OnUpdate() {
 	if (!healing_target->GetComponent<Movement>()) {
 		// go back 
 		going_back = true;
-		gameObject->GetComponent<Movement>()->target_position = home_node->transform.position;
+		gameObject->GetComponent<Movement>()->target_position = &home_node->transform.position;
 		return;
 	}
 
@@ -63,7 +62,7 @@ void MedicCharacter::OnUpdate() {
 			healing = false;
 			going_back = true;
 			healing_target->GetComponent<Health>()->GetHealed();
-			gameObject->GetComponent<Movement>()->target_position = home_node->transform.position;
+			gameObject->GetComponent<Movement>()->target_position = &home_node->transform.position;
 		}
 		dt_counter += Application::GetDT();
 	}

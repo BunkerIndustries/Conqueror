@@ -65,4 +65,33 @@ namespace core
 		gameObject->SetLayer(this);
 	}
 
+	std::vector<GameObject*> Layer::GetGameObjectsByTag(std::initializer_list<std::string> tags)
+	{
+		std::vector<GameObject*> gos;
+		for (int i = 0; i < gameObjects.size(); i++)
+		{
+			for (std::string tag : tags)
+			{
+				if (gameObjects[i]->HasTag(tag))
+				{
+					gos.push_back(gameObjects[i]);
+					break;
+				}
+			}
+		}
+		return gos;
+	}
+
+	std::vector<GameObject*> Layer::GetGameObjectsByTag(std::string tag)
+	{
+		std::vector<GameObject*> gos;
+		for (int i = 0; i < gameObjects.size(); i++)
+		{
+			if (gameObjects[i]->HasTag(tag))
+			{
+				gos.push_back(gameObjects[i]);
+			}
+		}
+		return gos;
+	}
 }
