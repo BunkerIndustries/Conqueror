@@ -9,14 +9,6 @@
 
 namespace core {
 
-    Scene::Scene() {
-
-    }
-
-    Scene::~Scene() {
-        delete camera;
-    }
-
     void Scene::InitGeneral() {
         camera = new Camera();
 

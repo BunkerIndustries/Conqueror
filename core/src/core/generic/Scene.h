@@ -18,8 +18,8 @@ namespace core {
         std::vector<GameObject*> gameObjects;
 
     public:
-        Scene();
-        virtual ~Scene();
+        Scene() = default;
+        virtual ~Scene() = default;
 
         Camera* GetCamera();
         glm::vec4& GetBackcolor();
