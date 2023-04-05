@@ -1,7 +1,8 @@
 #include "_Game.h"
 
 #include "MenuLayer.h"
-#include "../../GameScene/GameScene.h"
+
+#include "required/constants.h"
 
 MenuLayer::MenuLayer()
 {
@@ -28,7 +29,7 @@ bool MenuLayer::OnGameObjectClick(GameObjectPressedEvent& e)
     GameObject* go = e.GetGameObject();
 
     if (go->HasTag("play")) {
-        Application::ChangeScene(new GameScene());
+        Application::ChangeScene(gameScene);
     }
     else if (go->HasTag("quit")) {
         Application::GetInstance()->Exit();
