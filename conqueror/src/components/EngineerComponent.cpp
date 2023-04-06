@@ -2,6 +2,8 @@
 #include "EngineerComponent.h"
 
 #include "required/constants.h"
+#include "required/functions.h"
+#include "required/stands.h"
 
 EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
 	: available_engineers(engineerCount) { }
@@ -49,9 +51,9 @@ void EngineerCharacter::OnUpdate() {
 		dt_counter += Application::GetDT();
 		return;
 	}
-	// if he arrived and is not healing already
+	// if he arrived and is not building already
 	isBuilding = true;
-	//TODO: CreateNode(building_node->transform.position, mg_stand);
+	gameScene->mapLayer->CreateNode(building_node->transform.position, mg_stand);
 	delete building_node;
 	// TODO: place mg
 }

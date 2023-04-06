@@ -10,7 +10,6 @@ SoldierShooting::SoldierShooting() {
 
 void SoldierShooting::OnStart() {
 	target = nullptr;
-	bullet = nullptr;
 }
 
 void SoldierShooting::OnStop() {
@@ -32,7 +31,9 @@ void SoldierShooting::Shoot() {
 		int r = RandomInt(0, enemy_grid_y + soldier_miss_points);
 		if (r <= hit_probability) {
 			end_point = target->transform.position;
-			if (target->GetComponent<Health>()->TakeDamage(enemy_damage)) target = nullptr;
+			if (target->GetComponent<Health>()->TakeDamage(enemy_damage)) {
+				target = nullptr;
+			}
 		}
 		else {
 			end_point = glm::vec2(target->transform.position.x + RandomF(min_inaccuracy, max_inaccuracy) * RandomInt(-1, 1), target->transform.position.y);
@@ -77,21 +78,11 @@ bool SoldierShooting::LockTarget() {
 
 	// if this vector contains no enemies => no target is set, try unsuccessful
 	if (enemy_row_vec.size() == 0) {
-
 		return false;
-		// if no new target is found, remain on the old one
-		//if (target != nullptr) {
-		//	return true;
-		//}
-		//else {
-		//	return false;
-		//}
-		
 	}
 	// if it contains enemies => a target is set, try successful
 	else {
 		target = enemy_row_vec.at(RandomInt(0, enemy_row_vec.size()-1));
-		//LOG_DEBUG("Target found");
 		return true;
 	}
 

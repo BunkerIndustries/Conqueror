@@ -4,6 +4,7 @@
 #include "required/constants.h"
 
 #include "utils/Engineer.h"
+#include "utils/SoldierSupply.h"
 
 GameScene::GameScene() {
 }
@@ -29,6 +30,8 @@ void GameScene::LoadResources() {
 }
 void GameScene::Init() {
 
+    SoldierSupply::Init();
+
     AddLayer(mapLayer);
     AddLayer(enemyLayer);
     AddLayer(allyLayer);
@@ -37,9 +40,8 @@ void GameScene::Init() {
 }
 
 void GameScene::Update() {
-    float dt = Application::GetDT();
-    CameraMovement(dt);
 
+    CameraMovement(Application::GetDT());
     waveManager->OnUpdate();
 }
 
@@ -93,7 +95,6 @@ bool GameScene::GameObjectPressed(GameObjectPressedEvent& e) {
             active_go->GetComponent<SoldierBehaviour>()->SoldierMove(clicked_go);
             return true;
         }
-        
     }
 
     return true;

@@ -15,5 +15,7 @@ public:
 	void OnEvent(Event& event) override;
 
 	GameObject* CreateCharacter(std::string type, Transform transform);
+	GameObject* AllyLayer::CreateMg(glm::vec2 mg_node_position);
+
 private:
 };

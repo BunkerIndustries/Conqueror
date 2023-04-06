@@ -2,7 +2,8 @@
 
 #include "AllyLayer.h"
 #include "required/constants.h"
-#include "utils/Medic.h"
+#include "utils/SoldierSupply.h"
+#include "components/MgComponent.h"
 
 AllyLayer::AllyLayer()
 	: Layer("AllyLayer")
@@ -18,11 +19,7 @@ AllyLayer::~AllyLayer()
 
 void AllyLayer::OnAttach()
 {
-	CreateCharacter("soldier", Transform(glm::vec2(-5.0f, -5.0f), character_scale));
-	CreateCharacter("soldier", Transform(glm::vec2(-4.0f, -5.0f), character_scale));
-	/*CreateCharacter("soldier", glm::vec2(2.0f, 1.0f));
-	CreateCharacter("soldier", glm::vec2(2.5f, 1.0f));
-	CreateCharacter("soldier", glm::vec2(3.0f, 1.0f));*/
+
 }
 
 void AllyLayer::OnDetach()
@@ -40,9 +37,8 @@ void AllyLayer::OnEvent(Event& event)
 	EventDispatcher dispatcher(event);
 	dispatcher.dispatch<KeyPressedEvent>([this](KeyPressedEvent& e) 
 	{
-		if (e.getKeyCode() == KEY_K)
-		{
-			Medic::SendMedic(gameObjects[0]);
+		if (e.getKeyCode() == KEY_SPACE) {
+			SoldierSupply::TryCallSoldier();
 			return true;
 		}
 		return false;
@@ -82,4 +78,14 @@ GameObject* AllyLayer::CreateCharacter(std::string type, Transform transform) {
 	AddGameObjectToLayer(character);
 
 	return character;
+}
+
+GameObject* AllyLayer::CreateMg(glm::vec2 mg_node_position) {
+
+	GameObject* mg = new GameObject("mg", Transform(mg_node_position,mg_size));
+	mg->AddComponent(new SpriteRenderer(glm::vec4(0.5f, 0.1f, 0.5f, 1.0f), Geometry::RECTANGLE));
+	mg->AddComponent(new MgComponent());
+	AddGameObjectToLayer(mg);
+
+	return mg;
 }
