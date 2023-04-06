@@ -112,9 +112,9 @@ inline uint8_t engineer_count = 5;
 inline glm::vec2 engineer_building_position_offset = glm::vec2(0.5f, 0.0f);
 inline float building_time = 0.8f;
 
-// structures
+// buildings
 inline glm::vec2 building_size = glm::vec2(3.0f, 3.3f);
-inline glm::vec2 mg_size = glm::vec2(1.0f, 2.0f);
+
 
 // wave 
 inline float start_preparation_time = 4.0f;
@@ -125,3 +125,11 @@ inline float enemy_spawn_interval_gradient = 0.9f;
 
 // game 
 inline unsigned int start_soldier_stock = 20;
+
+// mg
+inline glm::vec2 mg_size = glm::vec2(1.0f, 2.0f);
+inline unsigned int mg_magazin_size = 50;
+inline float mg_reload_time = 3.0f;
+inline float mg_shoot_interval = 0.05f;
+inline uint8_t mg_miss_points = 5;
+inline uint8_t mg_damage = 15;
