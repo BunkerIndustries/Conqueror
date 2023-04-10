@@ -18,12 +18,7 @@ void CharacterUI::OnUpdate() {
 
 }
 
-void CharacterUI::ToggleUI() {
-	if (ui_toggled) {
-		DeleteUI(); 
-		ui_toggled = false;
-		return;
-	}
+void CharacterUI::OpenUI() {
 		
 	CreateBackground();
 	CreateHeader();
@@ -32,9 +27,8 @@ void CharacterUI::ToggleUI() {
 	}
 
 	for (auto& ui_element : ui_elements) {
-		//TODO: foreground_layer->AddGameObjectToLayer(ui_element);
+		gameScene->uiLayer->AddGameObjectToLayer(ui_element);
 	}
-	ui_toggled = true;
 }
 
 void CharacterUI::CreateBackground() {
@@ -80,7 +74,6 @@ void CharacterUI::DeleteUI() {
 		delete ui_element;
 	}
 	ui_elements.clear();
-	ui_toggled = false;
 }
 
 bool CharacterUI::UIElementPressed(GameObjectPressedEvent& e) {

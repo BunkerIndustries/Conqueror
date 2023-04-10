@@ -27,8 +27,11 @@ public:
 	bool OnMouseScroll(MouseScrolledEvent& e);
 	bool GameObjectPressed(GameObjectPressedEvent& e);
 
-	GameObject* GetActiveGO() const { return active_go; }
-	void SetActiveGO(GameObject* gameObject) { active_go = gameObject; }
+	GameObject* GetActiveCharacter() const { return active_character; }
+	void SetActiveCharacter(GameObject* gameObject) { active_character = gameObject; }
+
+	GameObject* GetActiveBuilding() const { return active_building; }
+	void SetActiveBuilding(GameObject* gameObject) { active_building = gameObject; }
 
 	MapLayer* mapLayer = nullptr;
 	EnemyLayer* enemyLayer = nullptr;
@@ -38,7 +41,8 @@ public:
 	WaveManager* waveManager = nullptr;
 
 private:
-	GameObject* active_go = nullptr;
+	GameObject* active_character = nullptr;
+	GameObject* active_building = nullptr;
 
 	void CameraMovement(float dt);
 };

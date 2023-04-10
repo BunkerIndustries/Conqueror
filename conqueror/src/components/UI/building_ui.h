@@ -17,7 +17,7 @@ public:
 	};
 	bool UIElementPressed(GameObjectPressedEvent& e);
 
-	void ToggleUI();
+	void OpenUI();
 	void DeleteUI();
 
 private:
@@ -25,6 +25,5 @@ private:
 	void CreateHeader();
 	void CreateButtons();
 
-	bool ui_toggled = false;
-	std::vector<GameObject*> ui_elements;
+	std::vector<GameObject*> building_ui_elements;
 };

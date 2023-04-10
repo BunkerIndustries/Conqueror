@@ -4,6 +4,8 @@
 #include "required/constants.h"
 #include "utils/SoldierSupply.h"
 #include "components/MgComponent.h"
+#include "scenes/GameScene/GameScene.h"
+
 
 AllyLayer::AllyLayer()
 	: Layer("AllyLayer")
@@ -30,19 +32,6 @@ void AllyLayer::OnDetach()
 void AllyLayer::Update(const float dt)
 {
 
-}
-
-void AllyLayer::OnEvent(Event& event)
-{
-	EventDispatcher dispatcher(event);
-	dispatcher.dispatch<KeyPressedEvent>([this](KeyPressedEvent& e) 
-	{
-		if (e.getKeyCode() == KEY_SPACE) {
-			SoldierSupply::TryCallSoldier();
-			return true;
-		}
-		return false;
-	});
 }
 
 GameObject* AllyLayer::CreateCharacter(std::string type, Transform transform) {
@@ -88,4 +77,31 @@ GameObject* AllyLayer::CreateMg(glm::vec2 mg_node_position) {
 	AddGameObjectToLayer(mg);
 
 	return mg;
+}
+
+bool AllyLayer::KeyReleased(KeyReleasedEvent& e) {
+	if (e.getKeyCode() == KEY_SPACE) {
+		SoldierSupply::TryCallSoldier();
+		return true;
+	}
+	return false;
+}
+
+bool AllyLayer::GameObjectPressed(GameObjectPressedEvent& e) {
+	// check if e belongs to allylayer - otherwise return false
+
+	GameObject* clicked_character = e.GetGameObject();
+	if (!clicked_character->HasTag("soldier") || clicked_character->GetComponent<SoldierBehaviour>()->on_spawn_pos) return false;
+
+	if (gameScene->GetActiveCharacter() != nullptr) {
+		gameScene->GetActiveCharacter()->GetComponent<CharacterUI>()->DeleteUI();
+		if (clicked_character == gameScene->GetActiveCharacter()) {
+			gameScene->SetActiveCharacter(nullptr);
+			return true;
+		}
+	}
+	gameScene->SetActiveCharacter(clicked_character);
+
+	clicked_character->GetComponent<CharacterUI>()->OpenUI();
+	return true;
 }

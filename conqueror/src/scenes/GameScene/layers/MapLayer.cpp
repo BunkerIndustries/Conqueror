@@ -8,6 +8,8 @@
 #include "utils/Engineer.h"
 #include "utils/Medic.h"
 
+#include "scenes/GameScene/GameScene.h"
+
 
 
 MapLayer::MapLayer()
@@ -37,11 +39,6 @@ void MapLayer::OnDetach()
 void MapLayer::Update(const float dt)
 {
 }
-
-void MapLayer::OnEvent(Event& event)
-{
-}
-
 
 GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 	GameObject* node_go = new GameObject("node", Transform(position, node_size));
@@ -118,4 +115,36 @@ GameObject* MapLayer::CreateBuilding(Transform transform, std::string type) {
 	AddGameObjectToLayer(building);
 
 	return building;
+}
+
+bool MapLayer::GameObjectPressed(GameObjectPressedEvent& e) {
+	// check if e belongs to allylayer - otherwise return false
+
+	GameObject* clicked_mapobject = e.GetGameObject();
+
+	if (clicked_mapobject->HasTag("move_node")) {
+
+		if (gameScene->GetActiveCharacter() == nullptr || clicked_mapobject->GetComponent<Node>()->is_occupied) return false;
+
+		gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->SoldierMove(clicked_mapobject);
+		return true;
+	}
+	else if (clicked_mapobject->HasTag("medic_building") || clicked_mapobject->HasTag("engineer_building")) {
+
+		if (gameScene->GetActiveBuilding() != nullptr) {
+			gameScene->GetActiveBuilding()->GetComponent<BuildingUI>()->DeleteUI();
+			if (clicked_mapobject == gameScene->GetActiveBuilding()) {
+				gameScene->SetActiveBuilding(nullptr);
+				return true;
+			}
+		}
+		clicked_mapobject->GetComponent<BuildingUI>()->OpenUI();
+
+		gameScene->SetActiveBuilding(clicked_mapobject);
+		return true;
+	}
+	else {
+		return false;
+	}
+	
 }

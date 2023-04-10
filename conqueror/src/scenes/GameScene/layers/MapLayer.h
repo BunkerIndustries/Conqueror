@@ -13,7 +13,12 @@ public:
 	void OnAttach() override;
 	void OnDetach() override;
 	void Update(const float dt) override;
-	void OnEvent(Event& event) override;
+	void OnEvent(Event& e) override
+	{
+		EventDispatcher dispatcher(e);
+		dispatcher.dispatch<GameObjectPressedEvent>(BIND_EVENT_FN(MapLayer::GameObjectPressed));
+	};
+	bool GameObjectPressed(GameObjectPressedEvent& e);
 
 	GameObject* CreateBuilding(Transform transform, std::string type);
 	GameObject* CreateNode(glm::vec2 position, Stand& node_stand);
