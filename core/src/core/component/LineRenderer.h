@@ -7,7 +7,7 @@ namespace core
 	class LineRenderer : public Component
 	{
     public:
-        LineRenderer(glm::vec2 pointA, glm::vec2 pointB, glm::vec4 color, float thickness);
+        LineRenderer(glm::vec2 pointA, glm::vec2 pointB, glm::vec4 color, float thickness, float lastingTime);
 
         void OnStart() override { }
         void OnStop() override { }
@@ -20,7 +20,7 @@ namespace core
         glm::vec4 color;
 
         float thickness;
-        float lasting_time;
+        float lastingTime;
 
         float dt_counter;
 	};
