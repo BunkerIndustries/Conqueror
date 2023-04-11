@@ -26,7 +26,6 @@ namespace core
 
         void ChangeSprite(glm::vec2 pos);
 
-        void ChangeCoords();
 
     private:
         glm::vec4 color;
@@ -47,5 +46,7 @@ namespace core
         int spriteColumns;
 
         glm::vec2 selectedSprite;
+
+		void ChangeCoords();
 	};
 };

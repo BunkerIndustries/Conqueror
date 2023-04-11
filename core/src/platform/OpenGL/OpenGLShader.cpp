@@ -88,7 +88,7 @@ namespace core
             glGetShaderiv(shaderProgrammID, GL_INFO_LOG_LENGTH, &len);
             char linkingError[1000] = {};
             glGetShaderInfoLog(shaderProgrammID, len, NULL, &linkingError[0]);
-
+        
             LOG_CORE_ERROR("'" + filePath + "'\n\tLinking of shaders failed!\n" + &linkingError[0]);
         }
 

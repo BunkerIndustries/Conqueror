@@ -44,8 +44,6 @@ namespace core {
                 else
                     Renderer::DrawTriangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, color, gameObject->GetProjectionMode(), gameObject->GetObjectID());
                 break;
-            case Geometry::CIRCLE: 
-                break;
         }
     }
 

@@ -73,11 +73,13 @@ layout(binding = 0) uniform sampler2D uTexture[32];
 
 void main()
 {
-    if (TexID >= 0) {
-        display = texture(uTexture[TexID], Input.TexCoord * Input.TilingFactor);  
-    }
-    else {
-        display = Input.Color;
-    }
+    vec4 color = Input.Color;
+    if (TexID >= 0)
+        color *= texture(uTexture[TexID], Input.TexCoord * Input.TilingFactor);
+
+    if (color.a == 0.0)
+        discard;
+
+    display = color;
     objectID = CoreID;
 }

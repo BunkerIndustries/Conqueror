@@ -51,11 +51,11 @@ namespace core {
 
     void Transform::Update()
     {
-        while (rotation > 359)
+        while (rotation >= 360)
         {
             rotation -= 360;
         }
-        while (rotation < 359)
+        while (rotation <= -360)
         {
             rotation += 360;
         }

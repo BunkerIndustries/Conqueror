@@ -18,12 +18,15 @@ IncludeDir["IMGUI"] = "lib/core/IMGUI_DOCKING"
 IncludeDir["IMPLOT"] = "lib/core/IMPLOT"
 IncludeDir["SPDLOG"] = "lib/SPDLOG/include"
 IncludeDir["MINIAUDIO"] = "lib/MINIAUDIO"
+IncludeDir["msdfgen"] = "lib/core/msdf-atlas-gen/msdfgen"
+IncludeDir["msdf_atlas_gen"] = "lib/core/msdf-atlas-gen/msdf-atlas-gen"
 
 group "dependencies"
 include "lib/core/GLFW"
 include "lib/core/GLAD"
 include "lib/core/IMGUI_DOCKING"
 include "lib/core/IMPLOT"
+include "lib/core/msdf-atlas-gen"
 group ""
 
 project "core"
@@ -64,7 +67,9 @@ project "core"
 		"%{IncludeDir.IMGUI}",
 		"%{IncludeDir.IMPLOT}",
 		"%{IncludeDir.SPDLOG}",
-		"%{IncludeDir.MINIAUDIO}"
+		"%{IncludeDir.MINIAUDIO}",		
+		"%{IncludeDir.msdfgen}",
+		"%{IncludeDir.msdf_atlas_gen}"
 	}
 
 	links 
@@ -73,7 +78,8 @@ project "core"
 		"GLAD",
 		"IMGUI",
 		"IMPLOT",
-		"opengl32.lib"
+		"opengl32.lib",
+		"msdf-atlas-gen"
 	}
 
 	disablewarnings 
@@ -146,7 +152,9 @@ project "conqueror"
 		"%{IncludeDir.MINIAUDIO}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.IMGUI}",
-		"%{IncludeDir.IMPLOT}"
+		"%{IncludeDir.IMPLOT}",
+		"%{IncludeDir.msdfgen}",
+		"%{IncludeDir.msdf_atlas_gen}"
 	}
 
 	links

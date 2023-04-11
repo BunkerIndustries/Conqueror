@@ -7,20 +7,8 @@
 
 namespace core
 {
-	LineRenderer::LineRenderer(glm::vec2 positionA, glm::vec2 positionB, glm::vec4 color, float thickness, float lasting_time)
-	{
-		Init(positionA, positionB, color, thickness, lasting_time);
-	}
-
-	void LineRenderer::Init(glm::vec2 positionA, glm::vec2 positionB, glm::vec4 color, float thickness, float lasting_time)
-	{
-		this->positionA = positionA;
-		this->positionB = positionB;
-		this->color = color;
-		this->thickness = thickness;
-		this->lasting_time = lasting_time;
-		this->dt_counter = 0.0f;
-	}
+	LineRenderer::LineRenderer(glm::vec2 positionA, glm::vec2 positionB, glm::vec4 color, float thickness)
+		:positionA(positionA), positionB(positionB), color(color), thickness(thickness) { }
 
 	void LineRenderer::OnUpdate()
 	{
@@ -28,10 +16,5 @@ namespace core
 		Renderer::DrawLine(positionA, positionB, color, thickness, gameObject->GetProjectionMode(), gameObject->GetObjectID());
 
 		if (dt_counter >= lasting_time) delete gameObject;
-	}
-
-	void LineRenderer::OnImgui(float dt)
-	{
-
 	}
 };
