@@ -23,14 +23,14 @@ namespace core {
         Renderer::ClearStats();
         Renderer::BeginRender(*camera);
 
-        for (int i = Application::GetLayerStack().GetSize() - 1; i >= 0; i--)
+        for (int i = 0; i < Application::GetLayerStack().GetSize(); i++)
         {
             Layer* layer = Application::GetLayerStack()[i];
             if (!layer->IsAttached()) continue;
 
-            for (int i = 0; i < layer->GetGameObjects().size(); i++)
+            for (int j = 0; j < layer->GetGameObjects().size(); j++)
             {
-                GameObject* gameObject = layer->GetGameObjects()[i];
+                GameObject* gameObject = layer->GetGameObjects()[j];
                 if (!gameObject->IsRunning()) continue;
                 gameObject->Update();
             }
