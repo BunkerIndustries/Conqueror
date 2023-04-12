@@ -13,6 +13,18 @@ UILayer::~UILayer()
 
 void UILayer::OnAttach()
 {
+	Panel* p = new Panel(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), Transform(glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 2.0f)), Type::Rectangle);
+	Button* b = new Button(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), Transform(glm::vec2(0.0f, -0.5f), glm::vec2(1.0f, 1.0f)), Type::Rectangle, BIND_BUTTON_EVENT_FN(UILayer::test));
+	p->AddChildObject(b);
+	Label* l = new Label("test", glm::vec4(1.0f, 0.0f, 0.0f, 1.0f), Transform(glm::vec2(0.0f, 0.5f), glm::vec2(1.0f, 1.0f)));
+	p->AddChildObject(l);
+
+	AddUIObject(p, ProjectionMode::PERSPECTIVE);
+
+}
+
+void UILayer::test() {
+
 }
 
 void UILayer::OnDetach()

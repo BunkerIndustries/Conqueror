@@ -13,6 +13,8 @@ public:
 	void Update(const float dt) override;
 	void OnEvent(Event& event) override;
 
+	void test();
+
 private:
 	bool OnGameObjectClick(GameObjectPressedEvent& e);
 
