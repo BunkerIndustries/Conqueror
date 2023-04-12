@@ -13,7 +13,7 @@ namespace core
 	void LineRenderer::OnUpdate()
 	{
 		dt_counter += Application::GetDT();
-		Renderer::DrawLine(positionA, positionB, color, thickness, gameObject->GetProjectionMode(), gameObject->GetObjectID());
+		Renderer::DrawLine(positionA, positionB, color, thickness, gameObject->GetProjectionMode(), gameObject->GetCoreID());
 
 		if (dt_counter >= lastingTime) delete gameObject;
 	}
