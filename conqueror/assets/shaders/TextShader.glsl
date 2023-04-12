@@ -1,11 +1,11 @@
-#type vertex
+﻿#type vertex
 #version 450 core
-
 layout(location = 0) in vec2 aPos;
 layout(location = 1) in vec4 aColor;
 layout(location = 2) in vec2 aTexCoord;
 layout(location = 3) in int aProjectionMode;
 layout(location = 4) in int aCoreID;
+layout(location = 5) in int aUIID;
 
 // camera variables
 uniform mat4 uPerspective;
@@ -70,6 +70,8 @@ float screenPxRange() {
 float median(float r, float g, float b) {
     return max(min(r, g), min(max(r, g), b));
 }
+
+//uniform sampler2D uIDAttachment;
 
 void main()
 {

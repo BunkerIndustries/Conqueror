@@ -6,6 +6,7 @@
 #include "generic/Application.h"
 #include "renderer/Renderer.h"
 #include "renderer/FrameBuffer.h"
+#include "ui/UIObject.h"
 
 #include <GLFW/glfw3.h>
 
@@ -383,15 +384,28 @@ namespace core {
 
         for (Layer* layer : Application::GetLayerStack()) 
         {
+            if (layer == &Application::GetImGuiLayer()) continue;
             std::vector<GameObject*> gameobjects = layer->GetGameObjects();
+            std::vector<UIObject*> uiObjects = layer->GetUIObjects();
+
             if (ImGui::TreeNode(layer->GetName().c_str())) 
             {
-                if (ImGui::TreeNode("Objects: "))
+                if (ImGui::TreeNode("UIObjects: "))
+                {
+                    for (int i = 0; i < uiObjects.size(); i++)
+                    {
+                        if (ImGui::Selectable((uiObjects[i]->GetName() + std::string("##" + std::to_string(i))).c_str(), uiObjects[i] == selectedObject)) {
+                            selectedObject = uiObjects[i];
+                        }
+                    }
+                    ImGui::TreePop();
+                }
+                if (ImGui::TreeNode("GameObjects: "))
                 {
                     for (int i = 0; i < gameobjects.size(); i++)
                     {
-                        if (ImGui::Selectable((gameobjects[i]->GetName() + std::string(" (ObjectID = " + std::to_string(gameobjects[i]->GetObjectID()) + std::string(")")) + std::string("##" + std::to_string(i))).c_str(), gameobjects[i] == selectedGameobject)) {
-                            selectedGameobject = gameobjects[i];
+                        if (ImGui::Selectable((gameobjects[i]->GetName() + std::string(" (ObjectID = " + std::to_string(gameobjects[i]->GetCoreID()) + std::string(")")) + std::string("##" + std::to_string(i))).c_str(), gameobjects[i] == selectedObject)) {
+                            selectedObject = gameobjects[i];
                         }
                     }
                     ImGui::TreePop();
@@ -413,8 +427,8 @@ namespace core {
             Application::GetImGuiLayer().DockPanel(name, Application::GetImGuiLayer().GetDockspaceLeftBottom());
 
         ImGui::Begin(name);
-        if (selectedGameobject != nullptr) {
-            selectedGameobject->Imgui(dt);
+        if (dynamic_cast<GameObject*>(selectedObject) != nullptr) {
+            dynamic_cast<GameObject*>(selectedObject)->Imgui(dt);
         }
         ImGui::End();
     }

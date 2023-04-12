@@ -1,9 +1,10 @@
-#type vertex
+﻿#type vertex
 #version 460 core
 layout(location = 0) in vec2 aPos; // the position variable has attribute position 0
 layout(location = 1) in vec4 aColor; //the color of the vector
 layout(location = 2) in int aProjectionMode;
 layout(location = 3) in int aCoreID;
+layout(location = 4) in int aUIID;
 
 // camera variables
 uniform mat4 uPerspective;
@@ -55,6 +56,7 @@ struct VertexOutput
 layout(location = 0) in VertexOutput Input;
 layout(location = 1) in flat int CoreID;
 
+//uniform sampler2D uIDAttachment;
 
 void main()
 {

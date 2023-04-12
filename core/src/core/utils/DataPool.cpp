@@ -57,6 +57,8 @@ namespace core {
         return texture;
     }
 
+    
+
     int ProjectionModeToInt(const ProjectionMode& mode)
     {
 	    switch (mode)

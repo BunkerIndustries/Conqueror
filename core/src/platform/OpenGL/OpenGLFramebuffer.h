@@ -25,6 +25,8 @@ namespace core
 		void Bind() override;
 		void Unbind() override;
 
+		void BindAttachmentAsTexture(uint32_t attachment, uint32_t slot) override;
+
 		FramebufferSpecification& GetSpecification() override { return specification; }
 		uint32_t GetColorID(uint32_t index) override
 		{

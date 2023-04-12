@@ -34,15 +34,15 @@ namespace core {
         {
             case Geometry::RECTANGLE:
                 if (texture)
-                    Renderer::DrawRectangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, texture, 1.0f, color, gameObject->GetProjectionMode(), gameObject->GetObjectID());
+                    Renderer::DrawRectangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, texture, 1.0f, color, gameObject->GetProjectionMode(), gameObject->GetCoreID());
                 else
-					Renderer::DrawRectangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, color, gameObject->GetProjectionMode(), gameObject->GetObjectID());
+					Renderer::DrawRectangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, color, gameObject->GetProjectionMode(), gameObject->GetCoreID());
                 break;
             case Geometry::TRIANGLE:
                 if (texture)
-                    Renderer::DrawTriangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, texture, 1.0f, color, gameObject->GetProjectionMode(), gameObject->GetObjectID());
+                    Renderer::DrawTriangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, texture, 1.0f, color, gameObject->GetProjectionMode(), gameObject->GetCoreID());
                 else
-                    Renderer::DrawTriangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, color, gameObject->GetProjectionMode(), gameObject->GetObjectID());
+                    Renderer::DrawTriangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, color, gameObject->GetProjectionMode(), gameObject->GetCoreID());
                 break;
         }
     }

@@ -19,7 +19,7 @@ namespace core
 
 		std::string ToString() const override {
 			std::stringstream string;
-			string << "GameObjectPressedEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetObjectID();
+			string << "GameObjectPressedEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetCoreID();
 			return string.str();
 		}
 
@@ -40,7 +40,7 @@ namespace core
 
 		std::string ToString() const override {
 			std::stringstream string;
-			string << "GameObjectReleasedEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetObjectID();
+			string << "GameObjectReleasedEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetCoreID();
 			return string.str();
 		}
 
@@ -61,7 +61,7 @@ namespace core
 
 		std::string ToString() const override {
 			std::stringstream string;
-			string << "GameObjectHoverBeginEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetObjectID();
+			string << "GameObjectHoverBeginEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetCoreID();
 			return string.str();
 		}
 
@@ -82,7 +82,7 @@ namespace core
 
 		std::string ToString() const override {
 			std::stringstream string;
-			string << "GameObjectHoverEndEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetObjectID();
+			string << "GameObjectHoverEndEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetCoreID();
 			return string.str();
 		}
 

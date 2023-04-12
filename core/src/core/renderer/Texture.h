@@ -39,7 +39,6 @@ namespace core {
 
         virtual bool IsLoaded() = 0;
 
-
         virtual ~Texture() = default;
 
         static Shr<Texture> CreateTexture(std::string filePath, std::string name);

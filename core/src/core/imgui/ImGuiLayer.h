@@ -35,7 +35,7 @@ namespace core {
 
         glm::ivec2 mousePosViewportRelative;
 
-        GameObject* selectedGameobject = nullptr;
+        Object* selectedObject = nullptr;
 
         std::unordered_map<std::string, void*> variablePool;
 

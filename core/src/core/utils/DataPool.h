@@ -7,13 +7,6 @@
 
 namespace core {
 
-    /*struct CharacterTemplateS
-    {
-        unsigned int textureID; // texture ID, used by opengl
-        glm::ivec2 size; // size of character
-        glm::ivec2 bearing; // height offset
-        unsigned int advance; // width offset
-    };*/
     using Map = std::unordered_map<std::string, std::shared_ptr<void>>;
 
     class DataPool {
@@ -25,10 +18,6 @@ namespace core {
         static std::shared_ptr<Shader> GetShader(std::string shaderName);
         // search for a texture with the specific string (name)
         static std::shared_ptr<Texture> GetTexture(std::string textureName);
-        
-
-        //static void prepareCharacters();
-        
     };
 
     enum class ProjectionMode { PERSPECTIVE, ORTHOGRAPHIC, SCREEN };

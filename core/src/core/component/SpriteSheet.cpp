@@ -58,7 +58,7 @@ namespace core
 	}
 	void SpriteSheet::OnUpdate()
 	{
-		Renderer::DrawRectangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, texCoords, texture, 1.0f, color, gameObject->GetProjectionMode(), gameObject->GetObjectID());
+		Renderer::DrawRectangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, texCoords, texture, 1.0f, color, gameObject->GetProjectionMode(), gameObject->GetCoreID());
 	}
 
 	void SpriteSheet::OnImgui(float dt)

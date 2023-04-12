@@ -76,13 +76,13 @@ namespace core
 
 	void OpenGLTexture::Bind(unsigned slot)
 	{
-		if (slot < 32)
+		if (slot < 31)
 		{
 			glActiveTexture(GL_TEXTURE0 + slot);
 			glBindTexture(GL_TEXTURE_2D, texID);
 			return;
 		}
-		LOG_CORE_WARN("You should not go over 32 texture slots, as the OpenGL specification does not allow more");
+		LOG_CORE_WARN("You should not go over 31 texture slots, as the OpenGL specification does not allow more");
 	}
 
 	bool OpenGLTexture::IsLoaded()

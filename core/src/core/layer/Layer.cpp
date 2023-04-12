@@ -2,9 +2,13 @@
 
 #include "layer/Layer.h"
 #include "event/Event.h"
+#include "renderer/Renderer.h"
+#include "ui/Button.h"
+#include "ui/UIObject.h"
 
 namespace core
 {
+
 	Layer::~Layer()
 	{
 		const int layerSize = gameObjects.size();
@@ -94,4 +98,64 @@ namespace core
 		}
 		return gos;
 	}
+
+	void Layer::AddUIObject(UIObject* object, ProjectionMode mode)
+	{
+		object->globalPos = object->transform.position;
+		object->mode = mode;
+		uiObjects.push_back(object);
+	}
+
+	void Layer::RemoveUIObject()
+	{
+		uiObjects.clear();
+	}
+
+	void Layer::RemoveUIObject(uint32_t index)
+	{
+		if (index >= uiObjects.size())
+		{
+			LOG_CORE_ERROR("Index '{0}' out of range in 'RemoveUIObject' in layer '{1}'", index, this->GetName());
+			return;
+		}
+		uiObjects.erase(uiObjects.begin() + index);
+	}
+
+	void Layer::RemoveUIObject(UIObject* object)
+	{
+		std::vector<UIObject*>::iterator it = std::find(uiObjects.begin(), uiObjects.end(), object);
+		if (it == uiObjects.end())
+		{
+			LOG_CORE_ERROR("UIObject '{0}' not registered in 'RemoveUIObject' in layer '{1}'", (uint8_t)object, this->GetName());
+			return;
+		}
+		uiObjects.erase(it);
+	}
+
+	std::vector<UIObject*>& Layer::GetUIObjects()
+	{
+		return uiObjects;
+	}
+
+	void Layer::RenderUI()
+	{
+		for (UIObject* object : uiObjects) {
+			RenderObject(object);
+		}
+	}
+
+	void Layer::RenderObject(UIObject* object)
+	{
+		object->CalculateGlobalCoords();
+		object->RenderObject();
+		Renderer::NextBatch();
+		for (UIObject* child : object->GetChildObjects())
+		{
+			if (child != object)
+				child->mode = object->mode;
+				RenderObject(child);
+		}
+	}
+
+	
 }

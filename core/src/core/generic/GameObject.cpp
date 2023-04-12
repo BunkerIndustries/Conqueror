@@ -10,14 +10,14 @@
 #include "generic/Scene.h"
 
 #include "component/SpriteRenderer.h"
+#include "event/Input.h"
+#include "event/KeyCodes.h"
 
 #include "imgui/ImGuiLayer.h"
 #include "utils/Core.h"
 
 
 namespace core {
-
-	std::unordered_map<core_id, GameObject*> GameObject::IDMap;
 
 	void GameObject::StopComponentIndex(uint32_t index)
 	{
@@ -35,11 +35,7 @@ namespace core {
 	}
 
 	GameObject::GameObject(std::string name, Transform& transform, ProjectionMode mode)
-        : name(name), mode(mode), transform(transform)
-    {
-        objectID = Core::RequestID();
-        IDMap.emplace(objectID, this);
-    }
+        : Object(name, transform), mode(mode) { }
 
 
     GameObject::~GameObject()
@@ -81,16 +77,15 @@ namespace core {
 
     void GameObject::Update()
 	{
+        core_id id = coreID;
         // update gameObject, in order to display moving changes
         for (auto component : components) {
-        	if (component && !deleted) {
+            if (component) {
                 component->OnUpdate();
             }
+            if (Core::IsDeleted(id)) return;
         }
-        if (this && !deleted)
-        {
-			transform.Update();
-        }
+		transform.Update();
     }
 
     void GameObject::Start()
@@ -178,11 +173,17 @@ namespace core {
 
 	void GameObject::Imgui(float dt) {
 		ImGui::Text("Transform:");
-		ImGui::DragFloat(std::string("X:").c_str(), &this->transform.position.x, 0.5f);
-		ImGui::DragFloat(std::string("Y:").c_str(), &this->transform.position.y, 0.5f);
-		ImGui::DragFloat(std::string("Width:").c_str(), &this->transform.scale.x, 0.5f);
-		ImGui::DragFloat(std::string("Height:").c_str(), &this->transform.scale.y, 0.5f);
-        ImGui::DragFloat(std::string("Rotation:").c_str(), &this->transform.rotation, 0.5f);
+        float speed = 0.5f;
+        if (Input::IsKeyPressed(KEY_LEFT_SHIFT) && Input::IsKeyPressed(KEY_LEFT_CONTROL))
+            speed = 0.001f;
+        else if (Input::IsKeyPressed(KEY_LEFT_SHIFT))
+            speed = 0.01f;
+        
+		ImGui::DragFloat(std::string("X:").c_str(), &this->transform.position.x, speed);
+		ImGui::DragFloat(std::string("Y:").c_str(), &this->transform.position.y, speed);
+		ImGui::DragFloat(std::string("Width:").c_str(), &this->transform.scale.x, speed);
+		ImGui::DragFloat(std::string("Height:").c_str(), &this->transform.scale.y, speed);
+        ImGui::DragFloat(std::string("Rotation:").c_str(), &this->transform.rotation, speed);
         
 
 		for (auto component : components) {
@@ -190,15 +191,7 @@ namespace core {
 		}
     }
 
-    GameObject* GameObject::GetGameObjectByID(core_id id)
-    {
-        CORE_ASSERT(id > 0, "invalid ID");
-        if (IDMap.find(id) != IDMap.end()) {
-            return IDMap.at(id);
-        }
-        CORE_ASSERT(false, "invalid ID");
-        return nullptr;
-    }
+    
 
     
 

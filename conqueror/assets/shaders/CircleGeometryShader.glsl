@@ -1,4 +1,4 @@
-#type vertex
+﻿#type vertex
 #version 460 core
 layout(location = 0) in vec2 aWorldPosition; // the position variable has attribute position 0
 layout(location = 1) in vec2 aLocalPosition; //the color of the vector
@@ -10,6 +10,7 @@ layout(location = 6) in float aThickness;
 layout(location = 7) in float aFade;
 layout(location = 8) in int aProjectionMode;
 layout(location = 9) in int aCoreID;
+
 
 // camera variables
 uniform mat4 uPerspective;
@@ -79,7 +80,8 @@ layout(location = 0) in VertexOutput Input;
 layout(location = 6) in flat int TexID;
 layout(location = 7) in flat int CoreID;
 
-layout(binding = 0) uniform sampler2D uTexture[32];
+uniform sampler2D uTexture[31];
+//uniform sampler2D uIDAttachment;
 
 void main()
 {
