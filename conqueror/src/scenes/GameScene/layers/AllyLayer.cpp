@@ -91,17 +91,27 @@ bool AllyLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 	// check if e belongs to allylayer - otherwise return false
 
 	GameObject* clicked_character = e.GetGameObject();
-	if (!clicked_character->HasTag("soldier") || clicked_character->GetComponent<SoldierBehaviour>()->on_spawn_pos) return false;
 
-	if (gameScene->GetActiveCharacter() != nullptr) {
-		gameScene->GetActiveCharacter()->GetComponent<CharacterUI>()->DeleteUI();
-		if (clicked_character == gameScene->GetActiveCharacter()) {
-			gameScene->SetActiveCharacter(nullptr);
-			return true;
-		}
+	if (clicked_character == gameScene->GetActiveCharacter()) {
+		clicked_character->GetComponent<CharacterUI>()->DeleteUI();
+		gameScene->SetActiveCharacter(nullptr);
+		return true;
 	}
+
+	if (clicked_character->HasTag("soldier") && !clicked_character->GetComponent<SoldierBehaviour>()->on_spawn_pos) {
+		// activate soldier ui
+	}
+	else if (clicked_character->HasTag("medic")) {
+		// activate medic ui
+	}
+	else if (clicked_character->HasTag("engineer")) {
+		// activate engineer ui
+	}
+	else {
+		return false;
+	}
+
 	gameScene->SetActiveCharacter(clicked_character);
 
-	clicked_character->GetComponent<CharacterUI>()->OpenUI();
 	return true;
 }

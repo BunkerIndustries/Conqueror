@@ -20,7 +20,7 @@ private:
 
 class MedicCharacter : public Component {
 public:
-	MedicCharacter(GameObject* home_node, GameObject* healing_target);
+	MedicCharacter(GameObject* home_node);
 	virtual ~MedicCharacter() = default;
 
 	void OnStart() override { };

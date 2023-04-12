@@ -124,7 +124,7 @@ bool MapLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 
 	if (clicked_mapobject->HasTag("move_node")) {
 
-		if (gameScene->GetActiveCharacter() == nullptr || clicked_mapobject->GetComponent<Node>()->is_occupied) return false;
+		if (gameScene->GetActiveCharacter() == nullptr || !gameScene->GetActiveCharacter()->HasTag("soldier") || clicked_mapobject->GetComponent<Node>()->is_occupied) return false;
 
 		gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->SoldierMove(clicked_mapobject);
 		return true;

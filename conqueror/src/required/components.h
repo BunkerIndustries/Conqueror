@@ -11,4 +11,3 @@
 #include "components/soldier_shooting.h"
 #include "components/UI/building_ui.h"
 #include "components/UI/character_ui.h"
-#include "components/UI/ui_constants.h"

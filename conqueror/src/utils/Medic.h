@@ -7,7 +7,7 @@ class Medic
 {
 public:
 	static void AddBuilding(Transform transform, uint32_t medicCount);
-	static void SendMedic(GameObject* gameObject);
+	static void SendMedic();
 	static void ReturnMedic(GameObject* gameObject);
 };
 

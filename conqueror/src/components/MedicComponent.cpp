@@ -24,10 +24,10 @@ void MedicBuilding::ReturnMedic() {
 	available_medics++;
 }
 
-MedicCharacter::MedicCharacter(GameObject* home_node, GameObject* healing_target)
-	:home_node(home_node), healing_target(healing_target)
+MedicCharacter::MedicCharacter(GameObject* home_node)
+	:home_node(home_node)
 {
-	healing_target_position = healing_target->transform.position + medic_healing_position_offset;
+	healing_target_position = gameScene->GetActiveCharacter()->transform.position + medic_healing_position_offset;
 	healing = false;
 	going_back = false;
 	dt_counter = 0.0f;

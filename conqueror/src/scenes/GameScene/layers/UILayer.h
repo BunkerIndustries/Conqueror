@@ -13,11 +13,15 @@ public:
 	void Update(const float dt) override;
 	void OnEvent(Event& event) override;
 
-	void test();
+	void ActivateSoldierUI();
+	void ActivateMedicUI();
+	void ActivateEngineerUI();
+	void ActivateMedicBuildlingUI();
+	void ActivateEngineerBuildingUI();
+	void DeactivateCharacterUI();
+	void DeactivateBuildingUI();
 
 private:
-	bool OnGameObjectClick(GameObjectPressedEvent& e);
-
-	void OnUIClick();
-	void OnGOClick(GameObject* gameObject);
+	Panel* character_background;
+	Panel* building_background;
 };

@@ -11,7 +11,7 @@ void Medic::AddBuilding(Transform transform, uint32_t medicCount)
 	medicBuilding->AddComponent(new MedicBuilding(medicCount));
 }
 
-void Medic::SendMedic(GameObject* gameObject)
+void Medic::SendMedic()
 {
 	std::vector<GameObject*> medicBuildings = gameScene->mapLayer->GetGameObjectsByTag("medic_building");
 	GameObject* nearestBuilding = nullptr;
@@ -22,19 +22,11 @@ void Medic::SendMedic(GameObject* gameObject)
 			nearestBuilding = medicBuilding;
 			continue;
 		}
-
-		//FIND NEAREST BUILDING WITH AVAILABLE MEDICS
-		/*nearestBuilding->
-		 * if (available_Medics <= 0) return;
-		 *
-		 */
 	}
-	//TODO: get function to get gameobjects from layer
-	//
-	//->AddComponent(new MedicCharacter(healing_target));
+	
 	GameObject* medic = gameScene->allyLayer->CreateCharacter("medic", Transform(nearestBuilding->transform.position, character_scale, 0.0f));
-	medic->AddComponent(new MedicCharacter(nearestBuilding, gameObject));
-	medic->GetComponent<Movement>()->target_position = &gameObject->transform.position;
+	medic->AddComponent(new MedicCharacter(nearestBuilding));
+	medic->GetComponent<Movement>()->target_position = &gameScene->GetActiveCharacter()->transform.position;
 	nearestBuilding->GetComponent<MedicBuilding>()->SendMedic();
 }
 
