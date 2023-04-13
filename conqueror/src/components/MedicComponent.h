@@ -20,7 +20,7 @@ private:
 
 class MedicCharacter : public Component {
 public:
-	MedicCharacter(GameObject* home_node);
+	MedicCharacter(GameObject* medic_building);
 	virtual ~MedicCharacter() = default;
 
 	void OnStart() override { };
@@ -29,7 +29,7 @@ public:
 	void OnEvent(Event& event) override {};
 
 private:
-	GameObject* home_node;
+	GameObject* medic_building;
 	GameObject* healing_target;
 	glm::vec2 healing_target_position;
 

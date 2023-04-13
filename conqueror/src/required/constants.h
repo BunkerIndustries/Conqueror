@@ -136,7 +136,9 @@ inline uint8_t mg_damage = 15;
 
 // ui
 inline glm::vec4 ui_character_background_color = glm::vec4(0.2f, 0.2f, 0.2f, 0.6f);
+inline glm::vec4 ui_building_background_color = glm::vec4(0.15f, 0.15f, 0.15f, 0.6f);
 inline glm::vec4 ui_header_color = glm::vec4(0.1f, 0.1f, 0.1f, 0.6f);
 inline glm::vec4 ui_call_medic_button_color = glm::vec4(0.0f, 0.8f, 0.0f, 0.8f);
+inline glm::vec4 ui_place_mg_button_color = glm::vec4(0.2f, 0.5f, 0.5f, 0.8f);
 inline glm::vec4 ui_send_engineer_button_color = glm::vec4(0.5f, 0.8f, 0.2f, 0.8f);
 inline glm::vec2 ui_background_size = glm::vec2(0.4f, 0.6f);

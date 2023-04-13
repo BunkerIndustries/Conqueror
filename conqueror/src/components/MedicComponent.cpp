@@ -10,13 +10,11 @@ MedicBuilding::MedicBuilding(uint32_t number_of_medics)
 }
 
 void MedicBuilding::SendMedic() {
+	
 	if (available_medics <= 0) return;
-
 	available_medics--;
 
-	
-
-	//TODO: foreground_layer->AddGameObjectToLayer(medic);
+	gameScene->allyLayer->CreateCharacter("medic", Transform(gameObject->transform.position, character_scale));
 
 }
 
@@ -24,9 +22,10 @@ void MedicBuilding::ReturnMedic() {
 	available_medics++;
 }
 
-MedicCharacter::MedicCharacter(GameObject* home_node)
-	:home_node(home_node)
+MedicCharacter::MedicCharacter(GameObject* medic_building)
+	:medic_building(medic_building)
 {
+	healing_target = gameScene->GetActiveCharacter();
 	healing_target_position = gameScene->GetActiveCharacter()->transform.position + medic_healing_position_offset;
 	healing = false;
 	going_back = false;
@@ -37,8 +36,8 @@ MedicCharacter::MedicCharacter(GameObject* home_node)
 void MedicCharacter::OnUpdate() {
 
 	if (going_back) {
-		if (gameObject->transform.position == home_node->transform.position) {
-			home_node->GetComponent<MedicBuilding>()->ReturnMedic();
+		if (gameObject->transform.position == medic_building->transform.position) {
+			medic_building->GetComponent<MedicBuilding>()->ReturnMedic();
 			delete gameObject;
 		}
 		return;
@@ -48,7 +47,7 @@ void MedicCharacter::OnUpdate() {
 	if (!healing_target->GetComponent<Movement>()) {
 		// go back 
 		going_back = true;
-		gameObject->GetComponent<Movement>()->target_position = &home_node->transform.position;
+		gameObject->GetComponent<Movement>()->target_position = &medic_building->transform.position;
 		return;
 	}
 
@@ -62,7 +61,7 @@ void MedicCharacter::OnUpdate() {
 			healing = false;
 			going_back = true;
 			healing_target->GetComponent<Health>()->GetHealed();
-			gameObject->GetComponent<Movement>()->target_position = &home_node->transform.position;
+			gameObject->GetComponent<Movement>()->target_position = &medic_building->transform.position;
 		}
 		dt_counter += Application::GetDT();
 	}

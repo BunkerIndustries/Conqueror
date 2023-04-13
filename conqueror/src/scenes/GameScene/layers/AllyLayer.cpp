@@ -61,6 +61,7 @@ GameObject* AllyLayer::CreateCharacter(std::string type, Transform transform) {
 		character->AddComponent(new Movement(medic_movement_speed));
 		character->AddComponent(new Health(medic_health));
 		character->AddComponent(new CharacterUI());
+		character->AddComponent(new MedicCharacter(gameScene->mapLayer->medicBuilding));
 	}
 	else LOG_WARN("WARNING: probably no existing type given when creating a character");
 

@@ -28,8 +28,8 @@ void MapLayer::OnAttach()
 	CreateEnemyGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
 
 	Layer* layer = this;
-	Medic::AddBuilding(Transform(glm::vec2(12.0f, -5.0f), glm::vec2(1.0f), -45.0f), medic_count);
-	Engineer::AddBuilding(Transform(glm::vec2(-12.0f, -5.0f), glm::vec2(1.0f), 45.0f), engineer_count);
+	medicBuilding = Medic::AddBuilding(Transform(glm::vec2(12.0f, -5.0f), glm::vec2(1.0f), -45.0f), medic_count);
+	engineerBuilding = Engineer::AddBuilding(Transform(glm::vec2(-12.0f, -5.0f), glm::vec2(1.0f), 45.0f), engineer_count);
 }
 
 void MapLayer::OnDetach()

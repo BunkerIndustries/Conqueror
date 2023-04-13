@@ -1,7 +1,6 @@
 #include "_Game.h"
 #include "building_ui.h"
 #include "required/constants.h"
-#include "components/UI/ui_constants.h"
 
 BuildingUI::BuildingUI() {
 
