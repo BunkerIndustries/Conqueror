@@ -8,6 +8,6 @@ class Engineer
 public:
 	static GameObject* AddBuilding(Transform transform, uint32_t engineerCount);
 	static void PlaceMG();
-	static bool CheckForValidArtillerieNodes();
+	static void PlaceArtillerie();
 };
 

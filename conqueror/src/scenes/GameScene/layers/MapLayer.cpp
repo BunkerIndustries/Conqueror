@@ -122,29 +122,32 @@ bool MapLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 
 	GameObject* clicked_mapobject = e.GetGameObject();
 
-	if (clicked_mapobject->HasTag("move_node")) {
+	if (clicked_mapobject == gameScene->GetActiveBuilding()) {
+		gameScene->uiLayer->DeactivateBuildingUI();
+		gameScene->SetActiveBuilding(nullptr);
+	}
+	else {
+		gameScene->uiLayer->DeactivateBuildingUI();
+	}
 
+	if (clicked_mapobject->HasTag("move_node")) {
 		if (gameScene->GetActiveCharacter() == nullptr || !gameScene->GetActiveCharacter()->HasTag("soldier") || clicked_mapobject->GetComponent<Node>()->is_occupied) return false;
 
 		gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->SoldierMove(clicked_mapobject);
 		return true;
 	}
-	else if (clicked_mapobject->HasTag("medic_building") || clicked_mapobject->HasTag("engineer_building")) {
-
-		if (gameScene->GetActiveBuilding() != nullptr) {
-			gameScene->GetActiveBuilding()->GetComponent<BuildingUI>()->DeleteUI();
-			if (clicked_mapobject == gameScene->GetActiveBuilding()) {
-				gameScene->SetActiveBuilding(nullptr);
-				return true;
-			}
-		}
-		clicked_mapobject->GetComponent<BuildingUI>()->OpenUI();
-
-		gameScene->SetActiveBuilding(clicked_mapobject);
-		return true;
+	else if (clicked_mapobject->HasTag("medic_building")) {
+		gameScene->uiLayer->ActivateMedicBuildlingUI();
+	}
+	else if (clicked_mapobject->HasTag("engineer_building")) {
+		gameScene->uiLayer->ActivateEngineerBuildingUI();
 	}
 	else {
 		return false;
 	}
-	
+
+	gameScene->SetActiveBuilding(clicked_mapobject);
+
+	return true;
+
 }

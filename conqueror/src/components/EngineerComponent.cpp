@@ -3,7 +3,6 @@
 
 #include "required/constants.h"
 #include "required/functions.h"
-#include "required/stands.h"
 
 EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
 	: available_engineers(engineerCount) { }
@@ -19,9 +18,9 @@ void EngineerBuilding::ReturnEngineer()
 }
 
 
-EngineerCharacter::EngineerCharacter(GameObject* engineer_building, Stand& stand) 
-	: engineer_building(engineer_building)
+EngineerCharacter::EngineerCharacter(Stand& stand) 
 {
+	engineer_building = gameScene->mapLayer->engineerBuilding;
 	building_node = ChooseBuildingNode(stand.stand);
 	building_node_position = building_node->transform.position + engineer_building_position_offset;
 	gameObject->GetComponent<Movement>()->target_position = &building_node_position;

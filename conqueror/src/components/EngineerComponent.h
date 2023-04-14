@@ -1,5 +1,6 @@
 #pragma once
 #include "_Game.h"
+#include "required/stands.h"
 
 class EngineerBuilding : public Component
 {
@@ -21,7 +22,7 @@ private:
 
 class EngineerCharacter : public Component {
 public:
-	EngineerCharacter(GameObject* engineer_building, Stand& stand);
+	EngineerCharacter(Stand& stand);
 	virtual ~EngineerCharacter() = default;
 
 	void OnStart() override { };

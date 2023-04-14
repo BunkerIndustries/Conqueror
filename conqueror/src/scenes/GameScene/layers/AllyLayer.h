@@ -21,7 +21,10 @@ public:
 	bool KeyReleased(KeyReleasedEvent& e);
 	bool GameObjectPressed(GameObjectPressedEvent& e);
 
-	GameObject* CreateCharacter(std::string type, Transform transform);
+	GameObject* CreateSoldier(glm::vec2 position);
+	GameObject* CreateMedic(glm::vec2 position);
+	GameObject* CreateEngineer(glm::vec2 position, Stand stand);
+
 	GameObject* AllyLayer::CreateMg(glm::vec2 mg_node_position);
 
 private:
