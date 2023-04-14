@@ -18,7 +18,7 @@ void EngineerBuilding::ReturnEngineer()
 }
 
 
-EngineerCharacter::EngineerCharacter(Stand& stand) 
+EngineerCharacter::EngineerCharacter(Stand& stand)
 {
 	engineer_building = gameScene->mapLayer->engineerBuilding;
 	building_node = ChooseBuildingNode(stand.stand);

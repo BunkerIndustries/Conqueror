@@ -2,6 +2,8 @@
 #include "_Game.h"
 #include "layer/Layer.h"
 
+struct Stand;
+
 class AllyLayer : public Layer
 {
 public:

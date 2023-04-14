@@ -14,7 +14,7 @@ void MedicBuilding::SendMedic() {
 	if (available_medics <= 0) return;
 	available_medics--;
 
-	gameScene->allyLayer->CreateCharacter("medic", Transform(gameObject->transform.position, character_scale));
+	gameScene->allyLayer->CreateMedic(gameObject->transform.position);
 
 }
 

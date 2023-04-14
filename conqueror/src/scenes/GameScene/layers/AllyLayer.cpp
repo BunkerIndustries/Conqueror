@@ -40,7 +40,6 @@ GameObject* AllyLayer::CreateSoldier(glm::vec2 position) {
 	character->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), Geometry::RECTANGLE));		// TODO: Change to sprite_path
 	character->AddComponent(new Movement(soldier_movement_speed));
 	character->AddComponent(new Health(soldier_health));
-	character->AddComponent(new CharacterUI());
 	character->AddComponent(new SoldierBehaviour());
 	character->AddComponent(new SoldierShooting());
 	AddGameObjectToLayer(character);
@@ -52,7 +51,6 @@ GameObject* AllyLayer::CreateMedic(glm::vec2 position) {
 	character->AddComponent(new SpriteRenderer(glm::vec4(0.5f, 0.5f, 0.0f, 0.8f), Geometry::RECTANGLE));		// TODO: Change to sprite_path
 	character->AddComponent(new Movement(medic_movement_speed));
 	character->AddComponent(new Health(medic_health));
-	character->AddComponent(new CharacterUI());
 	character->AddComponent(new MedicCharacter(gameScene->mapLayer->medicBuilding));
 	AddGameObjectToLayer(character);
 	return character;
@@ -63,7 +61,6 @@ GameObject* AllyLayer::CreateEngineer(glm::vec2 position, Stand stand) {
 	character->AddComponent(new SpriteRenderer(glm::vec4(0.5f, 0.6f, 0.0f, 0.4f), Geometry::RECTANGLE));		// TODO: Change to sprite_path
 	character->AddComponent(new Movement(engineer_movement_speed));
 	character->AddComponent(new Health(engineer_health));
-	character->AddComponent(new CharacterUI());
 	character->AddComponent(new EngineerCharacter(stand));
 	AddGameObjectToLayer(character);
 	return character;
@@ -89,6 +86,8 @@ bool AllyLayer::KeyReleased(KeyReleasedEvent& e) {
 
 bool AllyLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 	// check if e belongs to allylayer - otherwise return false
+
+
 
 	GameObject* clicked_character = e.GetGameObject();
 

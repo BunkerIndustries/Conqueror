@@ -10,6 +10,6 @@ void SoldierSupply::Init() {
 void SoldierSupply::TryCallSoldier() {
 	if (soldier_stock <= 0) return;
 
-	gameScene->allyLayer->CreateCharacter("soldier", Transform(soldier_spawn_pos, character_scale));
+	gameScene->allyLayer->CreateSoldier(soldier_spawn_pos);
 	soldier_stock--;
 }

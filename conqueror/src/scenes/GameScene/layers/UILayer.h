@@ -11,7 +11,7 @@ public:
 	void OnAttach() override;
 	void OnDetach() override;
 	void Update(const float dt) override;
-	void OnEvent(Event& event) override;
+	void OnEvent(Event& event) override {};
 
 	void ActivateSoldierUI();
 	void ActivateMedicUI();

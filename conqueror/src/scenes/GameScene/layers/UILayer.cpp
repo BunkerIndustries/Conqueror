@@ -41,6 +41,7 @@ void UILayer::ActivateSoldierUI() {
 	header->AddChildObject(call_medic_button);
 
 	character_background->AddChildObject(header);
+	AddUIObject(character_background, ProjectionMode::SCREEN);
 }
 
 void UILayer::ActivateMedicUI() {
@@ -53,6 +54,7 @@ void UILayer::ActivateMedicUI() {
 	header->AddChildObject(name);
 
 	character_background->AddChildObject(header);
+	AddUIObject(character_background, ProjectionMode::SCREEN);
 }
 
 void UILayer::ActivateEngineerUI() {
@@ -65,6 +67,7 @@ void UILayer::ActivateEngineerUI() {
 	header->AddChildObject(name);
 
 	character_background->AddChildObject(header);
+	AddUIObject(character_background, ProjectionMode::SCREEN);
 }
 
 void UILayer::ActivateMedicBuildlingUI() {
@@ -77,6 +80,7 @@ void UILayer::ActivateMedicBuildlingUI() {
 	header->AddChildObject(name);
 
 	building_background->AddChildObject(header);
+	AddUIObject(building_background, ProjectionMode::SCREEN);
 }
 
 void UILayer::ActivateEngineerBuildingUI() {
@@ -85,12 +89,13 @@ void UILayer::ActivateEngineerBuildingUI() {
 	Panel* header = new Panel(ui_header_color, Transform(glm::vec2(0.0f, 0.7f), glm::vec2(0.9f, 0.2f)), Type::Rectangle, "ui_building_header");
 	// picturebox with picture of medic-bulding
 	Label* name = new Label("Engineer-building: ", glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(glm::vec2(0.2f, 0.0f), glm::vec2(0.8f, 0.2f)), "ui_buildling_name");
-	Button* place_mg_button = new Button(ui_place_mg_button_color, Transform(glm::vec2(0.0f, 0.5f), glm::vec2(0.8f, 0.2f)), Type::Rectangle, Engineer::BuildMG, "ui_place_mg_button");
+	Button* place_mg_button = new Button(ui_place_mg_button_color, Transform(glm::vec2(0.0f, 0.5f), glm::vec2(0.8f, 0.2f)), Type::Rectangle, Engineer::PlaceMG, "ui_place_mg_button");
 	// add picturebox child object
 	header->AddChildObject(name);
 	header->AddChildObject(place_mg_button);
 
 	building_background->AddChildObject(header);
+	AddUIObject(building_background, ProjectionMode::SCREEN);
 }
 
 void UILayer::DeactivateCharacterUI() {
