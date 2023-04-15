@@ -7,19 +7,40 @@
 
 namespace core
 {
-	class GameObjectPressedEvent : public Event {
-	private:
-		GameObject* gameObject;
+
+	class GameObjectEvent : public Event
+	{
 	public:
-		GameObjectPressedEvent() = default;
-		GameObjectPressedEvent(GameObject* gameObject)
+		GameObjectEvent() = default;
+		GameObjectEvent(GameObject* gameObject)
 			: gameObject(gameObject) { }
 
 		inline GameObject* GetGameObject() const { return gameObject; }
 
-		std::string ToString() const override {
+		inline std::string ToString() const override {
 			std::stringstream string;
-			string << "GameObjectPressedEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetCoreID();
+			string << "GameObjectEvent: Name: " << gameObject->GetName() << " | CoreID: " << gameObject->GetCoreID();
+			return string.str();
+		}
+
+		EVENT_CLASS_CATEGORY(EventCategoryGameObject | EventCategoryGame);
+
+		EVENT_CLASS_TYPE(GameObjectPressed);
+
+	protected:
+		GameObject* gameObject = nullptr;
+	};
+
+	class GameObjectPressedEvent : public GameObjectEvent {
+	public:
+		GameObjectPressedEvent() = default;
+		GameObjectPressedEvent(GameObject* gm)
+			: GameObjectEvent(gm) { }
+
+
+		inline std::string ToString() const override {
+			std::stringstream string;
+			string << "GameObjectPressedEvent: Name: " << gameObject->GetName() << " | ID: " << gameObject->GetCoreID();
 			return string.str();
 		}
 
@@ -28,19 +49,15 @@ namespace core
 		EVENT_CLASS_TYPE(GameObjectPressed);
 	};
 
-	class GameObjectReleasedEvent : public Event {
-	private:
-		GameObject* gameObject;
+	class GameObjectReleasedEvent : public GameObjectEvent {
 	public:
 		GameObjectReleasedEvent() = default;
-		GameObjectReleasedEvent(GameObject* gameObject)
-			: gameObject(gameObject) { }
-
-		inline GameObject* GetGameObject() const { return gameObject; }
+		GameObjectReleasedEvent(GameObject* gm)
+			: GameObjectEvent(gm) { }
 
 		std::string ToString() const override {
 			std::stringstream string;
-			string << "GameObjectReleasedEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetCoreID();
+			string << "GameObjectReleasedEvent: Name: " << gameObject->GetName() << " | ID: " << gameObject->GetCoreID();
 			return string.str();
 		}
 
@@ -49,19 +66,15 @@ namespace core
 		EVENT_CLASS_TYPE(GameObjectReleased);
 	};
 
-	class GameObjectHoverBeginEvent : public Event {
-	private:
-		GameObject* gameObject;
+	class GameObjectHoverBeginEvent : public GameObjectEvent {
 	public:
 		GameObjectHoverBeginEvent() = default;
-		GameObjectHoverBeginEvent(GameObject* gameObject)
-			: gameObject(gameObject) { }
-
-		inline GameObject* GetGameObject() const { return gameObject; }
+		GameObjectHoverBeginEvent(GameObject* gm)
+			: GameObjectEvent(gm) { }
 
 		std::string ToString() const override {
 			std::stringstream string;
-			string << "GameObjectHoverBeginEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetCoreID();
+			string << "GameObjectHoverBeginEvent: Name: " << gameObject->GetName() << " | ID: " << gameObject->GetCoreID();
 			return string.str();
 		}
 
@@ -70,19 +83,15 @@ namespace core
 		EVENT_CLASS_TYPE(GameObjectHoverBegin);
 	};
 
-	class GameObjectHoverEndEvent : public Event {
-	private:
-		GameObject* gameObject;
+	class GameObjectHoverEndEvent : public GameObjectEvent {
 	public:
 		GameObjectHoverEndEvent() = default;
-		GameObjectHoverEndEvent(GameObject* gameObject)
-			: gameObject(gameObject) { }
-
-		inline GameObject* GetGameObject() const { return gameObject; }
+		GameObjectHoverEndEvent(GameObject* gm)
+			: GameObjectEvent(gm) { }
 
 		std::string ToString() const override {
 			std::stringstream string;
-			string << "GameObjectHoverEndEvent: Name:" << gameObject->GetName() << " | ID: " << gameObject->GetCoreID();
+			string << "GameObjectHoverEndEvent: Name: " << gameObject->GetName() << " | ID: " << gameObject->GetCoreID();
 			return string.str();
 		}
 

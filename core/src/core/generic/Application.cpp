@@ -4,6 +4,7 @@
 
 #include "event/Input.h"
 #include "event/KeyCodes.h"
+#include "event/GameEvent.h"
 #include "renderer/RenderCommand.h"
 #include "renderer/Renderer.h"
 #include "imgui/ImGuiLayer.h"
@@ -50,6 +51,15 @@ namespace core {
 		dispatcher.dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 		dispatcher.dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
 		dispatcher.dispatch<KeyPressedEvent>(BIND_EVENT_FN(Application::OnKeyPressed));
+
+		if (event.IsInCategory(EventCategoryGameObject))
+		{
+			if (const GameObject* gm = (*dynamic_cast<GameObjectEvent*>(&event)).GetGameObject(); gm->onlyLayerReceive)
+			{
+				gm->GetLayer()->OnEvent(event);
+				return;
+			}
+		}
 
 		for (auto it = layerStack.end(); it != layerStack.begin(); )
 		{
