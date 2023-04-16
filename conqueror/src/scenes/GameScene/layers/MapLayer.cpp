@@ -50,7 +50,7 @@ GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 	else {
 		waiting_nodes.push_back(node_go);
 	}
-
+	node_go->onlyLayerReceive = true;
 	AddGameObjectToLayer(node_go);
 
 	return node_go;
@@ -111,7 +111,7 @@ GameObject* MapLayer::CreateBuilding(Transform transform, std::string type) {
 	else {
 		LOG_WARN("WARNING: probably no existing type given when creating a building");
 	}
-
+	building->onlyLayerReceive = true;
 	AddGameObjectToLayer(building);
 
 	return building;

@@ -43,6 +43,7 @@ GameObject* AllyLayer::CreateSoldier(glm::vec2 position) {
 	character->AddComponent(new SoldierBehaviour());
 	character->AddComponent(new SoldierShooting());
 	character->AddTag("soldier");
+	character->onlyLayerReceive = true;
 	AddGameObjectToLayer(character);
 	return character;
 }
@@ -54,6 +55,7 @@ GameObject* AllyLayer::CreateMedic(glm::vec2 position) {
 	character->AddComponent(new Health(medic_health));
 	character->AddComponent(new MedicCharacter(gameScene->mapLayer->medicBuilding));
 	character->AddTag("medic");
+	character->onlyLayerReceive = true;
 	AddGameObjectToLayer(character);
 	return character;
 }
@@ -65,7 +67,7 @@ GameObject* AllyLayer::CreateEngineer(glm::vec2 position, Stand stand) {
 	character->AddComponent(new Health(engineer_health));
 	character->AddComponent(new EngineerCharacter(stand));
 	character->AddTag("engineer");
-	
+	character->onlyLayerReceive = true;
 	AddGameObjectToLayer(character);
 	return character;
 }
