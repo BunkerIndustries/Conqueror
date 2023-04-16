@@ -125,6 +125,7 @@ bool MapLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 	if (clicked_mapobject == gameScene->GetActiveBuilding()) {
 		gameScene->uiLayer->DeactivateBuildingUI();
 		gameScene->SetActiveBuilding(nullptr);
+		return true;
 	}
 	else {
 		gameScene->uiLayer->DeactivateBuildingUI();
