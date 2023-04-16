@@ -14,6 +14,7 @@ private:
 	GameScene* gameScene;
 
 	bool cooldown_state;
+	bool just_started;
 	float cooldown_duration;
 	float wave_duration;
 

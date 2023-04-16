@@ -105,10 +105,31 @@ void UILayer::ActivateEngineerBuildingUI() {
 	AddUIObject(building_background, ProjectionMode::SCREEN);
 }
 
+void UILayer::ActivateSupplyMenuUI() {
+	RemoveUIObject(character_background);
+	RemoveUIObject(building_background);
+
+	supply_menu_background = new Panel(ui_supply_menu_background_color, Transform(glm::vec2(0.0f, 0.0f), ui_supply_menu_background_size), Type::Rectangle, "ui_supply_menu_background");
+	Label* text = new Label("You completed a wave!", ui_font_color, ui_supply_menu_text, "ui_supply_menu_text");
+	Panel* left_choice = new Panel(ui_choice_field_color, Transform(ui_left_choice_field_position, ui_choice_field_size), Type::Rectangle, "ui_supply_menu_left_choice_field");
+
+
+	Panel* right_choice = new Panel(ui_choice_field_color, Transform(ui_right_choice_field_position, ui_choice_field_size), Type::Rectangle, "ui_supply_menu_right_choice_field");
+	
+
+	supply_menu_background->AddChildObject(text);
+
+	AddUIObject(supply_menu_background, ProjectionMode::SCREEN);
+}
+
 void UILayer::DeactivateCharacterUI() {
 	RemoveUIObject(character_background);
 }
 
 void UILayer::DeactivateBuildingUI() {
 	RemoveUIObject(building_background);
+}
+
+void UILayer::DeactivateSupplyMenuUI() {
+	RemoveUIObject(supply_menu_background);
 }

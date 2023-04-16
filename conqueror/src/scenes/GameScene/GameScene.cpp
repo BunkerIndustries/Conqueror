@@ -4,7 +4,7 @@
 #include "required/constants.h"
 
 #include "utils/Engineer.h"
-#include "utils/SoldierSupply.h"
+#include "utils/Supply.h"
 
 GameScene::GameScene() {
 }
@@ -30,7 +30,7 @@ void GameScene::LoadResources() {
 }
 void GameScene::Init() {
 
-    SoldierSupply::Init();
+    Supply::Init();
 
     AddLayer(mapLayer);
     AddLayer(enemyLayer);

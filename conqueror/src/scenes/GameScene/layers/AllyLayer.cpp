@@ -2,7 +2,7 @@
 
 #include "AllyLayer.h"
 #include "required/constants.h"
-#include "utils/SoldierSupply.h"
+#include "utils/Supply.h"
 #include "components/MgComponent.h"
 #include "scenes/GameScene/GameScene.h"
 #include "required/stands.h"
@@ -84,7 +84,7 @@ GameObject* AllyLayer::CreateMg(glm::vec2 mg_node_position) {
 
 bool AllyLayer::KeyReleased(KeyReleasedEvent& e) {
 	if (e.getKeyCode() == KEY_SPACE) {
-		SoldierSupply::TryCallSoldier();
+		Supply::TryCallSoldier();
 		return true;
 	}
 	return false;

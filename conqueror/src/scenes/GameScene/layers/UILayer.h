@@ -18,10 +18,13 @@ public:
 	void ActivateEngineerUI();
 	void ActivateMedicBuildlingUI();
 	void ActivateEngineerBuildingUI();
+	void ActivateSupplyMenuUI();
 	void DeactivateCharacterUI();
 	void DeactivateBuildingUI();
+	void DeactivateSupplyMenuUI();
 
 private:
 	Panel* character_background;
 	Panel* building_background;
+	Panel* supply_menu_background;
 };

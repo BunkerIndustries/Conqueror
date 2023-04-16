@@ -12,6 +12,7 @@ WaveManager::WaveManager(GameScene* gameScene)
 	global_dt_counter = 0.0f;
 	spawn_dt_counter = 0.0f;
 	cooldown_state = true;
+	just_started = true;
 
 	cooldown_duration = start_preparation_time * game_time_factor;
 	wave_duration = start_wave_duration * game_time_factor;
@@ -25,8 +26,14 @@ void WaveManager::OnUpdate() {
 
 	if (cooldown_state) {
 		if (global_dt_counter >= cooldown_duration) {
+			LOG_DEBUG("cooldown over - wave state");
 			cooldown_state = false;
 			global_dt_counter = 0.0f;
+			if (just_started) {
+				just_started = false; 
+				return;
+			}
+			gameScene->uiLayer->ActivateSupplyMenuUI();
 		}
 		return;
 	}
@@ -41,6 +48,7 @@ void WaveManager::OnUpdate() {
 		}
 	}
 	else {
+		LOG_DEBUG("Wave over - cooldown state");
 		cooldown_state = true;
 		global_dt_counter = 0.0f;
 		wave_duration *= wave_length_gradient;

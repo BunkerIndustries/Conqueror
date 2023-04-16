@@ -1,13 +1,13 @@
 #include "_Game.h"
 
-#include "SoldierSupply.h"
-unsigned int SoldierSupply::soldier_stock;
+#include "Supply.h"
+unsigned int Supply::soldier_stock;
 
-void SoldierSupply::Init() {
+void Supply::Init() {
 	soldier_stock = start_soldier_stock;
 }
 
-void SoldierSupply::TryCallSoldier() {
+void Supply::TryCallSoldier() {
 	if (soldier_stock <= 0) return;
 
 	gameScene->allyLayer->CreateSoldier(soldier_spawn_pos);

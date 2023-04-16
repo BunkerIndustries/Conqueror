@@ -16,8 +16,6 @@ EnemyLayer::~EnemyLayer()
 
 void EnemyLayer::OnAttach()
 {
-	CreateEnemy("enemy 1", glm::vec2(1.0f, 10.0f));
-	CreateEnemy("enemy 2", glm::vec2(-1.0f, 10.0f));
 }
 
 void EnemyLayer::OnDetach()

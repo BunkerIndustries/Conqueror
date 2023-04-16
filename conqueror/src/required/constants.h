@@ -134,7 +134,7 @@ inline float mg_shoot_interval = 0.05f;
 inline uint8_t mg_miss_points = 5;
 inline uint8_t mg_damage = 15;
 
-// ui color
+// character and building ui color
 inline glm::vec4 ui_character_background_color = glm::vec4(0.2f, 0.2f, 0.2f, 0.6f);
 inline glm::vec4 ui_building_background_color = glm::vec4(0.15f, 0.15f, 0.15f, 0.6f);
 inline glm::vec4 ui_header_color = glm::vec4(0.1f, 0.1f, 0.1f, 0.6f);
@@ -143,7 +143,7 @@ inline glm::vec4 ui_place_mg_button_color = glm::vec4(0.2f, 0.5f, 0.5f, 0.8f);
 inline glm::vec4 ui_place_artillerie_button_color = glm::vec4(0.1f, 0.4f, 0.4f, 0.8f);
 inline glm::vec4 ui_font_color = glm::vec4(1.0f, 1.0f, 1.0f, 0.8f);
 
-// ui transform
+// character and building ui transform
 inline glm::vec2 ui_background_size = glm::vec2(0.3f, 0.6f);
 inline glm::vec2 ui_character_position = glm::vec2(0.8f, 0.0f);
 inline glm::vec2 ui_building_position = glm::vec2(-0.8f, 0.0f);
@@ -151,3 +151,15 @@ inline Transform ui_header_transform = Transform(glm::vec2(0.0f, 0.65f), glm::ve
 inline Transform ui_header_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.1f, 0.2f));
 inline Transform ui_first_button_transform = Transform(glm::vec2(0.0f, 0.1f), glm::vec2(0.25f, 0.08f));
 inline Transform ui_second_button_transform = Transform(glm::vec2(0.0f, -0.3f), glm::vec2(0.25f, 0.08f));
+
+// supply menu ui color
+inline glm::vec4 ui_supply_menu_background_color = glm::vec4(0.5f, 0.5f, 0.5f, 0.6f);
+inline glm::vec2 ui_supply_menu_background_size = glm::vec2(0.7f, 0.5f);
+inline glm::vec4 ui_choice_field_color = glm::vec4(0.2f, 0.2f, 0.2f, 0.6f);
+
+
+//supply menu ui transform
+inline Transform ui_supply_menu_text = Transform(glm::vec2(0.0f, 0.7f), glm::vec2(0.1f, 0.2f));
+inline glm::vec2 ui_left_choice_field_position = glm::vec2(-0.7f, -0.1f);
+inline glm::vec2 ui_right_choice_field_position = glm::vec2(0.7f, -0.1f);
+inline glm::vec2 ui_choice_field_size = glm::vec2(0.25f, 0.3f);
