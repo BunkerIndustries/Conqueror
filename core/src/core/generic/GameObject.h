@@ -47,6 +47,7 @@ namespace core {
             return mode;
         }
 
+        bool onlyLayerReceive = false;
         
 
     private:
