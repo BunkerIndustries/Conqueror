@@ -30,22 +30,14 @@ namespace core
 
 	void UIObject::RemoveChildObject(uint32_t index)
 	{
-		if (index >= childOjects.size())
-		{
-			LOG_CORE_ERROR("Index '{0}' out of range in 'RemoveChildObject' in Object '{0}'", index, this->GetName());
-			return;
-		}
+		if (index >= childOjects.size()) return;
 		childOjects.erase(childOjects.begin() + index);
 	}
 
 	void UIObject::RemoveChildObject(UIObject* object)
 	{
 		std::vector<UIObject*>::iterator it = std::find(childOjects.begin(), childOjects.end(), object);
-		if (it == childOjects.end())
-		{
-			LOG_CORE_ERROR("UIObject '{0}' not registered in 'RemoveChildObject' in Object '{0}'", (uint8_t)object, this->GetName());
-			return;
-		}
+		if (it == childOjects.end()) return;
 		childOjects.erase(it);
 	}
 
