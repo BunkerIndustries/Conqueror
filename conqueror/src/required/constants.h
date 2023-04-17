@@ -101,20 +101,17 @@ inline glm::vec4 node_waiting_color = glm::vec4(0.0f, 0.4f, 0.4f, node_alpha);
 inline float game_time_factor = 3.0f;
 
 // medics 
-inline uint8_t medic_count = 15;
-//inline MedicManagement* medic_management = new MedicManagement(medic_count);
+//inline MedicManagement* medic_management = new MedicManagement(start_medic_stock);
 inline glm::vec2 medic_healing_position_offset = glm::vec2(0.5f, 0.0f);
 inline float waiting_time_per_hp = 0.02f;
 
 // engineer 
-inline uint8_t engineer_count = 5;
-//inline EngineerManagement* engineer_management = new EngineerManagement(engineer_count);
+//inline EngineerManagement* engineer_management = new EngineerManagement(start_engineer_stock);
 inline glm::vec2 engineer_building_position_offset = glm::vec2(0.5f, 0.0f);
 inline float building_time = 0.8f;
 
 // buildings
 inline glm::vec2 building_size = glm::vec2(3.0f, 3.3f);
-
 
 // wave 
 inline float start_preparation_time = 4.0f;
@@ -123,8 +120,10 @@ inline float wave_length_gradient = 1.5f;
 inline float enemy_start_spawn_interval = 2.0f;
 inline float enemy_spawn_interval_gradient = 0.9f;
 
-// game 
+// stocks
 inline unsigned int start_soldier_stock = 20;
+inline uint8_t start_engineer_stock = 5;
+inline uint8_t start_medic_stock = 8;
 
 // mg
 inline glm::vec2 mg_size = glm::vec2(1.0f, 2.0f);

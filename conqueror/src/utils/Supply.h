@@ -7,6 +7,8 @@ public:
 	static void Init();
 	static void TryCallSoldier();
 
+
+
 private:
 	static unsigned int soldier_stock;
 	
