@@ -156,9 +156,13 @@ inline glm::vec4 ui_supply_menu_background_color = glm::vec4(0.5f, 0.5f, 0.5f, 0
 inline glm::vec2 ui_supply_menu_background_size = glm::vec2(0.7f, 0.5f);
 inline glm::vec4 ui_choice_field_color = glm::vec4(0.2f, 0.2f, 0.2f, 0.6f);
 
-
 //supply menu ui transform
 inline Transform ui_supply_menu_text = Transform(glm::vec2(0.0f, 0.7f), glm::vec2(0.1f, 0.2f));
 inline glm::vec2 ui_left_choice_field_position = glm::vec2(-0.7f, -0.1f);
 inline glm::vec2 ui_right_choice_field_position = glm::vec2(0.7f, -0.1f);
 inline glm::vec2 ui_choice_field_size = glm::vec2(0.25f, 0.3f);
+
+// supply menu
+inline uint8_t min_soldiers_choice = 3;
+inline uint8_t max_soldiers_choice = 6;
+inline uint8_t soldier_increase_by_wave = 3;
