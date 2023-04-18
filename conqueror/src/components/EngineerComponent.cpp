@@ -5,18 +5,29 @@
 #include "required/functions.h"
 
 EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
-	: available_engineers(engineerCount) { }
+	: available_engineers(engineerCount) {
+	available_mgs = 0;
+	available_artillery = 0;
+}
 
 void EngineerBuilding::SendEngineer()
 {
 	available_engineers--;
 }
 
-void EngineerBuilding::ReturnEngineer()
+void EngineerBuilding::IncreaseAvailableEngineers()
 {
 	available_engineers++;
 }
 
+void EngineerBuilding::IncreaseMgStock()
+{
+	available_mgs++;
+}
+void EngineerBuilding::IncreaseArtilleryStock()
+{
+	available_artillery++;
+}
 
 EngineerCharacter::EngineerCharacter(Stand& stand)
 {
@@ -43,7 +54,7 @@ void EngineerCharacter::OnUpdate() {
 
 	if (going_back) {
 		if (gameObject->transform.position == engineer_building->transform.position) {
-			engineer_building->GetComponent<EngineerBuilding>()->ReturnEngineer();
+			engineer_building->GetComponent<EngineerBuilding>()->IncreaseAvailableEngineers();
 			delete gameObject;
 		}
 		return;

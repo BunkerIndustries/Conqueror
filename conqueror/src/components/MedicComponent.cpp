@@ -18,7 +18,7 @@ void MedicBuilding::SendMedic() {
 
 }
 
-void MedicBuilding::ReturnMedic() {
+void MedicBuilding::IncreaseAvailableMedics() {
 	available_medics++;
 }
 
@@ -37,7 +37,7 @@ void MedicCharacter::OnUpdate() {
 
 	if (going_back) {
 		if (gameObject->transform.position == medic_building->transform.position) {
-			medic_building->GetComponent<MedicBuilding>()->ReturnMedic();
+			medic_building->GetComponent<MedicBuilding>()->IncreaseAvailableMedics();
 			delete gameObject;
 		}
 		return;

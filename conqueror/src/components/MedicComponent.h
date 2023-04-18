@@ -12,7 +12,7 @@ public:
 	void OnEvent(Event& event) override {};
 
 	void SendMedic();
-	void ReturnMedic();
+	void IncreaseAvailableMedics();
 
 private:
 	uint32_t available_medics;

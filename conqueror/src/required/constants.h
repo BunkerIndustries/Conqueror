@@ -153,14 +153,18 @@ inline Transform ui_second_button_transform = Transform(glm::vec2(0.0f, -0.3f), 
 
 // supply menu ui color
 inline glm::vec4 ui_supply_menu_background_color = glm::vec4(0.5f, 0.5f, 0.5f, 0.6f);
-inline glm::vec2 ui_supply_menu_background_size = glm::vec2(0.7f, 0.5f);
 inline glm::vec4 ui_choice_field_color = glm::vec4(0.2f, 0.2f, 0.2f, 0.6f);
+inline glm::vec4 ui_choice_field_button_color = glm::vec4(0.8f, 0.6f, 0.4f, 0.7f);
 
 //supply menu ui transform
-inline Transform ui_supply_menu_text = Transform(glm::vec2(0.0f, 0.7f), glm::vec2(0.1f, 0.2f));
-inline glm::vec2 ui_left_choice_field_position = glm::vec2(-0.7f, -0.1f);
-inline glm::vec2 ui_right_choice_field_position = glm::vec2(0.7f, -0.1f);
+inline glm::vec2 ui_supply_menu_background_size = glm::vec2(0.7f, 0.5f);
+inline Transform ui_supply_menu_text_transform = Transform(glm::vec2(0.0f, 0.7f), glm::vec2(0.1f, 0.2f));
+inline glm::vec2 ui_left_choice_field_position = glm::vec2(-0.55f, -0.1f);
+inline glm::vec2 ui_right_choice_field_position = glm::vec2(0.55f, -0.1f);
 inline glm::vec2 ui_choice_field_size = glm::vec2(0.25f, 0.3f);
+inline Transform ui_choice_field_text_transform = Transform(glm::vec2(0.0f, 0.8f), glm::vec2(0.01f, 0.2f));
+inline Transform ui_choice_field_count_transform = Transform(glm::vec2(0.0f, 0.6f), glm::vec2(0.01f, 0.15f));
+inline Transform ui_choice_field_button_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.15f, 0.1f));
 
 // supply menu
 inline uint8_t min_soldiers_choice = 3;

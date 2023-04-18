@@ -6,6 +6,7 @@
 #include "scenes/GameScene/GameScene.h"
 #include "utils/Medic.h"
 #include "utils/Engineer.h"
+#include "utils/Supply.h"
 
 UILayer::UILayer()
 	: Layer("UILayer")
@@ -108,16 +109,31 @@ void UILayer::ActivateEngineerBuildingUI() {
 void UILayer::ActivateSupplyMenuUI() {
 	RemoveUIObject(character_background);
 	RemoveUIObject(building_background);
+	RemoveUIObject(supply_menu_background);
 
 	supply_menu_background = new Panel(ui_supply_menu_background_color, Transform(glm::vec2(0.0f, 0.0f), ui_supply_menu_background_size), Type::Rectangle, "ui_supply_menu_background");
-	Label* text = new Label("You completed a wave!", ui_font_color, ui_supply_menu_text, "ui_supply_menu_text");
-	Panel* left_choice = new Panel(ui_choice_field_color, Transform(ui_left_choice_field_position, ui_choice_field_size), Type::Rectangle, "ui_supply_menu_left_choice_field");
+	Label* text = new Label("You completed a wave!", ui_font_color, ui_supply_menu_text_transform, "ui_supply_menu_text");
+	Panel* left_option = new Panel(ui_choice_field_color, Transform(ui_left_choice_field_position, ui_choice_field_size), Type::Rectangle, "ui_supply_menu_left_choice_field");
+	Label* left_option_text = new Label("Soldiers", ui_font_color, ui_choice_field_text_transform, "ui_supply_menu_left_choice_text");
+	left_option->AddChildObject(left_option_text);
+	Label* left_option_count = new Label(std::to_string(Supply::CreateLeftOption()) + "x", ui_font_color, ui_choice_field_count_transform, "ui_supply_menu_left_choice_count");
+	left_option->AddChildObject(left_option_count);
+	// picturebox with soldier-image
+	Button* left_option_button = new Button(ui_choice_field_button_color, ui_choice_field_button_transform, Type::Rectangle, Supply::TakeLeftOption, "ui_upply_menu_left_choice_button");
+	left_option->AddChildObject(left_option_button);
 
-
-	Panel* right_choice = new Panel(ui_choice_field_color, Transform(ui_right_choice_field_position, ui_choice_field_size), Type::Rectangle, "ui_supply_menu_right_choice_field");
-	
+	Panel* right_option = new Panel(ui_choice_field_color, Transform(ui_right_choice_field_position, ui_choice_field_size), Type::Rectangle, "ui_supply_menu_right_choice_field");
+	Label* right_option_text = new Label(Supply::CreateRightOption(), ui_font_color, ui_choice_field_text_transform, "ui_supply_menu_right_choice_text");
+	right_option->AddChildObject(right_option_text);
+	Label* right_option_count = new Label("1x", ui_font_color, ui_choice_field_count_transform, "ui_supply_menu_right_choice_count");
+	right_option->AddChildObject(right_option_count);
+	// picturebox with image
+	Button* right_option_button = new Button(ui_choice_field_button_color, ui_choice_field_button_transform, Type::Rectangle, Supply::TakeRightOption, "ui_upply_menu_right_choice_button");
+	right_option->AddChildObject(right_option_button);
 
 	supply_menu_background->AddChildObject(text);
+	supply_menu_background->AddChildObject(left_option);
+	supply_menu_background->AddChildObject(right_option);
 
 	AddUIObject(supply_menu_background, ProjectionMode::SCREEN);
 }

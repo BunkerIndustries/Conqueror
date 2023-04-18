@@ -14,10 +14,15 @@ public:
 	void OnEvent(Event& event) override {};
 
 	void SendEngineer();
-	void ReturnEngineer();
+	void IncreaseAvailableEngineers();
+
+	void IncreaseMgStock();
+	void IncreaseArtilleryStock();
 
 private:
 	uint32_t available_engineers;
+	uint32_t available_mgs;
+	uint32_t available_artillery;
 };
 
 class EngineerCharacter : public Component {

@@ -6,13 +6,17 @@ class Supply {
 public:
 	static void Init();
 	static void TryCallSoldier();
-
-	static void TakeChoices();
 	static void IncreaseSoldierCount();
+
+	static uint8_t CreateLeftOption();
+	static std::string CreateRightOption();
+	static void TakeLeftOption();
+	static void TakeRightOption();
 
 private:
 	static unsigned int soldier_stock;
 	static uint8_t min_soldiers, max_soldiers;
 
-	static uint8_t soldiers;
+	static uint8_t left_option;
+	static std::string right_option;
 };

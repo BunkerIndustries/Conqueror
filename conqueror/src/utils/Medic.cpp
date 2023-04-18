@@ -16,8 +16,3 @@ void Medic::SendMedic()
 {
 	gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->SendMedic();
 }
-
-void Medic::ReturnMedic()
-{
-
-}
