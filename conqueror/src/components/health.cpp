@@ -2,6 +2,7 @@
 #include "health.h"
 
 #include "required/constants.h"
+#include "utils\Supply.h"
 
 Health::Health(float hp) 
 	:hp(hp)
@@ -26,6 +27,10 @@ bool Health::TakeDamage(float damage) {
 	hp -= damage;
 	if (hp <= 0.0f) {
 		if (gameScene->GetActiveCharacter() == gameObject) gameScene->SetActiveCharacter(nullptr);
+		if (gameObject->HasTag("soldier")) {
+			// get node and unoccupy it
+			Supply::CheckForGameOver();
+		}
 		delete gameObject;
 		return true;
 	}

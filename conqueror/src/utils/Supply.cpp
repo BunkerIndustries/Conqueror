@@ -62,3 +62,13 @@ void Supply::IncreaseSoldierCount() {
 	min_soldiers += soldier_increase_by_wave;
 	max_soldiers += soldier_increase_by_wave;
 }
+
+bool Supply::CheckForGameOver() {
+
+	// if soldiers still exist
+	if (soldier_stock > 0 || gameScene->allyLayer->GetGameObjectsByTag("soldier").size() != 0) {
+		return false;
+	}
+	// game over screen or something
+	return true;
+}

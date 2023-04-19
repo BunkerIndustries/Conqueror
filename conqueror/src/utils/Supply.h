@@ -13,6 +13,8 @@ public:
 	static void TakeLeftOption();
 	static void TakeRightOption();
 
+	static bool CheckForGameOver();
+
 private:
 	static unsigned int soldier_stock;
 	static uint8_t min_soldiers, max_soldiers;
