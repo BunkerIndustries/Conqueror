@@ -69,6 +69,6 @@ bool Supply::CheckForGameOver() {
 	if (soldier_stock > 0 || gameScene->allyLayer->GetGameObjectsByTag("soldier").size() != 0) {
 		return false;
 	}
-	// game over screen or something
+	Application::ChangeScene(menuScene);	// TODO: change to game-over menu
 	return true;
 }

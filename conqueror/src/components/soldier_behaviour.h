@@ -12,6 +12,7 @@ public:
 	void OnEvent(Event& event) override {};
 
 	void SoldierMove(GameObject* node);
+	void FreeNode();
 
 	bool on_spawn_pos;
 	bool is_healed;
@@ -19,7 +20,6 @@ public:
 private:
 	float health;
 
-	bool can_shoot;
 	bool travelling;
 
 	bool SoldierTryMoveToWaitingNode();
@@ -32,4 +32,5 @@ private:
 
 	std::vector<GameObject*>* stand = nullptr;
 	GameObject* old_node = nullptr;
+	Node* current_node = nullptr;
 };

@@ -82,13 +82,13 @@ void SoldierBehaviour::SoldierMove(GameObject* move_node) {
 
 	// get the for this function required components
 	Movement* move_component = gameObject->GetComponent<Movement>();
-	Node* node_component = move_node->GetComponent<Node>();
+	current_node = move_node->GetComponent<Node>();
 
 	// if the target node is the same it is already on or it is already occupied (position-check is needed because clicking a node twice with the same selected gameobject will make it unoccupied)
-	if (*move_component->target_position == move_node->transform.position || node_component->is_occupied) return;
+	if (*move_component->target_position == move_node->transform.position || current_node->is_occupied) return;
 
 	// make the clicked node occupied and the recent unoccupied
-	node_component->is_occupied = true;
+	current_node->is_occupied = true;
 
 	old_node->GetComponent<Node>()->is_occupied = false;
 
@@ -133,4 +133,9 @@ bool SoldierBehaviour::SoldierTryMoveToWaitingNode() {
 void SoldierBehaviour::RestartTimer() {
 	dt_counter = 0.0f;
 	time_to_wait = RandomF(min_soldier_shoot_waiting_time, max_soldier_shoot_waiting_time) * game_time_factor;
+}
+
+void SoldierBehaviour::FreeNode() {
+	current_node->is_occupied = false;
+	current_node = nullptr;
 }

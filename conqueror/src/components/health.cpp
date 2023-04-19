@@ -29,6 +29,7 @@ bool Health::TakeDamage(float damage) {
 		if (gameScene->GetActiveCharacter() == gameObject) gameScene->SetActiveCharacter(nullptr);
 		if (gameObject->HasTag("soldier")) {
 			// get node and unoccupy it
+			gameObject->GetComponent<SoldierBehaviour>()->FreeNode();
 			Supply::CheckForGameOver();
 		}
 		delete gameObject;

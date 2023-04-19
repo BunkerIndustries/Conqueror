@@ -121,7 +121,7 @@ inline float enemy_start_spawn_interval = 2.0f;
 inline float enemy_spawn_interval_gradient = 0.9f;
 
 // stocks
-inline unsigned int start_soldier_stock = 20;
+inline unsigned int start_soldier_stock = 2;
 inline uint8_t start_engineer_stock = 5;
 inline uint8_t start_medic_stock = 8;
 
@@ -167,6 +167,6 @@ inline Transform ui_choice_field_count_transform = Transform(glm::vec2(0.0f, 0.6
 inline Transform ui_choice_field_button_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.15f, 0.1f));
 
 // supply menu
-inline uint8_t min_soldiers_choice = 3;
-inline uint8_t max_soldiers_choice = 6;
+inline uint8_t min_soldiers_choice = 2;
+inline uint8_t max_soldiers_choice = 5;
 inline uint8_t soldier_increase_by_wave = 3;
