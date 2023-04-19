@@ -133,6 +133,10 @@ inline float mg_shoot_interval = 0.05f;
 inline uint8_t mg_miss_points = 5;
 inline uint8_t mg_damage = 15;
 
+// artillery
+inline float artillery_shoot_interval = 3.0f;
+
+
 // character and building ui color
 inline glm::vec4 ui_character_background_color = glm::vec4(0.2f, 0.2f, 0.2f, 0.6f);
 inline glm::vec4 ui_building_background_color = glm::vec4(0.15f, 0.15f, 0.15f, 0.6f);

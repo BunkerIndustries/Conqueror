@@ -27,7 +27,8 @@ public:
 	GameObject* CreateMedic(glm::vec2 position);
 	GameObject* CreateEngineer(glm::vec2 position, Stand stand);
 
-	GameObject* AllyLayer::CreateMg(glm::vec2 mg_node_position);
+	GameObject* CreateMg(glm::vec2 mg_position);
+	GameObject* CreateArtillery(glm::vec2 artillery_position);
 
 private:
 };

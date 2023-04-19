@@ -72,12 +72,22 @@ GameObject* AllyLayer::CreateEngineer(glm::vec2 position, Stand stand) {
 	return character;
 }
 
-GameObject* AllyLayer::CreateMg(glm::vec2 mg_node_position) {
+GameObject* AllyLayer::CreateMg(glm::vec2 mg_position) {
 
-	GameObject* mg = new GameObject("mg", Transform(mg_node_position,mg_size));
+	GameObject* mg = new GameObject("mg", Transform(mg_position,mg_size));
 	mg->AddComponent(new SpriteRenderer(glm::vec4(0.5f, 0.1f, 0.5f, 1.0f), Geometry::RECTANGLE));
 	mg->AddComponent(new MgComponent());
 	AddGameObjectToLayer(mg);
+
+	return mg;
+}
+
+GameObject* AllyLayer::CreateArtillery(glm::vec2 artillery_position) {
+
+	GameObject* artillery = new GameObject("artillery", Transform(artillery_position, mg_size));
+	artillery->AddComponent(new SpriteRenderer(glm::vec4(0.5f, 0.1f, 0.5f, 1.0f), Geometry::RECTANGLE));
+	artillery->AddComponent();
+	AddGameObjectToLayer(artillery);
 
 	return mg;
 }

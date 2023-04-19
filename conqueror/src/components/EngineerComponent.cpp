@@ -75,5 +75,12 @@ void EngineerCharacter::OnUpdate() {
 	isBuilding = true;
 	gameScene->mapLayer->CreateNode(building_node->transform.position, mg_stand);
 	delete building_node;
-	// TODO: place mg
+
+	if (building_node->GetComponent<Node>()->stand == trench_stand.stand) {
+		// place mg
+
+	}
+	else if (building_node->GetComponent<Node>()->stand == waiting_stand.stand) {
+		// place artillery
+	}
 }
