@@ -5,14 +5,6 @@
 
 
 MenuScene::MenuScene() {
-
-}
-
-MenuScene::~MenuScene() {
-    RemoveLayer(menuLayer);
-}
-
-void MenuScene::LoadResources() {
     backcolor = background_color;
 
     menuLayer = new MenuLayer();
@@ -20,11 +12,19 @@ void MenuScene::LoadResources() {
     CreateElement("title_object_001.png", glm::vec2(0.0f, 3.0f), glm::vec2(11.0f, 3.0f));
     CreateButton("play_object_001.png", glm::vec2(0.0f, -2.0f), "play");
 }
-void MenuScene::Init() {
+
+MenuScene::~MenuScene() {
+}
+
+void MenuScene::OnStart() {
     AddLayer(menuLayer);
 }
 
-void MenuScene::Update() {
+void MenuScene::OnStop() {
+    RemoveLayer(menuLayer);
+}
+
+void MenuScene::OnUpdate() {
 
 }
 

@@ -80,21 +80,4 @@ namespace core {
     {
         Application::RemoveOverlay(layer);
     }
-
-    void Scene::Start() {
-        isRunning = true;
-    }
-
-    void Scene::Disable() {
-        delete camera;
-    }
-
-    Camera* Scene::GetCamera() {
-        // return the current scene camera, useful for scene testing
-        return this->camera;
-    }
-
-    glm::vec4& Scene::GetBackcolor() {
-        return this->backcolor;
-    }
 }

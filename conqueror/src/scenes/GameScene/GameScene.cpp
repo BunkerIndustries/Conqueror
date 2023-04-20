@@ -7,17 +7,6 @@
 #include "utils/SoldierSupply.h"
 
 GameScene::GameScene() {
-}
-
-GameScene::~GameScene() {
-    RemoveLayer(mapLayer);
-    RemoveLayer(enemyLayer);
-    RemoveLayer(allyLayer);
-    
-    RemoveOverlay(uiLayer);
-}
-
-void GameScene::LoadResources() {
     // set background color
     backcolor = glm::vec4(0.8f, 0.8f, 0.8f, 1.0f);
 
@@ -28,7 +17,19 @@ void GameScene::LoadResources() {
 
     waveManager = new WaveManager(this);
 }
-void GameScene::Init() {
+
+GameScene::~GameScene() {
+
+}
+
+void GameScene::OnStop() {
+    RemoveLayer(mapLayer);
+    RemoveLayer(enemyLayer);
+    RemoveLayer(allyLayer);
+
+    RemoveOverlay(uiLayer);
+}
+void GameScene::OnStart() {
 
     SoldierSupply::Init();
 
@@ -39,7 +40,7 @@ void GameScene::Init() {
     AddOverlay(uiLayer);
 }
 
-void GameScene::Update() {
+void GameScene::OnUpdate() {
 
     CameraMovement(Application::GetDT());
     waveManager->OnUpdate();

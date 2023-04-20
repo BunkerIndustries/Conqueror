@@ -17,6 +17,8 @@ public:
 	}
 
 	void Init() override {
+		gameScene = new GameScene();
+		menuScene = new MenuScene();
 		Application::ChangeScene(menuScene);
 	}
 

@@ -14,10 +14,13 @@ class GameScene : public Scene
 public:
 	GameScene();
 	~GameScene() override;
-	void LoadResources() override;
-	void Init() override;
-	void Update() override;
-	
+
+
+	void OnStart() override;
+	void OnStop() override;
+	void OnUpdate() override;
+
+public:
 	void OnEvent(Event& e) override
 	{
 		EventDispatcher dispatcher(e);

@@ -3,8 +3,8 @@
 #include "scenes/GameScene/GameScene.h"
 
 // scenes
-inline GameScene* gameScene = new GameScene();
-inline MenuScene* menuScene = new MenuScene();
+inline GameScene* gameScene;
+inline MenuScene* menuScene;
 
 // enemy movement grid
 inline std::vector<std::vector<GameObject*>> enemy_grid;
