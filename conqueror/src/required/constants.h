@@ -135,6 +135,8 @@ inline uint8_t mg_damage = 15;
 
 // artillery
 inline float artillery_shoot_interval = 3.0f;
+inline float artillery_normal_damage = 70.0f;
+inline float artillery_critical_damage = 100.0f;
 inline glm::vec2 artillery_explosion_size = glm::vec2(3.0f, 3.0f);
 
 
