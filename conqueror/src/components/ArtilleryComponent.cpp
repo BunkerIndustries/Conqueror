@@ -9,7 +9,7 @@ ArtilleryComponent::ArtilleryComponent() {
 }
 
 void ArtilleryComponent::OnStart() {
-
+	reload_time = RandomF(artillery_min_reload_time, artillery_max_reload_time);
 }
 
 void ArtilleryComponent::OnStop() {
@@ -20,7 +20,7 @@ void ArtilleryComponent::OnUpdate() {
 	dt_counter += Application::GetDT();
 
 	// TODO: random time
-	if (dt_counter >= artillery_shoot_interval) {
+	if (dt_counter >= reload_time) {
 		Shoot();
 		dt_counter = 0.0f;
 	}
@@ -60,4 +60,5 @@ void ArtilleryComponent::Shoot() {
 			}
 		}
 	}
+	reload_time = RandomF(artillery_min_reload_time, artillery_max_reload_time);
 }

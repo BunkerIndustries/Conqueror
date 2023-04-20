@@ -13,5 +13,6 @@ public:
 
 private:
 	float dt_counter;
+	float reload_time;
 	void Shoot();
 };
