@@ -113,22 +113,14 @@ namespace core
 
 	void Layer::RemoveUIObject(uint32_t index)
 	{
-		if (index >= uiObjects.size())
-		{
-			LOG_CORE_ERROR("Index '{0}' out of range in 'RemoveUIObject' in layer '{1}'", index, this->GetName());
-			return;
-		}
+		if (index >= uiObjects.size()) return;
 		uiObjects.erase(uiObjects.begin() + index);
 	}
 
 	void Layer::RemoveUIObject(UIObject* object)
 	{
 		std::vector<UIObject*>::iterator it = std::find(uiObjects.begin(), uiObjects.end(), object);
-		if (it == uiObjects.end())
-		{
-			LOG_CORE_ERROR("UIObject '{0}' not registered in 'RemoveUIObject' in layer '{1}'", (uint8_t)object, this->GetName());
-			return;
-		}
+		if (it == uiObjects.end()) return;
 		uiObjects.erase(it);
 	}
 

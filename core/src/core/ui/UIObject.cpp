@@ -23,6 +23,24 @@ namespace core
 		childOjects.push_back(uiObject);
 	}
 
+	void UIObject::RemoveChildObject()
+	{
+		childOjects.clear();
+	}
+
+	void UIObject::RemoveChildObject(uint32_t index)
+	{
+		if (index >= childOjects.size()) return;
+		childOjects.erase(childOjects.begin() + index);
+	}
+
+	void UIObject::RemoveChildObject(UIObject* object)
+	{
+		std::vector<UIObject*>::iterator it = std::find(childOjects.begin(), childOjects.end(), object);
+		if (it == childOjects.end()) return;
+		childOjects.erase(it);
+	}
+
 	UIObject* UIObject::GetParentObject() const
 	{
 		return parent;

@@ -4,6 +4,7 @@
 
 #include "event/Input.h"
 #include "event/KeyCodes.h"
+#include "event/GameEvent.h"
 #include "renderer/RenderCommand.h"
 #include "renderer/Renderer.h"
 #include "imgui/ImGuiLayer.h"
@@ -50,6 +51,15 @@ namespace core {
 		dispatcher.dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 		dispatcher.dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
 		dispatcher.dispatch<KeyPressedEvent>(BIND_EVENT_FN(Application::OnKeyPressed));
+
+		if (event.IsInCategory(EventCategoryGameObject))
+		{
+			if (const GameObject* gm = (*dynamic_cast<GameObjectEvent*>(&event)).GetGameObject(); gm->onlyLayerReceive)
+			{
+				gm->GetLayer()->OnEvent(event);
+				return;
+			}
+		}
 
 		for (auto it = layerStack.end(); it != layerStack.begin(); )
 		{
@@ -114,7 +124,7 @@ namespace core {
 		//set start scene
 		if (queuedScene) {
 			currentScene = queuedScene;
-			currentScene->InitGeneral();
+			currentScene->Start();
 			queuedScene = nullptr;
 		}
 
@@ -138,13 +148,13 @@ namespace core {
 					if (queuedScene != nullptr) {
 						// TODO: save scenes instead of deleting them
 						// delete the scene with it's heap components (renderer and camera)
-						currentScene->Disable();
+						currentScene->Stop();
 
 						// remove the scene
-						delete currentScene;
+						//delete currentScene;
 						// switch and initialize the scene
 						currentScene = queuedScene;
-						currentScene->InitGeneral();
+						currentScene->Start();
 						// don't forget to reset the tempscene, because we want to override it
 						queuedScene = nullptr;
 					}
@@ -157,7 +167,7 @@ namespace core {
 							layer->Update(dt);
 					}
 
-					currentScene->OnUpdate();
+					currentScene->Update();
 
 					Input::ProcessInput();
 					

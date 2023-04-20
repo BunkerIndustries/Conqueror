@@ -26,6 +26,10 @@ namespace core
 
 		void AddChildObject(UIObject* uiObject);
 
+		void RemoveChildObject();
+		void RemoveChildObject(uint32_t index);
+		void RemoveChildObject(UIObject* object);
+
 		UIObject* GetParentObject() const;
 		std::vector<UIObject*>& GetChildObjects();
 		
