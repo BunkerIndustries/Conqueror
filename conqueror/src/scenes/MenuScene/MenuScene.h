@@ -8,10 +8,10 @@ class MenuScene : public Scene
 public:
 	MenuScene();
 	~MenuScene() override;
-	void LoadResources() override;
-	void Init() override;
-	void Update() override;
 
+	void OnStart() override;
+	void OnStop() override;
+	void OnUpdate() override;
 	void OnEvent(Event& e) override {}
 
 private:

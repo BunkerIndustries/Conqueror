@@ -124,7 +124,7 @@ namespace core {
 		//set start scene
 		if (queuedScene) {
 			currentScene = queuedScene;
-			currentScene->InitGeneral();
+			currentScene->Start();
 			queuedScene = nullptr;
 		}
 
@@ -148,13 +148,13 @@ namespace core {
 					if (queuedScene != nullptr) {
 						// TODO: save scenes instead of deleting them
 						// delete the scene with it's heap components (renderer and camera)
-						currentScene->Disable();
+						currentScene->Stop();
 
 						// remove the scene
-						delete currentScene;
+						//delete currentScene;
 						// switch and initialize the scene
 						currentScene = queuedScene;
-						currentScene->InitGeneral();
+						currentScene->Start();
 						// don't forget to reset the tempscene, because we want to override it
 						queuedScene = nullptr;
 					}
@@ -167,7 +167,7 @@ namespace core {
 							layer->Update(dt);
 					}
 
-					currentScene->OnUpdate();
+					currentScene->Update();
 
 					Input::ProcessInput();
 					
