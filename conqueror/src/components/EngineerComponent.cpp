@@ -77,10 +77,9 @@ void EngineerCharacter::OnUpdate() {
 	delete building_node;
 
 	if (building_node->GetComponent<Node>()->stand == trench_stand.stand) {
-		// place mg
-
+		gameScene->allyLayer->CreateMg(building_node_position);
 	}
 	else if (building_node->GetComponent<Node>()->stand == waiting_stand.stand) {
-		// place artillery
+		gameScene->allyLayer->CreateArtillery(building_node_position);
 	}
 }
