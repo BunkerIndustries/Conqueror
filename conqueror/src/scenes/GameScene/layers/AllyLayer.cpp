@@ -4,6 +4,7 @@
 #include "required/constants.h"
 #include "utils/Supply.h"
 #include "components/MgComponent.h"
+#include "components/ArtilleryComponent.h"
 #include "scenes/GameScene/GameScene.h"
 #include "required/stands.h"
 
@@ -86,10 +87,10 @@ GameObject* AllyLayer::CreateArtillery(glm::vec2 artillery_position) {
 
 	GameObject* artillery = new GameObject("artillery", Transform(artillery_position, mg_size));
 	artillery->AddComponent(new SpriteRenderer(glm::vec4(0.5f, 0.1f, 0.5f, 1.0f), Geometry::RECTANGLE));
-	artillery->AddComponent();
+	artillery->AddComponent(new ArtilleryComponent());
 	AddGameObjectToLayer(artillery);
 
-	return mg;
+	return artillery;
 }
 
 bool AllyLayer::KeyReleased(KeyReleasedEvent& e) {

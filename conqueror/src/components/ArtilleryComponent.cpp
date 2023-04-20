@@ -45,7 +45,7 @@ void ArtilleryComponent::Shoot() {
 		for (uint8_t y = 0; y < 3; y++) {
 
 			// if out ob y-bounds
-			if (top_left.y < 0 || top_left.y + > enemy_grid_y+1) continue;
+			if (top_left.y < 0 || top_left.y + y > enemy_grid_y+1) continue;
 
 			// make damage to every gameobject in this field
 			GameObject* hit_enemy = enemy_grid[top_left.x + x][top_left.y + y];
