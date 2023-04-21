@@ -14,7 +14,7 @@ namespace core {
 
     class GameObject : public Object {
     public:
-        GameObject(std::string name, Transform& transform = Transform(), ProjectionMode mode = ProjectionMode::PERSPECTIVE);
+        GameObject(std::string name, const Transform& transform = Transform(), ProjectionMode mode = ProjectionMode::PERSPECTIVE);
 
         ~GameObject() override;
 
