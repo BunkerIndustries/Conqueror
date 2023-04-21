@@ -19,6 +19,9 @@ public:
 	void Init() override {
 		gameScene = new GameScene();
 		menuScene = new MenuScene();
+
+		DataPool::GetFont("mononoki.ttf");
+
 		Application::ChangeScene(menuScene);
 	}
 
