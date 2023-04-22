@@ -57,6 +57,21 @@ namespace core
 		glViewport(x, y, width, height);
 	}
 
+	void OpenGLRenderAPI::SetPolygonModel(Polygon pol)
+	{
+		switch (pol) {
+			case Polygon::OFF: 
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+				break;
+			case Polygon::LINE:
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+				break;
+			case Polygon::POINT: 
+				glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+				break;
+		}
+	}
+
 	void OpenGLRenderAPI::DrawElements(Shr<VertexArray>& vertexArray, uint32_t elementCount)
 	{
 		vertexArray->Bind();

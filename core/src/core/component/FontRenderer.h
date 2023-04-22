@@ -6,7 +6,7 @@ namespace core
 	class FontRenderer : public Component
 	{
 	public:
-		FontRenderer(glm::vec4 color, std::string text, std::string fontPath = "assets/fonts/mononoki.ttf");
+		FontRenderer(glm::vec4 color, std::string text, std::string fontPath = "mononoki.ttf");
 
 		void ChangeText(std::string text);
 

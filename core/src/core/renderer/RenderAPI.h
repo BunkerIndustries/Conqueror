@@ -6,6 +6,13 @@
 
 namespace core {
 
+	enum class Polygon
+	{
+		OFF = 0,
+		LINE,
+		POINT
+	};
+
 	class RenderAPI
 	{
 	public:
@@ -16,6 +23,8 @@ namespace core {
 			VULKAN
 		};
 
+		
+
 		virtual ~RenderAPI() = default;
 
 		virtual void Init() = 0;
@@ -25,14 +34,14 @@ namespace core {
 
 		virtual void SetViewPort(uint32_t x, uint32_t y, uint32_t width, uint32_t height) = 0;
 
+		virtual void SetPolygonModel(Polygon pol) = 0;
+
 		virtual void DrawElements(Shr<VertexArray>& vertexArray, uint32_t elementCount = 0) = 0;
 		
 		virtual void DrawIndexed(const Shr<VertexArray>& vertexArray, uint32_t indexCount = 0) = 0;
 
 		virtual void DrawLines(Shr<VertexArray>& vertexArray, uint32_t vertexCount, float thicknesss) = 0;
 		virtual void SetLineWidth(float thickness) = 0;
-
-		//virtual void DrawCircles(float radius, float thickness, float fade) = 0;
 
 		static Shr<RenderAPI> CreateAPI();
 

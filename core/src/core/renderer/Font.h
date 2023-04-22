@@ -20,7 +20,7 @@ namespace core
 		MSDFData* GetMSDFData() const { return data; };
 		Shr<Texture> GetAtlasTexture() const { return atlasTexture; };
 
-		static Shr<Font> GetFont(std::string fontPath);
+		//static Shr<Font> GetFont(std::string fontPath);
 
 	private:
 		MSDFData* data;

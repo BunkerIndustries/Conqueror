@@ -4,6 +4,7 @@
 #include "imgui/ImGuiLayer.h"
 
 #include "generic/Application.h"
+#include "renderer/RenderCommand.h"
 #include "renderer/Renderer.h"
 #include "renderer/FrameBuffer.h"
 #include "ui/UIObject.h"
@@ -322,14 +323,13 @@ namespace core {
             stream << "Polygon Model: ";
             ImGui::Text(stream.str().c_str()); stream.str("");
 
-            static int selected = 6914;
-            if (ImGui::Selectable("OFF", selected == 6914))
-                selected = 6914;
-            if (ImGui::Selectable("POINT", selected == 6912))
-                selected = 6912;
-            if (ImGui::Selectable("LINE", selected == 6913))
-                selected = 6913;
-            //RenderBatch::SetPolygonMode(selected);
+            static int selected = 0;
+            if (ImGui::Selectable("OFF", selected == 0))
+                RenderCommand::SetPolygonModel(Polygon::OFF);
+            if (ImGui::Selectable("LINE", selected == 2))
+                RenderCommand::SetPolygonModel(Polygon::LINE);
+            if (ImGui::Selectable("POINT", selected == 1))
+                RenderCommand::SetPolygonModel(Polygon::POINT);
 
             ImGui::BeginDisabled();
             if (ImGui::TreeNode("Textures in use"))

@@ -51,6 +51,11 @@ namespace core {
 		{
 			rendererAPI->DrawIndexed(vertexArray, indexCount);
 		}
+
+		inline static void SetPolygonModel(Polygon pol)
+		{
+			rendererAPI->SetPolygonModel(pol);
+		}
 	};
 
 }

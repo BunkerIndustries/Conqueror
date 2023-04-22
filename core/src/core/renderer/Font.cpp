@@ -127,22 +127,23 @@ namespace core
 		msdfgen::deinitializeFreetype(ft);
 	}
 
-
-	Shr<Font> Font::GetFont(std::string fontPath)
-	{
-		static Shr<Font> DefaultFont;
-
-		if (!DefaultFont)
-		{
-			DefaultFont = MakeShr<Font>(fontPath);
-		}
-
-		if (DefaultFont->fontPath != fontPath)
-		{
-			DefaultFont = MakeShr<Font>(fontPath);
-		}
-
-		return DefaultFont;
-	}
+	//replaced by DataPool
+	
+	//Shr<Font> Font::GetFont(std::string fontPath)
+	//{
+	//	static Shr<Font> DefaultFont;
+	//
+	//	if (!DefaultFont)
+	//	{
+	//		DefaultFont = MakeShr<Font>(fontPath);
+	//	}
+	//
+	//	if (DefaultFont->fontPath != fontPath)
+	//	{
+	//		DefaultFont = MakeShr<Font>(fontPath);
+	//	}
+	//
+	//	return DefaultFont;
+	//}
 
 };

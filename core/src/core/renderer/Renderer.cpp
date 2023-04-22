@@ -21,7 +21,6 @@ namespace core {
         int uiID;
     };
 
-
     struct TriangleVertex
     {
         glm::vec2 position;
@@ -875,10 +874,22 @@ namespace core {
         data.stats.elementCount += 6;
         data.stats.objectCount++;
     }
-    static float con = 2.5f;
+
+
     void Renderer::DrawString(glm::vec2 position, glm::vec2 size, float rotation, glm::vec4 color, std::string string, Shr<Font> font, ProjectionMode mode, core_id coreID, core_id uiID)
     {
-        
+        size_t dataSize = string.length() * 4;
+        size_t index = 0;
+
+        float leftVertex = 0.0f;
+        float rightVertex = 0.0f;
+        float highestVertex = 0.0f;
+        float lowestVertex = 0.0f;
+
+        std::vector<glm::vec4> vertexData;
+        vertexData.resize(dataSize);
+        std::vector<glm::vec2> texCoordData;
+        texCoordData.resize(dataSize);
 
         const auto& fontGeometry = font->GetMSDFData()->FontGeometry;
         const auto& metrics = fontGeometry.getMetrics();
@@ -887,17 +898,15 @@ namespace core {
         data.fontAtlasTexture = fontAtlas;
 
         double x = 0.0;
-        double fsScale = 1.0 / (metrics.ascenderY - metrics.descenderY);
+        double fsScale = 1.0;// / (metrics.ascenderY - metrics.descenderY);
         double y = 0.0;
         float lineHeightOffset = 0.0f;
-
-        position.y -= fsScale / 2.5;
 
         glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(position, 0.0f))
             * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
             * glm::scale(glm::mat4(1.0f), glm::vec3(size, 1.0f));
 
-        for (size_t i = 0; i < string.size(); i++)
+        for (size_t i = 0; i < string.length(); i++)
         {
             char character = string[i];
             if (character == '\r')
@@ -937,43 +946,25 @@ namespace core {
             texCoordMin *= glm::vec2(texelWidth, texelHeight);
             texCoordMax *= glm::vec2(texelWidth, texelHeight);
 
-            // render here
-            data.textVertexBufferPtr->position = transform * glm::vec4(quadMin, 0.0f, 1.0f);
-            data.textVertexBufferPtr->color = color;
-            data.textVertexBufferPtr->texCoord = texCoordMin;
-            data.textVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
-            data.textVertexBufferPtr->coreID = coreID; // TODO
-            data.textVertexBufferPtr++;
-            data.stats.vertexCount++;
 
-            data.textVertexBufferPtr->position = transform * glm::vec4(quadMin.x, quadMax.y, 0.0f, 1.0f);
-            data.textVertexBufferPtr->color = color;
-            data.textVertexBufferPtr->texCoord = { texCoordMin.x, texCoordMax.y };
-            data.textVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
-            data.textVertexBufferPtr->coreID = coreID; // TODO
-            data.textVertexBufferPtr++;
-            data.stats.vertexCount++;
+            //save data in buffers
+            vertexData[index + 0] = glm::vec4(quadMin, 0.0f, 1.0f);
+            vertexData[index + 1] = glm::vec4(quadMin.x, quadMax.y, 0.0f, 1.0f);
+            vertexData[index + 2] = glm::vec4(quadMax, 0.0f, 1.0f);
+            vertexData[index + 3] = glm::vec4(quadMax.x, quadMin.y, 0.0f, 1.0f);
 
-            data.textVertexBufferPtr->position = transform * glm::vec4(quadMax, 0.0f, 1.0f);
-            data.textVertexBufferPtr->color = color;
-            data.textVertexBufferPtr->texCoord = texCoordMax;
-            data.textVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
-            data.textVertexBufferPtr->coreID = coreID; // TODO
-            data.textVertexBufferPtr++;
-            data.stats.vertexCount++;
+            texCoordData[index + 0] = texCoordMin;
+            texCoordData[index + 1] = { texCoordMin.x, texCoordMax.y };
+            texCoordData[index + 2] = texCoordMax;
+            texCoordData[index + 3] = { texCoordMax.x, texCoordMin.y };
 
-            data.textVertexBufferPtr->position = transform * glm::vec4(quadMax.x, quadMin.y, 0.0f, 1.0f);
-            data.textVertexBufferPtr->color = color;
-            data.textVertexBufferPtr->texCoord = { texCoordMax.x, texCoordMin.y };
-            data.textVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
-            data.textVertexBufferPtr->coreID = coreID; // TODO
-            data.textVertexBufferPtr++;
-            data.stats.vertexCount++;
+            index += 4;
 
-            data.textElementCount += 6;
+            if (quadMax.y > highestVertex) highestVertex = quadMax.y;
+            if (quadMin.y < lowestVertex) lowestVertex = quadMin.y;
 
-            data.stats.elementCount += 6;
-            data.stats.objectCount++;
+        	if (quadMin.x < rightVertex) rightVertex = quadMin.x;
+            if (quadMax.x > leftVertex) leftVertex = quadMax.x;
 
             if (i < string.size() - 1)
             {
@@ -985,6 +976,28 @@ namespace core {
                 x += fsScale * advance + kerningOffset;
             }
         }
+
+    	glm::vec4 stringSize((leftVertex - rightVertex) / 2, (highestVertex - lowestVertex) / 2 + lowestVertex, 0, 0); // idk what this is; tried until it worked
+
+        for (size_t i = 0; i < dataSize; i++)
+        {
+            vertexData[i] -= stringSize;
+
+            data.textVertexBufferPtr->position = transform * vertexData.at(i);
+            data.textVertexBufferPtr->color = color;
+            data.textVertexBufferPtr->texCoord = texCoordData.at(i);
+            data.textVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
+            data.textVertexBufferPtr->coreID = coreID; // TODO
+            data.textVertexBufferPtr++;
+            data.stats.vertexCount++;
+
+            
+        }
+
+        data.textElementCount += dataSize / 4 * 6;
+
+        data.stats.elementCount += dataSize / 4 * 6;
+        data.stats.objectCount += dataSize / 4;
     }
 
     Renderer::Stats Renderer::GetStats()
