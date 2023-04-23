@@ -169,8 +169,8 @@ inline Transform ui_supply_menu_text_transform = Transform(glm::vec2(0.0f, 0.7f)
 inline glm::vec2 ui_left_choice_field_position = glm::vec2(-0.55f, -0.1f);
 inline glm::vec2 ui_right_choice_field_position = glm::vec2(0.55f, -0.1f);
 inline glm::vec2 ui_choice_field_size = glm::vec2(0.25f, 0.3f);
-inline Transform ui_choice_field_text_transform = Transform(glm::vec2(0.0f, 0.8f), glm::vec2(0.01f, 0.2f));
-inline Transform ui_choice_field_count_transform = Transform(glm::vec2(0.0f, 0.6f), glm::vec2(0.01f, 0.15f));
+inline Transform ui_choice_field_text_transform = Transform(glm::vec2(0.0f, 0.8f), glm::vec2(0.05f, 0.2f));
+inline Transform ui_choice_field_count_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.05f, 0.15f));
 inline Transform ui_choice_field_button_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.15f, 0.1f));
 
 // supply menu

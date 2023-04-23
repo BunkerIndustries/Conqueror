@@ -19,6 +19,7 @@ UILayer::~UILayer()
 
 void UILayer::OnAttach()
 {
+	ActivateSupplyMenuUI();
 }
 
 void UILayer::OnDetach()
@@ -126,7 +127,7 @@ void UILayer::ActivateSupplyMenuUI() {
 	Label* right_option_text = new Label(Supply::CreateRightOption(), ui_font_color, ui_choice_field_text_transform, DataPool::GetFont("mononoki.ttf"), "ui_supply_menu_right_choice_text");
 	right_option->AddChildObject(right_option_text);
 	Label* right_option_count = new Label("1x", ui_font_color, ui_choice_field_count_transform, DataPool::GetFont("mononoki.ttf"), "ui_supply_menu_right_choice_count");
-	right_option->AddChildObject(right_option_count);
+	right_option->AddChildObject(right_option_count); 
 	// picturebox with image
 	Button* right_option_button = new Button(ui_choice_field_button_color, ui_choice_field_button_transform, Type::Rectangle, Supply::TakeRightOption, "ui_upply_menu_right_choice_button");
 	right_option->AddChildObject(right_option_button);
