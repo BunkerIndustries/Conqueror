@@ -18,7 +18,7 @@ namespace core
 	void Label::Render(core_id idToRender)
 	{
 		TextRenderData data;
-		data.transform = {};
+		data.transform = { globalPos, transform.scale, transform.rotation };
 		data.color = color;
 		data.string = text;
 		data.font = font;

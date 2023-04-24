@@ -22,6 +22,6 @@ namespace core
         bool registerAlphaPixelsToEvent;
 
         float lastingTime;
-        float dt_counter;
+        float dt_counter = 0.0f;
 	};
 };
