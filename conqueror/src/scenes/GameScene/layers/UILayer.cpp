@@ -19,7 +19,6 @@ UILayer::~UILayer()
 
 void UILayer::OnAttach()
 {
-	ActivateSupplyMenuUI();
 }
 
 void UILayer::OnDetach()
