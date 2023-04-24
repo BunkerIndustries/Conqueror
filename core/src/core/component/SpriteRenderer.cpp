@@ -12,16 +12,17 @@
 namespace core {
     
     SpriteRenderer::SpriteRenderer(glm::vec4 color, Geometry geometry, bool registerAlphaPixelsToEvent)
-        : color(color), texture(nullptr), geometry(geometry), registerAlphaPixelsToEvent(registerAlphaPixelsToEvent) { }
+        : color(color), texture(nullptr), tilingFactor(1.0f), geometry(geometry), registerAlphaPixelsToEvent(registerAlphaPixelsToEvent) { }
 
-    SpriteRenderer::SpriteRenderer(glm::vec4 color, Shr<Texture> texture, Geometry geometry, bool registerAlphaPixelsToEvent)
-        : color(color), texture(texture), geometry(geometry), registerAlphaPixelsToEvent(registerAlphaPixelsToEvent) { }
+    SpriteRenderer::SpriteRenderer(glm::vec4 color, Shr<Texture> texture, float tilingFactor, Geometry geometry, bool registerAlphaPixelsToEvent)
+        : color(color), texture(texture), tilingFactor(tilingFactor), geometry(geometry), registerAlphaPixelsToEvent(registerAlphaPixelsToEvent) { }
 
     void SpriteRenderer::OnUpdate() {
         EdgeRenderData data;
         data.transform = gameObject->transform;
         data.color = color;
         data.texture = texture;
+        data.tilingFactor = tilingFactor;
         data.mode = gameObject->GetProjectionMode();
         data.coreID = gameObject->GetCoreID();
         data.coreIDToAlphaPixels = registerAlphaPixelsToEvent;

@@ -18,7 +18,7 @@ namespace core {
     class SpriteRenderer : public Component {
     public:
         SpriteRenderer(glm::vec4 color, Geometry geometry, bool registerAlphaPixelsToEvent = false);
-        SpriteRenderer(glm::vec4 color, Shr<Texture> texture, Geometry geometry, bool registerAlphaPixelsToEvent = false);
+        SpriteRenderer(glm::vec4 color, Shr<Texture> texture, float tilingFactor, Geometry geometry, bool registerAlphaPixelsToEvent = false);
         
 
         ~SpriteRenderer() override { }
@@ -46,6 +46,7 @@ namespace core {
     private:
         glm::vec4 color;
         Shr<Texture> texture;
+        float tilingFactor;
         glm::vec2 texCoords[4];
         Geometry geometry;
         bool registerAlphaPixelsToEvent;
