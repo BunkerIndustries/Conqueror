@@ -9,10 +9,10 @@ namespace core
 	class SpriteSheet : public Component
 	{
     public:
-        SpriteSheet(glm::vec4 color, Shr<Texture> texture, float spriteWidth, float spriteHeight, glm::vec2 selectedSprite);
-        SpriteSheet(glm::vec4 color, Shr<Texture> texture, float spriteWidth, float spriteHeight, float paddingWidth, float paddingHeight, glm::vec2 selectedSprite);
+        SpriteSheet(glm::vec4 color, Shr<Texture> texture, float spriteWidth, float spriteHeight, glm::vec2 selectedSprite, bool registerAlphaPixelsToEvent = false);
+        SpriteSheet(glm::vec4 color, Shr<Texture> texture, float spriteWidth, float spriteHeight, float paddingWidth, float paddingHeight, glm::vec2 selectedSprite, bool registerAlphaPixelsToEvent = false);
 
-        void Init(glm::vec4 color, Shr<Texture> texture, float spriteWidth, float spriteHeight, float paddingWidth, float paddingHeight, glm::vec2 selectedSprite);
+        void Init(Shr<Texture> texture, glm::vec2 selectedSprite);
 
         void OnStart() override { }
         void OnStop() override { }
@@ -46,6 +46,8 @@ namespace core
         int spriteColumns;
 
         glm::vec2 selectedSprite;
+
+        bool registerAlphaPixelsToEvent;
 
 		void ChangeCoords();
 	};

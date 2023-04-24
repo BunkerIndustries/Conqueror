@@ -11,23 +11,11 @@
 
 namespace core {
     
-    SpriteRenderer::SpriteRenderer(glm::vec4 color, Geometry geometry)
-    { Init(color, nullptr, geometry); }
+    SpriteRenderer::SpriteRenderer(glm::vec4 color, Geometry geometry, bool registerAlphaPixelsToEvent)
+        : color(color), texture(nullptr), geometry(geometry), registerAlphaPixelsToEvent(registerAlphaPixelsToEvent) { }
 
-    SpriteRenderer::SpriteRenderer(glm::vec4 color, Shr<Texture> texture, Geometry geometry)
-    { Init(color, texture, geometry); }
-
-
-    void SpriteRenderer::Init(glm::vec4 color, Shr<Texture> texture, Geometry geometry)
-    {
-        this->color = color;
-        this->texture = texture;
-        this->texCoords[0] = { 0.0f, 0.0f };
-        this->texCoords[1] = { 1.0f, 0.0f };
-        this->texCoords[2] = { 1.0f, 1.0f };
-        this->texCoords[3] = { 0.0f, 1.0f };
-        this->geometry = geometry;
-    }
+    SpriteRenderer::SpriteRenderer(glm::vec4 color, Shr<Texture> texture, Geometry geometry, bool registerAlphaPixelsToEvent)
+        : color(color), texture(texture), geometry(geometry), registerAlphaPixelsToEvent(registerAlphaPixelsToEvent) { }
 
     void SpriteRenderer::OnUpdate() {
         EdgeRenderData data;
@@ -36,6 +24,7 @@ namespace core {
         data.texture = texture;
         data.mode = gameObject->GetProjectionMode();
         data.coreID = gameObject->GetCoreID();
+        data.coreIDToAlphaPixels = registerAlphaPixelsToEvent;
         switch (geometry)
         {
             case Geometry::RECTANGLE:

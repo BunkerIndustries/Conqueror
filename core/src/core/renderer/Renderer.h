@@ -25,6 +25,7 @@ namespace core {
         ProjectionMode mode = ProjectionMode::PERSPECTIVE;
         core_id coreID = 0;
         core_id uiID = -1;
+        bool coreIDToAlphaPixels = false;
     };
 
     struct CircleRenderData
@@ -42,6 +43,7 @@ namespace core {
         ProjectionMode mode = ProjectionMode::PERSPECTIVE;
         core_id coreID = 0;
         core_id uiID = -1;
+        bool coreIDToAlphaPixels = false;
     };
 
     struct LineRenderData
@@ -68,6 +70,7 @@ namespace core {
         ProjectionMode mode = ProjectionMode::PERSPECTIVE;
         core_id coreID = 0;
         core_id uiID = -1;
+        bool coreIDToAlphaPixels = false;
     };
 
     class Renderer {

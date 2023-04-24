@@ -6,8 +6,8 @@
 namespace core
 {
 
-	FontRenderer::FontRenderer(glm::vec4 color, std::string text, std::string fontPath)
-		: color(color), text(text), fontPath(fontPath) { }
+	FontRenderer::FontRenderer(glm::vec4 color, std::string text, std::string fontPath, bool registerAlphaPixelsToEvent)
+		: color(color), text(text), fontPath(fontPath), registerAlphaPixelsToEvent(registerAlphaPixelsToEvent) { }
 
 	void FontRenderer::ChangeText(std::string text)
 	{
@@ -23,6 +23,7 @@ namespace core
 		data.font = DataPool::GetFont(fontPath);
 		data.mode = gameObject->GetProjectionMode();
 		data.coreID = gameObject->GetCoreID();
+		data.coreIDToAlphaPixels = registerAlphaPixelsToEvent;
 		Renderer::DrawString(data);
 	}
 };

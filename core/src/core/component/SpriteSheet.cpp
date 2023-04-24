@@ -4,21 +4,20 @@
 
 namespace core
 {	
-	SpriteSheet::SpriteSheet(glm::vec4 color, Shr<Texture> texture, float spriteWidth, float spriteHeight,glm::vec2 selectedSprite)
-		:color(color), texture(texture), spriteWidth(spriteWidth), spriteHeight(spriteHeight), selectedSprite(selectedSprite)
+	SpriteSheet::SpriteSheet(glm::vec4 color, Shr<Texture> texture, float spriteWidth, float spriteHeight, glm::vec2 selectedSprite, bool registerAlphaPixelsToEvent)
+		: color(color), texture(texture), spriteWidth(spriteWidth), spriteHeight(spriteHeight), selectedSprite(selectedSprite), registerAlphaPixelsToEvent(registerAlphaPixelsToEvent)
 	{
-		Init(color, texture, spriteWidth, spriteHeight, 0, 0, selectedSprite);
+		Init(texture, selectedSprite);
 	}
 
-	SpriteSheet::SpriteSheet(glm::vec4 color, Shr<Texture> texture, float spriteWidth, float spriteHeight, float paddingWidth, float paddingHeight, glm::vec2 selectedSprite)
-		:color(color), texture(texture), spriteWidth(spriteWidth), spriteHeight(spriteHeight), 
-		paddingWidth(paddingWidth), paddingHeight(paddingHeight), 
-		selectedSprite(selectedSprite)
+	SpriteSheet::SpriteSheet(glm::vec4 color, Shr<Texture> texture, float spriteWidth, float spriteHeight, float paddingWidth, float paddingHeight, glm::vec2 selectedSprite, bool registerAlphaPixelsToEvent)
+		: color(color), texture(texture), spriteWidth(spriteWidth), spriteHeight(spriteHeight), 
+		paddingWidth(paddingWidth), paddingHeight(paddingHeight), registerAlphaPixelsToEvent(registerAlphaPixelsToEvent)
 	{
-		Init(color, texture, spriteWidth, spriteHeight, paddingWidth, paddingHeight, selectedSprite);
+		Init(texture, selectedSprite);
 	}
 
-	void SpriteSheet::Init(glm::vec4 color, Shr<Texture> texture, float spriteWidth, float spriteHeight, float paddingWidth, float paddingHeight, glm::vec2 selectedSprite)
+	void SpriteSheet::Init(Shr<Texture> texture, glm::vec2 selectedSprite)
 	{
 		//this->spriteWidth = spriteWidth - paddingWidth;
 		//this->spriteHeight = spriteHeight - paddingHeight;
@@ -62,8 +61,10 @@ namespace core
 		data.transform = gameObject->transform;
 		data.color = color;
 		data.texture = texture;
+		std::copy(std::begin(texCoords), std::end(texCoords), std::begin(data.texCoords));
 		data.mode = gameObject->GetProjectionMode();
 		data.coreID = gameObject->GetCoreID();
+		data.coreIDToAlphaPixels = registerAlphaPixelsToEvent;
 		Renderer::DrawRectangle(data);
 	}
 

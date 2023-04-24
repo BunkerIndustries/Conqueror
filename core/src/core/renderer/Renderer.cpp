@@ -19,7 +19,7 @@ namespace core {
         int projectionMode;
         int coreID;
         int uiID;
-        int alphaCoreID = 0;
+        int alphaCoreID;
     };
 
     struct LineVertex
@@ -46,7 +46,7 @@ namespace core {
 
         int projectionMode;
         int coreID;
-        int alphaCoreID = 0;
+        int alphaCoreID;
     };
 
     struct TextVertex
@@ -58,7 +58,7 @@ namespace core {
         int projectionMode;
         int coreID;
         int uiID;
-        int alphaCoreID = 0;
+        int alphaCoreID;
     };
 
     struct RenderData
@@ -516,6 +516,7 @@ namespace core {
             data.rectangleVertexBufferPtr->texIndex = texIndex;
             data.rectangleVertexBufferPtr->projectionMode = ProjectionModeToInt(renderData.mode);
             data.rectangleVertexBufferPtr->coreID = renderData.coreID;
+            data.rectangleVertexBufferPtr->alphaCoreID = renderData.coreIDToAlphaPixels;
             data.rectangleVertexBufferPtr++;
 
             data.stats.vertexCount++;
@@ -570,6 +571,7 @@ namespace core {
             data.triangleVertexBufferPtr->texIndex = texIndex;
             data.triangleVertexBufferPtr->projectionMode = ProjectionModeToInt(renderData.mode);
             data.triangleVertexBufferPtr->coreID = renderData.coreID;
+            data.triangleVertexBufferPtr->alphaCoreID = renderData.coreIDToAlphaPixels;
             data.triangleVertexBufferPtr++;
 
             data.stats.vertexCount++;
@@ -655,6 +657,7 @@ namespace core {
             data.circleVertexBufferPtr->fade = renderData.fade;
             data.circleVertexBufferPtr->projectionMode = ProjectionModeToInt(renderData.mode);
             data.circleVertexBufferPtr->coreID = renderData.coreID;
+            data.circleVertexBufferPtr->alphaCoreID = renderData.coreIDToAlphaPixels;
             data.circleVertexBufferPtr++;
             data.stats.vertexCount++;
         }
@@ -778,7 +781,8 @@ namespace core {
             data.textVertexBufferPtr->color = renderData.color;
             data.textVertexBufferPtr->texCoord = texCoordData.at(i);
             data.textVertexBufferPtr->projectionMode = ProjectionModeToInt(renderData.mode);
-            data.textVertexBufferPtr->coreID = renderData.coreID; // TODO
+            data.textVertexBufferPtr->coreID = renderData.coreID;
+            data.textVertexBufferPtr->alphaCoreID = renderData.coreIDToAlphaPixels;
             data.textVertexBufferPtr++;
             data.stats.vertexCount++;
 
