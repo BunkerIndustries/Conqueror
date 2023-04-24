@@ -47,15 +47,15 @@ inline float engineer_movement_speed = 0.9f;
 inline glm::vec2 character_scale = glm::vec2(0.9f, 1.2f);	// probably temporary
 
 //bullet
-inline float bullet_speed = 5.0f;
-inline glm::vec2 bullet_scale = glm::vec2(0.5f, 0.5f);	// probably temporary
+inline float bullet_speed = 10.0f;
+inline glm::vec2 bullet_scale = glm::vec2(0.5f, 1.0f);	// probably temporary
 
 //soldier behaviour 
 inline float min_soldier_shoot_waiting_time = 0.5f;
 inline float max_soldier_shoot_waiting_time = 1.5f;
 inline uint8_t max_soldier_lock_target_tries = 2;
 inline uint8_t soldier_miss_points = 1;
-inline glm::vec2 soldier_spawn_pos = glm::vec2(-5.0f, -15.0f);
+inline glm::vec2 soldier_spawn_pos = glm::vec2(-5.0f, -5.0f);
 
 // stands (probabilities have to be choose_probability_sum in total)
 inline uint8_t choose_probability_sum = 100;
@@ -125,7 +125,7 @@ inline float enemy_start_spawn_interval = 2.0f;
 inline float enemy_spawn_interval_gradient = 0.9f;
 
 // stocks
-inline unsigned int start_soldier_stock = 4;
+inline unsigned int start_soldier_stock = 30;
 inline uint8_t start_engineer_stock = 5;
 inline uint8_t start_medic_stock = 8;
 

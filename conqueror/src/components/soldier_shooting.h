@@ -23,7 +23,7 @@ public:
 		target = nullptr;
 	}
 
-	static std::unordered_map<SoldierShooting*, GameObject*> trackTable;
+	static std::unordered_map<GameObject*, GameObject*> trackTable;
 
 private:
 	bool LockTarget();
