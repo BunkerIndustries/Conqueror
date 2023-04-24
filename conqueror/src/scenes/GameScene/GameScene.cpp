@@ -24,7 +24,7 @@ GameScene::~GameScene() {
 }
 
 void GameScene::OnStop() {
-    //RemoveLayer(backgroundLayer);
+    RemoveLayer(backgroundLayer);
     RemoveLayer(mapLayer);
     RemoveLayer(enemyLayer);
     RemoveLayer(allyLayer);
@@ -35,7 +35,7 @@ void GameScene::OnStart() {
 
     Supply::Init();
 
-    //AddLayer(backgroundLayer);
+    AddLayer(backgroundLayer);
     AddLayer(mapLayer);
     AddLayer(enemyLayer);
     AddLayer(allyLayer);
@@ -50,22 +50,22 @@ void GameScene::OnUpdate() {
 }
 
 void GameScene::CameraMovement(float dt) {
-    if (Input::IsKeyPressed(KEY_S)) 
-        camera->position.y -= cameraMoveSpeed * dt;
-    if (Input::IsKeyPressed(KEY_W))
-        camera->position.y += cameraMoveSpeed * dt;
-    if (Input::IsKeyPressed(KEY_D))
-        camera->position.x += cameraMoveSpeed * dt;
-    if (Input::IsKeyPressed(KEY_A))
-        camera->position.x -= cameraMoveSpeed * dt;
+    if (Input::IsKeyPressed(KEY_S) && camera->position.y > min_camera_positions.y) 
+        camera->position.y -= camera_move_speed * dt;
+    if (Input::IsKeyPressed(KEY_W) && camera->position.y < max_camera_positions.y)
+        camera->position.y += camera_move_speed * dt;
+    if (Input::IsKeyPressed(KEY_D) && camera->position.x < max_camera_positions.x)
+        camera->position.x += camera_move_speed * dt;
+    if (Input::IsKeyPressed(KEY_A) && camera->position.x > min_camera_positions.x)
+        camera->position.x -= camera_move_speed * dt;
 }
 
 bool GameScene::OnMouseScroll(MouseScrolledEvent& e)
 {
     //Checking if camera z position is inside wanted bounds
-    if (GetCamera()->position.z > maxCameraZPos && e.GetYOffset() > 0) return true;
-    else if (GetCamera()->position.z < minCameraZPos && e.GetYOffset() < 0) return true;
-    GetCamera()->position.z += cameraScrollSpeed * Application::GetDT() * e.GetYOffset();
+    if (GetCamera()->position.z > max_camera_z_pos && e.GetYOffset() > 0) return true;
+    else if (GetCamera()->position.z < min_camera_z_pos && e.GetYOffset() < 0) return true;
+    GetCamera()->position.z += camera_scroll_speed * Application::GetDT() * e.GetYOffset();
 
     return true;
 }

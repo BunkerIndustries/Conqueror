@@ -10,10 +10,12 @@ inline MenuScene* menuScene;
 inline std::vector<std::vector<GameObject*>> enemy_grid;
 
 // camera movement 
-inline float cameraScrollSpeed = 15.0f;
-inline float cameraMoveSpeed = 2.0f;
-inline float minCameraZPos = 2.0f;
-inline float maxCameraZPos = 20.0f;
+inline float camera_scroll_speed = 15.0f;
+inline float camera_move_speed = 2.0f;
+inline float min_camera_z_pos = 2.0f;
+inline float max_camera_z_pos = 20.0f;
+inline glm::vec2 min_camera_positions = glm::vec2(-7.0f, -5.0f);
+inline glm::vec2 max_camera_positions = glm::vec2(7.0f, 5.0f);
 
 // all sprite paths
 inline std::string soldier_sprite_path = "";
