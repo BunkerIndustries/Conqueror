@@ -10,6 +10,7 @@ layout(location = 6) in float aThickness;
 layout(location = 7) in float aFade;
 layout(location = 8) in int aProjectionMode;
 layout(location = 9) in int aCoreID;
+layout(location = 10) in int aAlphaCoreID;
 
 
 // camera variables
@@ -30,6 +31,7 @@ struct VertexOutput
 layout(location = 0) out VertexOutput Output;
 layout(location = 6) out flat int TexID;
 layout(location = 7) out flat int CoreID;
+layout(location = 8) out flat int alphaCoreID;
 
 void main()
 {
@@ -41,6 +43,7 @@ void main()
     Output.Fade = aFade;
     TexID = aTexID;
     CoreID = aCoreID;
+    alphaCoreID = aAlphaCoreID;
 
     vec4 position;
     switch (aProjectionMode) {
@@ -79,6 +82,7 @@ struct VertexOutput
 layout(location = 0) in VertexOutput Input;
 layout(location = 6) in flat int TexID;
 layout(location = 7) in flat int CoreID;
+layout(location = 8) in flat int alphaCoreID;
 
 uniform sampler2D uTexture[31];
 //uniform sampler2D uIDAttachment;
@@ -94,13 +98,17 @@ void main()
         discard;
     
     //Set output color
-    display = Input.Color;
+    vec4 color = Input.Color;
 
     if (TexID >= 0) {
-        display *= texture(uTexture[TexID], Input.TexCoord * Input.TilingFactor);
+        color *= texture(uTexture[TexID], Input.TexCoord * Input.TilingFactor);
     }
 
-    display.a *= circle;
+    if (color.a == 0.0 && alphaCoreID == 0)
+        discard;
+
+    color.a *= circle;
+    display = color;
     
     objectID = CoreID;
 }

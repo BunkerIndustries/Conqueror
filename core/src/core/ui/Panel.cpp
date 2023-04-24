@@ -14,13 +14,19 @@ namespace core
 
 	void Panel::Render(core_id idToRender)
 	{
+		EdgeRenderData data;
+		data.transform = { globalPos, transform.scale, transform.rotation };
+		data.color = color;
+		data.mode = mode;
+		data.coreID = idToRender;
+
 		switch (type)
 		{
 			case Type::Rectangle:
-				Renderer::DrawRectangle(globalPos, transform.scale, transform.rotation, color, mode, idToRender);
+				Renderer::DrawRectangle(data);
 				break;
 			case Type::Triangle:
-				Renderer::DrawTriangle(globalPos, transform.scale, transform.rotation, color, mode, idToRender);
+				Renderer::DrawTriangle(data);
 				break;
 		}
 	}

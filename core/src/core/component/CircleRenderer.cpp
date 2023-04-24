@@ -15,9 +15,14 @@ namespace core {
 
     void CircleRenderer::OnUpdate() 
     {
-        if (texture)
-            Renderer::DrawCircle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, texture, 1.0f, color, thickness, fade, gameObject->GetProjectionMode(), gameObject->GetCoreID());
-        else
-			Renderer::DrawCircle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, color, thickness, fade, gameObject->GetProjectionMode(), gameObject->GetCoreID());
+        CircleRenderData data;
+        data.transform = gameObject->transform;
+        data.color = color;
+        data.thickness = thickness;
+        data.fade = fade;
+        data.texture = texture;
+        data.mode = gameObject->GetProjectionMode();
+        data.coreID = gameObject->GetCoreID();
+    	Renderer::DrawCircle(data);
     }
 }

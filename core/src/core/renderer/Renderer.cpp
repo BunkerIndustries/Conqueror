@@ -9,7 +9,7 @@
 
 namespace core {
 
-    struct RectangleVertex
+    struct EdgeVertex
     {
         glm::vec2 position;
         glm::vec4 color;
@@ -19,18 +19,7 @@ namespace core {
         int projectionMode;
         int coreID;
         int uiID;
-    };
-
-    struct TriangleVertex
-    {
-        glm::vec2 position;
-        glm::vec4 color;
-        glm::vec2 texCoords;
-        float tilingFactor;
-        int texIndex;
-        int projectionMode;
-        int coreID;
-        int uiID;
+        int alphaCoreID = 0;
     };
 
     struct LineVertex
@@ -57,6 +46,7 @@ namespace core {
 
         int projectionMode;
         int coreID;
+        int alphaCoreID = 0;
     };
 
     struct TextVertex
@@ -68,6 +58,7 @@ namespace core {
         int projectionMode;
         int coreID;
         int uiID;
+        int alphaCoreID = 0;
     };
 
     struct RenderData
@@ -97,12 +88,12 @@ namespace core {
         Shr<VertexBuffer> textVertexBuffer;
         
         uint32_t rectangleElementCount = 0;
-        RectangleVertex* rectangleVertexBufferBase = nullptr;
-        RectangleVertex* rectangleVertexBufferPtr = nullptr;
+        EdgeVertex* rectangleVertexBufferBase = nullptr;
+        EdgeVertex* rectangleVertexBufferPtr = nullptr;
 
         uint32_t triangleElementCount = 0;
-        TriangleVertex* triangleVertexBufferBase = nullptr;
-        TriangleVertex* triangleVertexBufferPtr = nullptr;
+        EdgeVertex* triangleVertexBufferBase = nullptr;
+        EdgeVertex* triangleVertexBufferPtr = nullptr;
 
         uint32_t lineElementCount = 0;
         LineVertex* lineVertexBufferBase = nullptr;
@@ -151,17 +142,21 @@ namespace core {
         BufferLayout edgeGeometryLayout = {
             { GLSLDataType::FLOAT2, "aPos" },
             { GLSLDataType::FLOAT4, "aColor" },
+
             { GLSLDataType::FLOAT2, "aTexCoord" },
             { GLSLDataType::FLOAT , "aTilingFactor"},
             { GLSLDataType::INT , "aTexID" },
+
 			{ GLSLDataType::INT , "aProjectionMode" },
             { GLSLDataType::INT , "aCoreID" },
-            { GLSLDataType::INT , "aUIID" }
+            { GLSLDataType::INT , "aUIID" },
+			{ GLSLDataType::INT , "aAlphaCoreID" }
         };
 
         BufferLayout lineGeometryLayout = {
             { GLSLDataType::FLOAT2, "aPos" },
             { GLSLDataType::FLOAT4, "aColor" },
+
 			{ GLSLDataType::INT , "aProjectionMode" },
             { GLSLDataType::INT , "aCoreID" },
             { GLSLDataType::INT , "aUIID" }
@@ -180,7 +175,8 @@ namespace core {
             { GLSLDataType::FLOAT,  "aFade" },
 
 			{ GLSLDataType::INT , "aProjectionMode" },
-            { GLSLDataType::INT, "aCoreID" }
+            { GLSLDataType::INT, "aCoreID" },
+            { GLSLDataType::INT , "aAlphaCoreID" }
         };
 
         BufferLayout textLayout
@@ -191,7 +187,8 @@ namespace core {
 
             { GLSLDataType::INT ,   "aProjectionMode" },
             { GLSLDataType::INT,    "aCoreID" },
-            { GLSLDataType::INT , "aUIID" }
+            { GLSLDataType::INT , "aUIID" },
+            { GLSLDataType::INT , "aAlphaCoreID" }
         };
 
         data.edgeGeometryShader = DataPool::GetShader("EdgeGeometryShader");
@@ -207,11 +204,11 @@ namespace core {
         data.textShader->Compile();
 
         data.rectangleVertexArray = VertexArray::CreateArray();
-        data.rectangleVertexBuffer = VertexBuffer::CreateBuffer(edgeGeometryLayout, data.MAX_VERTICES * sizeof(RectangleVertex));
+        data.rectangleVertexBuffer = VertexBuffer::CreateBuffer(edgeGeometryLayout, data.MAX_VERTICES * sizeof(EdgeVertex));
         data.rectangleVertexArray->SetVertexBuffer(data.rectangleVertexBuffer);
         
         data.triangleVertexArray = VertexArray::CreateArray();
-        data.triangleVertexBuffer = VertexBuffer::CreateBuffer(edgeGeometryLayout, data.MAX_VERTICES * sizeof(TriangleVertex));
+        data.triangleVertexBuffer = VertexBuffer::CreateBuffer(edgeGeometryLayout, data.MAX_VERTICES * sizeof(EdgeVertex));
         data.triangleVertexArray->SetVertexBuffer(data.triangleVertexBuffer);
 
         data.circleVertexArray = VertexArray::CreateArray();
@@ -277,8 +274,8 @@ namespace core {
         data.triangleVertexData[1] = glm::vec4( 0.5f, -0.5f, 0.0f, 1.0f);
         data.triangleVertexData[2] = glm::vec4( 0.0f,  0.5f, 0.0f, 1.0f);
 
-        data.rectangleVertexBufferBase = new RectangleVertex[data.MAX_VERTICES];
-        data.triangleVertexBufferBase = new TriangleVertex[data.MAX_VERTICES];
+        data.rectangleVertexBufferBase = new EdgeVertex[data.MAX_VERTICES];
+        data.triangleVertexBufferBase = new EdgeVertex[data.MAX_VERTICES];
         data.circleVertexBufferBase = new CircleVertex[data.MAX_VERTICES];
         data.lineVertexBufferBase = new LineVertex[data.MAX_VERTICES];
         data.textVertexBufferBase = new TextVertex[data.MAX_VERTICES];
@@ -476,159 +473,49 @@ namespace core {
         }
     }
 
-    void Renderer::DrawRectangle(glm::vec2 position, glm::vec2 size, float rotation, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID)
-    {
-        glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(position, 0.0f))
-			* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), {0.0f, 0.0f, 1.0f})
-            * glm::scale(glm::mat4(1.0f), glm::vec3(size, 1.0f));
-
-        DrawRectangle(transform, color, mode, coreID, uiID);
-    }
-
-    void Renderer::DrawRectangle(glm::vec2 position, glm::vec2 size, float rotation, Shr<Texture>& texture, float tilingFactor, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID)
-    {
-        glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(position, 0.0f))
-            * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-            * glm::scale(glm::mat4(1.0f), glm::vec3(size, 1.0f));
-
-        DrawRectangle(transform, texture, tilingFactor, color, mode, coreID, uiID);
-    }
-
-    // sprite sheet entry function
-    void Renderer::DrawRectangle(glm::vec2 position, glm::vec2 size, float rotation, glm::vec2 texCoordSprite[4], Shr<Texture>& texture, float tilingFactor, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID)
-    {
-        glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(position, 0.0f))
-            * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-            * glm::scale(glm::mat4(1.0f), glm::vec3(size, 1.0f));
-
-        DrawRectangle(transform, texture, tilingFactor, texCoordSprite, color, mode, coreID, uiID);
-    }
-
-    void Renderer::DrawRectangle(glm::mat4 transform, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID)
+    void Renderer::DrawRectangle(const EdgeRenderData& renderData)
     {
         const uint32_t rectangleVertexCount = 4;
-        const int texIndex = -1;
-        const glm::vec2 texCoords[4] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
-        const float tilingFactor = 1.0f;
+
+        glm::mat4 transform = renderData.transform.GetMatrix();
 
         if (data.rectangleElementCount >= data.MAX_ELEMENTS)
         {
             NextBatch();
         }
 
-        for (int i = 0; i < rectangleVertexCount; i++)
+    	int texIndex = -1;
+        if (renderData.texture != nullptr)
         {
-            data.rectangleVertexBufferPtr->position = transform * data.rectangleVertexData[i];
-            data.rectangleVertexBufferPtr->color = color;
-            data.rectangleVertexBufferPtr->texCoords = texCoords[i];
-            data.rectangleVertexBufferPtr->tilingFactor = tilingFactor;
-            data.rectangleVertexBufferPtr->texIndex = texIndex;
-            data.rectangleVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
-            data.rectangleVertexBufferPtr->coreID = coreID;
-            data.rectangleVertexBufferPtr++;
-
-            data.stats.vertexCount++;
-        }
-
-        data.rectangleElementCount += 6;
-
-        data.stats.elementCount += 6;
-        data.stats.objectCount++;
-    }
-
-    void Renderer::DrawRectangle(glm::mat4 transform, Shr<Texture>& texture, float tilingFactor, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID)
-    {
-        const uint32_t rectangleVertexCount = 4;
-        constexpr glm::vec2 texCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
-
-        if (data.rectangleElementCount >= data.MAX_ELEMENTS)
-        {
-            NextBatch();
-        }
-
-        int texIndex = -1;
-        for (uint32_t i = 0; i < data.rectangleTextureSlotIndex; i++)
-        {
-	        if (*data.rectangleTextureSlots[i] == *texture)
-	        {
-                texIndex = i;
-                break;
-	        }
-        }
-
-        if (texIndex == -1)
-        {
-            if (data.rectangleTextureSlotIndex >= data.MAX_TEXTURE_SLOTS)
-                NextBatch();
-
-            texIndex = data.rectangleTextureSlotIndex;
-            data.rectangleTextureSlots[data.rectangleTextureSlotIndex] = texture;
-            data.rectangleTextureSlotIndex++;
-        }
-
-        for (int i = 0; i < rectangleVertexCount; i++)
-        {
-            data.rectangleVertexBufferPtr->position = transform * data.rectangleVertexData[i];
-            data.rectangleVertexBufferPtr->color = color;
-            data.rectangleVertexBufferPtr->texCoords = texCoords[i];
-            data.rectangleVertexBufferPtr->tilingFactor = tilingFactor;
-            data.rectangleVertexBufferPtr->texIndex = texIndex;
-            data.rectangleVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
-            data.rectangleVertexBufferPtr->coreID = coreID;
-            data.rectangleVertexBufferPtr++;
-
-            data.stats.vertexCount++;
-        }
-
-        data.rectangleElementCount += 6;
-
-        data.stats.elementCount += 6;
-        data.stats.objectCount++;
-    }
-    
-
-    
-
-    // mandatory for sprite sheets
-
-    void Renderer::DrawRectangle(glm::mat4 transform, Shr<Texture>& texture, float tilingFactor, glm::vec2 texCoordSprite[4], glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID)
-    {
-        const uint32_t rectangleVertexCount = 4;
-
-        if (data.rectangleElementCount >= data.MAX_ELEMENTS)
-        {
-            NextBatch();
-        }
-
-        int texIndex = -1;
-        for (uint32_t i = 0; i < data.rectangleTextureSlotIndex; i++)
-        {
-            if (*data.rectangleTextureSlots[i] == *texture)
+            for (uint32_t i = 0; i < data.rectangleTextureSlotIndex; i++)
             {
-                texIndex = i;
-                break;
+                if (*data.rectangleTextureSlots[i] == *renderData.texture)
+                {
+                    texIndex = i;
+                    break;
+                }
+            }
+
+            if (texIndex == -1)
+            {
+                if (data.rectangleTextureSlotIndex >= data.MAX_TEXTURE_SLOTS)
+                    NextBatch();
+
+                texIndex = data.rectangleTextureSlotIndex;
+                data.rectangleTextureSlots[data.rectangleTextureSlotIndex] = renderData.texture;
+                data.rectangleTextureSlotIndex++;
             }
         }
 
-        if (texIndex == -1)
-        {
-            if (data.rectangleTextureSlotIndex >= data.MAX_TEXTURE_SLOTS)
-                NextBatch();
-
-            texIndex = data.rectangleTextureSlotIndex;
-            data.rectangleTextureSlots[data.rectangleTextureSlotIndex] = texture;
-            data.rectangleTextureSlotIndex++;
-        }
-
         for (int i = 0; i < rectangleVertexCount; i++)
         {
             data.rectangleVertexBufferPtr->position = transform * data.rectangleVertexData[i];
-            data.rectangleVertexBufferPtr->color = color;
-            data.rectangleVertexBufferPtr->texCoords = texCoordSprite[i];
-            data.rectangleVertexBufferPtr->tilingFactor = tilingFactor;
+            data.rectangleVertexBufferPtr->color = renderData.color;
+            data.rectangleVertexBufferPtr->texCoords = renderData.texCoords[i];
+            data.rectangleVertexBufferPtr->tilingFactor = renderData.tilingFactor;
             data.rectangleVertexBufferPtr->texIndex = texIndex;
-            data.rectangleVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
-            data.rectangleVertexBufferPtr->coreID = coreID;
+            data.rectangleVertexBufferPtr->projectionMode = ProjectionModeToInt(renderData.mode);
+            data.rectangleVertexBufferPtr->coreID = renderData.coreID;
             data.rectangleVertexBufferPtr++;
 
             data.stats.vertexCount++;
@@ -640,63 +527,11 @@ namespace core {
         data.stats.objectCount++;
     }
 
-    void Renderer::DrawTriangle(glm::vec2 position, glm::vec2 size, float rotation, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID)
-    {
-        glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(position, 0.0f))
-            * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-            * glm::scale(glm::mat4(1.0f), glm::vec3(size, 1.0f));
-    
-        DrawTriangle(transform, color, mode, coreID, uiID);
-    }
-
-
-    
-
-    void Renderer::DrawTriangle(glm::vec2 position, glm::vec2 size, float rotation, Shr<Texture>& texture, float tilingFactor, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID)
-    {
-        glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(position, 0.0f))
-            * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-            * glm::scale(glm::mat4(1.0f), glm::vec3(size, 1.0f));
-
-        DrawTriangle(transform, texture, tilingFactor, color, mode, coreID, uiID);
-    }
-
-    void Renderer::DrawTriangle(glm::mat4 transform, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID)
+    void Renderer::DrawTriangle(const EdgeRenderData& renderData)
     {
         const uint32_t triangleVertexCount = 3;
-        const float texIndex = -1.0f;
-        const glm::vec2 texCoords[3] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f } };
-        const float tilingFactor = 1.0f;
-        
-        if (data.triangleElementCount >= data.MAX_ELEMENTS)
-        {
-            NextBatch();
-        }
-        
-        for (int i = 0; i < triangleVertexCount; i++)
-        {
-            data.triangleVertexBufferPtr->position = transform * data.triangleVertexData[i];
-            data.triangleVertexBufferPtr->color = color;
-            data.triangleVertexBufferPtr->texCoords = texCoords[i];
-            data.triangleVertexBufferPtr->tilingFactor = tilingFactor;
-            data.triangleVertexBufferPtr->texIndex = texIndex;
-            data.triangleVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
-            data.triangleVertexBufferPtr->coreID = coreID;
-            data.triangleVertexBufferPtr++;
-        
-            data.stats.vertexCount++;
-        }
-        
-        data.triangleElementCount += 3;
-        
-        data.stats.elementCount += 3;
-        data.stats.objectCount++;
-    }
 
-    void Renderer::DrawTriangle(glm::mat4 transform, Shr<Texture>& texture, float tilingFactor, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID)
-    {
-        const uint32_t triangleVertexCount = 3;
-        constexpr glm::vec2 texCoords[] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 0.5f, 1.0f } };
+        glm::mat4 transform = renderData.transform.GetMatrix();
 
         if (data.triangleElementCount >= data.MAX_ELEMENTS)
         {
@@ -704,34 +539,37 @@ namespace core {
         }
 
         int texIndex = -1;
-        for (uint32_t i = 0; i < data.triangleTextureSlotIndex; i++)
+        if (renderData.texture != nullptr)
         {
-            if (*data.triangleTextureSlots[i] == *texture)
+            for (uint32_t i = 0; i < data.triangleTextureSlotIndex; i++)
             {
-                texIndex = i;
-                break;
+                if (*data.triangleTextureSlots[i] == *renderData.texture)
+                {
+                    texIndex = i;
+                    break;
+                }
             }
-        }
 
-        if (texIndex == -1)
-        {
-            if (data.triangleTextureSlotIndex >= data.MAX_TEXTURE_SLOTS)
-                NextBatch();
+            if (texIndex == -1)
+            {
+                if (data.triangleTextureSlotIndex >= data.MAX_TEXTURE_SLOTS)
+                    NextBatch();
 
-            texIndex = data.triangleTextureSlotIndex;
-            data.triangleTextureSlots[data.triangleTextureSlotIndex] = texture;
-            data.triangleTextureSlotIndex++;
+                texIndex = data.triangleTextureSlotIndex;
+                data.triangleTextureSlots[data.triangleTextureSlotIndex] = renderData.texture;
+                data.triangleTextureSlotIndex++;
+            }
         }
 
         for (int i = 0; i < triangleVertexCount; i++)
         {
             data.triangleVertexBufferPtr->position = transform * data.triangleVertexData[i];
-            data.triangleVertexBufferPtr->color = color;
-            data.triangleVertexBufferPtr->texCoords = texCoords[i];
-            data.triangleVertexBufferPtr->tilingFactor = tilingFactor;
+            data.triangleVertexBufferPtr->color = renderData.color;
+            data.triangleVertexBufferPtr->texCoords = renderData.texCoords[i];
+            data.triangleVertexBufferPtr->tilingFactor = renderData.tilingFactor;
             data.triangleVertexBufferPtr->texIndex = texIndex;
-            data.triangleVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
-            data.triangleVertexBufferPtr->coreID = coreID;
+            data.triangleVertexBufferPtr->projectionMode = ProjectionModeToInt(renderData.mode);
+            data.triangleVertexBufferPtr->coreID = renderData.coreID;
             data.triangleVertexBufferPtr++;
 
             data.stats.vertexCount++;
@@ -744,20 +582,20 @@ namespace core {
     }
 
 
-    void Renderer::DrawLine(glm::vec2 p0, glm::vec2 p1, glm::vec4 color, float thickness, ProjectionMode mode, core_id coreID, core_id uiID)
+    void Renderer::DrawLine(const LineRenderData& renderData)
     {
-        data.lineVertexBufferPtr->position = p0;
-        data.lineVertexBufferPtr->color = color;
-        data.lineVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
-        data.lineVertexBufferPtr->coreID = coreID;
+        data.lineVertexBufferPtr->position = renderData.point0;
+        data.lineVertexBufferPtr->color = renderData.color;
+        data.lineVertexBufferPtr->projectionMode = ProjectionModeToInt(renderData.mode);
+        data.lineVertexBufferPtr->coreID = renderData.coreID;
         data.lineVertexBufferPtr++;
 
         data.stats.vertexCount++;
         
-        data.lineVertexBufferPtr->position = p1;
-        data.lineVertexBufferPtr->color = color;
-        data.lineVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
-        data.lineVertexBufferPtr->coreID = coreID;
+        data.lineVertexBufferPtr->position = renderData.point1;
+        data.lineVertexBufferPtr->color = renderData.color;
+        data.lineVertexBufferPtr->projectionMode = ProjectionModeToInt(renderData.mode);
+        data.lineVertexBufferPtr->coreID = renderData.coreID;
         data.lineVertexBufferPtr++;
 
         data.stats.vertexCount++;
@@ -767,66 +605,15 @@ namespace core {
         data.stats.elementCount += 1;
         data.stats.objectCount++;
 
-        data.lineWidth = thickness;
+        data.lineWidth = renderData.thickness;
         NextBatch();
     }
 
-    void Renderer::DrawCircle(glm::vec2 position, glm::vec2 size, float rotation, glm::vec4 color, float thickness, float fade, ProjectionMode mode, core_id coreID, core_id uiID)
-    {
-        glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(position, 0.0f))
-            * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-            * glm::scale(glm::mat4(1.0f), glm::vec3(size, 1.0f));
-
-        DrawCircle(transform, color, thickness, fade, mode, coreID, uiID);
-    }
-
-    void Renderer::DrawCircle(glm::vec2 position, glm::vec2 size, float rotation, Shr<Texture>& texture, float tilingFactor, glm::vec4 color, float thickness, float fade, ProjectionMode mode, core_id coreID, core_id uiID)
-    {
-        glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(position, 0.0f))
-            * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-            * glm::scale(glm::mat4(1.0f), glm::vec3(size, 1.0f));
-
-        DrawCircle(transform, texture, tilingFactor, color, thickness, fade, mode, coreID, uiID);
-    }
-
-    void Renderer::DrawCircle(glm::mat4 transform, glm::vec4 color, float thickness, float fade, ProjectionMode mode, core_id coreID, core_id uiID)
+    void Renderer::DrawCircle(const CircleRenderData& renderData)
     {
         const uint32_t circleVertexCount = 4;
-        const float texIndex = -1.0f;
-        const glm::vec2 texCoords[4] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
-        const float tilingFactor = 1.0f;
 
-        if (data.circleElementCount >= data.MAX_ELEMENTS)
-        {
-            NextBatch();
-        }
-
-        for (int i = 0; i < circleVertexCount; i++)
-        {
-            data.circleVertexBufferPtr->worldPos = transform * data.rectangleVertexData[i];
-            data.circleVertexBufferPtr->localPos = data.rectangleVertexData[i] * glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, 1.0f)); // just multiplying x and y by 2
-            data.circleVertexBufferPtr->texCoords = texCoords[i];
-            data.circleVertexBufferPtr->tilingFactor = tilingFactor;
-            data.circleVertexBufferPtr->texIndex = texIndex;
-        	data.circleVertexBufferPtr->color = color;
-            data.circleVertexBufferPtr->thickness = thickness;
-            data.circleVertexBufferPtr->fade = fade;
-            data.circleVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
-            data.circleVertexBufferPtr->coreID = coreID;
-            data.circleVertexBufferPtr++;
-            data.stats.vertexCount++;
-        }
-
-        data.circleElementCount += 6;
-
-        data.stats.elementCount += 6;
-        data.stats.objectCount++;
-    }
-
-    void Renderer::DrawCircle(glm::mat4 transform, Shr<Texture>& texture, float tilingFactor, glm::vec4 color, float thickness, float fade, ProjectionMode mode, core_id coreID, core_id uiID)
-    {
-        const uint32_t circleVertexCount = 4;
-        constexpr glm::vec2 texCoords[4] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
+        glm::mat4 transform = renderData.transform.GetMatrix();
 
         if (data.circleElementCount >= data.MAX_ELEMENTS)
         {
@@ -834,37 +621,40 @@ namespace core {
         }
 
         int texIndex = -1;
-        for (uint32_t i = 0; i < data.circleTextureSlotIndex; i++)
+        if (renderData.texture != nullptr)
         {
-            if (*data.circleTextureSlots[i] == *texture)
+            for (uint32_t i = 0; i < data.circleTextureSlotIndex; i++)
             {
-                texIndex = i;
-                break;
+                if (*data.circleTextureSlots[i] == *renderData.texture)
+                {
+                    texIndex = i;
+                    break;
+                }
             }
-        }
 
-        if (texIndex == -1)
-        {
-            if (data.circleTextureSlotIndex >= data.MAX_TEXTURE_SLOTS)
-                NextBatch();
+            if (texIndex == -1)
+            {
+                if (data.circleTextureSlotIndex >= data.MAX_TEXTURE_SLOTS)
+                    NextBatch();
 
-            texIndex = data.circleTextureSlotIndex;
-            data.circleTextureSlots[data.circleTextureSlotIndex] = texture;
-            data.circleTextureSlotIndex++;
+                texIndex = data.circleTextureSlotIndex;
+                data.circleTextureSlots[data.circleTextureSlotIndex] = renderData.texture;
+                data.circleTextureSlotIndex++;
+            }
         }
 
         for (int i = 0; i < circleVertexCount; i++)
         {
             data.circleVertexBufferPtr->worldPos = transform * data.rectangleVertexData[i];
             data.circleVertexBufferPtr->localPos = data.rectangleVertexData[i] * glm::scale(glm::mat4(1.0f), glm::vec3(2.0f, 2.0f, 1.0f)); // just multiplying x and y by 2
-            data.circleVertexBufferPtr->texCoords = texCoords[i];
-            data.circleVertexBufferPtr->tilingFactor = tilingFactor;
+            data.circleVertexBufferPtr->texCoords = renderData.texCoords[i];
+            data.circleVertexBufferPtr->tilingFactor = renderData.tilingFactor;
             data.circleVertexBufferPtr->texIndex = texIndex;
-            data.circleVertexBufferPtr->color = color;
-            data.circleVertexBufferPtr->thickness = thickness;
-            data.circleVertexBufferPtr->fade = fade;
-            data.circleVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
-            data.circleVertexBufferPtr->coreID = coreID;
+            data.circleVertexBufferPtr->color = renderData.color;
+            data.circleVertexBufferPtr->thickness = renderData.thickness;
+            data.circleVertexBufferPtr->fade = renderData.fade;
+            data.circleVertexBufferPtr->projectionMode = ProjectionModeToInt(renderData.mode);
+            data.circleVertexBufferPtr->coreID = renderData.coreID;
             data.circleVertexBufferPtr++;
             data.stats.vertexCount++;
         }
@@ -876,9 +666,12 @@ namespace core {
     }
 
 
-    void Renderer::DrawString(glm::vec2 position, glm::vec2 size, float rotation, glm::vec4 color, std::string string, Shr<Font> font, ProjectionMode mode, core_id coreID, core_id uiID)
+    void Renderer::DrawString(const TextRenderData& renderData)
     {
-        size_t dataSize = string.length() * 4;
+        std::string string = renderData.string;
+        auto& font = renderData.font;
+
+        size_t dataSize = renderData.string.length() * 4;
         size_t index = 0;
 
         float leftVertex = 0.0f;
@@ -902,9 +695,7 @@ namespace core {
         double y = 0.0;
         float lineHeightOffset = 0.0f;
 
-        glm::mat4 transform = glm::translate(glm::mat4(1.0f), glm::vec3(position, 0.0f))
-            * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
-            * glm::scale(glm::mat4(1.0f), glm::vec3(size, 1.0f));
+        glm::mat4 transform = renderData.transform.GetMatrix();
 
         for (size_t i = 0; i < string.length(); i++)
         {
@@ -984,10 +775,10 @@ namespace core {
             vertexData[i] -= stringSize;
 
             data.textVertexBufferPtr->position = transform * vertexData.at(i);
-            data.textVertexBufferPtr->color = color;
+            data.textVertexBufferPtr->color = renderData.color;
             data.textVertexBufferPtr->texCoord = texCoordData.at(i);
-            data.textVertexBufferPtr->projectionMode = ProjectionModeToInt(mode);
-            data.textVertexBufferPtr->coreID = coreID; // TODO
+            data.textVertexBufferPtr->projectionMode = ProjectionModeToInt(renderData.mode);
+            data.textVertexBufferPtr->coreID = renderData.coreID; // TODO
             data.textVertexBufferPtr++;
             data.stats.vertexCount++;
 

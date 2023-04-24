@@ -17,7 +17,14 @@ namespace core
 
 	void Label::Render(core_id idToRender)
 	{
-		Renderer::DrawString(globalPos, transform.scale, transform.rotation, color, text, font, mode, idToRender);
+		TextRenderData data;
+		data.transform = {};
+		data.color = color;
+		data.string = text;
+		data.font = font;
+		data.mode = mode;
+		data.coreID = idToRender;
+		Renderer::DrawString(data);
 	}
 
 }

@@ -331,6 +331,8 @@ namespace core {
             if (ImGui::Selectable("POINT", selected == 1))
                 RenderCommand::SetPolygonModel(Polygon::POINT);
 
+            
+
             ImGui::BeginDisabled();
             if (ImGui::TreeNode("Textures in use"))
             {

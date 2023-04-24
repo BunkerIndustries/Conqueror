@@ -2,13 +2,74 @@
 #include "utility.h"
 
 #include "generic/Camera.h"
+#include "generic/Transform.h"
 #include "renderer/FrameBuffer.h"
 #include "renderer/Texture.h"
 #include "utils/DataPool.h"
 
 #include "renderer/Font.h"
 
+#define DEFAULT_COLOR glm::vec4(0.925f, 0.329f, 0.956, 1.0f)
+
 namespace core {
+
+    struct EdgeRenderData
+    {
+        Transform transform = Transform();
+        glm::vec4 color = DEFAULT_COLOR;
+
+        Shr<Texture> texture = nullptr;
+        glm::vec2 texCoords[4] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
+        float tilingFactor = 1.0f;
+
+        ProjectionMode mode = ProjectionMode::PERSPECTIVE;
+        core_id coreID = 0;
+        core_id uiID = -1;
+    };
+
+    struct CircleRenderData
+    {
+        Transform transform = Transform();
+        glm::vec4 color = DEFAULT_COLOR;
+
+        float thickness = 1.0f;
+        float fade = 0.005f;
+
+        Shr<Texture> texture = nullptr;
+        glm::vec2 texCoords[4] = { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f } };
+        float tilingFactor = 1.0f;
+
+        ProjectionMode mode = ProjectionMode::PERSPECTIVE;
+        core_id coreID = 0;
+        core_id uiID = -1;
+    };
+
+    struct LineRenderData
+    {
+        glm::vec2 point0 = glm::vec2(0.0f, 0.0f);
+        glm::vec2 point1 = glm::vec2(1.0f, 0.0f);
+        glm::vec4 color = DEFAULT_COLOR;
+
+        float thickness = 1.0f;
+
+        ProjectionMode mode = ProjectionMode::PERSPECTIVE;
+        core_id coreID = 0;
+        core_id uiID = -1;
+    };
+
+    struct TextRenderData
+    {
+        Transform transform = Transform();
+        glm::vec4 color = DEFAULT_COLOR;
+
+        std::string string = "";
+        Shr<Font> font = DataPool::GetFont("mononoki.ttf");
+
+        ProjectionMode mode = ProjectionMode::PERSPECTIVE;
+        core_id coreID = 0;
+        core_id uiID = -1;
+    };
+
     class Renderer {
     public:
         static void Init();
@@ -21,19 +82,15 @@ namespace core {
 
         static void Render();
 
-        static void DrawRectangle(glm::vec2 position, glm::vec2 size, float rotation, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID = -1);
-        static void DrawRectangle(glm::vec2 position, glm::vec2 size, float rotation, Shr<Texture>& texture, float tilingFactor, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID = -1);
-        static void DrawRectangle(glm::vec2 position, glm::vec2 size, float rotation, glm::vec2 texCoordSprite[4], Shr<Texture>& texture, float tilingFactor, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID = -1);
+        static void DrawRectangle(const EdgeRenderData& renderData);
 
-        static void DrawTriangle(glm::vec2 position, glm::vec2 size, float rotation, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID = -1);
-        static void DrawTriangle(glm::vec2 position, glm::vec2 size, float rotation, Shr<Texture>& texture, float tilingFactor, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID = -1);
+        static void DrawTriangle(const EdgeRenderData& renderData);
 
-        static void DrawLine(glm::vec2 p0, glm::vec2 p1, glm::vec4 color, float thickness, ProjectionMode mode, core_id coreID, core_id uiID = -1);
+        static void DrawLine(const LineRenderData& renderData);
 
-        static void DrawCircle(glm::vec2 position, glm::vec2 size, float rotation, glm::vec4 color, float thickness, float fade, ProjectionMode mode, core_id coreID, core_id uiID = -1);
-        static void DrawCircle(glm::vec2 position, glm::vec2 size, float rotation, Shr<Texture>& texture, float tilingFactor, glm::vec4 color, float thickness, float fade, ProjectionMode mode, core_id coreID, core_id uiID = -1);
+        static void DrawCircle(const CircleRenderData& renderData);
 
-        static void DrawString(glm::vec2 position, glm::vec2 size, float rotation, glm::vec4 color, std::string string, Shr<Font> font, ProjectionMode mode, core_id coreID, core_id uiID = -1);
+        static void DrawString(const TextRenderData& renderData);
 
         struct Stats
         {
@@ -52,18 +109,6 @@ namespace core {
     private:
 
         static void StartBatch();
-
-        static void DrawRectangle(glm::mat4 transform, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID);
-        
-        static void DrawRectangle(glm::mat4 transform, Shr<Texture>& texture, float tilingFactor, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID);
-        static void DrawRectangle(glm::mat4 transform, Shr<Texture>& texture, float tilingFactor, glm::vec2 texCoordSprite[4], glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID);
-
-        static void DrawTriangle(glm::mat4 transform, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID);
-        static void DrawTriangle(glm::mat4 transform, Shr<Texture>& texture, float tilingFactor, glm::vec4 color, ProjectionMode mode, core_id coreID, core_id uiID);
-
-        static void DrawCircle(glm::mat4 transform, glm::vec4 color, float thickness, float fade, ProjectionMode mode, core_id coreID, core_id uiID);
-        static void DrawCircle(glm::mat4 transform, Shr<Texture>& texture, float tilingFactor, glm::vec4 color, float thickness, float fade, ProjectionMode mode, core_id coreID, core_id uiID);
-
     };
 
 }

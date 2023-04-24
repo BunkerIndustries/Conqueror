@@ -16,6 +16,13 @@ namespace core
 
 	void FontRenderer::OnUpdate()
 	{
-		Renderer::DrawString(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, color, text, DataPool::GetFont(fontPath), gameObject->GetProjectionMode(), gameObject->GetCoreID());
+		TextRenderData data;
+		data.transform = gameObject->transform;
+		data.color = color;
+		data.string = text;
+		data.font = DataPool::GetFont(fontPath);
+		data.mode = gameObject->GetProjectionMode();
+		data.coreID = gameObject->GetCoreID();
+		Renderer::DrawString(data);
 	}
 };

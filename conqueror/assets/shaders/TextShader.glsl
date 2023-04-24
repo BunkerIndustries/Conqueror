@@ -6,6 +6,7 @@ layout(location = 2) in vec2 aTexCoord;
 layout(location = 3) in int aProjectionMode;
 layout(location = 4) in int aCoreID;
 layout(location = 5) in int aUIID;
+layout(location = 6) in int aAlphaCoreID;
 
 // camera variables
 uniform mat4 uPerspective;
@@ -20,12 +21,16 @@ struct VertexOutput
 
 layout (location = 0) out VertexOutput Output;
 layout (location = 2) out flat int coreID;
+layout (location = 3) out flat int alphaCoreID;
+
 
 void main()
 {
 	Output.Color = aColor;
 	Output.TexCoord = aTexCoord;
 	coreID = aCoreID;
+    alphaCoreID = aAlphaCoreID;
+    
 
     vec4 position;
     switch(aProjectionMode) {
@@ -46,7 +51,7 @@ void main()
 #type fragment
 #version 450 core
 
-layout(location = 0) out vec4 o_Color;
+layout(location = 0) out vec4 display;
 layout(location = 1) out int oCoreID;
 
 struct VertexOutput
@@ -57,6 +62,8 @@ struct VertexOutput
 
 layout (location = 0) in VertexOutput Input;
 layout (location = 2) in flat int coreID;
+layout (location = 3) in flat int alphaCoreID;
+
 
 layout (binding = 0) uniform sampler2D u_FontAtlas;
 
@@ -85,8 +92,8 @@ void main()
 		discard;
 
 	vec4 bgColor = vec4(0.0);
-    o_Color = mix(bgColor, Input.Color, opacity);
-	if (o_Color.a == 0.0)
+    display = mix(bgColor, Input.Color, opacity);
+	if (display.a == 0.0 && alphaCoreID == 0)
 		discard;
 
 	oCoreID = coreID;

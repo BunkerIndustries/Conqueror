@@ -30,19 +30,19 @@ namespace core {
     }
 
     void SpriteRenderer::OnUpdate() {
+        EdgeRenderData data;
+        data.transform = gameObject->transform;
+        data.color = color;
+        data.texture = texture;
+        data.mode = gameObject->GetProjectionMode();
+        data.coreID = gameObject->GetCoreID();
         switch (geometry)
         {
             case Geometry::RECTANGLE:
-                if (texture)
-                    Renderer::DrawRectangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, texture, 1.0f, color, gameObject->GetProjectionMode(), gameObject->GetCoreID());
-                else
-					Renderer::DrawRectangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, color, gameObject->GetProjectionMode(), gameObject->GetCoreID());
+                    Renderer::DrawRectangle(data);
                 break;
             case Geometry::TRIANGLE:
-                if (texture)
-                    Renderer::DrawTriangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, texture, 1.0f, color, gameObject->GetProjectionMode(), gameObject->GetCoreID());
-                else
-                    Renderer::DrawTriangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, color, gameObject->GetProjectionMode(), gameObject->GetCoreID());
+                    Renderer::DrawTriangle(data);
                 break;
         }
     }
