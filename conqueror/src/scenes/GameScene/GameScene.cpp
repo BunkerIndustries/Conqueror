@@ -10,6 +10,7 @@ GameScene::GameScene() {
     // set background color
     backcolor = glm::vec4(0.8f, 0.8f, 0.8f, 1.0f);
 
+    backgroundLayer = new BackgroundLayer();
     mapLayer = new MapLayer();
     enemyLayer = new EnemyLayer();
     allyLayer = new AllyLayer;
@@ -23,6 +24,7 @@ GameScene::~GameScene() {
 }
 
 void GameScene::OnStop() {
+    RemoveLayer(backgroundLayer);
     RemoveLayer(mapLayer);
     RemoveLayer(enemyLayer);
     RemoveLayer(allyLayer);
@@ -33,6 +35,7 @@ void GameScene::OnStart() {
 
     Supply::Init();
 
+    AddLayer(backgroundLayer);
     AddLayer(mapLayer);
     AddLayer(enemyLayer);
     AddLayer(allyLayer);

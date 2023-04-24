@@ -2,6 +2,7 @@
 
 #include "_Game.h"
 
+#include "layers/BackgroundLayer.h"
 #include "layers/AllyLayer.h"
 #include "layers/EnemyLayer.h"
 #include "layers/MapLayer.h"
@@ -36,6 +37,7 @@ public:
 	GameObject* GetActiveBuilding() const { return active_building; }
 	void SetActiveBuilding(GameObject* gameObject) { active_building = gameObject; }
 
+	BackgroundLayer* backgroundLayer = nullptr;
 	MapLayer* mapLayer = nullptr;
 	EnemyLayer* enemyLayer = nullptr;
 	AllyLayer* allyLayer = nullptr;

@@ -177,3 +177,6 @@ inline Transform ui_choice_field_button_transform = Transform(glm::vec2(0.0f, 0.
 inline uint8_t min_soldiers_choice = 2;
 inline uint8_t max_soldiers_choice = 5;
 inline uint8_t soldier_increase_by_wave = 3;
+
+// sprite stuff
+inline glm::vec2 background_image_size = glm::vec2(40.0f, 25.0f);
