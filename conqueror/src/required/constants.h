@@ -46,6 +46,10 @@ inline float medic_movement_speed = 1.4f;
 inline float engineer_movement_speed = 0.9f;
 inline glm::vec2 character_scale = glm::vec2(0.9f, 1.2f);	// probably temporary
 
+//bullet
+inline float bullet_speed = 5.0f;
+inline glm::vec2 bullet_scale = glm::vec2(0.5f, 0.5f);	// probably temporary
+
 //soldier behaviour 
 inline float min_soldier_shoot_waiting_time = 0.5f;
 inline float max_soldier_shoot_waiting_time = 1.5f;
@@ -121,7 +125,7 @@ inline float enemy_start_spawn_interval = 2.0f;
 inline float enemy_spawn_interval_gradient = 0.9f;
 
 // stocks
-inline unsigned int start_soldier_stock = 2;
+inline unsigned int start_soldier_stock = 4;
 inline uint8_t start_engineer_stock = 5;
 inline uint8_t start_medic_stock = 8;
 

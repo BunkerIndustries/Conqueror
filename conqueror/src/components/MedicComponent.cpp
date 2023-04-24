@@ -47,7 +47,7 @@ void MedicCharacter::OnUpdate() {
 	if (!healing_target->GetComponent<Movement>()) {
 		// go back 
 		going_back = true;
-		gameObject->GetComponent<Movement>()->target_position = &medic_building->transform.position;
+		gameObject->GetComponent<Movement>()->SetTrackingPos(&medic_building->transform.position);
 		return;
 	}
 

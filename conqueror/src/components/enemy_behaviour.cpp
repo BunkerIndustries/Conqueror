@@ -28,7 +28,7 @@ void EnemyBehaviour::OnStart() {
 	y_index = 0;
 	x_index = random_x_pos;
 
-	move_component->target_position = &enemy_grid.at(random_x_pos).at(0)->transform.position;
+	move_component->SetTargetPos(enemy_grid.at(random_x_pos).at(0)->transform.position);
 
 	enemy_stands[y_index][x_index] = gameObject;
 	
@@ -71,13 +71,13 @@ void EnemyBehaviour::OnUpdate() {
 					time_over = true;
 					dt_time_counter = 0.0f;
 
-					gameObject->GetComponent<EnemyShooting>()->Shoot();
+					//gameObject->GetComponent<EnemyShooting>()->Shoot();
 				}
 			}
 		}
 	}
 	else {
-		if (gameObject->transform.position == *move_component->target_position) {
+		if (gameObject->transform.position == move_component->GetTargetPos()) {
 			is_waiting = true;
 			time_over = false;
 		}
@@ -131,7 +131,7 @@ void EnemyBehaviour::ChoosePosAndMove() {
 	y_index += y_offset;
 
 	// now move to the selected node and occupy it
-	move_component->target_position = &move_node_go->transform.position;
+	move_component->SetTrackingPos(&move_node_go->transform.position);
 	enemy_grid.at(x_index).at(y_index)->GetComponent<Node>()->is_occupied = true;
 	enemy_stands[y_index][x_index] = gameObject;
 }

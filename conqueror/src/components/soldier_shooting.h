@@ -13,13 +13,22 @@ public:
 
 	void Shoot();
 
+	GameObject* GetTarget() const
+	{
+		return target;
+	}
+
 	void NullTarget()
 	{
 		target = nullptr;
 	}
 
+	static std::unordered_map<SoldierShooting*, GameObject*> trackTable;
+
 private:
 	bool LockTarget();
+
+	void UnlockTarget(GameObject* target) const;
 
 	GameObject* target;
 	uint8_t hit_probability;

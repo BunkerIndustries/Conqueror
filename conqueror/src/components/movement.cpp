@@ -4,30 +4,50 @@
 #include "required/constants.h"
 
 Movement::Movement(float movement_speed)
-	:movement_speed(movement_speed)
-{
-	
-}
+	: tracking_position(nullptr), target_position(glm::vec2()), move(false), isArrived(false), movement_speed(movement_speed) { }
 
-void Movement::OnStart() {
-	target_position = &gameObject->transform.position;	// Do not move when initialised
-	has_arrived = false;
-	//LOG_DEBUG("Target x pos: {0}", target_position.x);
-}
-
-void Movement::OnStop() {
-
-}
+Movement::Movement(float movement_speed, glm::vec2 pos)
+	: tracking_position(nullptr), target_position(pos), move(true), isArrived(false), movement_speed(movement_speed) { }
 
 void Movement::OnUpdate() {
 
-	if (*target_position != gameObject->transform.position) {
-		has_arrived = false;
-		MoveTo(*target_position, movement_speed);
+
+	if (tracking_position != nullptr)
+	{
+		target_position = *tracking_position;
+		move = true;
 	}
-	else {
-		has_arrived = true;
+	else
+	{
+		move = false;
 	}
+
+	if (gameObject->transform.position == target_position)
+	{
+		move = false;
+		isArrived = true;
+
+		//when bullet then delete if arrived
+		if (gameObject->HasTag("bullet"))
+		{
+			delete this;
+		}
+	}
+
+	if (move)
+		MoveTo(target_position, movement_speed);
+}
+
+void Movement::SetTrackingPos(glm::vec2* pos)
+{
+	tracking_position = pos;
+}
+
+void Movement::SetTargetPos(glm::vec2 pos)
+{
+	target_position = pos;
+	tracking_position = nullptr;
+	move = true;
 }
 
 void Movement::MoveTo(glm::vec2 target_pos, float speed) {
