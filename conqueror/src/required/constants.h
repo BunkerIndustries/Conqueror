@@ -179,4 +179,4 @@ inline uint8_t max_soldiers_choice = 5;
 inline uint8_t soldier_increase_by_wave = 3;
 
 // sprite stuff
-inline glm::vec2 background_image_size = glm::vec2(40.0f, 25.0f);
+inline glm::vec2 background_tile_size = glm::vec2(30.0f, 15.0f);

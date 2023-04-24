@@ -24,7 +24,7 @@ GameScene::~GameScene() {
 }
 
 void GameScene::OnStop() {
-    RemoveLayer(backgroundLayer);
+    //RemoveLayer(backgroundLayer);
     RemoveLayer(mapLayer);
     RemoveLayer(enemyLayer);
     RemoveLayer(allyLayer);
@@ -35,7 +35,7 @@ void GameScene::OnStart() {
 
     Supply::Init();
 
-    AddLayer(backgroundLayer);
+    //AddLayer(backgroundLayer);
     AddLayer(mapLayer);
     AddLayer(enemyLayer);
     AddLayer(allyLayer);

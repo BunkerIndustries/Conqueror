@@ -14,4 +14,6 @@ public:
 	void Update(const float dt) override {};
 	void OnEvent(Event& e) override {};
 
+private:
+	void CreateBackgroundTile(glm::vec2 pos);
 };
