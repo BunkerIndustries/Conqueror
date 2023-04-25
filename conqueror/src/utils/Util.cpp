@@ -4,12 +4,12 @@
 #include <corecrt_math_defines.h>
 
 
-int Util::RadToDeg(float rad) const
+int Util::RadToDeg(float rad)
 {
 	return rad * (180 / M_PI);
 }
 
-int Util::VectorAngle(float x, float y) const
+int Util::VectorAngle(float x, float y)
 {
 	if (x == 0) // special cases
 		return (y > 0) ? 90
