@@ -66,9 +66,10 @@ void Supply::IncreaseSoldierCount() {
 bool Supply::CheckForGameOver() {
 
 	// if soldiers still exist
-	if (soldier_stock > 0 || gameScene->allyLayer->GetGameObjectsByTag("soldier").size() != 0) {
+	if (soldier_stock > 0 || gameScene->allyLayer->GetGameObjectsByTag("soldier").size() > 1) {
 		return false;
 	}
-	Application::ChangeScene(menuScene);	// TODO: change to game-over menu
+	LOG_DEBUG("Scene change");
+	Application::ChangeScene(new MenuScene());	// TODO: change to game-over menu
 	return true;
 }

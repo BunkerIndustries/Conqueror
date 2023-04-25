@@ -13,9 +13,9 @@ inline std::vector<std::vector<GameObject*>> enemy_grid;
 inline float camera_scroll_speed = 15.0f;
 inline float camera_move_speed = 2.0f;
 inline float min_camera_z_pos = 2.0f;
-inline float max_camera_z_pos = 20.0f;
+inline float max_camera_z_pos = 15.0f;
 inline glm::vec2 min_camera_positions = glm::vec2(-7.0f, -5.0f);
-inline glm::vec2 max_camera_positions = glm::vec2(7.0f, 5.0f);
+inline glm::vec2 max_camera_positions = glm::vec2(7.0f, 3.0f);
 
 // all sprite paths
 inline std::string soldier_sprite_path = "";
@@ -24,10 +24,10 @@ inline std::string engineer_sprite_path = "";
 inline std::string enemy_sprite_path = "";
 
 // enemy grid 
-inline const int enemy_grid_x = 10;
-inline const int enemy_grid_y = 6;
-inline float enemy_grid_offset = 0.5f;
-inline glm::vec2 enemy_grid_startpos = glm::vec2(0.0f, 2.0f);
+inline const int enemy_grid_x = 15;
+inline const int enemy_grid_y = 9;
+inline float enemy_grid_offset = 1.0f;
+inline glm::vec2 enemy_grid_startpos = glm::vec2(0.0f, 5.0f);
 
 // enemy behaviour 
 inline float min_enemy_waiting_time = 0.5f;
