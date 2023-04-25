@@ -4,7 +4,7 @@
 #include "required/functions.h"
 #include "required/stands.h"
 
-std::unordered_map<SoldierShooting*, GameObject*> SoldierShooting::trackTable;
+
 
 SoldierShooting::SoldierShooting() {
 
@@ -26,7 +26,9 @@ void SoldierShooting::Shoot() {
 	
 	for (uint8_t i = 0; i < max_soldier_lock_target_tries; i++) {
 		if (!LockTarget()) continue;
-		gameScene->CreateBullet(gameScene->allyLayer, gameObject->transform.position, glm::vec2(0.0f, 10.0f));
+
+		gameScene->CreateBullet(gameScene->allyLayer, target, gameObject->transform.position, target->transform.position);
+		
 		break;
 	}
 
@@ -34,6 +36,7 @@ void SoldierShooting::Shoot() {
 
 bool SoldierShooting::LockTarget() {
 	// check if target already exists
+	LOG_DEBUG(target->GetName());
 	if (target) {
 		return true;
 	}
@@ -63,16 +66,6 @@ bool SoldierShooting::LockTarget() {
 
 	// set random enemy in row as target and return true
 	target = enemies_in_row[RandomInt(0, enemies_in_row.size() - 1)];
+	Util::shootingTable[target].push_back(this);
 	return true;
-}
-
-void SoldierShooting::UnlockTarget(GameObject* target) const
-{
-	for (auto& [key, val] : trackTable)
-	{
-		if (val == target)
-		{
-			key->NullTarget();
-		}
-	}
 }

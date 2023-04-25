@@ -4,6 +4,7 @@
 #include "required/constants.h"
 #include "utils\Supply.h"
 
+
 Health::Health(float hp) 
 	:hp(hp)
 {
@@ -31,6 +32,19 @@ bool Health::TakeDamage(float damage) {
 			// get node and unoccupy it
 			gameObject->GetComponent<SoldierBehaviour>()->FreeNode();
 			Supply::CheckForGameOver();
+		}
+		else if (gameObject->HasTag("enemy"))
+		{
+			for (auto [key, val] : Util::shootingTable)
+			{
+				if (key == gameObject)
+				{
+					for (SoldierShooting* ss : val)
+					{
+						ss->NullTarget();
+					}
+				}
+			}
 		}
 		delete gameObject;
 		return true;

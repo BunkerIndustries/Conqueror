@@ -9,3 +9,4 @@
 #include "components/node.h"
 #include "components/soldier_behaviour.h"
 #include "components/soldier_shooting.h"
+#include "components/BulletComponent.h"

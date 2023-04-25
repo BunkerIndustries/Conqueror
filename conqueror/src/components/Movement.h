@@ -17,11 +17,13 @@ public:
 
 	glm::vec2* GetTrackingPos() const { return tracking_position; }
 	glm::vec2 GetTargetPos() const { return target_position; }
+	glm::vec2 GetDirection() const { return direction; }
 	bool IsArrived() const { return isArrived; }
 
 private:
 	glm::vec2* tracking_position;
 	glm::vec2 target_position;
+	glm::vec2 direction;
 	bool move;
 	bool isArrived;
 	float movement_speed;
