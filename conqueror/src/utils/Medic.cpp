@@ -14,5 +14,9 @@ GameObject* Medic::AddBuilding(Transform transform, uint32_t medicCount)
 
 void Medic::SendMedic()
 {
+	if (gameScene->GetActiveCharacter()->GetComponent<Health>()->GetHp() == soldier_health
+		|| gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->ReceivingMedic()) {
+		return;
+	}
 	gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->SendMedic();
 }

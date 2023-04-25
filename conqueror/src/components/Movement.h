@@ -11,7 +11,7 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
 
-	glm::vec2* target_position;
+	glm::vec2 target_position;
 	
 	bool has_arrived;
 

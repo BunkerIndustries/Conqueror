@@ -15,8 +15,8 @@ void SoldierBehaviour::OnStart() {
 
 	// start configuration
 	on_spawn_pos = true;
-	is_healed = false;
 	travelling = false;
+	gets_healed = false;
 	time_to_wait = RandomF(min_soldier_shoot_waiting_time, max_soldier_shoot_waiting_time) * game_time_factor;
 	dt_counter = 0.0f;
 }
@@ -78,14 +78,14 @@ void SoldierBehaviour::OnUpdate() {
 
 void SoldierBehaviour::SoldierMove(GameObject* move_node) {
 
-	if (is_healed) return;
+	if (gets_healed) return;
 
 	// get the for this function required components
 	Movement* move_component = gameObject->GetComponent<Movement>();
 	current_node = move_node->GetComponent<Node>();
 
 	// if the target node is the same it is already on or it is already occupied (position-check is needed because clicking a node twice with the same selected gameobject will make it unoccupied)
-	if (*move_component->target_position == move_node->transform.position || current_node->is_occupied) return;
+	if (move_component->target_position == move_node->transform.position || current_node->is_occupied) return;
 
 	// make the clicked node occupied and the recent unoccupied
 	current_node->is_occupied = true;
@@ -93,7 +93,7 @@ void SoldierBehaviour::SoldierMove(GameObject* move_node) {
 	old_node->GetComponent<Node>()->is_occupied = false;
 
 	// move the gameobject
-	move_component->target_position = &move_node->transform.position;
+	move_component->target_position = move_node->transform.position;
 	this->target_position = move_node->transform.position;
 	travelling = true;
 
@@ -117,7 +117,7 @@ bool SoldierBehaviour::SoldierTryMoveToWaitingNode() {
 		if (!node->GetComponent<Node>()->is_occupied) {
 
 			// move the gameobject to the chosen waiting node 
-			gameObject->GetComponent<Movement>()->target_position = &node->transform.position;
+			gameObject->GetComponent<Movement>()->target_position = node->transform.position;
 			this->target_position = node->transform.position;
 			node->GetComponent<Node>()->is_occupied = true;
 			this->stand = waiting_stand.stand;
@@ -139,3 +139,9 @@ void SoldierBehaviour::FreeNode() {
 	current_node->is_occupied = false;
 	current_node = nullptr;
 }
+
+void SoldierBehaviour::MedicSent() { gets_healed = true; }
+
+void SoldierBehaviour::MedicLeft() { gets_healed = false; }
+
+bool SoldierBehaviour::ReceivingMedic() { return gets_healed; }

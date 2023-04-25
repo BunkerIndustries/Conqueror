@@ -14,13 +14,17 @@ public:
 	void SoldierMove(GameObject* node);
 	void FreeNode();
 
+	void MedicSent();
+	void MedicLeft();
+	bool ReceivingMedic();
+
 	bool on_spawn_pos;
-	bool is_healed;
 
 private:
 	float health;
 
 	bool travelling;
+	bool gets_healed;
 
 	bool SoldierTryMoveToWaitingNode();
 	void RestartTimer();
