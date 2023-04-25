@@ -55,5 +55,6 @@ namespace core
 	{
 		if (!parent) return;
 		globalPos = parent->globalPos + transform.position * parent->transform.scale * glm::vec2(0.5f);
+		globalScale = parent->globalScale * transform.scale;
 	}
 }
