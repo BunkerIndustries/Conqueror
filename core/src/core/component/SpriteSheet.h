@@ -3,13 +3,13 @@
 #include "utility.h"
 
 #include "generic/Component.h"
+#include "component/Sprite.h"
 
 namespace core
 {
-	class SpriteSheet : public Component
-	{
+    class SpriteSheet : public Component
+    {
     public:
-        SpriteSheet(glm::vec4 color, Shr<Texture> texture, float spriteWidth, float spriteHeight, glm::vec2 selectedSprite, bool registerAlphaPixelsToEvent = false);
         SpriteSheet(glm::vec4 color, Shr<Texture> texture, float spriteWidth, float spriteHeight, float paddingWidth, float paddingHeight, glm::vec2 selectedSprite, bool registerAlphaPixelsToEvent = false);
 
         void Init(Shr<Texture> texture, glm::vec2 selectedSprite);
@@ -31,7 +31,7 @@ namespace core
         glm::vec4 color;
         Shr<Texture> texture;
 
-        glm::vec2 texCoords[4];
+        std::array<glm::vec2, 4> texCoords;
 
         float spriteWidth;
         float spriteHeight;
@@ -49,6 +49,8 @@ namespace core
 
         bool registerAlphaPixelsToEvent;
 
-		void ChangeCoords();
-	};
+        std::vector<std::vector<Shr<Sprite>>> Sprites;
+
+        void ChangeCoords();
+    };
 };
