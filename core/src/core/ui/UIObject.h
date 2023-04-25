@@ -36,6 +36,7 @@ namespace core
 	protected:
 
 		glm::vec2 globalPos;
+		glm::vec2 globalScale;
 		ProjectionMode mode;
 
 		UIObject* parent = nullptr;

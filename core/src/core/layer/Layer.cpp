@@ -102,6 +102,7 @@ namespace core
 	void Layer::AddUIObject(UIObject* object, ProjectionMode mode)
 	{
 		object->globalPos = object->transform.position;
+		object->globalScale = object->transform.scale;
 		object->mode = mode;
 		uiObjects.push_back(object);
 	}

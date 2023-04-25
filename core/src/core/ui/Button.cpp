@@ -19,7 +19,7 @@ namespace core
 	void Button::Render(core_id idToRender)
 	{
 		EdgeRenderData data;
-		data.transform = { globalPos, transform.scale, transform.rotation };
+		data.transform = { globalPos, globalScale, transform.rotation };
 		data.color = color;
 		data.mode = mode;
 		data.coreID = idToRender;
