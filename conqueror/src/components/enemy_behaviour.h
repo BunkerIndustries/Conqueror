@@ -11,7 +11,7 @@ public:
 	void OnStart() override;
 	void OnStop() override;
 	void OnUpdate() override;
-	void OnEvent(Event& event) override {};
+	void OnEvent(Event& event) override;
 
 	GameObject* GetNode();
 

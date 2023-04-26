@@ -32,9 +32,9 @@ void SoldierShooting::Shoot() {
 		float dist = sqrt(distanceVec2.x * distanceVec2.x + distanceVec2.y * distanceVec2.y);
 
 		glm::vec2 pos = target->transform.position;
-		float distScale = dist / bulletInaccuracyMultiplicator;
+		float distScale = dist / 10;
 
-		if (RandomInt(-dist, 2) < 0 && bulletDistanceMoreInaccuracy)
+		if (RandomInt(-dist, 2) < 0)
 		{
 			float randomX = RandomF(-1.0f, 1.0f) * distScale;
 			pos.x += randomX;

@@ -8,8 +8,7 @@ inline void RoundVec2(glm::vec2& vec) {		// written by chatGPT 0_0
 
 }
 
-inline int RandomInt(const int from, const int to) {	// written by chatGPT 0_0
-
+inline int RandomInt(int from, int to) {	// written by chatGPT 0_0
 	std::random_device rd;  // Use a true random number source
 	std::mt19937 generator(rd());  // Use Mersenne Twister algorithm
 	std::uniform_int_distribution<> distribution(from, to);  // Distribute numbers evenly
@@ -23,6 +22,7 @@ inline float RandomF(float min_float, float max_float) {	// written by chatGPT 0
 		srand(time(nullptr)); // set seed based on current time, only once
 		initialized = true;
 	}
+
 	float random = ((float)rand()) / (float)RAND_MAX; // generate random float between 0 and 1
 	float range = max_float - min_float; // calculate range
 	return (random * range) + min_float; // scale and shift the random number to the desired range

@@ -55,9 +55,9 @@ void EnemyBehaviour::OnUpdate() {
 			time_running = false;
 
 			
-			if (y_index != enemy_grid_y - 1) {
-				ChoosePosAndMove();
-			}
+			//if (y_index != enemy_grid_y - 1) {
+			//	ChoosePosAndMove();
+			//}
 			
 		}
 		else {
@@ -86,6 +86,22 @@ void EnemyBehaviour::OnUpdate() {
 		}
 	}
 
+}
+
+void EnemyBehaviour::OnEvent(Event& event)
+{
+	
+	EventDispatcher dispatcher(event);
+	dispatcher.dispatch<KeyPressedEvent>([this](KeyPressedEvent& e)
+	{
+		if (e.getKeyCode() == KEY_C)
+		{
+			if (y_index != enemy_grid_y - 1) {
+				ChoosePosAndMove();
+			}
+		}
+		return false;
+	});
 }
 
 

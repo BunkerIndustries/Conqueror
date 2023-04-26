@@ -51,8 +51,8 @@ inline float bullet_speed = 10.0f;
 inline glm::vec2 bullet_scale = glm::vec2(0.5f, 1.0f);	// probably temporary
 
 //soldier behaviour 
-inline float min_soldier_shoot_waiting_time = 0.5f;
-inline float max_soldier_shoot_waiting_time = 1.5f;
+inline float min_soldier_shoot_waiting_time = 0.2f;
+inline float max_soldier_shoot_waiting_time = 0.4f;
 inline uint8_t max_soldier_lock_target_tries = 2;
 inline uint8_t soldier_miss_points = 1;
 inline glm::vec2 soldier_spawn_pos = glm::vec2(-5.0f, -5.0f);
@@ -74,7 +74,7 @@ inline uint8_t hiding_hit_probability = 4;
 inline uint8_t artillerie_hit_probability = 6;
 
 // damage 
-inline uint8_t soldier_damage = 35;
+inline uint8_t soldier_damage = 0;
 inline uint8_t enemy_damage = 35;
 
 // health 
@@ -89,6 +89,8 @@ inline float min_inaccuracy = 0.8f;
 inline float max_inaccuracy = 1.4f;
 inline float trace_thickness = 0.3f;
 inline float trace_lasting = 0.15f;
+inline bool bulletDistanceMoreInaccuracy = true;
+inline float bulletInaccuracyMultiplicator = 10.0f;
 
 // node 
 inline glm::vec2 node_size = glm::vec2(0.5f, 0.5f);
