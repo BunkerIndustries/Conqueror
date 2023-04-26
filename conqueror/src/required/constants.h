@@ -30,7 +30,7 @@ inline glm::vec2 enemy_grid_startpos = glm::vec2(0.0f, 2.0f);
 // enemy behaviour 
 inline float min_enemy_waiting_time = 0.5f;
 inline float max_enemy_waiting_time = 2.0f;
-inline float enemy_movement_speed = 3.0f;
+inline float enemy_movement_speed = 1.5f;
 inline uint8_t max_enemy_lock_target_tries = 3;
 inline glm::vec2 enemy_scale = glm::vec2(0.7f, 1.0f);
 inline uint8_t enemy_random_movement_sum = 5;
@@ -41,7 +41,7 @@ inline float enemy_spawn_y_position = 15.0f;
 inline float enemy_spawn_random_x_radius = 5.0f;
 
 // character 
-inline float soldier_movement_speed = 3.2f;
+inline float soldier_movement_speed = 1.7f;
 inline float medic_movement_speed = 1.4f;
 inline float engineer_movement_speed = 0.9f;
 inline glm::vec2 character_scale = glm::vec2(0.9f, 1.2f);	// probably temporary
@@ -51,8 +51,8 @@ inline float bullet_speed = 10.0f;
 inline glm::vec2 bullet_scale = glm::vec2(0.5f, 1.0f);	// probably temporary
 
 //soldier behaviour 
-inline float min_soldier_shoot_waiting_time = 0.2f;
-inline float max_soldier_shoot_waiting_time = 0.5f;
+inline float min_soldier_shoot_waiting_time = 0.5f;
+inline float max_soldier_shoot_waiting_time = 1.5f;
 inline uint8_t max_soldier_lock_target_tries = 2;
 inline uint8_t soldier_miss_points = 1;
 inline glm::vec2 soldier_spawn_pos = glm::vec2(-5.0f, -5.0f);

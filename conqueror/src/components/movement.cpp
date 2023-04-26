@@ -24,7 +24,7 @@ Movement::Movement(float movement_speed, glm::vec2 pos)
 void Movement::OnUpdate() {
 
 	
-  	if (tracking_position != nullptr)
+   	if (tracking_position != nullptr)
 	{
 		target_position = *tracking_position;
 		move = true;

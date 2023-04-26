@@ -28,7 +28,12 @@ void SoldierShooting::Shoot() {
 		GameObject* target = LockTarget();
 		if (!target) continue;
 
-		gameScene->CreateBullet(gameScene->allyLayer, target, gameObject->transform.position, target->transform.position);
+		glm::vec2 distanceVec2 = target->transform.position - gameObject->transform.position;
+		float dist = sqrt(distanceVec2.x * distanceVec2.x + distanceVec2.y * distanceVec2.y);
+		LOG_WARN(dist);
+
+		if (dist < 6.0f)
+			gameScene->CreateBullet(gameScene->allyLayer, target, gameObject->transform.position, target->transform.position);
 		
 		break;
 	}
