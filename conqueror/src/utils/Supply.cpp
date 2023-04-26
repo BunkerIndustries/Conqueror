@@ -31,7 +31,7 @@ uint8_t Supply::CreateLeftOption() {
 }
 
 std::string Supply::CreateRightOption() {
-	std::string right_choices[4] = { "Medic", "Engineer", "Mg", "Artillerie" };
+	std::string right_choices[4] = { "ARZT", "MECHANIKER", "MG", "ARTILLERIE" };
 	std::string banana = right_choices[RandomInt(0, 3)];
 	right_option = banana;
 	return banana;
@@ -43,16 +43,16 @@ void Supply::TakeLeftOption() {
 }
 
 void Supply::TakeRightOption() {
-	if (right_option == "Medic") {
+	if (right_option == "ARZT") {
 		gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->IncreaseAvailableMedics();
 	}
-	else if (right_option == "Engineer") {
+	else if (right_option == "MECHANIKER") {
 		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->IncreaseAvailableEngineers();
 	}
-	else if (right_option == "Mg") {
+	else if (right_option == "MG") {
 		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->IncreaseMgStock();
 	}
-	else if (right_option == "Artillerie") {
+	else if (right_option == "ARTILLERIE") {
 		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->IncreaseArtilleryStock();
 	}
 	gameScene->uiLayer->DeactivateSupplyMenuUI();
