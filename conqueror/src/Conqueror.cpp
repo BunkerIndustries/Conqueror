@@ -20,7 +20,7 @@ public:
 		gameScene = new GameScene();
 		menuScene = new MenuScene();
 
-		DataPool::GetFont("mononoki.ttf");
+		DataPool::GetFont(ui_font_family);
 
 		Application::ChangeScene(menuScene);
 	}
