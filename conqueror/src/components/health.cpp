@@ -23,6 +23,11 @@ void Health::OnUpdate() {
 
 }
 
+/**
+ * \brief 
+ * \param damage 
+ * \return 
+ */
 bool Health::TakeDamage(float damage) {
 	if (this == nullptr) return true;
 	hp -= damage;
@@ -35,16 +40,8 @@ bool Health::TakeDamage(float damage) {
 		}
 		else if (gameObject->HasTag("enemy"))
 		{
-			for (auto [key, val] : Util::shootingTable)
-			{
-				if (key == gameObject)
-				{
-					for (SoldierShooting* ss : val)
-					{
-						ss->NullTarget();
-					}
-				}
-			}
+			gameObject->GetComponent<EnemyBehaviour>()->GetNode()->GetComponent<Node>()->is_occupied = false;
+			Util::shootingTable.erase(Util::shootingTable.find(gameObject));
 		}
 		delete gameObject;
 		return true;

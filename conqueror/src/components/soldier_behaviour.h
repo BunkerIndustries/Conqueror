@@ -14,21 +14,21 @@ public:
 	void SoldierMove(GameObject* node);
 	void FreeNode();
 
-	bool on_spawn_pos;
-	bool is_healed;
+	bool on_spawn_pos = true;
+	bool is_healed = false;
 
 private:
-	float health;
+	float health = 0.0f;
 
-	bool travelling;
+	bool travelling  = false;
 
 	bool SoldierTryMoveToWaitingNode();
 	void RestartTimer();
 
-	float dt_counter;
-	float time_to_wait;
+	float dt_counter = 0.0f;
+	float time_to_wait  = 0.0f;
 
-	glm::vec2 target_position;
+	glm::vec2 target_position = glm::vec2(0.0f);
 
 	std::vector<GameObject*>* stand = nullptr;
 	GameObject* old_node = nullptr;

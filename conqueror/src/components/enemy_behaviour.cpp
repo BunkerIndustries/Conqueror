@@ -10,6 +10,11 @@ EnemyBehaviour::EnemyBehaviour() {
 
 }
 
+GameObject* EnemyBehaviour::GetNode()
+{
+	return node;
+}
+
 size_t EnemyBehaviour::GetYIndex() {
 	return y_index;
 }
@@ -24,27 +29,24 @@ void EnemyBehaviour::OnStart() {
 	time_over = true;
 	time_running = false;
 
-	size_t random_x_pos = RandomInt(0, enemy_grid_x - 1);
-	y_index = 0;
-	x_index = random_x_pos;
-
-	move_component->SetTargetPos(enemy_grid.at(random_x_pos).at(0)->transform.position);
-
-	enemy_stands[y_index][x_index] = gameObject;
-	
+	TryLeaveSpawnPos();
 }
 
 void EnemyBehaviour::OnStop() {
 	// removes the gameobject from the array
-	for (size_t i = 0; i < enemy_grid_y - 1; i++) {
+	for (size_t i = 0; i < enemy_grid_x; i++) {
 		if (enemy_stands[y_index][i] == gameObject) {
 			enemy_stands[y_index][i] = nullptr;
 		}
 	}
+	
 }
 
 void EnemyBehaviour::OnUpdate() {
-
+	if (onSpawnPos)
+	{
+		TryLeaveSpawnPos();
+	}
 	// handles the complete movement and shoot behaviour of the enemies 
 	if (is_waiting) {
 		dt_time_counter += Application::GetDT();
@@ -52,6 +54,7 @@ void EnemyBehaviour::OnUpdate() {
 			is_waiting = false;
 			time_running = false;
 
+			
 			if (y_index != enemy_grid_y - 1) {
 				ChoosePosAndMove();
 			}
@@ -117,16 +120,15 @@ void EnemyBehaviour::ChoosePosAndMove() {
 
 	// if this node is already occupied, do nothing
 	if (move_node_go->GetComponent<Node>()->is_occupied) return;
-
 	enemy_grid.at(x_index).at(y_index)->GetComponent<Node>()->is_occupied = false;
-
 	// removes the gameobject from the array
-	for (size_t i = 0; i < enemy_grid_x - 1; i++) {
+	for (size_t i = 0; i < enemy_grid_x; i++) {
 		if (enemy_stands[y_index][i] == gameObject) {
 			enemy_stands[y_index][i] = nullptr;
 		}
 	}
 	
+
 	x_index += x_offset;
 	y_index += y_offset;
 
@@ -134,4 +136,24 @@ void EnemyBehaviour::ChoosePosAndMove() {
 	move_component->SetTrackingPos(&move_node_go->transform.position);
 	enemy_grid.at(x_index).at(y_index)->GetComponent<Node>()->is_occupied = true;
 	enemy_stands[y_index][x_index] = gameObject;
+	node = move_node_go;
+
+}
+
+void EnemyBehaviour::TryLeaveSpawnPos()
+{
+	x_index = RandomInt(0, enemy_grid_x - 1);
+	y_index = 0;
+
+	GameObject* move_node_go = enemy_grid.at(x_index).at(y_index);
+	if (move_node_go->GetComponent<Node>()->is_occupied) {
+		onSpawnPos = true;
+		return;
+	}
+	move_component->SetTargetPos(enemy_grid.at(x_index).at(y_index)->transform.position);
+
+	enemy_stands[y_index][x_index] = gameObject;
+	move_node_go->GetComponent<Node>()->is_occupied = true;
+	onSpawnPos = false;
+	node = move_node_go;
 }

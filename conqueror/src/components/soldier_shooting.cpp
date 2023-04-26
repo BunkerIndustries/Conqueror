@@ -11,7 +11,7 @@ SoldierShooting::SoldierShooting() {
 }
 
 void SoldierShooting::OnStart() {
-	target = nullptr;
+	//target = nullptr;
 }
 
 void SoldierShooting::OnStop() {
@@ -25,7 +25,8 @@ void SoldierShooting::OnUpdate() {
 void SoldierShooting::Shoot() {
 	
 	for (uint8_t i = 0; i < max_soldier_lock_target_tries; i++) {
-		if (!LockTarget()) continue;
+		GameObject* target = LockTarget();
+		if (!target) continue;
 
 		gameScene->CreateBullet(gameScene->allyLayer, target, gameObject->transform.position, target->transform.position);
 		
@@ -34,11 +35,11 @@ void SoldierShooting::Shoot() {
 
 }
 
-bool SoldierShooting::LockTarget() {
+GameObject* SoldierShooting::LockTarget() {
 	// check if target already exists
-	LOG_DEBUG(target->GetName());
+	GameObject* target = GetTarget();
 	if (target) {
-		return true;
+		return target;
 	}
 
 	// choose a random row of enemies
@@ -61,11 +62,25 @@ bool SoldierShooting::LockTarget() {
 
 	// if no enemies in row, return false
 	if (enemies_in_row.empty()) {
-		return false;
+		return nullptr;
 	}
 
 	// set random enemy in row as target and return true
 	target = enemies_in_row[RandomInt(0, enemies_in_row.size() - 1)];
+	ASSERT(target->HasTag("enemy"), "")
 	Util::shootingTable[target].push_back(this);
-	return true;
+
+	return target;
+}
+
+GameObject* SoldierShooting::GetTarget() const
+{
+	for (auto [key, val] : Util::shootingTable)
+	{
+		for (const SoldierShooting* ss : val)
+		{
+			if (ss == this) return key;
+		}
+	}
+	return nullptr;
 }

@@ -13,6 +13,8 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
 
+	GameObject* GetNode();
+
 	size_t GetYIndex();
 
 private:
@@ -20,6 +22,7 @@ private:
 	bool is_waiting = false;
 	bool time_over = false;
 	bool time_running = false;
+	bool onSpawnPos = true;
 
 	float time_to_wait = 0.0f;
 	float dt_time_counter = 0.0f;
@@ -27,5 +30,8 @@ private:
 	size_t x_index = 0;
 	size_t y_index = 0;
 
+	GameObject* node = nullptr;
+
 	void ChoosePosAndMove();
+	void TryLeaveSpawnPos();
 };
