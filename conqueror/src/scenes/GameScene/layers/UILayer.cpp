@@ -113,6 +113,7 @@ void UILayer::ActivateSupplyMenuUI() {
 
 	supply_menu_background = new Panel(ui_supply_menu_background_color, Transform(glm::vec2(0.0f, 0.0f), ui_supply_menu_background_size), Type::Rectangle, "ui_supply_menu_background");
 	Label* text = new Label("DU HAST EINEM ANGRIFF STANDGEHALTEN!", ui_font_color, ui_supply_menu_text_transform, DataPool::GetFont(ui_font_family), "ui_supply_menu_text");
+	Label* text2 = new Label("WAS MOECHTEST DU ANFORDERN?", ui_font_color, ui_supply_menu_text2_transform, DataPool::GetFont(ui_font_family), "ui_supply_menu_text2");
 	Panel* left_option = new Panel(ui_choice_field_color, Transform(ui_left_choice_field_position, ui_choice_field_size), Type::Rectangle, "ui_supply_menu_left_choice_field");
 	Label* left_option_text = new Label("SOLDATEN", ui_font_color, ui_choice_field_text_transform, DataPool::GetFont(ui_font_family), "ui_supply_menu_left_choice_text");
 	left_option->AddChildObject(left_option_text);
@@ -132,6 +133,7 @@ void UILayer::ActivateSupplyMenuUI() {
 	right_option->AddChildObject(right_option_button);
 
 	supply_menu_background->AddChildObject(text);
+	supply_menu_background->AddChildObject(text2);
 	supply_menu_background->AddChildObject(left_option);
 	supply_menu_background->AddChildObject(right_option);
 
