@@ -45,6 +45,7 @@ public:
 
 	WaveManager* waveManager = nullptr;
 
+	GameObject* CreateBullet(Layer* layer, GameObject* target, glm::vec2 startPos, glm::vec2 targetPos);
 private:
 	GameObject* active_character = nullptr;
 	GameObject* active_building = nullptr;

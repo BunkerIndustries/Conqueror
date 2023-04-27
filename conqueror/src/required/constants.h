@@ -32,7 +32,7 @@ inline glm::vec2 enemy_grid_startpos = glm::vec2(0.0f, 5.0f);
 // enemy behaviour 
 inline float min_enemy_waiting_time = 0.5f;
 inline float max_enemy_waiting_time = 2.0f;
-inline float enemy_movement_speed = 1.0f;
+inline float enemy_movement_speed = 1.5f;
 inline uint8_t max_enemy_lock_target_tries = 3;
 inline glm::vec2 enemy_scale = glm::vec2(0.7f, 1.0f);
 inline uint8_t enemy_random_movement_sum = 5;
@@ -43,17 +43,21 @@ inline float enemy_spawn_y_position = 15.0f;
 inline float enemy_spawn_random_x_radius = 5.0f;
 
 // character 
-inline float soldier_movement_speed = 1.2f;
+inline float soldier_movement_speed = 1.7f;
 inline float medic_movement_speed = 1.4f;
 inline float engineer_movement_speed = 0.9f;
 inline glm::vec2 character_scale = glm::vec2(0.9f, 1.2f);	// probably temporary
 
+//bullet
+inline float bullet_speed = 10.0f;
+inline glm::vec2 bullet_scale = glm::vec2(0.5f, 1.0f);	// probably temporary
+
 //soldier behaviour 
-inline float min_soldier_shoot_waiting_time = 0.5f;
-inline float max_soldier_shoot_waiting_time = 1.5f;
+inline float min_soldier_shoot_waiting_time = 0.2f;
+inline float max_soldier_shoot_waiting_time = 0.4f;
 inline uint8_t max_soldier_lock_target_tries = 2;
 inline uint8_t soldier_miss_points = 1;
-inline glm::vec2 soldier_spawn_pos = glm::vec2(-5.0f, -15.0f);
+inline glm::vec2 soldier_spawn_pos = glm::vec2(-5.0f, -5.0f);
 
 // stands (probabilities have to be choose_probability_sum in total)
 inline uint8_t choose_probability_sum = 100;
@@ -72,7 +76,7 @@ inline uint8_t hiding_hit_probability = 4;
 inline uint8_t artillerie_hit_probability = 6;
 
 // damage 
-inline uint8_t soldier_damage = 35;
+inline uint8_t soldier_damage = 0;
 inline uint8_t enemy_damage = 35;
 
 // health 
@@ -87,6 +91,8 @@ inline float min_inaccuracy = 0.8f;
 inline float max_inaccuracy = 1.4f;
 inline float trace_thickness = 0.3f;
 inline float trace_lasting = 0.15f;
+inline bool bulletDistanceMoreInaccuracy = true;
+inline float bulletInaccuracyMultiplicator = 10.0f;
 
 // node 
 inline glm::vec2 node_size = glm::vec2(0.5f, 0.5f);
@@ -123,7 +129,7 @@ inline float enemy_start_spawn_interval = 2.0f;
 inline float enemy_spawn_interval_gradient = 0.9f;
 
 // stocks
-inline unsigned int start_soldier_stock = 2;
+inline unsigned int start_soldier_stock = 30;
 inline uint8_t start_engineer_stock = 5;
 inline uint8_t start_medic_stock = 8;
 

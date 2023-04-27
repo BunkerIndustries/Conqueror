@@ -50,8 +50,7 @@ void MedicCharacter::OnUpdate() {
 	if (!healing_target->GetComponent<Movement>()) {
 		// go back 
 		going_back = true;
-		gameObject->GetComponent<Movement>()->target_position = medic_building->transform.position;
-		LOG_DEBUG("soldier to heal just died");
+		gameObject->GetComponent<Movement>()->SetTrackingPos(&medic_building->transform.position);
 		return;
 	}
 
@@ -67,9 +66,8 @@ void MedicCharacter::OnUpdate() {
 			healing = false;
 			going_back = true;
 			healing_target->GetComponent<Health>()->GetHealed();
-			gameObject->GetComponent<Movement>()->target_position = medic_building->transform.position;
+			gameObject->GetComponent<Movement>()->SetTrackingPos(&medic_building->transform.position);
 			gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->MedicLeft();
-			LOG_DEBUG("medic has finished healing");
 		}
 		dt_counter += Application::GetDT();
 	}

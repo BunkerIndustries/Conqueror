@@ -33,14 +33,14 @@ void WaveManager::OnUpdate() {
 				just_started = false; 
 				return;
 			}
-			gameScene->uiLayer->ActivateSupplyMenuUI();
+			//gameScene->uiLayer->ActivateSupplyMenuUI();
 		}
 		return;
 	}
 
 	if (global_dt_counter <= wave_duration) {
 		if (spawn_dt_counter >= spawn_interval) {
-			gameScene->enemyLayer->CreateEnemy("enemy", glm::vec2(RandomF(enemy_grid_startpos.x - enemy_spawn_random_x_radius, enemy_grid_startpos.x + enemy_spawn_random_x_radius), enemy_spawn_y_position));
+			//gameScene->enemyLayer->CreateEnemy("enemy", glm::vec2(RandomF(enemy_grid_startpos.x - enemy_spawn_random_x_radius, enemy_grid_startpos.x + enemy_spawn_random_x_radius), enemy_spawn_y_position));
 			spawn_dt_counter = 0.0f;
 		}
 		else {

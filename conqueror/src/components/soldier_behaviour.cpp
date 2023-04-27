@@ -41,7 +41,7 @@ void SoldierBehaviour::OnUpdate() {
 		if (this->stand != waiting_stand.stand) {
 
 			// if time is not over => increase dt-time-counter by dt
-			if (!(dt_counter >= time_to_wait)) {
+			if (dt_counter < time_to_wait) {
 				dt_counter += Application::GetDT();
 				//ld("dt_counter: {0} ; time_to_wait: {1}", dt_counter, time_to_wait);
 			}
@@ -85,7 +85,7 @@ void SoldierBehaviour::SoldierMove(GameObject* move_node) {
 	current_node = move_node->GetComponent<Node>();
 
 	// if the target node is the same it is already on or it is already occupied (position-check is needed because clicking a node twice with the same selected gameobject will make it unoccupied)
-	if (move_component->target_position == move_node->transform.position || current_node->is_occupied) return;
+	if (move_component->GetTargetPos() == move_node->transform.position || current_node->is_occupied) return;
 
 	// make the clicked node occupied and the recent unoccupied
 	current_node->is_occupied = true;
@@ -93,7 +93,7 @@ void SoldierBehaviour::SoldierMove(GameObject* move_node) {
 	old_node->GetComponent<Node>()->is_occupied = false;
 
 	// move the gameobject
-	move_component->target_position = move_node->transform.position;
+	move_component->SetTrackingPos(&move_node->transform.position);
 	this->target_position = move_node->transform.position;
 	travelling = true;
 
@@ -117,7 +117,7 @@ bool SoldierBehaviour::SoldierTryMoveToWaitingNode() {
 		if (!node->GetComponent<Node>()->is_occupied) {
 
 			// move the gameobject to the chosen waiting node 
-			gameObject->GetComponent<Movement>()->target_position = node->transform.position;
+			gameObject->GetComponent<Movement>()->SetTrackingPos(&node->transform.position);
 			this->target_position = node->transform.position;
 			node->GetComponent<Node>()->is_occupied = true;
 			this->stand = waiting_stand.stand;

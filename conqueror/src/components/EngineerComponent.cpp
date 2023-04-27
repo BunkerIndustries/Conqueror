@@ -34,7 +34,7 @@ EngineerCharacter::EngineerCharacter(Stand& stand)
 	engineer_building = gameScene->mapLayer->engineerBuilding;
 	building_node = ChooseBuildingNode(stand.stand);
 	building_node_position = building_node->transform.position + engineer_building_position_offset;
-	gameObject->GetComponent<Movement>()->target_position = building_node_position;
+	gameObject->GetComponent<Movement>()->SetTrackingPos(&building_node_position);
 
 	isBuilding = false;
 	going_back = false;
@@ -66,7 +66,7 @@ void EngineerCharacter::OnUpdate() {
 		if (dt_counter >= building_time) {
 			isBuilding = false;
 			going_back = true;
-			gameObject->GetComponent<Movement>()->target_position = engineer_building->transform.position;
+			gameObject->GetComponent<Movement>()->SetTrackingPos(&engineer_building->transform.position);
 		}
 		dt_counter += Application::GetDT();
 		return;

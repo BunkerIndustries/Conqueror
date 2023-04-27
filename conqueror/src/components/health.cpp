@@ -4,6 +4,7 @@
 #include "required/constants.h"
 #include "utils\Supply.h"
 
+
 Health::Health(float hp) 
 	:hp(hp)
 {
@@ -22,6 +23,11 @@ void Health::OnUpdate() {
 
 }
 
+/**
+ * \brief 
+ * \param damage 
+ * \return 
+ */
 bool Health::TakeDamage(float damage) {
 	if (this == nullptr) return true;
 	hp -= damage;
@@ -32,6 +38,12 @@ bool Health::TakeDamage(float damage) {
 			gameObject->GetComponent<SoldierBehaviour>()->FreeNode();
 			gameScene->uiLayer->DeactivateCharacterUI();
 			Supply::CheckForGameOver();
+		}
+		else if (gameObject->HasTag("enemy"))
+		{
+			if (gameObject->GetComponent<EnemyBehaviour>()->GetNode() != nullptr)
+				gameObject->GetComponent<EnemyBehaviour>()->GetNode()->GetComponent<Node>()->is_occupied = false;
+			Util::shootingTable.erase(Util::shootingTable.find(gameObject));
 		}
 		delete gameObject;
 		return true;

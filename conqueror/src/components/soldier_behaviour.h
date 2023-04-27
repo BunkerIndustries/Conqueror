@@ -18,21 +18,21 @@ public:
 	void MedicLeft();
 	bool ReceivingMedic();
 
-	bool on_spawn_pos;
+	bool on_spawn_pos = true;
 
 private:
-	float health;
+	float health = 0.0f;
 
-	bool travelling;
-	bool gets_healed;
+	bool travelling = false;
+	bool gets_healed = false;
 
 	bool SoldierTryMoveToWaitingNode();
 	void RestartTimer();
 
-	float dt_counter;
-	float time_to_wait;
+	float dt_counter = 0.0f;
+	float time_to_wait  = 0.0f;
 
-	glm::vec2 target_position;
+	glm::vec2 target_position = glm::vec2(0.0f);
 
 	std::vector<GameObject*>* stand = nullptr;
 	GameObject* old_node = nullptr;

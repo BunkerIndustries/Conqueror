@@ -13,14 +13,20 @@ public:
 
 	void Shoot();
 
-	void NullTarget()
-	{
-		target = nullptr;
-	}
+	//GameObject* GetTarget() const
+	//{
+	//	return target;
+	//}
+	//
+	//void NullTarget()
+	//{
+	//	target = nullptr;
+	//}
+
+	
 
 private:
-	bool LockTarget();
-
-	GameObject* target;
+	GameObject* LockTarget();
+	GameObject* GetTarget() const;
 	uint8_t hit_probability;
 };

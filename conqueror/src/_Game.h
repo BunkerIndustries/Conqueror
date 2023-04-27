@@ -24,6 +24,7 @@
 #include <random>
 
 //C Libraries
+#include <cmath>
 #include <stdio.h>
 #include <string.h>
 #include <dirent/include/dirent.h>
@@ -59,6 +60,8 @@
 
 //components
 #include "required/components.h"
+
+#include "utils/Util.h"
 
 
 #ifdef CORE_PLATFORM_WINDOWS

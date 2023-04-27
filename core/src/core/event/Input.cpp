@@ -86,12 +86,14 @@ namespace core
             if (mouseHoverID[0] != mouseHoverID[1])
             {
                 if (mouseHoverID[1] != 0) {
-                    GameObject* gameObject = dynamic_cast<GameObject*>(Core::GetObjectByID(mouseHoverID[1]));
+                    Object* object = Core::GetObjectByID(mouseHoverID[1]);
+                    GameObject* gameObject = dynamic_cast<GameObject*>(object);
                     if (gameObject)
 						Application::QueueEvents(new GameObjectHoverEndEvent(gameObject));
                 }
                 if (mouseHoverID[0] != 0) {
-                    GameObject* gameObject = dynamic_cast<GameObject*>(Core::GetObjectByID(mouseHoverID[0]));
+                    Object* object = Core::GetObjectByID(mouseHoverID[0]);
+                    GameObject* gameObject = dynamic_cast<GameObject*>(object);
                     if (gameObject)
 						Application::QueueEvents(new GameObjectHoverBeginEvent(gameObject));
                 }
