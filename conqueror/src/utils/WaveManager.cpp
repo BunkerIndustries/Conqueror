@@ -14,6 +14,8 @@ WaveManager::WaveManager(GameScene* gameScene)
 	cooldown_state = true;
 	just_started = true;
 
+	enemies_are_dead = true;
+
 	cooldown_duration = start_preparation_time * game_time_factor;
 	wave_duration = start_wave_duration * game_time_factor;
 	spawn_interval = enemy_start_spawn_interval * game_time_factor;
@@ -25,22 +27,22 @@ void WaveManager::OnUpdate() {
 	global_dt_counter += dt;
 
 	if (cooldown_state) {
-		if (global_dt_counter >= cooldown_duration) {
+		if ((global_dt_counter >= cooldown_duration)) {
 			LOG_DEBUG("cooldown over - wave state");
 			cooldown_state = false;
+			enemies_are_dead = false;
 			global_dt_counter = 0.0f;
 			if (just_started) {
 				just_started = false; 
 				return;
 			}
-			//gameScene->uiLayer->ActivateSupplyMenuUI();
 		}
 		return;
 	}
 
 	if (global_dt_counter <= wave_duration) {
 		if (spawn_dt_counter >= spawn_interval) {
-			//gameScene->enemyLayer->CreateEnemy("enemy", glm::vec2(RandomF(enemy_grid_startpos.x - enemy_spawn_random_x_radius, enemy_grid_startpos.x + enemy_spawn_random_x_radius), enemy_spawn_y_position));
+			gameScene->enemyLayer->CreateEnemy("enemy", glm::vec2(RandomF(enemy_grid_startpos.x - enemy_spawn_random_x_radius, enemy_grid_startpos.x + enemy_spawn_random_x_radius), enemy_spawn_y_position));
 			spawn_dt_counter = 0.0f;
 		}
 		else {
@@ -48,8 +50,10 @@ void WaveManager::OnUpdate() {
 		}
 	}
 	else {
+		if (!enemies_are_dead) return;
 		LOG_DEBUG("Wave over - cooldown state");
 		cooldown_state = true;
+		gameScene->uiLayer->ActivateSupplyMenuUI();
 		global_dt_counter = 0.0f;
 		wave_duration *= wave_length_gradient;
 		spawn_interval *= enemy_spawn_interval_gradient;
@@ -57,3 +61,8 @@ void WaveManager::OnUpdate() {
 	}
 }
 
+void WaveManager::CheckForEnemiesDead() {
+	if (gameScene->enemyLayer->GetGameObjectsByTag("enemy").size() > 1) return;
+
+	enemies_are_dead = true;
+}

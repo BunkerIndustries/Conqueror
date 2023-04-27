@@ -9,11 +9,12 @@ public:
 	~WaveManager() = default;
 
 	void OnUpdate();
-
+	void CheckForEnemiesDead();
 private:
 	GameScene* gameScene;
 
 	bool cooldown_state;
+	bool enemies_are_dead;
 	bool just_started;
 	float cooldown_duration;
 	float wave_duration;

@@ -67,7 +67,7 @@ void MedicCharacter::OnUpdate() {
 			going_back = true;
 			healing_target->GetComponent<Health>()->GetHealed();
 			gameObject->GetComponent<Movement>()->SetTrackingPos(&medic_building->transform.position);
-			gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->MedicLeft();
+			healing_target->GetComponent<SoldierBehaviour>()->MedicLeft();
 		}
 		dt_counter += Application::GetDT();
 	}

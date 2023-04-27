@@ -44,6 +44,8 @@ bool Health::TakeDamage(float damage) {
 			if (gameObject->GetComponent<EnemyBehaviour>()->GetNode() != nullptr)
 				gameObject->GetComponent<EnemyBehaviour>()->GetNode()->GetComponent<Node>()->is_occupied = false;
 			Util::shootingTable.erase(Util::shootingTable.find(gameObject));
+			
+			gameScene->waveManager->CheckForEnemiesDead();
 		}
 		delete gameObject;
 		return true;

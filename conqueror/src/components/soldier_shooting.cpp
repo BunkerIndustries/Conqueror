@@ -67,7 +67,7 @@ GameObject* SoldierShooting::LockTarget() {
 			break;
 		}
 	}
-	LOG_TRACE(row);
+	//LOG_TRACE(row);
 	for (int i = 0; i < enemy_grid_x; i++) {
 		if (enemy_stands[row][i]) {
 			enemies_in_row.push_back(enemy_stands[row][i]);
@@ -81,7 +81,7 @@ GameObject* SoldierShooting::LockTarget() {
 
 	// set random enemy in row as target and return true
 	target = enemies_in_row[RandomInt(0, enemies_in_row.size() - 1)];
-	ASSERT(target->HasTag("enemy"), "")
+	//ASSERT(target->HasTag("enemy"), "")
 	Util::shootingTable[target].push_back(this);
 
 	return target;
