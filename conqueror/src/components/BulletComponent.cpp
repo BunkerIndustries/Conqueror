@@ -23,7 +23,10 @@ void BulletComponent::OnUpdate()
 	gameObject->transform.rotation = Util::VectorAngle(movement->GetDirection().y, movement->GetDirection().x);
 	if (movement->IsArrived())
 	{
-		target->GetComponent<Health>()->TakeDamage(soldier_damage);
+		if (gameObject->transform.position == target->transform.position)
+		{
+			target->GetComponent<Health>()->TakeDamage(soldier_damage);
+		}
 		delete gameObject;
 	}
 
