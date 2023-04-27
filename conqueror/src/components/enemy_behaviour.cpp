@@ -33,12 +33,12 @@ void EnemyBehaviour::OnStart() {
 }
 
 void EnemyBehaviour::OnStop() {
-	// removes the gameobject from the array
-	for (size_t i = 0; i < enemy_grid_x; i++) {
-		if (enemy_stands[y_index][i] == gameObject) {
-			enemy_stands[y_index][i] = nullptr;
-		}
-	}
+	//// removes the gameobject from the array
+	//for (size_t i = 0; i < enemy_grid_x; i++) {
+	//	if (enemy_stands[y_index][i] == gameObject) {
+	//		enemy_stands[y_index][i] = nullptr;
+	//	}
+	//}
 	
 }
 
@@ -55,9 +55,9 @@ void EnemyBehaviour::OnUpdate() {
 			time_running = false;
 
 			
-			//if (y_index != enemy_grid_y - 1) {
-			//	ChoosePosAndMove();
-			//}
+			if (y_index != enemy_grid_y - 1) {
+				ChoosePosAndMove();
+			}
 			
 		}
 		else {
@@ -94,11 +94,10 @@ void EnemyBehaviour::OnEvent(Event& event)
 	EventDispatcher dispatcher(event);
 	dispatcher.dispatch<KeyPressedEvent>([this](KeyPressedEvent& e)
 	{
+			return false;
 		if (e.getKeyCode() == KEY_C)
 		{
-			if (y_index != enemy_grid_y - 1) {
-				ChoosePosAndMove();
-			}
+			
 		}
 		return false;
 	});
@@ -108,15 +107,15 @@ void EnemyBehaviour::OnEvent(Event& event)
 void EnemyBehaviour::ChoosePosAndMove() {
 
 	// first calculate random number between 0 and enemy_random_movement_sum to select the position the enemy should move to, based on their probabilities
-	uint8_t random = RandomInt(0, enemy_random_movement_sum);
+	uint32_t random = RandomInt(0, enemy_random_movement_sum);
 	
 	// if he is at the bottom of the grid, do nothing
 	if (y_index == enemy_grid_y - 1) return;
 
 	GameObject* move_node_go;
 
-	int8_t x_offset = 0;
-	int8_t y_offset;
+	int32_t x_offset = 0;
+	int32_t y_offset;
 
 	// calculates the probabilities for each move-possibility and sets the move_node_go to the randomly selected node
 	if (random <= enemy_move_left_probability && x_index != 0) {

@@ -78,7 +78,7 @@ namespace core
 		double fontScale = 1.0;
 		data->FontGeometry = msdf_atlas::FontGeometry(&data->Glyphs);
 		int glyphsLoaded = data->FontGeometry.loadCharset(font, fontScale, charset);
-		LOG_CORE_DEBUG("Loaded {0} glyphs from font (out of {1})", glyphsLoaded, charset.size());
+		LOG_CORE_DEBUG("Loaded {0} glyphs from font '" + fileString + "' (out of {1})", glyphsLoaded, charset.size());
 
 
 		double emSize = 40.0;

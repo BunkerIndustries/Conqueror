@@ -32,7 +32,7 @@ MedicCharacter::MedicCharacter(GameObject* medic_building)
 	dt_counter = 0.0f;
 	heal_time = 0.0f;
 
-	gameObject->GetComponent<Movement>()->target_position = healing_target_position;
+	gameObject->GetComponent<Movement>()->SetTargetPos(healing_target_position);
 }
 
 void MedicCharacter::OnUpdate() {

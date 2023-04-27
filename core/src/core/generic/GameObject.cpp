@@ -40,6 +40,7 @@ namespace core {
 
     GameObject::~GameObject()
     {
+        Application::GetInstance()->GameObjectDeleted(this);
         this->deleted = true;
         if (layer) {
             std::vector<GameObject*>::iterator it = std::find(layer->GetGameObjects().begin(), layer->GetGameObjects().end(), this);

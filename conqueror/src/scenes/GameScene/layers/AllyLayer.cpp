@@ -63,7 +63,7 @@ GameObject* AllyLayer::CreateMedic(glm::vec2 position) {
 
 GameObject* AllyLayer::CreateEngineer(glm::vec2 position, Stand stand) {
 	GameObject* character = new GameObject("engineer", Transform(position, character_scale));
-	character->AddComponent(new SpriteRenderer(glm::vec4(0.5f, 0.6f, 0.0f, 0.4f), Geometry::RECTANGLE));		// TODO: Change to sprite_path
+	character->AddComponent(new SpriteRenderer(glm::vec4(0.5f, 0.0f, 0.0f, 0.4f), Geometry::RECTANGLE));		// TODO: Change to sprite_path
 	character->AddComponent(new Movement(engineer_movement_speed));
 	character->AddComponent(new Health(engineer_health));
 	character->AddComponent(new EngineerCharacter(stand));
