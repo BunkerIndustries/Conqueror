@@ -25,7 +25,7 @@ public:
 
 	GameObject* CreateSoldier(glm::vec2 position);
 	GameObject* CreateMedic(glm::vec2 position);
-	GameObject* CreateEngineer(glm::vec2 position, Stand stand);
+	GameObject* CreateEngineer(glm::vec2 position, std::vector<GameObject*>& nodes);
 
 	GameObject* CreateMg(glm::vec2 mg_position);
 	GameObject* CreateArtillery(glm::vec2 artillery_position);

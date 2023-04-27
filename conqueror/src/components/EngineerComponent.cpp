@@ -6,8 +6,8 @@
 
 EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
 	: available_engineers(engineerCount) {
-	available_mgs = 0;
-	available_artillery = 0;
+	available_mgs = 1;
+	available_artillery = 1;
 }
 
 void EngineerBuilding::SendEngineer()
@@ -29,21 +29,21 @@ void EngineerBuilding::IncreaseArtilleryStock()
 	available_artillery++;
 }
 
-EngineerCharacter::EngineerCharacter(Stand& stand)
+EngineerCharacter::EngineerCharacter(std::vector<GameObject*>& nodes)
 {
 	engineer_building = gameScene->mapLayer->engineerBuilding;
-	building_node = ChooseBuildingNode(stand.stand);
+	building_node = ChooseBuildingNode();
 	building_node_position = building_node->transform.position + engineer_building_position_offset;
 	gameObject->GetComponent<Movement>()->SetTrackingPos(&building_node_position);
-
+	nodes = nodes;
 	isBuilding = false;
 	going_back = false;
 	dt_counter = 0.0f;
 }
 
-GameObject* EngineerCharacter::ChooseBuildingNode(std::vector<GameObject*>* nodes) {
+GameObject* EngineerCharacter::ChooseBuildingNode() {
 	std::vector<GameObject*> valid_nodes;
-	for (auto node : *nodes) {
+	for (auto node : nodes) {
 		if (!node->GetComponent<Node>()->is_occupied) valid_nodes.push_back(node);
 	}
 		

@@ -27,7 +27,7 @@ private:
 
 class EngineerCharacter : public Component {
 public:
-	EngineerCharacter(Stand& stand);
+	EngineerCharacter(std::vector<GameObject*>& nodes);
 	virtual ~EngineerCharacter() = default;
 
 	void OnStart() override { };
@@ -39,8 +39,9 @@ private:
 	GameObject* engineer_building;
 	GameObject* building_node;
 	glm::vec2 building_node_position;
+	std::vector<GameObject*> nodes;
 
-	GameObject* ChooseBuildingNode(std::vector<GameObject*>* nodes);
+	GameObject* ChooseBuildingNode();
 
 	bool isBuilding;
 	bool going_back;

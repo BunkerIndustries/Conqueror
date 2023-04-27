@@ -46,10 +46,19 @@ GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 	node_go->AddComponent(new SpriteRenderer(*node_stand.color, Geometry::RECTANGLE));
 	node_go->AddComponent(new Node(node_stand.stand));
 
-	if (node_stand.stand != waiting_stand.stand) node_go->AddTag("move_node");
-	else {
+	if (node_stand.stand == waiting_stand.stand) {
 		waiting_nodes.push_back(node_go);
 	}
+	else if (node_stand.stand == trench_stand.stand) {
+		trench_nodes.push_back(node_go);
+	}
+	else if (node_stand.stand == hiding_stand.stand) {
+		hiding_nodes.push_back(node_go);
+	}
+	else {
+		node_go->AddTag("move_node");
+	}
+
 	node_go->onlyLayerReceive = true;
 	AddGameObjectToLayer(node_go);
 

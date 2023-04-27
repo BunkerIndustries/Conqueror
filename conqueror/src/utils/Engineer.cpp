@@ -15,20 +15,26 @@ GameObject* Engineer::AddBuilding(Transform transform, uint32_t engineerCount)
 
 void Engineer::PlaceMG() {
 	bool nop = true;
-	for (size_t i = 0; i < trench_stand.stand->size(); i++) {
-		if (!trench_stand.stand->at(i)->GetComponent<Node>()->is_occupied) nop = false; break;
+	for (size_t i = 0; i < trench_nodes.size(); i++) {
+		if (!trench_nodes.at(i)->GetComponent<Node>()->is_occupied) {
+			nop = false; 
+			break;
+		}
 	}
 	if (nop) return;
 
-	gameScene->allyLayer->CreateEngineer(gameScene->mapLayer->engineerBuilding->transform.position, trench_stand);
+	gameScene->allyLayer->CreateEngineer(gameScene->mapLayer->engineerBuilding->transform.position, trench_nodes);
 }
 
 void Engineer::PlaceArtillerie() {
 	bool nop = true;
-	for (size_t i = 0; i < trench_stand.stand->size(); i++) {
-		if (!trench_stand.stand->at(i)->GetComponent<Node>()->is_occupied) nop = false; break;
+	for (size_t i = 0; i < hiding_nodes.size(); i++) {
+		if (!hiding_nodes.at(i)->GetComponent<Node>()->is_occupied) {
+			nop = false; 
+			break;
+		}
 	}
 	if (nop) return;
 
-	gameScene->allyLayer->CreateEngineer(gameScene->mapLayer->engineerBuilding->transform.position, hiding_stand);
+	gameScene->allyLayer->CreateEngineer(gameScene->mapLayer->engineerBuilding->transform.position, hiding_nodes);
 }
