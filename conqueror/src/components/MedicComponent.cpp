@@ -26,12 +26,14 @@ MedicCharacter::MedicCharacter(GameObject* medic_building)
 	:medic_building(medic_building)
 {
 	healing_target = gameScene->GetActiveCharacter();
-	healing_target_position = gameScene->GetActiveCharacter()->transform.position + medic_healing_position_offset;
+	healing_target_position = healing_target->transform.position + medic_healing_position_offset;
 	healing = false;
 	going_back = false;
 	dt_counter = 0.0f;
 	heal_time = 0.0f;
+}
 
+void MedicCharacter::OnStart() {
 	gameObject->GetComponent<Movement>()->SetTargetPos(healing_target_position);
 }
 
@@ -47,14 +49,15 @@ void MedicCharacter::OnUpdate() {
 	}
 
 	// if the soldier is already dead
-	if (!healing_target->GetComponent<Movement>()) {
+	if (!healing_target->GetComponent<SoldierBehaviour>()) {
 		// go back 
+		LOG_DEBUG("soldier to heal just died");
 		going_back = true;
 		gameObject->GetComponent<Movement>()->SetTrackingPos(&medic_building->transform.position);
 		return;
 	}
 
-	if ((gameObject->transform.position != healing_target_position) || going_back) LOG_DEBUG("medic on the way"); return;	// if he has not arrived yet or is going back
+	if ((gameObject->transform.position != healing_target_position) || going_back) return;	// if he has not arrived yet or is going back
 	if (!healing) {	// if he arrived and is not healing already
 		LOG_DEBUG("medic just arrived at soldier to heal");
 		healing = true;
@@ -63,6 +66,7 @@ void MedicCharacter::OnUpdate() {
 	else if (healing) {
 		if (dt_counter >= heal_time) {
 			// healing is over
+			LOG_DEBUG("medic just finished healing");
 			healing = false;
 			going_back = true;
 			healing_target->GetComponent<Health>()->GetHealed();

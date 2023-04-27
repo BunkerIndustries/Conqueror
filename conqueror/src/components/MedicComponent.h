@@ -23,7 +23,7 @@ public:
 	MedicCharacter(GameObject* medic_building);
 	virtual ~MedicCharacter() = default;
 
-	void OnStart() override { };
+	void OnStart() override;
 	void OnStop() override { };
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};

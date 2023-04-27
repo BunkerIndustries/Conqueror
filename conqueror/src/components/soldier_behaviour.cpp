@@ -77,7 +77,7 @@ void SoldierBehaviour::OnUpdate() {
 }
 
 void SoldierBehaviour::SoldierMove(GameObject* move_node) {
-
+	gameObject->GetComponent<Health>()->TakeDamage(20.0f);
 	if (gets_healed) return;
 
 	// get the for this function required components

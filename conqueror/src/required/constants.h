@@ -111,7 +111,7 @@ inline float game_time_factor = 3.0f;
 // medics 
 //inline MedicManagement* medic_management = new MedicManagement(start_medic_stock);
 inline glm::vec2 medic_healing_position_offset = glm::vec2(0.5f, 0.0f);
-inline float waiting_time_per_hp = 0.02f;
+inline float waiting_time_per_hp = 0.03f;
 
 // engineer 
 //inline EngineerManagement* engineer_management = new EngineerManagement(start_engineer_stock);
