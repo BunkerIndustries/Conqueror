@@ -61,12 +61,12 @@ GameObject* AllyLayer::CreateMedic(glm::vec2 position) {
 	return character;
 }
 
-GameObject* AllyLayer::CreateEngineer(glm::vec2 position, std::vector<GameObject*>& nodes) {
+GameObject* AllyLayer::CreateEngineer(glm::vec2 position, bool mg_artillery) {
 	GameObject* character = new GameObject("engineer", Transform(position, character_scale));
 	character->AddComponent(new SpriteRenderer(glm::vec4(0.5f, 0.0f, 0.0f, 0.4f), Geometry::RECTANGLE));		// TODO: Change to sprite_path
 	character->AddComponent(new Movement(engineer_movement_speed));
 	character->AddComponent(new Health(engineer_health));
-	character->AddComponent(new EngineerCharacter(nodes));
+	character->AddComponent(new EngineerCharacter(mg_artillery));
 	character->AddTag("engineer");
 	character->onlyLayerReceive = true;
 	AddGameObjectToLayer(character);
@@ -85,7 +85,7 @@ GameObject* AllyLayer::CreateMg(glm::vec2 mg_position) {
 
 GameObject* AllyLayer::CreateArtillery(glm::vec2 artillery_position) {
 
-	GameObject* artillery = new GameObject("artillery", Transform(artillery_position, mg_size));
+	GameObject* artillery = new GameObject("artillery", Transform(artillery_position, artillery_size));
 	artillery->AddComponent(new SpriteRenderer(glm::vec4(0.5f, 0.1f, 0.5f, 1.0f), Geometry::RECTANGLE));
 	artillery->AddComponent(new ArtilleryComponent());
 	AddGameObjectToLayer(artillery);

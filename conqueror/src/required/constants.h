@@ -114,7 +114,7 @@ inline float waiting_time_per_hp = 0.03f;
 
 // engineer 
 inline glm::vec2 engineer_building_position_offset = glm::vec2(0.5f, 0.0f);
-inline float building_time = 0.8f;
+inline float building_time = 2.5f;
 
 // buildings
 inline glm::vec2 building_size = glm::vec2(3.0f, 3.3f);
@@ -132,19 +132,22 @@ inline uint8_t start_engineer_stock = 5;
 inline uint8_t start_medic_stock = 8;
 
 // mg
-inline glm::vec2 mg_size = glm::vec2(1.0f, 2.0f);
+inline glm::vec2 mg_size = glm::vec2(0.6f, 0.8f);
 inline unsigned int mg_magazin_size = 50;
 inline float mg_reload_time = 3.0f;
 inline float mg_shoot_interval = 0.05f;
 inline uint8_t mg_miss_points = 5;
 inline uint8_t mg_damage = 15;
+inline glm::vec2 mg_position_offset = glm::vec2(0.0f, 0.2f);
 
 // artillery
+inline glm::vec2 artillery_size = glm::vec2(0.8f, 1.0f); 
 inline float artillery_min_reload_time = 2.5f;
 inline float artillery_max_reload_time = 4.0f;
 inline float artillery_normal_damage = 70.0f;
 inline float artillery_critical_damage = 100.0f;
 inline glm::vec2 artillery_explosion_size = glm::vec2(3.0f, 3.0f);
+inline glm::vec2 artillery_position_offset = glm::vec2(0.0f, 0.2f);
 
 // ui fonts
 inline std::string ui_font_family = "PixeloidMono.ttf";

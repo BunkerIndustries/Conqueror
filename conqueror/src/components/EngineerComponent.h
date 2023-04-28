@@ -19,6 +19,12 @@ public:
 	void IncreaseMgStock();
 	void IncreaseArtilleryStock();
 
+	void DecreaseMgStock();
+	void DecreaseArtilleryStock();
+
+	uint8_t GetMgStock();
+	uint8_t GetArtilleryStock();
+
 private:
 	uint32_t available_engineers;
 	uint32_t available_mgs;
@@ -27,10 +33,10 @@ private:
 
 class EngineerCharacter : public Component {
 public:
-	EngineerCharacter(std::vector<GameObject*>& nodes);
+	EngineerCharacter(bool mg_artillery);
 	virtual ~EngineerCharacter() = default;
 
-	void OnStart() override { };
+	void OnStart() override;
 	void OnStop() override { };
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
@@ -39,7 +45,7 @@ private:
 	GameObject* engineer_building;
 	GameObject* building_node;
 	glm::vec2 building_node_position;
-	std::vector<GameObject*> nodes;
+	bool mg_artillery;
 
 	GameObject* ChooseBuildingNode();
 

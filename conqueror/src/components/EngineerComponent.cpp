@@ -3,6 +3,7 @@
 
 #include "required/constants.h"
 #include "required/functions.h"
+#include "required/stands.h"
 
 EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
 	: available_engineers(engineerCount) {
@@ -29,21 +30,41 @@ void EngineerBuilding::IncreaseArtilleryStock()
 	available_artillery++;
 }
 
-EngineerCharacter::EngineerCharacter(std::vector<GameObject*>& nodes)
+void EngineerBuilding::DecreaseMgStock() {
+	available_mgs--;
+}
+
+void EngineerBuilding::DecreaseArtilleryStock() {
+	available_artillery--;
+}
+
+uint8_t EngineerBuilding::GetMgStock() {
+	return available_mgs;
+}
+
+uint8_t EngineerBuilding::GetArtilleryStock() {
+	return available_artillery;
+}
+
+EngineerCharacter::EngineerCharacter(bool mg_artillery)
 {
 	engineer_building = gameScene->mapLayer->engineerBuilding;
+	this->mg_artillery = mg_artillery;
 	building_node = ChooseBuildingNode();
 	building_node_position = building_node->transform.position + engineer_building_position_offset;
-	gameObject->GetComponent<Movement>()->SetTrackingPos(&building_node_position);
-	nodes = nodes;
 	isBuilding = false;
 	going_back = false;
 	dt_counter = 0.0f;
 }
 
+void EngineerCharacter::OnStart() {
+	gameObject->GetComponent<Movement>()->SetTargetPos(building_node_position);
+}
+
 GameObject* EngineerCharacter::ChooseBuildingNode() {
+	std::vector<GameObject*> nodes = mg_artillery ? trench_nodes : hiding_nodes;
 	std::vector<GameObject*> valid_nodes;
-	for (auto node : nodes) {
+	for (auto& node : nodes) {
 		if (!node->GetComponent<Node>()->is_occupied) valid_nodes.push_back(node);
 	}
 		
@@ -67,19 +88,24 @@ void EngineerCharacter::OnUpdate() {
 			isBuilding = false;
 			going_back = true;
 			gameObject->GetComponent<Movement>()->SetTrackingPos(&engineer_building->transform.position);
+
+			if (mg_artillery) {
+				gameScene->allyLayer->CreateMg(building_node->transform.position + mg_position_offset);
+				gameScene->mapLayer->CreateNode(building_node->transform.position, mg_stand);
+				gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->DecreaseMgStock();
+
+			}
+			else {
+				gameScene->allyLayer->CreateArtillery(building_node->transform.position + artillery_position_offset);
+				gameScene->mapLayer->CreateNode(building_node->transform.position, artillerie_stand);
+				gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->DecreaseArtilleryStock();
+			}
+			delete building_node;
 		}
 		dt_counter += Application::GetDT();
 		return;
 	}
 	// if he arrived and is not building already
 	isBuilding = true;
-	gameScene->mapLayer->CreateNode(building_node->transform.position, mg_stand);
-	delete building_node;
-
-	if (building_node->GetComponent<Node>()->stand == trench_stand.stand) {
-		gameScene->allyLayer->CreateMg(building_node_position);
-	}
-	else if (building_node->GetComponent<Node>()->stand == waiting_stand.stand) {
-		gameScene->allyLayer->CreateArtillery(building_node_position);
-	}
+	dt_counter = 0.0f;
 }
