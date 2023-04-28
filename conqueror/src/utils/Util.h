@@ -7,6 +7,7 @@ public:
 	static int RadToDeg(float rad);
 	static int VectorAngle(float x, float y);
 
-	static std::unordered_map<GameObject*, std::vector<SoldierShooting*>> shootingTable;
+	static std::unordered_map<GameObject*, std::vector<SoldierShooting*>> soldierTable;
+	static std::unordered_map<GameObject*, std::vector<SoldierShooting*>> enemyTable;
 };
 

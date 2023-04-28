@@ -82,14 +82,14 @@ GameObject* SoldierShooting::LockTarget() {
 	// set random enemy in row as target and return true
 	target = enemies_in_row[RandomInt(0, enemies_in_row.size() - 1)];
 	ASSERT(target->HasTag("enemy"), "")
-	Util::shootingTable[target].push_back(this);
+	Util::soldierTable[target].push_back(this);
 
 	return target;
 }
 
 GameObject* SoldierShooting::GetTarget() const
 {
-	for (auto [key, val] : Util::shootingTable)
+	for (auto [key, val] : Util::soldierTable)
 	{
 		for (const SoldierShooting* ss : val)
 		{

@@ -26,6 +26,22 @@ public:
 		Application::ChangeScene(menuScene);
 	}
 
+	void GameObjectDeleted(GameObject* gameObject) override
+	{
+		if (gameObject->HasTag("enemy"))
+		{
+			for (size_t y = 0; y < enemy_grid_y; y++) {
+				for (size_t x = 0; x < enemy_grid_x; x++)
+				{
+					if (enemy_stands[y][x] == gameObject) {
+						enemy_stands[y][x] = nullptr;
+					}
+				}
+			}
+
+		}
+			
+	}
 };
 
 core::Application* core::CreateApplication() {

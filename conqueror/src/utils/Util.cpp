@@ -2,7 +2,8 @@
 #include "Util.h"
 
 #include <corecrt_math_defines.h>
-std::unordered_map<GameObject*, std::vector<SoldierShooting*>> Util::shootingTable;
+std::unordered_map<GameObject*, std::vector<SoldierShooting*>> Util::soldierTable;
+std::unordered_map<GameObject*, std::vector<SoldierShooting*>> Util::enemyTable;
 
 int Util::RadToDeg(float rad)
 {

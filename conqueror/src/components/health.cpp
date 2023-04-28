@@ -42,7 +42,7 @@ bool Health::TakeDamage(float damage) {
 		{
 			if (gameObject->GetComponent<EnemyBehaviour>()->GetNode() != nullptr)
 				gameObject->GetComponent<EnemyBehaviour>()->GetNode()->GetComponent<Node>()->is_occupied = false;
-			Util::shootingTable.erase(Util::shootingTable.find(gameObject));
+			Util::soldierTable.erase(Util::soldierTable.find(gameObject));
 		}
 		delete gameObject;
 		return true;

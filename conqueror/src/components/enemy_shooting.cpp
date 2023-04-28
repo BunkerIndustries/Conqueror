@@ -31,21 +31,20 @@ void EnemyShooting::Shoot() {
 		//LOG_DEBUG("LockTarget() returned true");
 
 
-		glm::vec2 end_point;
+		glm::vec2 distanceVec2 = target->transform.position - gameObject->transform.position;
+		float dist = sqrt(distanceVec2.x * distanceVec2.x + distanceVec2.y * distanceVec2.y);
 
-		int r = RandomInt(0, max_hit_probability);
-		if (r <= hit_probability) {
-			end_point = target->transform.position;
-			if (target->GetComponent<Health>()->TakeDamage(enemy_damage)) target = nullptr;
-		}
-		else {
-			end_point = glm::vec2(target->transform.position.x + RandomF(min_inaccuracy, max_inaccuracy) * RandomInt(-1, 1), target->transform.position.y);
-		}
-		
-		GameObject* trace = new GameObject("bullet",Transform());
-		trace->AddComponent(new LineRenderer(gameObject->transform.position, end_point, trace_color, trace_thickness, trace_lasting * game_time_factor));
-		gameScene->enemyLayer->AddGameObjectToLayer(trace);
+		glm::vec2 pos = target->transform.position;
+		float distScale = dist / bulletInaccuracyMultiplicator;
 
+		if (RandomInt(-dist, 2) < 0 && bulletDistanceMoreInaccuracy)
+		{
+			float randomX = RandomF(-1.0f, 1.0f) * distScale;
+			pos.x += randomX;
+		}
+
+
+		gameScene->CreateBullet(gameScene->enemyLayer, target, gameObject->transform.position, pos);
 
 		break;
 
@@ -59,7 +58,7 @@ bool EnemyShooting::LockTarget() {
 
 	// used for choosing the enemy-row randomly
 	int random = RandomInt(0, choose_probability_sum);
-	uint8_t prob = 0;
+	uint32_t prob = 0;
 
 	// choose 1 random row of the character stands
 	size_t i;
