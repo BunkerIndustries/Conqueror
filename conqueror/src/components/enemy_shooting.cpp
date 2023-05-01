@@ -25,9 +25,9 @@ void EnemyShooting::Shoot() {
 
 	// he has max max_enemy_lock_target_tries tries, if no character is found => cancel shooting
 	for (uint8_t i = 0; i < max_enemy_lock_target_tries; i++) {
-
+		GameObject* target = LockTarget();
 		// if a target is found => instantiate bullet and calulate whether it will hit or not, stop target-searching-process
-		if (!LockTarget()) continue;
+		if (!target) continue;
 		//LOG_DEBUG("LockTarget() returned true");
 
 
@@ -37,7 +37,7 @@ void EnemyShooting::Shoot() {
 		glm::vec2 pos = target->transform.position;
 		float distScale = dist / bulletInaccuracyMultiplicator;
 
-		if (RandomInt(-dist, 2) < 0 && bulletDistanceMoreInaccuracy)
+		if (RandomInt(hit_probability - 9, hit_probability + 1) < 0 && bulletDistanceMoreInaccuracy)
 		{
 			float randomX = RandomF(-1.0f, 1.0f) * distScale;
 			pos.x += randomX;
@@ -52,7 +52,7 @@ void EnemyShooting::Shoot() {
 }
 
 
-bool EnemyShooting::LockTarget() {
+GameObject* EnemyShooting::LockTarget() {
 
 	//std::vector<GameObject*>* chosen_stand;
 	//
@@ -85,6 +85,11 @@ bool EnemyShooting::LockTarget() {
 	//	return true;
 	//}
 
+	GameObject* target = GetTarget();
+	if (target) {
+		return target;
+	}
+
 	const std::vector<GameObject*>* chosen_stand = nullptr;
 
 	// Wähle eine zufällige Reihe aus den schießbaren Ständen
@@ -102,12 +107,25 @@ bool EnemyShooting::LockTarget() {
 
 	// Überprüfe, ob die gewählte Reihe Charaktere enthält
 	if (chosen_stand && chosen_stand->empty()) {
-		return false;
+		return nullptr;
 	}
 	
 	// Wähle zufällig einen Charakter in der gewählten Reihe als Ziel
 	target = chosen_stand->at(RandomInt(0, chosen_stand->size() - 1));
 	hit_probability = *shootable_stands[i].hit_probability;
-	return true;
+	Util::enemyTable[target].push_back(this);
+	return target;
 
+}
+
+GameObject* EnemyShooting::GetTarget() const
+{
+	for (auto [key, val] : Util::enemyTable)
+	{
+		for (const EnemyShooting* ss : val)
+		{
+			if (ss == this) return key;
+		}
+	}
+	return nullptr;
 }

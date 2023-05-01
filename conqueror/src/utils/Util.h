@@ -8,6 +8,6 @@ public:
 	static int VectorAngle(float x, float y);
 
 	static std::unordered_map<GameObject*, std::vector<SoldierShooting*>> soldierTable;
-	static std::unordered_map<GameObject*, std::vector<SoldierShooting*>> enemyTable;
+	static std::unordered_map<GameObject*, std::vector<EnemyShooting*>> enemyTable;
 };
 

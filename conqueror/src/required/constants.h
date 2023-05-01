@@ -74,7 +74,7 @@ inline uint8_t hiding_hit_probability = 4;
 inline uint8_t artillerie_hit_probability = 6;
 
 // damage 
-inline uint8_t soldier_damage = 0;
+inline uint8_t soldier_damage = 35;
 inline uint8_t enemy_damage = 35;
 
 // health 

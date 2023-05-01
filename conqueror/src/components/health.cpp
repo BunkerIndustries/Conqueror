@@ -36,6 +36,7 @@ bool Health::TakeDamage(float damage) {
 		if (gameObject->HasTag("soldier")) {
 			// get node and unoccupy it
 			gameObject->GetComponent<SoldierBehaviour>()->FreeNode();
+			Util::enemyTable.erase(Util::enemyTable.find(gameObject));
 			Supply::CheckForGameOver();
 		}
 		else if (gameObject->HasTag("enemy"))

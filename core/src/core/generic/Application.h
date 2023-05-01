@@ -78,7 +78,7 @@ namespace core {
 		static ImGuiLayer& GetImGuiLayer() { return *GetInstance()->imguiLayer; }
 		static LayerStack& GetLayerStack() { return GetInstance()->layerStack; }
 
-		virtual void DeletedGameObject(GameObject* gameObject) {};
+		virtual void GameObjectDeleted(GameObject* gameObject) {};
 	};
 
 	//defined by client
