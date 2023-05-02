@@ -1,5 +1,5 @@
 #include "_Game.h"
-#include "soldier_shooting.h"
+#include "SoldierShooting.h"
 #include "required/constants.h"
 #include "required/functions.h"
 #include "required/stands.h"
