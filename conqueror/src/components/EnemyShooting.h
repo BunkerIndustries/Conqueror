@@ -13,12 +13,8 @@ public:
 
 	void Shoot();
 
-	void NullTarget()
-	{
-		target = nullptr;
-	};
 private:
-	bool LockTarget();
-	GameObject* target = nullptr;
+	GameObject* LockTarget();
+	GameObject* GetTarget() const;
 	uint8_t hit_probability = 0;
 };

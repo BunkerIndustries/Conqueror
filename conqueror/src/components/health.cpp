@@ -37,13 +37,14 @@ bool Health::TakeDamage(float damage) {
 			// get node and unoccupy it
 			gameObject->GetComponent<SoldierBehaviour>()->FreeNode();
 			gameScene->uiLayer->DeactivateCharacterUI();
+			Util::enemyTable.erase(Util::enemyTable.find(gameObject));
 			Supply::CheckForGameOver();
 		}
 		else if (gameObject->HasTag("enemy"))
 		{
 			if (gameObject->GetComponent<EnemyBehaviour>()->GetNode() != nullptr)
 				gameObject->GetComponent<EnemyBehaviour>()->GetNode()->GetComponent<Node>()->is_occupied = false;
-			Util::shootingTable.erase(Util::shootingTable.find(gameObject));
+			Util::soldierTable.erase(Util::soldierTable.find(gameObject));
 			
 			gameScene->waveManager->CheckForEnemiesDead();
 		}

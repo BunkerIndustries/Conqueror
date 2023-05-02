@@ -25,7 +25,10 @@ void BulletComponent::OnUpdate()
 	{
 		if (gameObject->transform.position == target->transform.position)
 		{
-			target->GetComponent<Health>()->TakeDamage(soldier_damage);
+			if (target->HasTag("enemy"))
+				target->GetComponent<Health>()->TakeDamage(soldier_damage);
+			if (target->HasTag("soldier"))
+				target->GetComponent<Health>()->TakeDamage(enemy_damage);
 		}
 		delete gameObject;
 	}
