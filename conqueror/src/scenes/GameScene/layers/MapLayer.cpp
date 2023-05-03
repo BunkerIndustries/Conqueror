@@ -51,9 +51,11 @@ GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 	}
 	else if (node_stand.stand == trench_stand.stand) {
 		trench_nodes.push_back(node_go);
+		node_go->AddTag("move_node");
 	}
 	else if (node_stand.stand == hiding_stand.stand) {
 		hiding_nodes.push_back(node_go);
+		node_go->AddTag("move_node");
 	}
 	else {
 		node_go->AddTag("move_node");

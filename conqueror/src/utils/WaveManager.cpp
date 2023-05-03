@@ -27,7 +27,7 @@ void WaveManager::OnUpdate() {
 	global_dt_counter += dt;
 
 	if (cooldown_state) {
-		if ((global_dt_counter >= cooldown_duration)) {
+		if (global_dt_counter >= cooldown_duration) {
 			LOG_DEBUG("cooldown over - wave state");
 			cooldown_state = false;
 			enemies_are_dead = false;
