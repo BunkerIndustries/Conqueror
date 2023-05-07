@@ -7,11 +7,12 @@
 ArtilleryComponent::ArtilleryComponent(GameObject* own_node) 
 	:own_node(own_node->GetComponent<Node>())
 {
-
+	dt_counter = 0.0f;
 }
 
 void ArtilleryComponent::OnStart() {
-	reload_time = RandomF(artillery_min_reload_time, artillery_max_reload_time);
+	reload_time = RandomF(artillery_min_reload_time, artillery_max_reload_time) * game_time_factor;
+	LOG_DEBUG("reload_time: {0}", reload_time);
 }
 
 void ArtilleryComponent::OnStop() {
@@ -23,8 +24,6 @@ void ArtilleryComponent::OnUpdate() {
 	if (!own_node->contains_soldier) return;
 
 	dt_counter += Application::GetDT();
-
-	// TODO: random time
 	if (dt_counter >= reload_time) {
 		Shoot();
 		dt_counter = 0.0f;
@@ -38,10 +37,11 @@ void ArtilleryComponent::Shoot() {
 	uint8_t y = RandomInt(0, enemy_grid_y - 1);
 	GameObject* target_node = enemy_grid.at(x).at(y);
 
-	GameObject* nuclear_bomb_explosion = new GameObject("boom", Transform(target_node->transform.position, artillery_explosion_size), ProjectionMode::PERSPECTIVE);
+	GameObject* nuclear_bomb_explosion = new GameObject("bum", Transform(target_node->transform.position, artillery_explosion_size), ProjectionMode::PERSPECTIVE);
 	nuclear_bomb_explosion->AddComponent(new SpriteRenderer(glm::vec4(0.8f, 1.0f, 1.0f, 1.0f), Geometry::RECTANGLE));	// TODO: use sprite
+	gameScene->allyLayer->AddGameObjectToLayer(nuclear_bomb_explosion);
 	
-	glm::ivec2 top_left = glm::ivec2(x - 1, y + 1);
+	glm::ivec2 top_left = glm::ivec2(x - 1, y - 1);
 	// loops through a field that starts at the top left of the randomly chosen middle-node
 	for (uint8_t x = 0; x < 3; x++) {
 
@@ -50,7 +50,7 @@ void ArtilleryComponent::Shoot() {
 		for (uint8_t y = 0; y < 3; y++) {
 
 			// if out ob y-bounds
-			if (top_left.y < 0 || top_left.y + y > enemy_grid_y+1) continue;
+			if (top_left.y < 0 || top_left.y + y > enemy_grid_y - 1) continue;
 
 			// make damage to every gameobject in this field
 			GameObject* hit_enemy = enemy_grid[top_left.x + x][top_left.y + y];
@@ -65,5 +65,5 @@ void ArtilleryComponent::Shoot() {
 			}
 		}
 	}
-	reload_time = RandomF(artillery_min_reload_time, artillery_max_reload_time);
+	reload_time = RandomF(artillery_min_reload_time, artillery_max_reload_time) * game_time_factor;
 }

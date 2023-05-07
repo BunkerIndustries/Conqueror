@@ -51,6 +51,7 @@ EngineerCharacter::EngineerCharacter(bool mg_artillery)
 	engineer_building = gameScene->mapLayer->engineerBuilding;
 	this->mg_artillery = mg_artillery;
 	building_node = ChooseBuildingNode();
+	building_node->GetComponent<Node>()->is_occupied = true;
 	building_node_position = building_node->transform.position + engineer_building_position_offset;
 	isBuilding = false;
 	going_back = false;
