@@ -112,15 +112,12 @@ GameObject* MapLayer::CreateBuilding(Transform transform, std::string type) {
 
 	if (type == "medic") {
 		building->AddTag("medic_building");
-
-		building->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Buildings/buildings01.png"), 536.0f, 568.0f, 4.0f, 4.0f, glm::vec2(0, 0)));
-		building->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(0, 0));
+		building->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Buildings/med_tent.png"), 1.0f, Geometry::RECTANGLE));
 	}
 	else if (type == "engineer") {
 		building->AddTag("engineer_building");
 
-		building->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Buildings/buildings01.png"), 536.0f, 568.0f, 4.0f, 4.0f, glm::vec2(0, 0)));
-		building->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(0, 0));
+		building->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Buildings/engineer_tent.png"), 1.0f, Geometry::RECTANGLE));
 	}
 	else {
 		LOG_WARN("WARNING: probably no existing type given when creating a building");

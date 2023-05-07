@@ -139,6 +139,7 @@ void SoldierBehaviour::RestartTimer() {
 
 void SoldierBehaviour::FreeNode() {
 	current_node->is_occupied = false;
+	current_node->contains_soldier = false;
 	current_node = nullptr;
 }
 

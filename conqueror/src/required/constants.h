@@ -117,7 +117,7 @@ inline glm::vec2 engineer_building_position_offset = glm::vec2(0.5f, 0.0f);
 inline float building_time = 2.5f;
 
 // buildings
-inline glm::vec2 building_size = glm::vec2(3.0f, 3.3f);
+inline glm::vec2 building_size = glm::vec2(3.0f, 3.1f);
 
 // wave 
 inline float start_preparation_time = 4.0f;
