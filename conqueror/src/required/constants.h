@@ -168,8 +168,9 @@ inline glm::vec2 ui_building_position = glm::vec2(-0.8f, 0.0f);
 inline Transform ui_header_transform = Transform(glm::vec2(0.0f, 0.65f), glm::vec2(0.8f, 0.25f));
 inline Transform ui_header_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.25f, 0.7f));
 inline Transform ui_header_building_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.16f, 0.75f));
-inline Transform ui_first_button_transform = Transform(glm::vec2(0.0f, 0.1f), glm::vec2(0.7f, 0.15f));
-inline Transform ui_second_button_transform = Transform(glm::vec2(0.0f, -0.3f), glm::vec2(0.7f, 0.15f));
+inline Transform ui_character_icon_transform = Transform(glm::vec2(-0.7f, 0.1f), glm::vec2(0.2f, 0.2f));
+inline Transform ui_first_button_transform = Transform(glm::vec2(0.0f, -0.1f), glm::vec2(0.7f, 0.15f));
+inline Transform ui_second_button_transform = Transform(glm::vec2(0.0f, -0.4f), glm::vec2(0.7f, 0.15f));
 
 // supply menu ui color
 inline glm::vec4 ui_supply_menu_background_color = glm::vec4(0.5f, 0.5f, 0.5f, 0.6f);

@@ -36,11 +36,12 @@ void UILayer::ActivateSoldierUI() {
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_character_header");
 	// picturebox with picture of soldier
 	Label* name = new Label("SOLDAT", ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
+	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/"), Type::Rectangle);
 	Button* call_medic_button = new Button(ui_call_medic_button_color, ui_first_button_transform, Type::Rectangle, Medic::SendMedic, "ui_call_medic_button");
-	// add picturebox child object
 	header->AddChildObject(name);
 
 	character_background->AddChildObject(header);
+	character_background->AddChildObject(icon);
 	character_background->AddChildObject(call_medic_button);
 
 	AddUIObject(character_background, ProjectionMode::SCREEN);
@@ -52,10 +53,11 @@ void UILayer::ActivateMedicUI() {
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_character_header");
 	// picturebox with picture of medic
 	Label* name = new Label("ARZT", ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
-	// add picturebox child object
+	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/"), Type::Rectangle);
 	header->AddChildObject(name);
 
 	character_background->AddChildObject(header);
+	character_background->AddChildObject(icon);
 
 	AddUIObject(character_background, ProjectionMode::SCREEN);
 }
@@ -66,10 +68,11 @@ void UILayer::ActivateEngineerUI() {
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_character_header");
 	// picturebox with picture of medic
 	Label* name = new Label("MECHANIKER", ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
-	// add picturebox child object
+	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/"), Type::Rectangle);
 	header->AddChildObject(name);
 
 	character_background->AddChildObject(header);
+	character_background->AddChildObject(icon);
 
 	AddUIObject(character_background, ProjectionMode::SCREEN);
 }
