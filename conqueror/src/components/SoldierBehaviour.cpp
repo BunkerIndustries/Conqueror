@@ -70,6 +70,7 @@ void SoldierBehaviour::OnUpdate() {
 	else {
 		if (gameObject->transform.position == target_position) {
 			travelling = false;
+			current_node->contains_soldier = true;
 			this->stand->push_back(gameObject);
 			RestartTimer();
 		}
@@ -91,6 +92,7 @@ void SoldierBehaviour::SoldierMove(GameObject* move_node) {
 	current_node->is_occupied = true;
 
 	old_node->GetComponent<Node>()->is_occupied = false;
+	old_node->GetComponent<Node>()->contains_soldier = false;
 
 	// move the gameobject
 	move_component->SetTrackingPos(&move_node->transform.position);

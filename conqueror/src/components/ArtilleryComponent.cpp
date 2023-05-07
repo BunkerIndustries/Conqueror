@@ -4,7 +4,9 @@
 #include "required/constants.h"
 #include "required/functions.h"
 
-ArtilleryComponent::ArtilleryComponent() {
+ArtilleryComponent::ArtilleryComponent(GameObject* own_node) 
+	:own_node(own_node->GetComponent<Node>())
+{
 
 }
 
@@ -17,6 +19,9 @@ void ArtilleryComponent::OnStop() {
 }
 
 void ArtilleryComponent::OnUpdate() {
+
+	if (!own_node->contains_soldier) return;
+
 	dt_counter += Application::GetDT();
 
 	// TODO: random time

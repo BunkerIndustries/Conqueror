@@ -3,7 +3,7 @@
 
 class ArtilleryComponent : public Component {
 public:
-	ArtilleryComponent();
+	ArtilleryComponent(GameObject* own_node);
 	virtual ~ArtilleryComponent() = default;
 
 	void OnStart() override;
@@ -14,5 +14,7 @@ public:
 private:
 	float dt_counter;
 	float reload_time;
+	Node* own_node;
+
 	void Shoot();
 };

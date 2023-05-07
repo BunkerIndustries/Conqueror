@@ -27,8 +27,8 @@ public:
 	GameObject* CreateMedic(glm::vec2 position);
 	GameObject* CreateEngineer(glm::vec2 position, bool mg_artillery);
 
-	GameObject* CreateMg(glm::vec2 mg_position);
-	GameObject* CreateArtillery(glm::vec2 artillery_position);
+	GameObject* CreateMg(glm::vec2 mg_position, GameObject* mg_node);
+	GameObject* CreateArtillery(glm::vec2 artillery_position, GameObject* artillery_node);
 
 private:
 };

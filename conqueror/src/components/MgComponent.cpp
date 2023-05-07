@@ -4,8 +4,9 @@
 #include "required/functions.h"
 #include "required/stands.h"
 
-MgComponent::MgComponent() {
-
+MgComponent::MgComponent(GameObject* own_node) 
+	:own_node(own_node->GetComponent<Node>())
+{
 }
 
 void MgComponent::OnStart() {
@@ -20,6 +21,8 @@ void MgComponent::OnStop() {
 
 void MgComponent::OnUpdate() {
 	
+	if (!own_node->contains_soldier) return;
+
 	dt_counter += Application::GetDT();
 
 	if (ammo <= 0) {

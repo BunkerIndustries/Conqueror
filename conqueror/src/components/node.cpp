@@ -5,11 +5,12 @@
 Node::Node(std::vector<GameObject*>* stand)
 	:stand(stand)
 {
-
+	is_occupied = false;
+	contains_soldier = false;
 }
 
 void Node::OnStart() {
-	is_occupied = false;
+	
 }
 
 void Node::OnStop() {

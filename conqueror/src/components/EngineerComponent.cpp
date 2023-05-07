@@ -90,14 +90,14 @@ void EngineerCharacter::OnUpdate() {
 			gameObject->GetComponent<Movement>()->SetTrackingPos(&engineer_building->transform.position);
 
 			if (mg_artillery) {
-				gameScene->allyLayer->CreateMg(building_node->transform.position + mg_position_offset);
-				gameScene->mapLayer->CreateNode(building_node->transform.position, mg_stand);
+				GameObject* mg_node = gameScene->mapLayer->CreateNode(building_node->transform.position, mg_stand);
+				gameScene->allyLayer->CreateMg(building_node->transform.position + mg_position_offset, mg_node);
 				gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->DecreaseMgStock();
 
 			}
 			else {
-				gameScene->allyLayer->CreateArtillery(building_node->transform.position + artillery_position_offset);
-				gameScene->mapLayer->CreateNode(building_node->transform.position, artillerie_stand);
+				GameObject* artillery_node = gameScene->mapLayer->CreateNode(building_node->transform.position, artillerie_stand);
+				gameScene->allyLayer->CreateArtillery(building_node->transform.position + artillery_position_offset, artillery_node);
 				gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->DecreaseArtilleryStock();
 			}
 			delete building_node;

@@ -12,6 +12,7 @@ public:
 	void OnEvent(Event& event) override {};
 
 	bool is_occupied;
+	bool contains_soldier;
 
 	std::vector<GameObject*>* stand;
 };
