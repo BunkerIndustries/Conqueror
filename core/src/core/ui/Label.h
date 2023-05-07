@@ -15,7 +15,6 @@ namespace core
 
 	private:
 		std::string text;
-		glm::vec4 color;
 		Shr<Font> font;
 	};
 }

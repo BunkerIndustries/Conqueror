@@ -7,7 +7,7 @@
 namespace core
 {
 	Label::Label(std::string text, glm::vec4 color, const Transform& transform, const Shr<Font>& font, std::string name)
-		: UIObject(name, transform), text(text), color(color), font(font)
+		: UIObject(name, transform, color), text(text), font(font)
 	{
 	}
 
