@@ -18,7 +18,7 @@ namespace core
 	public:
 		
 
-		UIObject(std::string name, const Transform& transform);
+		UIObject(std::string name, const Transform& transform, glm::vec4 color);
 		virtual ~UIObject() override;
 
 
@@ -32,12 +32,17 @@ namespace core
 
 		UIObject* GetParentObject() const;
 		std::vector<UIObject*>& GetChildObjects();
+
+		glm::vec4 GetColor() const;
+		void SetColor(glm::vec4 color);
 		
 	protected:
 
 		glm::vec2 globalPos;
 		glm::vec2 globalScale;
 		ProjectionMode mode;
+
+		glm::vec4 color;
 
 		UIObject* parent = nullptr;
 		std::vector<UIObject*> childOjects;

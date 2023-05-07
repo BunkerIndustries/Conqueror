@@ -5,8 +5,8 @@
 
 namespace core
 {
-	UIObject::UIObject(std::string name, const Transform& transform)
-		: Object(name, transform) { }
+	UIObject::UIObject(std::string name, const Transform& transform, glm::vec4 color)
+		: Object(name, transform), color(color), globalPos(glm::vec2(0.0f)), globalScale(glm::vec2(0.0f)) { }
 
 	UIObject::~UIObject() { }
 
@@ -49,6 +49,16 @@ namespace core
 	std::vector<UIObject*>& UIObject::GetChildObjects()
 	{
 		return childOjects;
+	}
+
+	glm::vec4 UIObject::GetColor() const
+	{
+		return color;
+	}
+
+	void UIObject::SetColor(glm::vec4 color)
+	{
+		this->color = color;
 	}
 
 	void UIObject::CalculateGlobalCoords()

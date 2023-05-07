@@ -18,7 +18,6 @@ namespace core
 		void Render(core_id idToRender) override;
 
 	private:
-		glm::vec4 color;
 		Type type;
 		ButtonEventCallbackFunction buttonEventFunction;
 	};

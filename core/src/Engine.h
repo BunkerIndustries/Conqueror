@@ -33,6 +33,7 @@
 #include "core/ui/Panel.h"
 #include "core/ui/Label.h"
 #include "core/ui/Button.h"
+#include "core/ui/PictureBox.h"
 
 #include "core/utils/Log.h"
 #include "core/utils/Utils.h"
