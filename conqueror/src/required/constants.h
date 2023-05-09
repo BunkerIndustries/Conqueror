@@ -162,10 +162,10 @@ inline glm::vec4 ui_place_mg_button_color = glm::vec4(0.2f, 0.5f, 0.5f, 0.8f);
 inline glm::vec4 ui_place_artillerie_button_color = glm::vec4(0.1f, 0.4f, 0.4f, 0.8f);
 
 // character and building ui transform
-inline glm::vec2 ui_background_size = glm::vec2(0.3f, 0.6f);
-inline glm::vec2 ui_character_position = glm::vec2(0.8f, 0.0f);
+inline glm::vec2 ui_background_size = glm::vec2(0.4f, 0.6f);
+inline glm::vec2 ui_character_position = glm::vec2(0.7f, 0.0f);
 inline glm::vec2 ui_building_position = glm::vec2(-0.8f, 0.0f);
-inline Transform ui_header_transform = Transform(glm::vec2(0.0f, 0.65f), glm::vec2(0.8f, 0.25f));
+inline Transform ui_header_transform = Transform(glm::vec2(0.1f, 0.65f), glm::vec2(0.8f, 0.25f));
 inline Transform ui_header_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.25f, 0.7f));
 inline Transform ui_header_building_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.16f, 0.75f));
 inline Transform ui_character_icon_transform = Transform(glm::vec2(-0.7f, 0.1f), glm::vec2(0.2f, 0.2f));

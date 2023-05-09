@@ -36,7 +36,7 @@ void UILayer::ActivateSoldierUI() {
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_character_header");
 	// picturebox with picture of soldier
 	Label* name = new Label("SOLDAT", ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
-	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/"), Type::Rectangle);
+	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
 	Button* call_medic_button = new Button(ui_call_medic_button_color, ui_first_button_transform, Type::Rectangle, Medic::SendMedic, "ui_call_medic_button");
 	header->AddChildObject(name);
 
@@ -53,7 +53,7 @@ void UILayer::ActivateMedicUI() {
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_character_header");
 	// picturebox with picture of medic
 	Label* name = new Label("ARZT", ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
-	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/"), Type::Rectangle);
+	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/med_head.png"), Type::Rectangle);
 	header->AddChildObject(name);
 
 	character_background->AddChildObject(header);
@@ -68,7 +68,7 @@ void UILayer::ActivateEngineerUI() {
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_character_header");
 	// picturebox with picture of medic
 	Label* name = new Label("MECHANIKER", ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
-	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/"), Type::Rectangle);
+	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/engineer_head.png"), Type::Rectangle);
 	header->AddChildObject(name);
 
 	character_background->AddChildObject(header);
