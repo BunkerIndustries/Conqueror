@@ -38,7 +38,8 @@ void AllyLayer::Update(const float dt)
 
 GameObject* AllyLayer::CreateSoldier(glm::vec2 position) {
 	GameObject* character = new GameObject("soldier", Transform(position, character_scale));
-	character->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f), Geometry::RECTANGLE));		// TODO: Change to sprite_path
+	character->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("/Anims/Soldier/soldier_walk.png"), 92.0f, 300.0f, 16.0f, 16.0f, glm::vec2(0, 0)));
+	character->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(3, 0));
 	character->AddComponent(new Movement(soldier_movement_speed));
 	character->AddComponent(new Health(soldier_health));
 	character->AddComponent(new SoldierBehaviour());

@@ -19,7 +19,7 @@ namespace core
 		texcoords[1] = { (spriteWidth * (selectedSprite.x + 1) + paddingWidth) / textureWidth, (spriteHeight * selectedSprite.y - paddingHeight) / textureHeight };
 		texcoords[2] = { (spriteWidth * (selectedSprite.x + 1) + paddingWidth) / textureWidth, (spriteHeight * (selectedSprite.y + 1) - paddingHeight) / textureHeight };
 		texcoords[3] = { (spriteWidth * selectedSprite.x + paddingWidth) / textureWidth, (spriteHeight * (selectedSprite.y + 1) - paddingHeight) / textureHeight };
-	
+
 		// this fixes the unknown offset
 		for (int i = 0; i < 4; i++)
 		{
