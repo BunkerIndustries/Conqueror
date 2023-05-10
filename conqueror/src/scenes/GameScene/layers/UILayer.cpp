@@ -38,6 +38,8 @@ void UILayer::ActivateSoldierUI() {
 	Label* name = new Label("SOLDAT", ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
 	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
 	Button* call_medic_button = new Button(ui_call_medic_button_color, ui_first_button_transform, Type::Rectangle, Medic::SendMedic, "ui_call_medic_button");
+	PictureBox* button_pb = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/medic_button.png"), Type::Rectangle);
+	call_medic_button->AddChildObject(button_pb);
 	header->AddChildObject(name);
 
 	character_background->AddChildObject(header);
@@ -98,8 +100,11 @@ void UILayer::ActivateEngineerBuildingUI() {
 	// picturebox with picture of medic-bulding
 	Label* name = new Label("MECHANIKER", ui_font_color, ui_header_building_name_transform, DataPool::GetFont(ui_font_family), "ui_buildling_name");
 	Button* place_mg_button = new Button(ui_place_mg_button_color, ui_first_button_transform, Type::Rectangle, Engineer::PlaceMG, "ui_place_mg_button");
+	PictureBox* button1_pb = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/mg_button.png"), Type::Rectangle);
 	Button* place_artillerie_button = new Button(ui_place_artillerie_button_color, ui_second_button_transform, Type::Rectangle, Engineer::PlaceArtillerie, "ui_place_mg_button");
-	// add picturebox child object
+	PictureBox* button2_pb = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/artillery_button.png"), Type::Rectangle);
+	place_mg_button->AddChildObject(button1_pb);
+	place_artillerie_button->AddChildObject(button2_pb);
 	header->AddChildObject(name);
 	
 	building_background->AddChildObject(header);
