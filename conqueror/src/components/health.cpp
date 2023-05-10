@@ -23,13 +23,7 @@ void Health::OnUpdate() {
 
 }
 
-/**
- * \brief 
- * \param damage 
- * \return 
- */
 bool Health::TakeDamage(float damage) {
-	if (this == nullptr) return true;
 	hp -= damage;
 	if (hp <= 0.0f) {
 		if (gameScene->GetActiveCharacter() == gameObject) gameScene->SetActiveCharacter(nullptr);
@@ -44,7 +38,12 @@ bool Health::TakeDamage(float damage) {
 		{
 			if (gameObject->GetComponent<EnemyBehaviour>()->GetNode() != nullptr)
 				gameObject->GetComponent<EnemyBehaviour>()->GetNode()->GetComponent<Node>()->is_occupied = false;
-			Util::soldierTable.erase(Util::soldierTable.find(gameObject));
+			if (Util::soldierTable.count(gameObject))
+			{
+				auto it = Util::soldierTable.find(gameObject);
+				ASSERT(!(*it).first->IsDeleted(), "")
+				Util::soldierTable.erase(it);
+			}
 			
 			gameScene->waveManager->CheckForEnemiesDead();
 		}

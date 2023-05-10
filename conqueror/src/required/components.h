@@ -10,3 +10,5 @@
 #include "components/SoldierBehaviour.h"
 #include "components/SoldierShooting.h"
 #include "components/BulletComponent.h"
+#include "components/MgComponent.h"
+#include "components/ArtilleryComponent.h"

@@ -4,10 +4,14 @@
 class Util
 {
 public:
-	static int RadToDeg(float rad);
-	static int VectorAngle(float x, float y);
+	static float RadToDeg(float rad);
+	static float DegToRad(float deg);
+	static int VectorAngle(glm::vec2 point);
+	static glm::vec2 VectorAngle(float angle);
 
 	static std::unordered_map<GameObject*, std::vector<SoldierShooting*>> soldierTable;
 	static std::unordered_map<GameObject*, std::vector<EnemyShooting*>> enemyTable;
+	static std::unordered_map<GameObject*, std::vector<MgComponent*>> mgTable;
+	static std::unordered_map<GameObject*, std::vector<ArtilleryComponent*>> artillerieTable;
 };
 
