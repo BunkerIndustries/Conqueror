@@ -39,11 +39,13 @@ void Movement::OnUpdate() {
 
 	if (move)
 		MoveTo(target_position, movement_speed);
+		
 }
 
 void Movement::SetTrackingPos(glm::vec2* pos)
 {
 	tracking_position = pos;
+	isArrived = false;
 }
 
 void Movement::SetTargetPos(glm::vec2 pos)
@@ -51,6 +53,7 @@ void Movement::SetTargetPos(glm::vec2 pos)
 	target_position = pos;
 	tracking_position = nullptr;
 	move = true;
+	isArrived = false;
 }
 
 void Movement::MoveTo(glm::vec2 target_pos, float speed) {
