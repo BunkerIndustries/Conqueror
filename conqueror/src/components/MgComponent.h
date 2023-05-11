@@ -21,5 +21,6 @@ private:
 
 	Node* own_node;
 
-	void LockTarget();
+	GameObject* LockTarget();
+	GameObject* GetTarget() const;
 };

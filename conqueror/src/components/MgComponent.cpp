@@ -45,53 +45,69 @@ void MgComponent::OnUpdate() {
 	// shoot
 	dt_counter = 0.0f;
 	ammo -= 1;
-	glm::vec2 end_point;
+	glm::vec2 distanceVec2 = target->transform.position - gameObject->transform.position;
+	float dist = sqrt(distanceVec2.x * distanceVec2.x + distanceVec2.y * distanceVec2.y);
 
-	int r = RandomInt(0, enemy_grid_y + mg_miss_points);
-	if (r <= hit_probability) {
-		end_point = target->transform.position;
-		if (target->GetComponent<Health>()->TakeDamage(mg_damage)) {
-			target = nullptr;
-		}
-	}
-	else {
-		end_point = glm::vec2(target->transform.position.x + RandomF(min_inaccuracy, max_inaccuracy) * RandomInt(-1, 1), target->transform.position.y);
+	glm::vec2 pos = target->transform.position;
+	float distScale = dist / bulletInaccuracyMultiplicator;
+
+	if (RandomInt(-dist, 2) < 0 && bulletDistanceMoreInaccuracy)
+	{
+		float randomX = RandomF(-1.0f, 1.0f) * distScale;
+		pos.x += randomX;
 	}
 
-	GameObject* trace = new GameObject("bullet", Transform());
-	trace->AddComponent(new LineRenderer(gameObject->transform.position, end_point, trace_color, trace_thickness, trace_lasting * game_time_factor));
-	gameScene->allyLayer->AddGameObjectToLayer(trace);
+	gameScene->CreateBullet(gameScene->allyLayer, target, gameObject->transform.position, pos);
 }
 
-void MgComponent::LockTarget() {
+GameObject* MgComponent::LockTarget() {
 
-	std::vector<GameObject*> enemy_row_vec;
+	// check if target already exists
+	GameObject* target = GetTarget();
+	if (target) {
+		return target;
+	}
 
-	// used for choosing the enemy-row randomly
-	int random = RandomInt(0, SumTo(enemy_grid_y));
-	size_t prob = 0;
-
-	// choose 1 random row of the enemy grid
-	int y_row = 0;
-	for (uint8_t i = 1; i <= enemy_grid_y; i++) {
+	// choose a random row of enemies
+	std::vector<GameObject*> enemies_in_row;
+	int row = RandomInt(0, SumTo(enemy_grid_y));
+	int prob = 0;
+	for (int i = 1; i <= enemy_grid_y; i++) {
 		prob += i;
-		if (random <= prob) {
-			y_row = i - 1;
+		if (row <= prob) {
+			row = i - 1;
 			hit_probability = i;
 			break;
 		}
 	}
-
-	// copy all enemies who are in the randomly chosen row into another vector
-	for (size_t i = 0; i < enemy_grid_x; i++) {
-		if (enemy_stands[y_row][i] != nullptr) enemy_row_vec.push_back(enemy_stands[y_row][i]);
+	//LOG_TRACE(row);
+	for (int i = 0; i < enemy_grid_x; i++) {
+		if (enemy_stands[row][i]) {
+			enemies_in_row.push_back(enemy_stands[row][i]);
+		}
 	}
 
-
-	// if this vector contains no enemies => no target is set, try unsuccessful
-	if (enemy_row_vec.size() == 0) {
-		return;
+	// if no enemies in row, return false
+	if (enemies_in_row.empty()) {
+		return nullptr;
 	}
-	// if it contains enemies => a target is set, try successful
-	target = enemy_row_vec.at(RandomInt(0, enemy_row_vec.size() - 1));
+
+	// set random enemy in row as target and return true
+	target = enemies_in_row[RandomInt(0, enemies_in_row.size() - 1)];
+	ASSERT(target->HasTag("enemy"), "")
+		Util::soldierTable[target].push_back(this);
+
+	return target;
+}
+
+GameObject* MgComponent::GetTarget() const
+{
+	for (auto [key, val] : Util::soldierTable)
+	{
+		for (const MgComponent* ss : val)
+		{
+			if (ss == this) return key;
+		}
+	}
+	return nullptr;
 }
