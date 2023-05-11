@@ -41,6 +41,7 @@ void WalkingAnimation::OnUpdate() {
     }
     else
     {
+
         std::cout << "arrived";
     }
 }
