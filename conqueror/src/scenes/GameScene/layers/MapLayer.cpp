@@ -66,6 +66,25 @@ GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 
 	return node_go;
 }
+/*
+void MapLayer::CreateGameMap(std::vector<std::pair<std::vector<glm::vec2>, Stand>>& stands_with_nodes, std::vector<std::pair<Transform, std::string>>&map_sprites) {
+	// for every stand (vector of its node-positions)
+	for (auto& node : stands_with_nodes) {
+
+		Stand s = node.second;
+
+		// for every node-position in that stand
+		for (auto& pos : node.first) {
+			// create a node belonging to the stand with the desired position
+			CreateNode(pos, s);
+		}
+	}
+	
+	for (auto& sprite : map_sprites) {
+		GameObject* sp = new GameObject("map_sprite", sprite.first);
+		sp->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture(sprite.second), 1.0f, Geometry::RECTANGLE));
+	}
+}*/
 
 void MapLayer::CreateGameMap(std::vector<std::pair<std::vector<glm::vec2>, Stand>>& stands_with_nodes) {
 	// for every stand (vector of its node-positions)
@@ -79,6 +98,7 @@ void MapLayer::CreateGameMap(std::vector<std::pair<std::vector<glm::vec2>, Stand
 			CreateNode(pos, s);
 		}
 	}
+	
 }
 
 // TODO: Change to vec2 2D-vector, cubes are placeholders for debugging and visualisation

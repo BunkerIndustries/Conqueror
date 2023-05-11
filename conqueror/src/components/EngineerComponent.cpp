@@ -7,8 +7,8 @@
 
 EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
 	: available_engineers(engineerCount) {
-	available_mgs = 1;
-	available_artillery = 1;
+	available_mgs = 0;
+	available_artillery = 0;
 }
 
 void EngineerBuilding::SendEngineer()

@@ -34,7 +34,7 @@ void Engineer::PlaceArtillerie() {
 	bool nop = true;
 	for (size_t i = 0; i < hiding_nodes.size(); i++) {
 		if (!hiding_nodes.at(i)->GetComponent<Node>()->is_occupied) {
-			nop = false; 
+			nop = false;
 			break;
 		}
 	}

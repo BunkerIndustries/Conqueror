@@ -56,3 +56,14 @@ inline std::vector<std::pair<std::vector<glm::vec2>, Stand>> standard_map = {
 		,hiding_stand
 	}
 };
+/*
+inline std::vector<std::pair<Transform, std::string>> standard_map_sprites = {
+	{
+		{
+			Transform(glm::vec2(), glm::vec2()),
+			Transform(glm::vec2(), glm::vec2()),
+			Transform(glm::vec2(), glm::vec2())
+		}
+		,"Map/walls_frontview.png"
+	}
+}*/
