@@ -7,6 +7,7 @@
 #include "components/ArtilleryComponent.h"
 #include "scenes/GameScene/GameScene.h"
 #include "required/stands.h"
+#include "components/WalkingAnimationComponent.h"
 
 
 AllyLayer::AllyLayer()
@@ -44,6 +45,7 @@ GameObject* AllyLayer::CreateSoldier(glm::vec2 position) {
 	character->AddComponent(new Health(soldier_health));
 	character->AddComponent(new SoldierBehaviour());
 	character->AddComponent(new SoldierShooting());
+	character->AddComponent(new WalkingAnimation(glm::vec2(3.0f, 1.0f), glm::vec2(5.0f, 1.0f), glm::vec2(3.0f, 0.0f), glm::vec2(5.0f, 0.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), 3, 6));
 	character->AddTag("soldier");
 	character->onlyLayerReceive = true;
 	AddGameObjectToLayer(character);
