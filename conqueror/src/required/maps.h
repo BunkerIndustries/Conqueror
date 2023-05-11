@@ -1,8 +1,10 @@
 #pragma once
 #include "_Game.h"
 #include "stands.h"
+#include "constants.h"
 
-inline std::vector<std::pair<std::vector<glm::vec2>, Stand>> standard_map = {
+inline std::vector<std::pair<std::vector<glm::vec2>, Stand>> standard_map = 
+{
 	{
 		{
 			glm::vec2(-7.0f, -8.0f),
@@ -56,14 +58,13 @@ inline std::vector<std::pair<std::vector<glm::vec2>, Stand>> standard_map = {
 		,hiding_stand
 	}
 };
-/*
-inline std::vector<std::pair<Transform, std::string>> standard_map_sprites = {
+
+inline std::vector<std::pair<std::vector<Transform>, std::string>> standard_map_sprites =
+{
 	{
 		{
-			Transform(glm::vec2(), glm::vec2()),
-			Transform(glm::vec2(), glm::vec2()),
-			Transform(glm::vec2(), glm::vec2())
+			
 		}
-		,"Map/walls_frontview.png"
+		,
 	}
-}*/
+};

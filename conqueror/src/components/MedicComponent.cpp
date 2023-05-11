@@ -22,6 +22,10 @@ void MedicBuilding::IncreaseAvailableMedics() {
 	available_medics++;
 }
 
+uint32_t MedicBuilding::GetAvailableMedics() {
+	return available_medics;
+}
+
 MedicCharacter::MedicCharacter(GameObject* medic_building)
 	:medic_building(medic_building)
 {

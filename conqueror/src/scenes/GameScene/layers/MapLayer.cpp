@@ -24,7 +24,7 @@ MapLayer::~MapLayer()
 
 void MapLayer::OnAttach()
 {
-	CreateGameMap(standard_map);
+	CreateGameMap(standard_map, standard_map_sprites);
 	CreateEnemyGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
 
 	Layer* layer = this;
@@ -56,6 +56,8 @@ GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 	else if (node_stand.stand == hiding_stand.stand) {
 		hiding_nodes.push_back(node_go);
 		node_go->AddTag("move_node");
+		CreateMapSprite("Map/walls_frontview.png", Transform(position + hiding_sprite_node_offset, hiding_sprite_size));
+
 	}
 	else {
 		node_go->AddTag("move_node");
@@ -66,40 +68,35 @@ GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 
 	return node_go;
 }
-/*
-void MapLayer::CreateGameMap(std::vector<std::pair<std::vector<glm::vec2>, Stand>>& stands_with_nodes, std::vector<std::pair<Transform, std::string>>&map_sprites) {
-	// for every stand (vector of its node-positions)
-	for (auto& node : stands_with_nodes) {
 
-		Stand s = node.second;
-
-		// for every node-position in that stand
-		for (auto& pos : node.first) {
-			// create a node belonging to the stand with the desired position
-			CreateNode(pos, s);
-		}
-	}
-	
-	for (auto& sprite : map_sprites) {
-		GameObject* sp = new GameObject("map_sprite", sprite.first);
-		sp->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture(sprite.second), 1.0f, Geometry::RECTANGLE));
-	}
-}*/
-
-void MapLayer::CreateGameMap(std::vector<std::pair<std::vector<glm::vec2>, Stand>>& stands_with_nodes) {
-	// for every stand (vector of its node-positions)
-	for (auto& node : stands_with_nodes) {
-
-		Stand s = node.second;
-
-		// for every node-position in that stand
-		for (auto& pos : node.first) {
-			// create a node belonging to the stand with the desired position
-			CreateNode(pos, s);
-		}
-	}
-	
+void MapLayer::CreateMapSprite(std::string sprite_path, Transform trans) {
+	GameObject* sp = new GameObject("map_sprite", trans);
+	sp->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture(sprite_path), 1.0f, Geometry::RECTANGLE));
+	this->AddGameObjectToLayer(sp);
 }
+
+void MapLayer::CreateGameMap(std::vector<std::pair<std::vector<glm::vec2>, Stand>>& stands_with_nodes, std::vector<std::pair<std::vector<Transform>, std::string>>& map_sprites) {
+	// for every stand (vector of its node-positions)
+	for (auto& node : stands_with_nodes) {
+
+		Stand s = node.second;
+
+		// for every node-position in that stand
+		for (auto& pos : node.first) {
+			// create a node belonging to the stand with the desired position
+			CreateNode(pos, s);
+		}
+	}
+	
+	for (auto& pair : map_sprites) {
+		for (auto& sprite: pair.first) {
+			GameObject* sp = new GameObject("map_sprite", sprite);
+			sp->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture(pair.second), 1.0f, Geometry::RECTANGLE));
+			this->AddGameObjectToLayer(sp);
+		}
+	}
+}
+
 
 // TODO: Change to vec2 2D-vector, cubes are placeholders for debugging and visualisation
 void MapLayer::CreateEnemyGrid(const uint8_t x_size, const uint8_t y_size, const float offset, const glm::vec2 mid_pos) {
