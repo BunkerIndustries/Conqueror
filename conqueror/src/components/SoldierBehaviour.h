@@ -25,6 +25,7 @@ private:
 
 	bool travelling = false;
 	bool gets_healed = false;
+	bool can_shoot = true;
 
 	bool SoldierTryMoveToWaitingNode();
 	void RestartTimer();

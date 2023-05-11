@@ -34,6 +34,8 @@ void SoldierBehaviour::OnStop() {
 
 void SoldierBehaviour::OnUpdate() {
 	
+	if (!can_shoot) return;
+
 	// if he's not walking
 	if (!travelling) {
 
@@ -71,6 +73,12 @@ void SoldierBehaviour::OnUpdate() {
 		if (gameObject->transform.position == target_position) {
 			travelling = false;
 			current_node->contains_soldier = true;
+			if (current_node->stand == mg_stand.stand || current_node->stand == artillerie_stand.stand) {
+				can_shoot = false;
+			}
+			else {
+				can_shoot = true;
+			}
 			this->stand->push_back(gameObject);
 			RestartTimer();
 		}
