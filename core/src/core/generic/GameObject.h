@@ -41,6 +41,7 @@ namespace core {
 
         Layer* GetLayer() const { return this->layer; }
         bool IsRunning() const { return running; }
+        bool IsDeleted() const { return deleted; }
 
         ProjectionMode GetProjectionMode() const
         {

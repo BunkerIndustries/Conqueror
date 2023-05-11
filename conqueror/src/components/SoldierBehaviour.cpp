@@ -58,7 +58,7 @@ void SoldierBehaviour::OnUpdate() {
 					}
 				}
 				else if(this->stand != bunker_stand.stand){
-					gameObject->GetComponent<SoldierShooting>()->Shoot();
+					//gameObject->GetComponent<SoldierShooting>()->Shoot();
 					RestartTimer();
 				}
 				

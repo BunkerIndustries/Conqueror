@@ -45,7 +45,7 @@ inline float enemy_spawn_random_x_radius = 5.0f;
 // character 
 inline float soldier_movement_speed = 1.2f;
 inline float medic_movement_speed = 1.4f;
-inline float engineer_movement_speed = 0.9f;
+inline float engineer_movement_speed = 3.9f;
 inline glm::vec2 character_scale = glm::vec2(0.9f, 1.2f);	// probably temporary
 
 //bullet
@@ -76,8 +76,8 @@ inline uint8_t hiding_hit_probability = 4;
 inline uint8_t artillerie_hit_probability = 6;
 
 // damage 
-inline uint8_t soldier_damage = 35;
-inline uint8_t enemy_damage = 35;
+inline uint8_t soldier_damage = 0;
+inline uint8_t enemy_damage = 0;
 
 // health 
 inline float enemy_health = 100.0f;
@@ -136,8 +136,9 @@ inline glm::vec2 mg_size = glm::vec2(0.6f, 0.8f);
 inline unsigned int mg_magazin_size = 50;
 inline float mg_reload_time = 3.0f;
 inline float mg_shoot_interval = 0.05f;
-inline uint8_t mg_miss_points = 5;
-inline uint8_t mg_damage = 15;
+inline float mg_miss_points = 5;
+inline float mg_damage = 15;
+inline float mg_inaccuracy = 10.0f;
 inline glm::vec2 mg_position_offset = glm::vec2(0.0f, 0.4f);
 
 // artillery

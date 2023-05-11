@@ -33,31 +33,53 @@ void MgComponent::OnUpdate() {
 		return;
 	}
 
-	if (target == nullptr) {
-		LockTarget();
-		return;
-	}
 
 	if (dt_counter < mg_shoot_interval * game_time_factor) {
 		return;
 	}
 
-	// shoot
 	dt_counter = 0.0f;
-	ammo -= 1;
-	glm::vec2 distanceVec2 = target->transform.position - gameObject->transform.position;
-	float dist = sqrt(distanceVec2.x * distanceVec2.x + distanceVec2.y * distanceVec2.y);
 
-	glm::vec2 pos = target->transform.position;
-	float distScale = dist / bulletInaccuracyMultiplicator;
+	
+	glm::vec2 pos = gameObject->transform.position;
 
-	if (RandomInt(-dist, 2) < 0 && bulletDistanceMoreInaccuracy)
+	float lengthLeft = glm::length(enemy_grid[0][0]->transform.position.x - pos);
+	float lengthRight = glm::length(enemy_grid[enemy_grid_x - 1][0]->transform.position.x - pos);
+	float length = lengthLeft < lengthRight ? lengthRight : lengthLeft;
+
+	float lengthToNearestEnemy = -1.0f;
+	float angleToAim = 0.0f;
+	for (auto vec : enemy_stands)
 	{
-		float randomX = RandomF(-1.0f, 1.0f) * distScale;
-		pos.x += randomX;
+		for (auto* gm : vec)
+		{
+			if (gm == nullptr)
+				continue;
+			
+			if (lengthToNearestEnemy < 0)
+			{
+				lengthToNearestEnemy = glm::length(gm->transform.position - pos);
+				angleToAim = Util::VectorAngle(gm->transform.position - pos);
+				continue;
+			}
+
+			if (glm::length(gm->transform.position - pos) < lengthToNearestEnemy)
+			{
+				lengthToNearestEnemy = glm::length(gm->transform.position - pos);
+				angleToAim = Util::VectorAngle(gm->transform.position - pos);
+			}
+		}
 	}
 
-	gameScene->CreateBullet(gameScene->allyLayer, target, gameObject->transform.position, pos);
+	if (lengthToNearestEnemy < 0)
+		return;
+
+	const float angle = RandomF(angleToAim - mg_inaccuracy, angleToAim + mg_inaccuracy);
+
+	glm::vec2 calcPos = Util::VectorAngle(angle);
+	ammo--;
+	gameScene->CreateBullet(gameScene->allyLayer, nullptr, gameObject->transform.position, gameObject->transform.position + calcPos * glm::vec2(length, length));
+
 }
 
 GameObject* MgComponent::LockTarget() {
@@ -94,20 +116,20 @@ GameObject* MgComponent::LockTarget() {
 
 	// set random enemy in row as target and return true
 	target = enemies_in_row[RandomInt(0, enemies_in_row.size() - 1)];
-	ASSERT(target->HasTag("enemy"), "")
-		Util::soldierTable[target].push_back(this);
+	ASSERT(target->HasTag("enemy"), "");
+		//Util::soldierTable[target].push_back(this);
 
 	return target;
 }
 
 GameObject* MgComponent::GetTarget() const
 {
-	for (auto [key, val] : Util::soldierTable)
-	{
-		for (const MgComponent* ss : val)
-		{
-			if (ss == this) return key;
-		}
-	}
+	//for (auto [key, val] : Util::soldierTable)
+	//{
+	//	for (const MgComponent* ss : val)
+	//	{
+	//		if (ss == this) return key;
+	//	}
+	//}
 	return nullptr;
 }
