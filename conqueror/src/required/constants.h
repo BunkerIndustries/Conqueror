@@ -111,7 +111,7 @@ inline glm::vec2 engineer_building_position_offset = glm::vec2(0.5f, 0.0f);
 inline float building_time = 2.5f;
 
 // buildings
-inline glm::vec2 building_size = glm::vec2(3.0f, 3.1f);
+inline glm::vec2 building_size = glm::vec2(3.0f, 3.0f);
 
 // wave 
 inline float start_preparation_time = 4.0f;
@@ -122,8 +122,8 @@ inline float enemy_spawn_interval_gradient = 0.9f;
 
 // stocks
 inline unsigned int start_soldier_stock = 5;
-inline uint8_t start_engineer_stock = 5;
-inline uint8_t start_medic_stock = 8;
+inline uint8_t start_engineer_stock = 3;
+inline uint8_t start_medic_stock = 3;
 
 // mg
 inline glm::vec2 mg_size = glm::vec2(0.6f, 0.8f);
@@ -157,13 +157,15 @@ inline glm::vec4 ui_place_mg_button_color = glm::vec4(0.2f, 0.5f, 0.5f, 0.8f);
 inline glm::vec4 ui_place_artillerie_button_color = glm::vec4(0.1f, 0.4f, 0.4f, 0.8f);
 
 // character and building ui transform
-inline glm::vec2 ui_background_size = glm::vec2(0.3f, 0.73f);
+inline glm::vec2 ui_building_background_size = glm::vec2(0.3f, 0.73f);
+inline glm::vec2 ui_background_size = glm::vec2(0.3f, 0.6f);
 inline glm::vec2 ui_character_position = glm::vec2(0.8f, 0.0f);
 inline glm::vec2 ui_building_position = glm::vec2(-0.8f, 0.0f);
 inline Transform ui_header_transform = Transform(glm::vec2(0.0f, 0.4f), glm::vec2(0.8f, 0.25f));
 inline Transform ui_header_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.25f, 0.7f));
 inline Transform ui_header_building_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.16f, 0.75f));
 inline Transform ui_character_icon_transform = Transform(glm::vec2(0.0f, 1.0f), glm::vec2(0.3f, 0.32f));
+inline Transform ui_building_icon_transform = Transform(glm::vec2(0.0f, 1.0f), glm::vec2(0.3f, 0.24f));
 inline Transform ui_first_button_transform = Transform(glm::vec2(0.0f, -0.1f), glm::vec2(0.5f, 0.22f));
 inline Transform ui_second_button_transform = Transform(glm::vec2(0.0f, -0.6f), glm::vec2(0.5f, 0.22f));
 inline Transform ui_building_count_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.1, 0.1));

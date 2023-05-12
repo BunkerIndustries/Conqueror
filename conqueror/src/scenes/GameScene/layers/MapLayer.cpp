@@ -46,21 +46,19 @@ GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 	node_go->AddComponent(new SpriteRenderer(*node_stand.color, Geometry::RECTANGLE));
 	node_go->AddComponent(new Node(node_stand.stand));
 
+	node_go->AddTag("move_node");
+
 	if (node_stand.stand == waiting_stand.stand) {
 		waiting_nodes.push_back(node_go);
+		node_go->RemoveTag("move_node");
 	}
 	else if (node_stand.stand == trench_stand.stand) {
 		trench_nodes.push_back(node_go);
-		node_go->AddTag("move_node");
 	}
 	else if (node_stand.stand == hiding_stand.stand) {
 		hiding_nodes.push_back(node_go);
-		node_go->AddTag("move_node");
 		CreateMapSprite("Map/walls_frontview.png", Transform(position + hiding_sprite_node_offset, hiding_sprite_size));
 
-	}
-	else {
-		node_go->AddTag("move_node");
 	}
 
 	node_go->onlyLayerReceive = true;

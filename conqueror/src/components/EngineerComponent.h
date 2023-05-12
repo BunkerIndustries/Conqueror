@@ -25,6 +25,8 @@ public:
 	uint8_t GetMgStock();
 	uint8_t GetArtilleryStock();
 
+	uint8_t GetAvailableEngineers();
+
 private:
 	uint32_t available_engineers;
 	uint32_t available_mgs;

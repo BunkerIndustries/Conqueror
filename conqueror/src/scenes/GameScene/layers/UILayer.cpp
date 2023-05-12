@@ -65,7 +65,7 @@ void UILayer::ActivateMedicUI() {
 }
 
 void UILayer::ActivateEngineerUI() {
-	character_background = new Panel(ui_character_background_color, Transform(ui_character_position, ui_background_size), Type::Rectangle, "ui_character_background");
+	character_background = new Panel(ui_character_background_color, Transform(ui_character_position, ui_building_background_size), Type::Rectangle, "ui_character_background");
 
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_character_header");
 	// picturebox with picture of medic
@@ -80,12 +80,12 @@ void UILayer::ActivateEngineerUI() {
 }
 
 void UILayer::ActivateMedicBuildlingUI() {
-	building_background = new Panel(ui_building_background_color, Transform(ui_building_position, ui_background_size), Type::Rectangle, "ui_building_background");
+	building_background = new Panel(ui_building_background_color, Transform(ui_building_position, ui_building_background_size), Type::Rectangle, "ui_building_background");
 
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_building_header");
 	// picturebox with picture of medic-bulding
 	Label* name = new Label("AERZTE", ui_font_color, ui_header_building_name_transform, DataPool::GetFont(ui_font_family), "ui_buildling_name");
-	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/med_icon_clear.png"), Type::Rectangle);
+	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_building_icon_transform, DataPool::GetTexture("UI/med_icon_clear.png"), Type::Rectangle);
 	header->AddChildObject(name);
 
 	Label* count = new Label(std::to_string(gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->GetAvailableMedics()) + " verfuegbar", ui_font_color, ui_building_count_transform, DataPool::GetFont(ui_font_family));
@@ -98,12 +98,12 @@ void UILayer::ActivateMedicBuildlingUI() {
 }
 
 void UILayer::ActivateEngineerBuildingUI() {
-	building_background = new Panel(ui_building_background_color, Transform(ui_building_position, ui_background_size), Type::Rectangle, "ui_building_background");
+	building_background = new Panel(ui_building_background_color, Transform(ui_building_position, ui_building_background_size), Type::Rectangle, "ui_building_background");
 
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_building_header");
 	// picturebox with picture of medic-bulding
 	Label* name = new Label("MECHANIKER", ui_font_color, ui_header_building_name_transform, DataPool::GetFont(ui_font_family), "ui_buildling_name");
-	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/engineer_icon_clear.png"), Type::Rectangle);
+	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_building_icon_transform, DataPool::GetTexture("UI/engineer_icon_clear.png"), Type::Rectangle);
 	Button* place_mg_button = new Button(ui_place_mg_button_color, ui_first_button_transform, Type::Rectangle, Engineer::PlaceMG, "ui_place_mg_button");
 	PictureBox* button1_pb = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/mg_button.png"), Type::Rectangle);
 	Button* place_artillerie_button = new Button(ui_place_artillerie_button_color, ui_second_button_transform, Type::Rectangle, Engineer::PlaceArtillerie, "ui_place_mg_button");
@@ -112,7 +112,7 @@ void UILayer::ActivateEngineerBuildingUI() {
 	place_artillerie_button->AddChildObject(button2_pb);
 	header->AddChildObject(name);
 
-	Label* count = new Label(std::to_string(gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->GetAvailableMedics()) + " verfuegbar", ui_font_color, ui_building_count_transform, DataPool::GetFont(ui_font_family));
+	Label* count = new Label(std::to_string(gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->GetAvailableEngineers()) + " verfuegbar", ui_font_color, ui_building_count_transform, DataPool::GetFont(ui_font_family));
 	
 	building_background->AddChildObject(header);
 	building_background->AddChildObject(place_mg_button);

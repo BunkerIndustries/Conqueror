@@ -46,6 +46,10 @@ uint8_t EngineerBuilding::GetArtilleryStock() {
 	return available_artillery;
 }
 
+uint8_t EngineerBuilding::GetAvailableEngineers() {
+	return available_engineers;
+}
+
 EngineerCharacter::EngineerCharacter(bool mg_artillery)
 {
 	engineer_building = gameScene->mapLayer->engineerBuilding;
