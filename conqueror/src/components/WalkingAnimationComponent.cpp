@@ -7,11 +7,11 @@
 #include "required/constants.h"
 
 WalkingAnimation::WalkingAnimation(){}
-WalkingAnimation::WalkingAnimation(glm::vec2 indexStartUp, glm::vec2 indexEndUp, glm::vec2 indexStartDown, glm::vec2 indexEndDown, glm::vec2 indexStartRight, glm::vec2 indexEndRight, glm::vec2 indexStartLeft, glm::vec2 indexEndLeft, int animationSpeed, int spriteSheetLength)
+WalkingAnimation::WalkingAnimation(glm::ivec2 indexStartUp, glm::ivec2 indexEndUp, glm::ivec2 indexStartDown, glm::ivec2 indexEndDown, glm::ivec2 indexStartRight, glm::ivec2 indexEndRight, glm::ivec2 indexStartLeft, glm::ivec2 indexEndLeft, int animationSpeed, int spriteSheetLength)
     : indexStartUp(indexStartUp), indexEndUp(indexEndUp), indexStartDown(indexStartDown), indexEndDown(indexEndDown), indexStartRight(indexStartRight), indexEndRight(indexEndRight), indexStartLeft(indexStartLeft), indexEndLeft(indexEndLeft), animationSpeed(animationSpeed), spriteSheetLength(spriteSheetLength) {}
 
 std::string WalkingAnimation::CalculateDirection() {
-    glm::vec2 direction = gameObject->GetComponent<Movement>()->GetDirection(); // Example direction vector
+    glm::ivec2 direction = gameObject->GetComponent<Movement>()->GetDirection(); // Example direction vector
 
     float angle = std::atan2(direction.y, direction.x); // Calculate the angle in radians
 
@@ -42,24 +42,23 @@ void WalkingAnimation::OnUpdate() {
     else
     {
 
-        std::cout << "arrived";
     }
 }
 
 
-void WalkingAnimation::Start(glm::vec2 indexStart, glm::vec2 indexEnd) {
-    static int animationLength = indexEnd[0] - indexStart[0] + 1;
-    std::cout << animationLength;
+void WalkingAnimation::Start(glm::ivec2 indexStart, glm::ivec2 indexEnd) {
+    static int animationLength = indexEnd.x - indexStart.x + 1;
     static int tex = 0;
-    static float x = 0.0f;
+    static float x = 0.01f;
     x += Application::GetDT() / animationSpeed;
 
     tex = (int)(x * 100);
 
-    if (tex % animationLength == 0)
+    if (tex % (animationLength + 1) == 0)
     {
         x = 0.01f;
+        tex = (int)(x * 100);
     }
-
-    gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(tex + indexStart[0], indexStart[1]));
+    LOG_DEBUG(indexStart.y);
+    gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::ivec2(tex + indexStart.x, indexStart.y));
 }

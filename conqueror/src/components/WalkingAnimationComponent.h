@@ -4,27 +4,27 @@
 class WalkingAnimation : public Component {
 public:
 	WalkingAnimation();
-	WalkingAnimation(glm::vec2 indexStartUp, glm::vec2 IndexEndUp, glm::vec2 IndexStartDown, glm::vec2 indexEndDown, glm::vec2 indexStartRight, glm::vec2 IndexEndRight, glm::vec2 IndexStartLeft, glm::vec2 indexEndLeft, int animationSpeed, int spriteSheetLength);
+	WalkingAnimation(glm::ivec2 indexStartUp, glm::ivec2 IndexEndUp, glm::ivec2 IndexStartDown, glm::ivec2 indexEndDown, glm::ivec2 indexStartRight, glm::ivec2 IndexEndRight, glm::ivec2 IndexStartLeft, glm::ivec2 indexEndLeft, int animationSpeed, int spriteSheetLength);
 	void OnStart() override { }
 	void OnStop() override { }
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
 	std::string CalculateDirection();
-	void Start(glm::vec2 indexStart, glm::vec2 indexEnd);
+	void Start(glm::ivec2 indexStart, glm::ivec2 indexEnd);
 
 
 private:
 	int max;
 	int animationSpeed;
 	int spriteSheetLength;
-	glm::vec2 indexStart;
-	glm::vec2 indexEnd;
-	glm::vec2 indexStartUp;
-	glm::vec2 indexEndUp;
-	glm::vec2 indexStartDown;
-	glm::vec2 indexEndDown;
-	glm::vec2 indexStartLeft;
-	glm::vec2 indexEndLeft;
-	glm::vec2 indexStartRight;
-	glm::vec2 indexEndRight;
+	glm::ivec2 indexStart;
+	glm::ivec2 indexEnd;
+	glm::ivec2 indexStartUp;
+	glm::ivec2 indexEndUp;
+	glm::ivec2 indexStartDown;
+	glm::ivec2 indexEndDown;
+	glm::ivec2 indexStartLeft;
+	glm::ivec2 indexEndLeft;
+	glm::ivec2 indexStartRight;
+	glm::ivec2 indexEndRight;
 };
