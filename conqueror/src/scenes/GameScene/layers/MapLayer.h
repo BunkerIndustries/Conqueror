@@ -26,6 +26,7 @@ public:
 	GameObject* medicBuilding;
 	GameObject* engineerBuilding;
 private:
-	void CreateGameMap(std::vector<std::pair<std::vector<glm::vec2>, Stand>>& stands_with_nodes);
+	void CreateGameMap(std::vector<std::pair<std::vector<glm::vec2>, Stand>>& stands_with_nodes, std::vector<std::pair<std::vector<Transform>, std::string>>& map_sprites);
 	void CreateEnemyGrid(const uint8_t x_size, const uint8_t y_size, const float offset, const glm::vec2 mid_pos);
+	void MapLayer::CreateMapSprite(std::string sprite_path, Transform trans);
 };

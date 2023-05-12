@@ -88,7 +88,10 @@ void UILayer::ActivateMedicBuildlingUI() {
 	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/med_icon_clear.png"), Type::Rectangle);
 	header->AddChildObject(name);
 
+	Label* count = new Label(std::to_string(gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->GetAvailableMedics()) + " verfuegbar", ui_font_color, ui_building_count_transform, DataPool::GetFont(ui_font_family));
+
 	building_background->AddChildObject(header);
+	building_background->AddChildObject(count);
 	building_background->AddChildObject(icon);
 
 	AddUIObject(building_background, ProjectionMode::SCREEN);
@@ -108,10 +111,13 @@ void UILayer::ActivateEngineerBuildingUI() {
 	place_mg_button->AddChildObject(button1_pb);
 	place_artillerie_button->AddChildObject(button2_pb);
 	header->AddChildObject(name);
+
+	Label* count = new Label(std::to_string(gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->GetAvailableMedics()) + " verfuegbar", ui_font_color, ui_building_count_transform, DataPool::GetFont(ui_font_family));
 	
 	building_background->AddChildObject(header);
 	building_background->AddChildObject(place_mg_button);
 	building_background->AddChildObject(place_artillerie_button);
+	building_background->AddChildObject(count);
 	building_background->AddChildObject(icon);
 
 	AddUIObject(building_background, ProjectionMode::SCREEN);

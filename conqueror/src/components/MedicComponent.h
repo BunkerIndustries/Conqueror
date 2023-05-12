@@ -14,6 +14,8 @@ public:
 	void SendMedic();
 	void IncreaseAvailableMedics();
 
+	uint32_t GetAvailableMedics();
+
 private:
 	uint32_t available_medics;
 };

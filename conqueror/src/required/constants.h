@@ -10,18 +10,12 @@ inline MenuScene* menuScene;
 inline std::vector<std::vector<GameObject*>> enemy_grid;
 
 // camera movement 
-inline float camera_scroll_speed = 15.0f;
+inline float camera_scroll_speed = 28.0f;
 inline float camera_move_speed = 2.0f;
 inline float min_camera_z_pos = 2.0f;
 inline float max_camera_z_pos = 15.0f;
 inline glm::vec2 min_camera_positions = glm::vec2(-7.0f, -5.0f);
 inline glm::vec2 max_camera_positions = glm::vec2(7.0f, 3.0f);
-
-// all sprite paths
-inline std::string soldier_sprite_path = "";
-inline std::string medic_sprite_path = "";
-inline std::string engineer_sprite_path = "";
-inline std::string enemy_sprite_path = "";
 
 // enemy grid 
 inline const int enemy_grid_x = 15;
@@ -154,7 +148,7 @@ inline glm::vec2 artillery_position_offset = glm::vec2(0.0f, 0.4f);
 inline std::string ui_font_family = "PixeloidMono.ttf";
 inline glm::vec4 ui_font_color = glm::vec4(1.0f, 1.0f, 1.0f, 0.8f);
 
-// character and building ui color
+// character ui color
 inline glm::vec4 ui_character_background_color = glm::vec4(0.2f, 0.2f, 0.2f, 0.6f);
 inline glm::vec4 ui_building_background_color = glm::vec4(0.15f, 0.15f, 0.15f, 0.6f);
 inline glm::vec4 ui_header_color = glm::vec4(0.1f, 0.1f, 0.1f, 0.6f);
@@ -163,7 +157,7 @@ inline glm::vec4 ui_place_mg_button_color = glm::vec4(0.2f, 0.5f, 0.5f, 0.8f);
 inline glm::vec4 ui_place_artillerie_button_color = glm::vec4(0.1f, 0.4f, 0.4f, 0.8f);
 
 // character and building ui transform
-inline glm::vec2 ui_background_size = glm::vec2(0.3f, 0.6f);
+inline glm::vec2 ui_background_size = glm::vec2(0.3f, 0.73f);
 inline glm::vec2 ui_character_position = glm::vec2(0.8f, 0.0f);
 inline glm::vec2 ui_building_position = glm::vec2(-0.8f, 0.0f);
 inline Transform ui_header_transform = Transform(glm::vec2(0.0f, 0.4f), glm::vec2(0.8f, 0.25f));
@@ -172,6 +166,7 @@ inline Transform ui_header_building_name_transform = Transform(glm::vec2(0.0f, 0
 inline Transform ui_character_icon_transform = Transform(glm::vec2(0.0f, 1.0f), glm::vec2(0.3f, 0.32f));
 inline Transform ui_first_button_transform = Transform(glm::vec2(0.0f, -0.1f), glm::vec2(0.5f, 0.22f));
 inline Transform ui_second_button_transform = Transform(glm::vec2(0.0f, -0.6f), glm::vec2(0.5f, 0.22f));
+inline Transform ui_building_count_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.1, 0.1));
 
 // supply menu ui color
 inline glm::vec4 ui_supply_menu_background_color = glm::vec4(0.5f, 0.5f, 0.5f, 0.6f);
@@ -194,5 +189,7 @@ inline uint8_t min_soldiers_choice = 2;
 inline uint8_t max_soldiers_choice = 5;
 inline uint8_t soldier_increase_by_wave = 3;
 
-// sprite stuff
+// map sprites
 inline glm::vec2 background_tile_size = glm::vec2(30.0f, 15.0f);
+inline glm::vec2 hiding_sprite_size = glm::vec2(1.6f, 0.85f);
+inline glm::vec2 hiding_sprite_node_offset = glm::vec2(0.0f, 0.8f);
