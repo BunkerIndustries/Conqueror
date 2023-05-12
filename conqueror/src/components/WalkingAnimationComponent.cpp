@@ -48,11 +48,11 @@ void WalkingAnimation::OnUpdate() {
 
 
 void WalkingAnimation::Start(glm::vec2 indexStart, glm::vec2 indexEnd) {
-    static int animationLength = indexEnd[0] - indexStart[0];
+    static int animationLength = indexEnd[0] - indexStart[0] + 1;
     std::cout << animationLength;
     static int tex = 0;
     static float x = 0.0f;
-    x += Application::GetDT() / animationLength;
+    x += Application::GetDT() / animationSpeed;
 
     tex = (int)(x * 100);
 
