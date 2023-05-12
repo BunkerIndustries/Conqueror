@@ -85,10 +85,11 @@ void UILayer::ActivateMedicBuildlingUI() {
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_building_header");
 	// picturebox with picture of medic-bulding
 	Label* name = new Label("AERZTE", ui_font_color, ui_header_building_name_transform, DataPool::GetFont(ui_font_family), "ui_buildling_name");
-	// add picturebox child object
+	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/med_icon_clear.png"), Type::Rectangle);
 	header->AddChildObject(name);
 
 	building_background->AddChildObject(header);
+	building_background->AddChildObject(icon);
 
 	AddUIObject(building_background, ProjectionMode::SCREEN);
 }
@@ -99,6 +100,7 @@ void UILayer::ActivateEngineerBuildingUI() {
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_building_header");
 	// picturebox with picture of medic-bulding
 	Label* name = new Label("MECHANIKER", ui_font_color, ui_header_building_name_transform, DataPool::GetFont(ui_font_family), "ui_buildling_name");
+	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/engineer_icon_clear.png"), Type::Rectangle);
 	Button* place_mg_button = new Button(ui_place_mg_button_color, ui_first_button_transform, Type::Rectangle, Engineer::PlaceMG, "ui_place_mg_button");
 	PictureBox* button1_pb = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/mg_button.png"), Type::Rectangle);
 	Button* place_artillerie_button = new Button(ui_place_artillerie_button_color, ui_second_button_transform, Type::Rectangle, Engineer::PlaceArtillerie, "ui_place_mg_button");
@@ -110,6 +112,7 @@ void UILayer::ActivateEngineerBuildingUI() {
 	building_background->AddChildObject(header);
 	building_background->AddChildObject(place_mg_button);
 	building_background->AddChildObject(place_artillerie_button);
+	building_background->AddChildObject(icon);
 
 	AddUIObject(building_background, ProjectionMode::SCREEN);
 }
