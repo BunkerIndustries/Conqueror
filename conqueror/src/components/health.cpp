@@ -47,6 +47,8 @@ bool Health::TakeDamage(float damage) {
 			
 			gameScene->waveManager->CheckForEnemiesDead();
 		}
+		// else if medic remove
+		// else if engineer remove
 		delete gameObject;
 		return true;
 	}

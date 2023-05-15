@@ -156,3 +156,7 @@ void SoldierBehaviour::MedicSent() { gets_healed = true; }
 void SoldierBehaviour::MedicLeft() { gets_healed = false; }
 
 bool SoldierBehaviour::ReceivingMedic() { return gets_healed; }
+
+std::vector<GameObject*>* SoldierBehaviour::GetStand() {
+	return stand;
+}
