@@ -28,7 +28,7 @@ inline float min_enemy_waiting_time = 0.5f;
 inline float max_enemy_waiting_time = 2.0f;
 inline float enemy_movement_speed = 1.0f;
 inline uint8_t max_enemy_lock_target_tries = 3;
-inline glm::vec2 enemy_scale = glm::vec2(0.7f, 1.0f);
+inline glm::vec2 enemy_scale = glm::vec2(2.0f, 1.6f);
 inline uint8_t enemy_random_movement_sum = 5;
 inline uint8_t enemy_move_left_probability = 1;
 inline uint8_t enemy_move_mid_probability = 3;
@@ -40,7 +40,7 @@ inline float enemy_spawn_random_x_radius = 5.0f;
 inline float soldier_movement_speed = 1.2f;
 inline float medic_movement_speed = 1.4f;
 inline float engineer_movement_speed = 3.9f;
-inline glm::vec2 character_scale = glm::vec2(0.9f, 1.2f);
+inline glm::vec2 character_scale = glm::vec2(1.3f, 1.6f);
 inline glm::vec2 dead_body_size = glm::vec2(1.6f, 1.4f);
 inline float dead_body_lasting_time = 6.0f;
 
@@ -83,7 +83,7 @@ inline float max_inaccuracy = 1.4f;
 inline bool bulletDistanceMoreInaccuracy = true;
 inline float bulletInaccuracyMultiplicator = 10.0f;
 inline float bullet_speed = 35.0f;
-inline glm::vec2 bullet_scale = glm::vec2(0.15f, 0.23f);
+inline glm::vec2 bullet_scale = glm::vec2(0.2f, 0.32f);
 inline glm::vec4 bullet_color = glm::vec4(.9f, 0.57f, 0.00f, 1.0f);
 
 // node 

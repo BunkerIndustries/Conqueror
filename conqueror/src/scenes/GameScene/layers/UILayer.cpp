@@ -163,7 +163,7 @@ void UILayer::ActivateSupplyMenuUI() {
 	left_option->AddChildObject(left_option_count);
 	// picturebox with soldier-image
 	Button* left_option_button = new Button(ui_choice_field_button_color, ui_choice_field_button_transform, Type::Rectangle, Supply::TakeLeftOption, "ui_upply_menu_left_choice_button");
-	PictureBox* button1_pb = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(glm::vec2(0.0f, 0.0f), ui_choice_field_button_transform.scale), DataPool::GetTexture("UI/box_small"), Type::Rectangle);
+	PictureBox* button1_pb = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/box_small"), Type::Rectangle);
 	left_option_button->AddChildObject(button1_pb);
 	left_option->AddChildObject(left_option_button);
 
@@ -173,7 +173,7 @@ void UILayer::ActivateSupplyMenuUI() {
 	Label* right_option_count = new Label("1x", ui_font_color, ui_choice_field_count_transform, DataPool::GetFont(ui_font_family), "ui_supply_menu_right_choice_count");
 	right_option->AddChildObject(right_option_count); 
 	Button* right_option_button = new Button(ui_choice_field_button_color, ui_choice_field_button_transform, Type::Rectangle, Supply::TakeRightOption, "ui_upply_menu_right_choice_button");
-	PictureBox* button2_pb = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(glm::vec2(0.0f, 0.0f), ui_choice_field_button_transform.scale), DataPool::GetTexture("UI/box_small"), Type::Rectangle);
+	PictureBox* button2_pb = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/box_small"), Type::Rectangle);
 	left_option_button->AddChildObject(button2_pb);
 	right_option->AddChildObject(right_option_button);
 
