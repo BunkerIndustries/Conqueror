@@ -34,13 +34,12 @@ void UILayer::ActivateSoldierUI() {
 	character_background = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(ui_character_position, ui_background_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
 
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_character_header");
-	// picturebox with picture of soldier
 	Label* name = new Label("SOLDAT", ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
 	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
 
-	Panel* hp_menu = new Panel(glm::vec4(0.0f, 0.0f, 0.0f, 0.0f), ui_health_transform, Type::Rectangle);
-	PictureBox* hp_icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(ui_hp_icon_transform), DataPool::GetTexture("UI/HP_icon_clear.png"), Type::Rectangle);
-	Label* hp_text = new Label("HP", ui_font_color, ui_health_text_transform, DataPool::GetFont(ui_font_family));
+	Panel* hp_menu = new Panel(glm::vec4(0.2f, 0.2f, 0.2f, 1.0f), ui_health_transform, Type::Rectangle, "hp_menu");
+	PictureBox* hp_icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_hp_icon_transform, DataPool::GetTexture("UI/HP_icon_clear.png"), Type::Rectangle, "hp_icon");
+	Label* hp_text = new Label("HP", ui_font_color, ui_health_text_transform, DataPool::GetFont(ui_font_family), "hp_text");
 
 	hp_menu->AddChildObject(hp_icon);
 	hp_menu->AddChildObject(hp_text);
