@@ -161,7 +161,11 @@ inline glm::vec2 ui_building_background_size = glm::vec2(0.3f, 0.73f);
 inline glm::vec2 ui_background_size = glm::vec2(0.3f, 0.6f);
 inline glm::vec2 ui_character_position = glm::vec2(0.8f, 0.0f);
 inline glm::vec2 ui_building_position = glm::vec2(-0.8f, 0.0f);
-inline Transform ui_header_transform = Transform(glm::vec2(0.0f, 0.4f), glm::vec2(0.8f, 0.25f));
+inline Transform ui_header_transform = Transform(glm::vec2(0.0f, 0.4f), glm::vec2(0.9f, 0.25f));
+inline Transform ui_health_transform = Transform(glm::vec2(0.0f, 0.2f), glm::vec2(0.85f, 0.3f));
+inline Transform ui_hp_icon_transform = Transform(glm::vec2(0.8f, 0.0f), glm::vec2(0.3f, 1.0f));
+inline Transform ui_health_text_transform = Transform(glm::vec2(0.8f, 0.0f), glm::vec2(0.3f, 1.0f));
+
 inline Transform ui_header_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.25f, 0.7f));
 inline Transform ui_header_building_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.16f, 0.75f));
 inline Transform ui_character_icon_transform = Transform(glm::vec2(0.0f, 1.0f), glm::vec2(0.3f, 0.32f));
