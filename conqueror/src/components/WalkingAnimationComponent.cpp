@@ -24,7 +24,6 @@ void WalkingAnimation::CalculateDirection() {
     // Determine the direction based on the angle
     if (degrees > 45 && degrees <= 135)
         Start(indexStartUp, indexEndUp);
-    
     else if (degrees > 135 && degrees <= 225)
         Start(indexStartLeft, indexEndLeft);
     else if (degrees > 225 && degrees <= 315)
@@ -61,7 +60,5 @@ void WalkingAnimation::Start(glm::vec2 indexStart, glm::vec2 indexEnd) {
         x = 0.01f;
         tex = (int)(x * 100);
     }
-    LOG_DEBUG(tex);
-    LOG_DEBUG(tex + indexStart.x);
     gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(tex + indexStart.x - 1, indexStart.y));
 }
