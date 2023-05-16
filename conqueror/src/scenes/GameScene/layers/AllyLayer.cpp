@@ -45,7 +45,7 @@ GameObject* AllyLayer::CreateSoldier(glm::vec2 position) {
 	character->AddComponent(new Health(soldier_health));
 	character->AddComponent(new SoldierBehaviour());
 	character->AddComponent(new SoldierShooting());
-	character->AddComponent(new WalkingAnimation(glm::ivec2(3.0f, 1.0f), glm::ivec2(5.0f, 1.0f), glm::ivec2(3.0f, 0.0f), glm::ivec2(5.0f, 0.0f), glm::ivec2(0.0f, 0.0f), glm::ivec2(2.0f, 0.0f), glm::ivec2(0.0f, 1.0f), glm::ivec2(2.0f, 1.0f), 10, 6));
+	character->AddComponent(new WalkingAnimation(glm::vec2(3.0f, 1.0f), glm::vec2(5.0f, 1.0f), glm::vec2(3.0f, 0.0f), glm::vec2(5.0f, 0.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), 10, glm::vec2(3.0f, 1.0f)));
 	character->AddTag("soldier");
 	character->onlyLayerReceive = true;
 	AddGameObjectToLayer(character);
