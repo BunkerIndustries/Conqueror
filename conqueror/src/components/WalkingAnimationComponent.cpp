@@ -61,5 +61,7 @@ void WalkingAnimation::Start(glm::vec2 indexStart, glm::vec2 indexEnd) {
         x = 0.01f;
         tex = (int)(x * 100);
     }
-    gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(tex + indexStart.x, indexStart.y));
+    LOG_DEBUG(tex);
+    LOG_DEBUG(tex + indexStart.x);
+    gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(tex + indexStart.x - 1, indexStart.y));
 }
