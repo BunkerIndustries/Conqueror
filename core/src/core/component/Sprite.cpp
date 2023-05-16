@@ -9,23 +9,24 @@ namespace core
 		this->textureHeight = texture->GetHeight();
 		this->color = color;
 		this->texture = texture;
-		spriteWidth *= 2;
+		//spriteWidth *= 2;
 		//spriteHeight *= 2;
-		paddingWidth *= 2;
-		paddingHeight *= 8;
+		//paddingWidth *= 2;
+		//paddingHeight *= 8;
 
 		// create texcoords
-		texcoords[0] = { (spriteWidth * selectedSprite.x + paddingWidth) / textureWidth, (spriteHeight * selectedSprite.y - paddingHeight) / textureHeight };
-		texcoords[1] = { (spriteWidth * (selectedSprite.x + 1) + paddingWidth) / textureWidth, (spriteHeight * selectedSprite.y - paddingHeight) / textureHeight };
-		texcoords[2] = { (spriteWidth * (selectedSprite.x + 1) + paddingWidth) / textureWidth, (spriteHeight * (selectedSprite.y + 1) - paddingHeight) / textureHeight };
-		texcoords[3] = { (spriteWidth * selectedSprite.x + paddingWidth) / textureWidth, (spriteHeight * (selectedSprite.y + 1) - paddingHeight) / textureHeight };
+		texcoords[3] = { ((spriteWidth + paddingWidth) * selectedSprite.x) / textureWidth, (textureHeight - ((spriteHeight + paddingHeight) * selectedSprite.y)) / textureHeight };
+		texcoords[2] = { ((spriteWidth + paddingWidth) * (selectedSprite.x + 1)) / textureWidth, (textureHeight - ((spriteHeight + paddingHeight) * selectedSprite.y)) / textureHeight };
+		texcoords[0] = { ((spriteWidth + paddingWidth) * selectedSprite.x) / textureWidth, (textureHeight - ((spriteHeight + paddingHeight) * (selectedSprite.y + 1))) / textureHeight };
+		texcoords[1] = { (spriteWidth + paddingWidth) * (selectedSprite.x + 1) / textureWidth, (textureHeight - ((spriteHeight + paddingHeight) * (selectedSprite.y + 1))) / textureHeight };
+
 
 		// this fixes the unknown offset
-		for (int i = 0; i < 4; i++)
+		/*for (int i = 0; i < 4; i++)
 		{
 			//this->texCoords[i].x -= (spriteWidth / textureWidth) / 2;
 			texcoords[i].y -= (spriteHeight / textureHeight) / 2;
-		}
+		}*/
 	}
 
 	Sprite::~Sprite()
