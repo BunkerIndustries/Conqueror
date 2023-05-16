@@ -27,7 +27,7 @@ namespace core
 			std::vector<Shr<Sprite>> rowvec;
 			for (int column = 0; column <= spriteColumns; column++)
 			{
-				rowvec.push_back(MakeShr<Sprite>(color, texture, spriteWidth, spriteHeight, paddingWidth, paddingHeight, glm::vec2(spriteColumns - column, spriteRows - row), false));
+				rowvec.push_back(MakeShr<Sprite>(color, texture, spriteWidth, spriteHeight, paddingWidth, paddingHeight, glm::vec2(column, row), false));
 			}
 			Sprites.push_back(rowvec);
 		}

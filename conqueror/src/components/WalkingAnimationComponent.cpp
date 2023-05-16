@@ -20,15 +20,17 @@ std::string WalkingAnimation::CalculateDirection() {
 
     std::string directionString;
 
+
     // Determine the direction based on the angle
     if (degrees > 45 && degrees <= 135)
-        Start(indexStartUp, indexEndUp);
+        Start(indexStartUp, indexEndUp), LOG_DEBUG("UP");
+    
     else if (degrees > 135 && degrees <= 225)
-        Start(indexStartLeft, indexEndLeft);
+        Start(indexStartLeft, indexEndLeft), LOG_DEBUG("LEFT");
     else if (degrees > 225 && degrees <= 315)
-        Start(indexStartDown, indexEndDown);
+        Start(indexStartDown, indexEndDown), LOG_DEBUG("DOWN");
     else
-        Start(indexStartRight, indexEndRight);
+        Start(indexStartRight, indexEndRight), LOG_DEBUG("RIGHT");
 
     return directionString;
 }
@@ -42,24 +44,22 @@ void WalkingAnimation::OnUpdate() {
     else
     {
 
-        std::cout << "arrived";
     }
 }
 
 
 void WalkingAnimation::Start(glm::vec2 indexStart, glm::vec2 indexEnd) {
-    static int animationLength = indexEnd[0] - indexStart[0];
-    std::cout << animationLength;
+    int animationLength = indexEnd.x - indexStart.x + 1;
     static int tex = 0;
-    static float x = 0.0f;
-    x += Application::GetDT() / animationLength;
+    static float x = 0.01f;
+    x += Application::GetDT() / animationSpeed;
 
     tex = (int)(x * 100);
 
-    if (tex % animationLength == 0)
+    if (tex % (animationLength + 1) == 0)
     {
         x = 0.01f;
+        tex = (int)(x * 100);
     }
-
-    gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(tex + indexStart[0], indexStart[1]));
+    gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(tex + indexStart.x, indexStart.y));
 }
