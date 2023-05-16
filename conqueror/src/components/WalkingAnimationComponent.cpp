@@ -7,10 +7,10 @@
 #include "required/constants.h"
 
 WalkingAnimation::WalkingAnimation(){}
-WalkingAnimation::WalkingAnimation(glm::vec2 indexStartUp, glm::vec2 indexEndUp, glm::vec2 indexStartDown, glm::vec2 indexEndDown, glm::vec2 indexStartRight, glm::vec2 indexEndRight, glm::vec2 indexStartLeft, glm::vec2 indexEndLeft, int animationSpeed, int spriteSheetLength)
-    : indexStartUp(indexStartUp), indexEndUp(indexEndUp), indexStartDown(indexStartDown), indexEndDown(indexEndDown), indexStartRight(indexStartRight), indexEndRight(indexEndRight), indexStartLeft(indexStartLeft), indexEndLeft(indexEndLeft), animationSpeed(animationSpeed), spriteSheetLength(spriteSheetLength) {}
+WalkingAnimation::WalkingAnimation(glm::vec2 indexStartUp, glm::vec2 indexEndUp, glm::vec2 indexStartDown, glm::vec2 indexEndDown, glm::vec2 indexStartRight, glm::vec2 indexEndRight, glm::vec2 indexStartLeft, glm::vec2 indexEndLeft, int animationSpeed, glm::vec2 standartPosition)
+    : indexStartUp(indexStartUp), indexEndUp(indexEndUp), indexStartDown(indexStartDown), indexEndDown(indexEndDown), indexStartRight(indexStartRight), indexEndRight(indexEndRight), indexStartLeft(indexStartLeft), indexEndLeft(indexEndLeft), animationSpeed(animationSpeed), standartPosition(standartPosition){}
 
-std::string WalkingAnimation::CalculateDirection() {
+void WalkingAnimation::CalculateDirection() {
     glm::vec2 direction = gameObject->GetComponent<Movement>()->GetDirection(); // Example direction vector
 
     float angle = std::atan2(direction.y, direction.x); // Calculate the angle in radians
@@ -23,16 +23,15 @@ std::string WalkingAnimation::CalculateDirection() {
 
     // Determine the direction based on the angle
     if (degrees > 45 && degrees <= 135)
-        Start(indexStartUp, indexEndUp), LOG_DEBUG("UP");
-    
+        Start(indexStartUp, indexEndUp);
     else if (degrees > 135 && degrees <= 225)
-        Start(indexStartLeft, indexEndLeft), LOG_DEBUG("LEFT");
+        Start(indexStartLeft, indexEndLeft);
     else if (degrees > 225 && degrees <= 315)
-        Start(indexStartDown, indexEndDown), LOG_DEBUG("DOWN");
+        Start(indexStartDown, indexEndDown);
     else
-        Start(indexStartRight, indexEndRight), LOG_DEBUG("RIGHT");
+        Start(indexStartRight, indexEndRight);
 
-    return directionString;
+    
 }
 
 
@@ -43,7 +42,7 @@ void WalkingAnimation::OnUpdate() {
     }
     else
     {
-
+        gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(standartPosition.x, standartPosition.y));
     }
 }
 
@@ -61,7 +60,5 @@ void WalkingAnimation::Start(glm::vec2 indexStart, glm::vec2 indexEnd) {
         x = 0.01f;
         tex = (int)(x * 100);
     }
-    LOG_DEBUG(tex);
-    LOG_DEBUG(tex + indexStart.x);
     gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(tex + indexStart.x - 1, indexStart.y));
 }
