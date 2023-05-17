@@ -5,7 +5,10 @@ SingleAnimation::SingleAnimation(Shr<Texture> animation, float animSpriteWidth, 
 	: animation(animation), animSpriteWidth(animSpriteWidth), animSpriteHeight(animSpriteHeight), animPaddingWidth(animPaddingWidth), animPaddingHeight(animPaddingHeight), indexStart(indexStart), indexEnd(indexEnd), animationSpeed(animationSpeed), standartIndex(standartIndex), standart(standart), standartSpriteWidth(standartSpriteWidth), standartSpriteHeight(standartSpriteHeight), standartPaddingWidth(standartPaddingWidth), standartPaddingHeight(standartPaddingHeight) {} 
 	
 
+
 void SingleAnimation::PlayAnimation() {
+    gameObject->RemoveComponent<SpriteSheet>();
+    gameObject->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), animation, animSpriteWidth, animSpriteHeight, animPaddingWidth, animPaddingHeight, glm::vec2(0.0f, 0.0f)));
     int animationLength = indexEnd.x - indexStart.x + 1;
     static int tex = 0;
     static float x = 0.01f;
@@ -18,9 +21,13 @@ void SingleAnimation::PlayAnimation() {
         x = 0.01f;
         tex = (int)(x * 100);
     }
-    gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(indexStart.x, indexStart.y));
+    gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(tex + indexStart.x -1, indexStart.y));
 }
 
 void SingleAnimation::StopAnimation() {
+    gameObject->RemoveComponent<SpriteSheet>();
+
+    gameObject->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), standart, standartSpriteWidth, standartSpriteHeight, standartPaddingWidth, standartPaddingHeight, glm::vec2(0.0f, 0.0f)));
+
     gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(standartIndex.x, standartIndex.y));
 }

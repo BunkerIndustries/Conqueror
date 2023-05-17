@@ -15,7 +15,7 @@ namespace core
 		//paddingHeight *= 8;
 
 		// create texcoords
-		texcoords[1] = { ((spriteWidth + paddingWidth) * selectedSprite.x) / textureWidth, (textureHeight - ((spriteHeight + paddingHeight) * selectedSprite.y)) / textureHeight };
+		texcoords[3] = { ((spriteWidth + paddingWidth) * selectedSprite.x) / textureWidth, (textureHeight - ((spriteHeight + paddingHeight) * selectedSprite.y)) / textureHeight };
 		texcoords[2] = { ((spriteWidth + paddingWidth) * (selectedSprite.x + 1)) / textureWidth, (textureHeight - ((spriteHeight + paddingHeight) * selectedSprite.y)) / textureHeight };
 		texcoords[0] = { ((spriteWidth + paddingWidth) * selectedSprite.x) / textureWidth, (textureHeight - ((spriteHeight + paddingHeight) * (selectedSprite.y + 1))) / textureHeight };
 		texcoords[1] = { (spriteWidth + paddingWidth) * (selectedSprite.x + 1) / textureWidth, (textureHeight - ((spriteHeight + paddingHeight) * (selectedSprite.y + 1))) / textureHeight };
