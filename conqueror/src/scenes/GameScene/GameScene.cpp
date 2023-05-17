@@ -78,7 +78,7 @@ bool GameScene::GameObjectPressed(GameObjectPressedEvent& e) {
 
 GameObject* GameScene::CreateBullet(Layer* layer, GameObject* target, glm::vec2 startPos, glm::vec2 targetPos) {
     GameObject* bullet = new GameObject("bullet", Transform(startPos, bullet_scale));
-    bullet->AddComponent(new CircleRenderer(glm::vec4(0.2f, 0.4f, 0.7f, 0.8f), 1.0f, 0.005));		// TODO: Change to sprite_path
+    bullet->AddComponent(new CircleRenderer(bullet_color, 1.0f, 0.005));		// TODO: Change to sprite_path
     bullet->AddComponent(new Movement(bullet_speed, targetPos));
     bullet->AddComponent(new BulletComponent(target, targetPos));
     bullet->AddTag("bullet");

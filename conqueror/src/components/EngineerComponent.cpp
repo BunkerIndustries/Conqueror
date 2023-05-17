@@ -94,6 +94,9 @@ void EngineerCharacter::OnUpdate() {
 			gameObject->GetComponent<SingleAnimation>()->StopAnimation();
 			isBuilding = false;
 			going_back = true;
+
+			// REMOVE gameObject from building_node.stand
+
 			gameObject->GetComponent<Movement>()->SetTrackingPos(&engineer_building->transform.position);
 
 			if (mg_artillery) {
@@ -116,4 +119,7 @@ void EngineerCharacter::OnUpdate() {
 	// if he arrived and is not building already
 	isBuilding = true;
 	dt_counter = 0.0f;
+
+	// ADD gameObject to building_node.stand
+
 }

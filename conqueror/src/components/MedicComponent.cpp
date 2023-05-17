@@ -46,7 +46,6 @@ void MedicCharacter::OnUpdate() {
 	if (going_back) {
 		if (gameObject->transform.position == medic_building->transform.position) {
 			medic_building->GetComponent<MedicBuilding>()->IncreaseAvailableMedics();
-			LOG_DEBUG("medic reached medic-building");
 			delete gameObject;
 		}
 		return;
@@ -55,7 +54,6 @@ void MedicCharacter::OnUpdate() {
 	// if the soldier is already dead
 	if (!healing_target->GetComponent<SoldierBehaviour>()) {
 		// go back 
-		LOG_DEBUG("soldier to heal just died");
 		going_back = true;
 		gameObject->GetComponent<Movement>()->SetTrackingPos(&medic_building->transform.position);
 		return;
@@ -63,14 +61,18 @@ void MedicCharacter::OnUpdate() {
 
 	if ((gameObject->transform.position != healing_target_position) || going_back) return;	// if he has not arrived yet or is going back
 	if (!healing) {	// if he arrived and is not healing already
-		LOG_DEBUG("medic just arrived at soldier to heal");
+
+		// ADD gameObject to healing_target.stand
+
 		healing = true;
 		heal_time = (soldier_health - healing_target->GetComponent<Health>()->GetHp()) * waiting_time_per_hp * game_time_factor;
 	}
 	else if (healing) {
 		if (dt_counter >= heal_time) {
 			// healing is over
-			LOG_DEBUG("medic just finished healing");
+
+			// REMOVE gameObject from healing_target.stand
+
 			healing = false;
 			going_back = true;
 			healing_target->GetComponent<Health>()->GetHealed();

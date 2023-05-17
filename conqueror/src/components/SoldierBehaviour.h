@@ -13,6 +13,7 @@ public:
 
 	void SoldierMove(GameObject* node);
 	void FreeNode();
+	std::vector<GameObject*>* GetStand();
 
 	void MedicSent();
 	void MedicLeft();
