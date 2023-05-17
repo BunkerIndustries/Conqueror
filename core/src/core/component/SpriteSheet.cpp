@@ -36,6 +36,11 @@ namespace core
 
 	void SpriteSheet::ChangeSprite(glm::vec2 pos)
 	{
+		if (pos.x > spriteColumns || pos.y > spriteRows)
+		{
+			LOG_CORE_ERROR("Wrong usage of spritesheet index");
+			return;
+		}
 		this->selectedSprite.x = pos.x;
 		this->selectedSprite.y = pos.y;
 		ChangeCoords();
