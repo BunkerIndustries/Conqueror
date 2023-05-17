@@ -8,7 +8,6 @@
 #include "scenes/GameScene/GameScene.h"
 #include "required/stands.h"
 #include "components/WalkingAnimationComponent.h"
-#include "components/SingleAnimationComponent.h"
 
 
 AllyLayer::AllyLayer()
@@ -67,14 +66,12 @@ GameObject* AllyLayer::CreateMedic(glm::vec2 position) {
 
 GameObject* AllyLayer::CreateEngineer(glm::vec2 position, bool mg_artillery) {
 	GameObject* character = new GameObject("engineer", Transform(position, character_scale));
-	character->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Anims/Engineer/engineer_walk_forward.png"), 112.0f, 304.0f, 16.0f, 16.0f, glm::vec2(0, 0)));
+	character->AddComponent(new SpriteRenderer(glm::vec4(0.5f, 0.0f, 0.0f, 0.4f), Geometry::RECTANGLE));		// TODO: Change to sprite_path
 	character->AddComponent(new Movement(engineer_movement_speed));
 	character->AddComponent(new Health(engineer_health));
 	character->AddComponent(new EngineerCharacter(mg_artillery));
 	character->AddTag("engineer");
 	character->onlyLayerReceive = true;
-	character->AddComponent(new WalkingAnimation(glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), 10, glm::vec2(0.0f, 0.0f)));
-	character->AddComponent(new SingleAnimation(DataPool::GetTexture("Anims/Engineer/engineer_build.png"), 168.0f, 304.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f), glm::vec2(3.0f, 0.0f), 10, glm::vec2(0.0f, 0.0f), DataPool::GetTexture("Anims/Engineer/engineer_walk_forward.png"), 112.0f, 304.0f, 16.0f, 16.0f));
 	AddGameObjectToLayer(character);
 	return character;
 }

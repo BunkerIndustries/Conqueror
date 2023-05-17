@@ -19,8 +19,8 @@ namespace core
 		this->spriteRows = textureHeight / this->spriteHeight;
 
 		// sprites are inverted, because of the opengl and stbi axis conflict
-		// this->selectedSprite.x = spriteColumns - selectedSprite.x;
-		// this->selectedSprite.y = spriteRows - selectedSprite.y;
+		this->selectedSprite.x = spriteColumns - selectedSprite.x;
+		this->selectedSprite.y = spriteRows - selectedSprite.y;
 
 		for (int row = 0; row <= spriteRows; row++)
 		{
@@ -31,7 +31,7 @@ namespace core
 			}
 			Sprites.push_back(rowvec);
 		}
- 		ChangeCoords();
+		ChangeCoords();
 	}
 
 	void SpriteSheet::ChangeSprite(glm::vec2 pos)
@@ -39,17 +39,6 @@ namespace core
 		this->selectedSprite.x = pos.x;
 		this->selectedSprite.y = pos.y;
 		ChangeCoords();
-	}
-	
-	void SpriteSheet::ChangeSpriteSheet(Shr<Texture> newTexture, float newSpriteWidth, float newSpriteHeight, float newPaddingWidth, float newPaddingHeight, glm::vec2 standartIndex) {
-		texture = newTexture;
-		spriteWidth = newSpriteWidth;
-		spriteHeight = newSpriteHeight;
-		paddingWidth = newPaddingWidth;
-		paddingHeight = newPaddingHeight;
-		selectedSprite = standartIndex;
-		Init(texture, selectedSprite);
-
 	}
 
 	void SpriteSheet::ChangeCoords()
