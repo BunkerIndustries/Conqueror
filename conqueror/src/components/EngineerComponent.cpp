@@ -4,11 +4,12 @@
 #include "required/constants.h"
 #include "required/functions.h"
 #include "required/stands.h"
+#include "components/SingleAnimationComponent.h"
 
 EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
 	: available_engineers(engineerCount) {
-	available_mgs = 0;
-	available_artillery = 0;
+	available_mgs = 3;
+	available_artillery = 3;
 }
 
 void EngineerBuilding::SendEngineer()
@@ -90,6 +91,7 @@ void EngineerCharacter::OnUpdate() {
 	if (isBuilding)
 	{
 		if (dt_counter >= building_time) {
+			gameObject->GetComponent<SingleAnimation>()->StopAnimation();
 			isBuilding = false;
 			going_back = true;
 			gameObject->GetComponent<Movement>()->SetTrackingPos(&engineer_building->transform.position);
@@ -107,6 +109,7 @@ void EngineerCharacter::OnUpdate() {
 			}
 			delete building_node;
 		}
+		gameObject->GetComponent<SingleAnimation>()->PlayAnimation();
 		dt_counter += Application::GetDT();
 		return;
 	}

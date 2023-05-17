@@ -25,7 +25,7 @@ namespace core
         int GetSpriteColumns() { return spriteColumns; };
 
         void ChangeSprite(glm::vec2 pos);
-
+        void ChangeSpriteSheet(Shr<Texture> newTexture, float spriteWidth, float spriteHeight, float paddingWidth, float paddingHeight, glm::vec2 standartIndex);
 
     private:
         glm::vec4 color;
