@@ -32,9 +32,6 @@ bool Health::TakeDamage(float damage) {
 			gameObject->GetComponent<SoldierBehaviour>()->FreeNode();
 			gameScene->uiLayer->DeactivateCharacterUI();
 			Util::enemyTable.erase(Util::enemyTable.find(gameObject));
-
-			gameScene->mapLayer->CreateDeadBody("Anims/Soldier/soldier_dead.png", gameObject->transform.position);
-
 			Supply::CheckForGameOver();
 		}
 		else if (gameObject->HasTag("enemy"))
@@ -48,12 +45,8 @@ bool Health::TakeDamage(float damage) {
 				Util::soldierTable.erase(it);
 			}
 			
-			gameScene->mapLayer->CreateDeadBody("Anims/Enemy/french_dead.png", gameObject->transform.position);
-
 			gameScene->waveManager->CheckForEnemiesDead();
 		}
-		// else if medic remove
-		// else if engineer remove
 		delete gameObject;
 		return true;
 	}

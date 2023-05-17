@@ -31,26 +31,18 @@ void UILayer::Update(const float dt)
 
 
 void UILayer::ActivateSoldierUI() {
-	character_background = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(ui_character_position, ui_background_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
+	character_background = new Panel(ui_character_background_color, Transform(ui_character_position, ui_background_size), Type::Rectangle, "ui_character_background");
 
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_character_header");
+	// picturebox with picture of soldier
 	Label* name = new Label("SOLDAT", ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
 	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
-
-	Panel* hp_menu = new Panel(glm::vec4(0.2f, 0.2f, 0.2f, 1.0f), ui_health_transform, Type::Rectangle, "hp_menu");
-	PictureBox* hp_icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_hp_icon_transform, DataPool::GetTexture("UI/HP_icon_clear.png"), Type::Rectangle, "hp_icon");
-	Label* hp_text = new Label("HP", ui_font_color, ui_health_text_transform, DataPool::GetFont(ui_font_family), "hp_text");
-
-	hp_menu->AddChildObject(hp_icon);
-	hp_menu->AddChildObject(hp_text);
-
 	Button* call_medic_button = new Button(ui_call_medic_button_color, ui_first_button_transform, Type::Rectangle, Medic::SendMedic, "ui_call_medic_button");
 	PictureBox* button_pb = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/medic_button.png"), Type::Rectangle);
 	call_medic_button->AddChildObject(button_pb);
 	header->AddChildObject(name);
 
 	character_background->AddChildObject(header);
-	character_background->AddChildObject(hp_menu);
 	character_background->AddChildObject(icon);
 	character_background->AddChildObject(call_medic_button);
 
@@ -58,7 +50,7 @@ void UILayer::ActivateSoldierUI() {
 }
 
 void UILayer::ActivateMedicUI() {
-	character_background = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(ui_character_position, ui_background_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
+	character_background = new Panel(ui_character_background_color, Transform(ui_character_position, ui_background_size), Type::Rectangle, "ui_character_background");
 
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_character_header");
 	// picturebox with picture of medic
@@ -66,22 +58,14 @@ void UILayer::ActivateMedicUI() {
 	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/med_head.png"), Type::Rectangle);
 	header->AddChildObject(name);
 
-	Panel* hp_menu = new Panel(glm::vec4(0.0f, 0.0f, 0.0f, 0.0f), ui_health_transform, Type::Rectangle);
-	PictureBox* hp_icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(ui_hp_icon_transform), DataPool::GetTexture("UI/HP_icon_clear.png"), Type::Rectangle);
-	Label* hp_text = new Label("HP", ui_font_color, ui_health_text_transform, DataPool::GetFont(ui_font_family));
-
-	hp_menu->AddChildObject(hp_icon);
-	hp_menu->AddChildObject(hp_text);
-
 	character_background->AddChildObject(header);
-	character_background->AddChildObject(hp_menu);
 	character_background->AddChildObject(icon);
 
 	AddUIObject(character_background, ProjectionMode::SCREEN);
 }
 
 void UILayer::ActivateEngineerUI() {
-	character_background = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(ui_character_position, ui_background_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
+	character_background = new Panel(ui_character_background_color, Transform(ui_character_position, ui_building_background_size), Type::Rectangle, "ui_character_background");
 
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_character_header");
 	// picturebox with picture of medic
@@ -89,22 +73,14 @@ void UILayer::ActivateEngineerUI() {
 	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/engineer_head.png"), Type::Rectangle);
 	header->AddChildObject(name);
 
-	Panel* hp_menu = new Panel(glm::vec4(0.0f, 0.0f, 0.0f, 0.0f), ui_health_transform, Type::Rectangle);
-	PictureBox* hp_icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(ui_hp_icon_transform), DataPool::GetTexture("UI/HP_icon_clear.png"), Type::Rectangle);
-	Label* hp_text = new Label("HP", ui_font_color, ui_health_text_transform, DataPool::GetFont(ui_font_family));
-
-	hp_menu->AddChildObject(hp_icon);
-	hp_menu->AddChildObject(hp_text);
-
 	character_background->AddChildObject(header);
-	character_background->AddChildObject(hp_menu);
 	character_background->AddChildObject(icon);
 
 	AddUIObject(character_background, ProjectionMode::SCREEN);
 }
 
 void UILayer::ActivateMedicBuildlingUI() {
-	building_background = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(ui_building_position, ui_building_background_size), DataPool::GetTexture("UI/box_2.png"), Type::Rectangle);
+	building_background = new Panel(ui_building_background_color, Transform(ui_building_position, ui_building_background_size), Type::Rectangle, "ui_building_background");
 
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_building_header");
 	// picturebox with picture of medic-bulding
@@ -122,7 +98,7 @@ void UILayer::ActivateMedicBuildlingUI() {
 }
 
 void UILayer::ActivateEngineerBuildingUI() {
-	building_background = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(ui_building_position, ui_building_background_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
+	building_background = new Panel(ui_building_background_color, Transform(ui_building_position, ui_building_background_size), Type::Rectangle, "ui_building_background");
 
 	Panel* header = new Panel(ui_header_color, ui_header_transform, Type::Rectangle, "ui_building_header");
 	// picturebox with picture of medic-bulding
@@ -152,8 +128,7 @@ void UILayer::ActivateSupplyMenuUI() {
 	RemoveUIObject(building_background);
 	RemoveUIObject(supply_menu_background);
 
-	supply_menu_background = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(glm::vec2(0.0f, 0.0f), ui_supply_menu_background_size), DataPool::GetTexture("UI/big_box.png"), Type::Rectangle);
-
+	supply_menu_background = new Panel(ui_supply_menu_background_color, Transform(glm::vec2(0.0f, 0.0f), ui_supply_menu_background_size), Type::Rectangle, "ui_supply_menu_background");
 	Label* text = new Label("DU HAST EINEM ANGRIFF STANDGEHALTEN!", ui_font_color, ui_supply_menu_text_transform, DataPool::GetFont(ui_font_family), "ui_supply_menu_text");
 	Label* text2 = new Label("WAS MOECHTEST DU ANFORDERN?", ui_font_color, ui_supply_menu_text2_transform, DataPool::GetFont(ui_font_family), "ui_supply_menu_text2");
 	Panel* left_option = new Panel(ui_choice_field_color, Transform(ui_left_choice_field_position, ui_choice_field_size), Type::Rectangle, "ui_supply_menu_left_choice_field");
@@ -163,8 +138,6 @@ void UILayer::ActivateSupplyMenuUI() {
 	left_option->AddChildObject(left_option_count);
 	// picturebox with soldier-image
 	Button* left_option_button = new Button(ui_choice_field_button_color, ui_choice_field_button_transform, Type::Rectangle, Supply::TakeLeftOption, "ui_upply_menu_left_choice_button");
-	PictureBox* button1_pb = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/box_small"), Type::Rectangle);
-	left_option_button->AddChildObject(button1_pb);
 	left_option->AddChildObject(left_option_button);
 
 	Panel* right_option = new Panel(ui_choice_field_color, Transform(ui_right_choice_field_position, ui_choice_field_size), Type::Rectangle, "ui_supply_menu_right_choice_field");
@@ -172,9 +145,8 @@ void UILayer::ActivateSupplyMenuUI() {
 	right_option->AddChildObject(right_option_text);
 	Label* right_option_count = new Label("1x", ui_font_color, ui_choice_field_count_transform, DataPool::GetFont(ui_font_family), "ui_supply_menu_right_choice_count");
 	right_option->AddChildObject(right_option_count); 
+	// picturebox with image
 	Button* right_option_button = new Button(ui_choice_field_button_color, ui_choice_field_button_transform, Type::Rectangle, Supply::TakeRightOption, "ui_upply_menu_right_choice_button");
-	PictureBox* button2_pb = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/box_small"), Type::Rectangle);
-	left_option_button->AddChildObject(button2_pb);
 	right_option->AddChildObject(right_option_button);
 
 	supply_menu_background->AddChildObject(text);

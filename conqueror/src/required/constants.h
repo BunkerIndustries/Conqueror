@@ -28,7 +28,7 @@ inline float min_enemy_waiting_time = 0.5f;
 inline float max_enemy_waiting_time = 2.0f;
 inline float enemy_movement_speed = 1.0f;
 inline uint8_t max_enemy_lock_target_tries = 3;
-inline glm::vec2 enemy_scale = glm::vec2(2.0f, 1.6f);
+inline glm::vec2 enemy_scale = glm::vec2(0.7f, 1.0f);
 inline uint8_t enemy_random_movement_sum = 5;
 inline uint8_t enemy_move_left_probability = 1;
 inline uint8_t enemy_move_mid_probability = 3;
@@ -40,9 +40,11 @@ inline float enemy_spawn_random_x_radius = 5.0f;
 inline float soldier_movement_speed = 1.2f;
 inline float medic_movement_speed = 1.4f;
 inline float engineer_movement_speed = 3.9f;
-inline glm::vec2 character_scale = glm::vec2(1.3f, 1.6f);
-inline glm::vec2 dead_body_size = glm::vec2(1.6f, 1.4f);
-inline float dead_body_lasting_time = 6.0f;
+inline glm::vec2 character_scale = glm::vec2(0.9f, 1.2f);	// probably temporary
+
+//bullet
+inline float bullet_speed = 20.0f;
+inline glm::vec2 bullet_scale = glm::vec2(0.5f, 1.0f);	// probably temporary
 
 //soldier behaviour 
 inline float min_soldier_shoot_waiting_time = 0.7f;
@@ -77,14 +79,14 @@ inline float soldier_health = 100.0f;
 inline float medic_health = 50.0f;
 inline float engineer_health = 200.0f;
 
-// bullet
+// bullet trace 
+inline glm::vec4 trace_color = glm::vec4(1.0f, 0.0f, 0.0f, 0.8f);
 inline float min_inaccuracy = 0.8f;
 inline float max_inaccuracy = 1.4f;
+inline float trace_thickness = 0.3f;
+inline float trace_lasting = 0.15f;
 inline bool bulletDistanceMoreInaccuracy = true;
 inline float bulletInaccuracyMultiplicator = 10.0f;
-inline float bullet_speed = 35.0f;
-inline glm::vec2 bullet_scale = glm::vec2(0.2f, 0.32f);
-inline glm::vec4 bullet_color = glm::vec4(.9f, 0.57f, 0.00f, 1.0f);
 
 // node 
 inline glm::vec2 node_size = glm::vec2(0.5f, 0.5f);
@@ -159,11 +161,7 @@ inline glm::vec2 ui_building_background_size = glm::vec2(0.3f, 0.73f);
 inline glm::vec2 ui_background_size = glm::vec2(0.3f, 0.6f);
 inline glm::vec2 ui_character_position = glm::vec2(0.8f, 0.0f);
 inline glm::vec2 ui_building_position = glm::vec2(-0.8f, 0.0f);
-inline Transform ui_header_transform = Transform(glm::vec2(0.0f, 0.4f), glm::vec2(0.9f, 0.25f));
-inline Transform ui_health_transform = Transform(glm::vec2(0.0f, 0.2f), glm::vec2(0.85f, 0.3f));
-inline Transform ui_hp_icon_transform = Transform(glm::vec2(0.8f, 0.0f), glm::vec2(0.3f, 1.0f));
-inline Transform ui_health_text_transform = Transform(glm::vec2(0.8f, 0.0f), glm::vec2(0.3f, 1.0f));
-
+inline Transform ui_header_transform = Transform(glm::vec2(0.0f, 0.4f), glm::vec2(0.8f, 0.25f));
 inline Transform ui_header_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.25f, 0.7f));
 inline Transform ui_header_building_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.16f, 0.75f));
 inline Transform ui_character_icon_transform = Transform(glm::vec2(0.0f, 1.0f), glm::vec2(0.3f, 0.32f));
