@@ -5,10 +5,11 @@
 
 #include "required/functions.h"
 #include "required/constants.h"
+#include "SingleAnimationComponent.h"
 
 WalkingAnimation::WalkingAnimation(){}
-WalkingAnimation::WalkingAnimation(glm::vec2 indexStartUp, glm::vec2 indexEndUp, glm::vec2 indexStartDown, glm::vec2 indexEndDown, glm::vec2 indexStartRight, glm::vec2 indexEndRight, glm::vec2 indexStartLeft, glm::vec2 indexEndLeft, int animationSpeed, glm::vec2 standartPosition)
-    : indexStartUp(indexStartUp), indexEndUp(indexEndUp), indexStartDown(indexStartDown), indexEndDown(indexEndDown), indexStartRight(indexStartRight), indexEndRight(indexEndRight), indexStartLeft(indexStartLeft), indexEndLeft(indexEndLeft), animationSpeed(animationSpeed), standartPosition(standartPosition){}
+WalkingAnimation::WalkingAnimation(glm::vec2 indexStartUp, glm::vec2 indexEndUp, glm::vec2 indexStartDown, glm::vec2 indexEndDown, glm::vec2 indexStartRight, glm::vec2 indexEndRight, glm::vec2 indexStartLeft, glm::vec2 indexEndLeft, int animationSpeed, glm::vec2 standartPosition, bool hasSingleAnimation)
+    : indexStartUp(indexStartUp), indexEndUp(indexEndUp), indexStartDown(indexStartDown), indexEndDown(indexEndDown), indexStartRight(indexStartRight), indexEndRight(indexEndRight), indexStartLeft(indexStartLeft), indexEndLeft(indexEndLeft), animationSpeed(animationSpeed), standartPosition(standartPosition), hasSingleAnimation(hasSingleAnimation){}
 
 void WalkingAnimation::CalculateDirection() {
     glm::vec2 direction = gameObject->GetComponent<Movement>()->GetDirection(); // Example direction vector
@@ -40,7 +41,7 @@ void WalkingAnimation::OnUpdate() {
     {
         CalculateDirection();
     }
-    else
+    else if(!hasSingleAnimation)
     {
         gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(standartPosition.x, standartPosition.y));
     }

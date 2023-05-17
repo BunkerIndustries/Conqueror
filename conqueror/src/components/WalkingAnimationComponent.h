@@ -4,7 +4,7 @@
 class WalkingAnimation : public Component {
 public:
 	WalkingAnimation();
-	WalkingAnimation(glm::vec2 indexStartUp, glm::vec2 IndexEndUp, glm::vec2 IndexStartDown, glm::vec2 indexEndDown, glm::vec2 indexStartRight, glm::vec2 IndexEndRight, glm::vec2 IndexStartLeft, glm::vec2 indexEndLeft, int animationSpeed, glm::vec2 standartPosition);
+	WalkingAnimation(glm::vec2 indexStartUp, glm::vec2 IndexEndUp, glm::vec2 IndexStartDown, glm::vec2 indexEndDown, glm::vec2 indexStartRight, glm::vec2 IndexEndRight, glm::vec2 IndexStartLeft, glm::vec2 indexEndLeft, int animationSpeed, glm::vec2 standartPosition, bool hasSingleAnimation);
 	void OnStart() override { }
 	void OnStop() override { }
 	void OnUpdate() override;
@@ -28,4 +28,5 @@ private:
 	glm::vec2 indexStartRight;
 	glm::vec2 indexEndRight;
 	glm::vec2 standartPosition;
+	bool hasSingleAnimation;
 };

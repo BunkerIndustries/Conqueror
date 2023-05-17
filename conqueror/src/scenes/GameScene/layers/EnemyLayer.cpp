@@ -54,7 +54,7 @@ GameObject* EnemyLayer::CreateEnemy(std::string name, glm::vec2 spawn_pos) {
 	enemy_go->AddComponent(new EnemyBehaviour());
 	enemy_go->AddComponent(new EnemyShooting());
 	enemy_go->AddComponent(new Health(enemy_health));
-	enemy_go->AddComponent(new WalkingAnimation(glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 0.0f), glm::vec2(0.0f, 2.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), 10, glm::vec2(2.0f, 0.0f)));
+	enemy_go->AddComponent(new WalkingAnimation(glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 0.0f), glm::vec2(0.0f, 2.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), 10, glm::vec2(2.0f, 0.0f), false));
 
 
 	AddGameObjectToLayer(enemy_go);
