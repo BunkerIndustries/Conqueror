@@ -109,7 +109,9 @@ void EngineerCharacter::OnUpdate() {
 			}
 			delete building_node;
 		}
-		gameObject->GetComponent<SingleAnimation>()->PlayAnimation();
+		else {
+			gameObject->GetComponent<SingleAnimation>()->PlayAnimation();
+		}
 		dt_counter += Application::GetDT();
 		return;
 	}

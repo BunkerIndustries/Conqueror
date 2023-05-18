@@ -25,6 +25,8 @@ void SingleAnimation::PlayAnimation() {
 }
 
 void SingleAnimation::StopAnimation() {
+    LOG_DEBUG(animation);
+    LOG_DEBUG(standart);
     gameObject->RemoveComponent<SpriteSheet>();
     gameObject->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), standart, standartSpriteWidth, standartSpriteHeight, standartPaddingWidth, standartPaddingHeight, glm::vec2(0.0f, 0.0f)));
     gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(standartIndex.x, standartIndex.y));
