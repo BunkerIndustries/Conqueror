@@ -1,6 +1,7 @@
 #include "_Game.h"
 
 #include "MapLayer.h"
+#include "components/DestroyOverTime.h"
 
 #include "required/maps.h"
 #include "required/stands.h"
@@ -65,6 +66,13 @@ GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 	AddGameObjectToLayer(node_go);
 
 	return node_go;
+}
+
+void MapLayer::CreateDeadBody(std::string sprite_path, glm::vec2 position) {
+	GameObject* sp = new GameObject("map_sprite", Transform(position, dead_body_size));
+	sp->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture(sprite_path), 1.0f, Geometry::RECTANGLE));
+	sp->AddComponent(new DestroyOverTime(dead_body_lasting_time));
+	this->AddGameObjectToLayer(sp);
 }
 
 void MapLayer::CreateMapSprite(std::string sprite_path, Transform trans) {

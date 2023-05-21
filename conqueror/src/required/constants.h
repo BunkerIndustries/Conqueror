@@ -40,11 +40,14 @@ inline float enemy_spawn_random_x_radius = 5.0f;
 inline float soldier_movement_speed = 1.2f;
 inline float medic_movement_speed = 1.4f;
 inline float engineer_movement_speed = 3.9f;
-inline glm::vec2 character_scale = glm::vec2(0.9f, 1.2f);	// probably temporary
+inline glm::vec2 character_scale = glm::vec2(0.9f, 1.2f);
+inline glm::vec2 dead_body_size = glm::vec2(1.6f, 1.4f);
+inline float dead_body_lasting_time = 6.0f;
 
 //bullet
-inline float bullet_speed = 20.0f;
-inline glm::vec2 bullet_scale = glm::vec2(0.5f, 1.0f);	// probably temporary
+inline float bullet_speed = 30.0f;
+inline glm::vec2 bullet_scale = glm::vec2(0.5f, 1.0f);
+inline glm::vec4 bullet_color = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
 
 //soldier behaviour 
 inline float min_soldier_shoot_waiting_time = 0.7f;
@@ -70,8 +73,8 @@ inline uint8_t hiding_hit_probability = 4;
 inline uint8_t artillerie_hit_probability = 6;
 
 // damage 
-inline uint8_t soldier_damage = 0;
-inline uint8_t enemy_damage = 0;
+inline uint8_t soldier_damage = 35;
+inline uint8_t enemy_damage = 35;
 
 // health 
 inline float enemy_health = 100.0f;
@@ -144,6 +147,8 @@ inline float artillery_critical_damage = 100.0f;
 inline glm::vec2 artillery_explosion_size = glm::vec2(3.0f, 3.0f);
 inline glm::vec2 artillery_position_offset = glm::vec2(0.0f, 0.4f);
 inline int artillery_shoot_anim_speed = 15;
+inline int artillery_explosion_anim_speed = 15;
+inline float artillery_explosion_lasting = 3.0f;
 
 // ui fonts
 inline std::string ui_font_family = "PixeloidMono.ttf";

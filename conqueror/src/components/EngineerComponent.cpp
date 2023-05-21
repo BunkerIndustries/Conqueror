@@ -8,8 +8,8 @@
 
 EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
 	: available_engineers(engineerCount) {
-	available_mgs = 3;
-	available_artillery = 3;
+	available_mgs = 0;
+	available_artillery = 1;
 }
 
 void EngineerBuilding::SendEngineer()
@@ -99,13 +99,13 @@ void EngineerCharacter::OnUpdate() {
 			if (mg_artillery) {
 				GameObject* mg_node = gameScene->mapLayer->CreateNode(building_node->transform.position, mg_stand);
 				gameScene->allyLayer->CreateMg(building_node->transform.position + mg_position_offset, mg_node);
-				gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->DecreaseMgStock();
+				
 
 			}
 			else {
 				GameObject* artillery_node = gameScene->mapLayer->CreateNode(building_node->transform.position, artillerie_stand);
 				gameScene->allyLayer->CreateArtillery(building_node->transform.position + artillery_position_offset, artillery_node);
-				gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->DecreaseArtilleryStock();
+				
 			}
 			delete building_node;
 		}

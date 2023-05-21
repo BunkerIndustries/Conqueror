@@ -4,6 +4,7 @@
 #include "required/constants.h"
 #include "required/functions.h"
 #include "components/SingleAnimationComponent.h"
+#include "components/DestroyOverTime.h"
 
 ArtilleryComponent::ArtilleryComponent(GameObject* own_node) 
 	:own_node(own_node->GetComponent<Node>())
@@ -39,10 +40,14 @@ void ArtilleryComponent::Shoot() {
 	GameObject* target_node = enemy_grid.at(x).at(y);
 
 	gameObject->GetComponent<SingleAnimation>()->PlayAnimation(true);
+	LOG_DEBUG("ARTILLERY SHOOT");
 
-	GameObject* nuclear_bomb_explosion = new GameObject("bum", Transform(target_node->transform.position, artillery_explosion_size), ProjectionMode::PERSPECTIVE);
-	nuclear_bomb_explosion->AddComponent(new SpriteRenderer(glm::vec4(0.8f, 1.0f, 1.0f, 1.0f), Geometry::RECTANGLE));	// TODO: use sprite
-	gameScene->allyLayer->AddGameObjectToLayer(nuclear_bomb_explosion);
+	GameObject* explosion = new GameObject("bum", Transform(target_node->transform.position, artillery_explosion_size), ProjectionMode::PERSPECTIVE);
+	//explosion->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Anims/artillery_explosion.png"), 136.0f, 136.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f)));
+	//explosion->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(0.0f, 0.0f));
+	explosion->AddComponent(new SingleAnimation(DataPool::GetTexture("Anims/artillery_explosion.png"), 136.0f, 136.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), artillery_explosion_anim_speed, glm::vec2(0.0f, 0.0f), DataPool::GetTexture("Anims/artillery_explosion.png"), 136.0f, 136.0f, 16.0f, 16.0f));
+	explosion->AddComponent(new DestroyOverTime(artillery_explosion_lasting));
+	explosion->GetComponent<SingleAnimation>()->PlayAnimation(true);
 	
 	glm::ivec2 top_left = glm::ivec2(x - 1, y - 1);
 	// loops through a field that starts at the top left of the randomly chosen middle-node

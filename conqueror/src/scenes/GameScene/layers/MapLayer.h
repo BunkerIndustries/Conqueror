@@ -22,6 +22,7 @@ public:
 
 	GameObject* CreateBuilding(Transform transform, std::string type);
 	GameObject* CreateNode(glm::vec2 position, Stand& node_stand);
+	void CreateDeadBody(std::string sprite_path, glm::vec2 position);
 
 	GameObject* medicBuilding;
 	GameObject* engineerBuilding;

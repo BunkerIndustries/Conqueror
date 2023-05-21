@@ -93,11 +93,11 @@ GameObject* AllyLayer::CreateMg(glm::vec2 mg_position, GameObject* mg_node) {
 GameObject* AllyLayer::CreateArtillery(glm::vec2 artillery_position, GameObject* artillery_node) {
 
 	GameObject* artillery = new GameObject("artillery", Transform(artillery_position, artillery_size));
-	artillery->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Anims/Buildings/artillerie_front_north.png"), 248.0f, 400.0f, 16.0f, 16.0f, glm::vec2(0, 0)));
+	artillery->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Buildings/artillerie_front_north.png"), 248.0f, 400.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f)));
 	artillery->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(0.0f, 0.0f));
 	artillery->AddComponent(new ArtilleryComponent(artillery_node));
 
-	artillery->AddComponent(new SingleAnimation(DataPool::GetTexture("Anims/Buildings/artillerie_front_north.png"), 248.0f, 400.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), artillery_shoot_anim_speed, glm::vec2(0.0f, 0.0f), DataPool::GetTexture("Anims/Buildings/artillerie_front_north.png"), 248.0f, 400.0f, 16.0f, 16.0f));
+	artillery->AddComponent(new SingleAnimation(DataPool::GetTexture("Buildings/artillerie_front_north.png"), 248.0f, 400.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), artillery_shoot_anim_speed, glm::vec2(0.0f, 0.0f), DataPool::GetTexture("Buildings/artillerie_front_north.png"), 248.0f, 400.0f, 16.0f, 16.0f));
 
 	AddGameObjectToLayer(artillery);
 

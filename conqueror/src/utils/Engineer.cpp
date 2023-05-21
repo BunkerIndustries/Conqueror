@@ -26,6 +26,7 @@ void Engineer::PlaceMG() {
 	if (nop) return;
 
 	gameScene->allyLayer->CreateEngineer(gameScene->mapLayer->engineerBuilding->transform.position, true);
+	gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->DecreaseMgStock();
 }
 
 void Engineer::PlaceArtillerie() {
@@ -41,4 +42,5 @@ void Engineer::PlaceArtillerie() {
 	if (nop) return;
 
 	gameScene->allyLayer->CreateEngineer(gameScene->mapLayer->engineerBuilding->transform.position, false);
+	gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->DecreaseArtilleryStock();
 }
