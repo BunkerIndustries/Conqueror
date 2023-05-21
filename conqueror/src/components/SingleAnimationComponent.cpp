@@ -6,22 +6,39 @@ SingleAnimation::SingleAnimation(Shr<Texture> animation, float animSpriteWidth, 
 	
 
 
-void SingleAnimation::PlayAnimation() {
+void SingleAnimation::PlayAnimation(bool onceCycle) {
     gameObject->RemoveComponent<SpriteSheet>();
     gameObject->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), animation, animSpriteWidth, animSpriteHeight, animPaddingWidth, animPaddingHeight, glm::vec2(0.0f, 0.0f)));
-    int animationLength = indexEnd.x - indexStart.x + 1;
-    static int tex = 0;
-    static float x = 0.01f;
-    x += Application::GetDT() / animationSpeed;
+    if (onceCycle == true) {
+        int animationLength = indexEnd.x - indexStart.x + 1;
+        static int tex = 0;
+        static float x = 0.01f;
+        x += Application::GetDT() / animationSpeed;
 
-    tex = (int)(x * 100);
-
-    if (tex % (animationLength + 1) == 0)
-    {
-        x = 0.01f;
         tex = (int)(x * 100);
+
+        if (tex % (animationLength + 1) == 0)
+        {
+            StopAnimation();
+        }
+        gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(tex + indexStart.x - 1, indexStart.y));
     }
-    gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(tex + indexStart.x -1, indexStart.y));
+    else {
+        int animationLength = indexEnd.x - indexStart.x + 1;
+        static int tex = 0;
+        static float x = 0.01f;
+        x += Application::GetDT() / animationSpeed;
+
+        tex = (int)(x * 100);
+
+        if (tex % (animationLength + 1) == 0)
+        {
+            x = 0.01f;
+            tex = (int)(x * 100);
+        }
+        gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(tex + indexStart.x - 1, indexStart.y));
+    }
+    
 }
 
 void SingleAnimation::StopAnimation() {
