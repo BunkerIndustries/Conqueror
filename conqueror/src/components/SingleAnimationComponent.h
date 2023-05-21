@@ -8,7 +8,7 @@ public:
 	void OnStop() override { }
 	void OnEvent(Event& event) override {};
 	void OnUpdate() override {}
-	void PlayAnimation();
+	void PlayAnimation(bool onceCycle);
 	void StopAnimation();
 private:
 	Shr<Texture> animation;
