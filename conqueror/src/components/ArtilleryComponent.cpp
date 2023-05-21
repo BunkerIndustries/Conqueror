@@ -3,6 +3,7 @@
 #include "ArtilleryComponent.h"
 #include "required/constants.h"
 #include "required/functions.h"
+#include "components/SingleAnimationComponent.h"
 
 ArtilleryComponent::ArtilleryComponent(GameObject* own_node) 
 	:own_node(own_node->GetComponent<Node>())
@@ -36,6 +37,8 @@ void ArtilleryComponent::Shoot() {
 	uint8_t x = RandomInt(0, enemy_grid_x - 1);
 	uint8_t y = RandomInt(0, enemy_grid_y - 1);
 	GameObject* target_node = enemy_grid.at(x).at(y);
+
+	gameObject->GetComponent<SingleAnimation>()->PlayAnimation(true);
 
 	GameObject* nuclear_bomb_explosion = new GameObject("bum", Transform(target_node->transform.position, artillery_explosion_size), ProjectionMode::PERSPECTIVE);
 	nuclear_bomb_explosion->AddComponent(new SpriteRenderer(glm::vec4(0.8f, 1.0f, 1.0f, 1.0f), Geometry::RECTANGLE));	// TODO: use sprite
