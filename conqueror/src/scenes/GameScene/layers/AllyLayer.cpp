@@ -55,10 +55,11 @@ GameObject* AllyLayer::CreateSoldier(glm::vec2 position) {
 
 GameObject* AllyLayer::CreateMedic(glm::vec2 position) {
 	GameObject* character = new GameObject("medic", Transform(position, character_scale));
-	character->AddComponent(new SpriteRenderer(glm::vec4(0.5f, 0.5f, 0.0f, 0.8f), Geometry::RECTANGLE));		// TODO: Change to sprite_path
+	character->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Anims/Engineer/med_walk_fixed-0001.png"), 112.0f, 304.0f, 24.0f, 16.0f, glm::vec2(0, 0)));
 	character->AddComponent(new Movement(medic_movement_speed));
 	character->AddComponent(new Health(medic_health));
 	character->AddComponent(new MedicCharacter(gameScene->mapLayer->medicBuilding));
+	character->AddComponent(new WalkingAnimation(glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(3.0f, 0.0f), glm::vec2(5.0f, 0.0f), glm::vec2(3.0f, 1.0f), glm::vec2(5.0f, 1.0f), 16, glm::vec2(0.0f, 1.0f), false));
 	character->AddTag("medic");
 	character->onlyLayerReceive = true;
 	AddGameObjectToLayer(character);
