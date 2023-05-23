@@ -118,8 +118,8 @@ bool AllyLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 	GameObject* clicked_character = e.GetGameObject();
 
 	if (clicked_character == gameScene->GetActiveCharacter()) {
-		gameScene->uiLayer->DeactivateCharacterUI();
 		gameScene->SetActiveCharacter(nullptr);
+		gameScene->uiLayer->DeactivateCharacterUI();
 		return true;
 	}
 	else {
@@ -127,22 +127,20 @@ bool AllyLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 	}
 
 	if (clicked_character->HasTag("soldier") && !clicked_character->GetComponent<SoldierBehaviour>()->on_spawn_pos) {
-		gameScene->uiLayer->ActivateSoldierUI();
 		gameScene->SetActiveCharacter(clicked_character);
+		gameScene->uiLayer->ActivateSoldierUI();
 	}
 	else if (clicked_character->HasTag("medic")) {
-		gameScene->uiLayer->ActivateMedicUI();
 		gameScene->SetActiveCharacter(clicked_character);
+		gameScene->uiLayer->ActivateMedicUI();
 	}
 	else if (clicked_character->HasTag("engineer")) {
-		gameScene->uiLayer->ActivateEngineerUI();
 		gameScene->SetActiveCharacter(clicked_character);
+		gameScene->uiLayer->ActivateEngineerUI();
 	}
 	else {
 		return false;
 	}
-
-	gameScene->SetActiveCharacter(clicked_character);
 
 	return true;
 }

@@ -32,10 +32,10 @@ public:
 	bool GameObjectPressed(GameObjectPressedEvent& e);
 
 	GameObject* GetActiveCharacter() const { return active_character; }
-	void SetActiveCharacter(GameObject* gameObject) { active_character = gameObject; }
+	void SetActiveCharacter(GameObject* new_go) { active_character = new_go; }
 
 	GameObject* GetActiveBuilding() const { return active_building; }
-	void SetActiveBuilding(GameObject* gameObject) { active_building = gameObject; }
+	void SetActiveBuilding(GameObject* new_go) { active_building = new_go; }
 
 	BackgroundLayer* backgroundLayer = nullptr;
 	MapLayer* mapLayer = nullptr;

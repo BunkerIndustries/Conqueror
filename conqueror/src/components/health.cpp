@@ -25,6 +25,18 @@ void Health::OnUpdate() {
 
 bool Health::TakeDamage(float damage) {
 	hp -= damage;
+	if (gameScene->GetActiveCharacter() == gameObject) {
+		gameScene->uiLayer->DeactivateCharacterUI();
+		if (gameObject->HasTag("soldier")) {
+			gameScene->uiLayer->ActivateSoldierUI();
+		}
+		else if (gameObject->HasTag("medic")) {
+			gameScene->uiLayer->ActivateMedicUI();
+		}
+		else if (gameObject->HasTag("engineer")) {
+			gameScene->uiLayer->ActivateEngineerUI();
+		}
+	}
 	if (hp <= 0.0f) {
 		if (gameScene->GetActiveCharacter() == gameObject) gameScene->SetActiveCharacter(nullptr);
 		if (gameObject->HasTag("soldier")) {

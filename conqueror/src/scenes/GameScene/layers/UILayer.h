@@ -27,4 +27,7 @@ private:
 	PictureBox* character_background;
 	PictureBox* building_background;
 	PictureBox* supply_menu_background;
+
+	int hp;
+	Label* hp_text;
 };
