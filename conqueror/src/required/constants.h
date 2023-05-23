@@ -172,9 +172,12 @@ inline Transform ui_header_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm
 inline Transform ui_header_building_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.16f, 0.75f));
 inline Transform ui_character_icon_transform = Transform(glm::vec2(0.0f, 1.0f), glm::vec2(0.3f, 0.32f));
 inline Transform ui_building_icon_transform = Transform(glm::vec2(0.0f, 1.0f), glm::vec2(0.3f, 0.24f));
+inline Transform ui_medic_button_transform = Transform(glm::vec2(0.0f, -0.6f), glm::vec2(0.5f, 0.22f));
 inline Transform ui_first_button_transform = Transform(glm::vec2(0.0f, -0.1f), glm::vec2(0.5f, 0.22f));
 inline Transform ui_second_button_transform = Transform(glm::vec2(0.0f, -0.6f), glm::vec2(0.5f, 0.22f));
 inline Transform ui_building_count_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.1, 0.1));
+inline Transform ui_hp_icon_transform = Transform(glm::vec2(-0.7f, 0.0f), glm::vec2(0.3f, 0.2f));
+inline Transform ui_health_text_transform = Transform(glm::vec2(0.0f, 0.4f), glm::vec2(0.3f, 0.2f));
 
 // supply menu ui color
 inline glm::vec4 ui_supply_menu_background_color = glm::vec4(0.5f, 0.5f, 0.5f, 0.6f);
@@ -201,3 +204,4 @@ inline uint8_t soldier_increase_by_wave = 3;
 inline glm::vec2 background_tile_size = glm::vec2(30.0f, 15.0f);
 inline glm::vec2 hiding_sprite_size = glm::vec2(1.6f, 0.85f);
 inline glm::vec2 hiding_sprite_node_offset = glm::vec2(0.0f, 0.8f);
+

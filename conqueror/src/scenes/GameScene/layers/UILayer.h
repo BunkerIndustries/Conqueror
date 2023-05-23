@@ -24,7 +24,7 @@ public:
 	void DeactivateSupplyMenuUI();
 
 private:
-	Panel* character_background;
-	Panel* building_background;
-	Panel* supply_menu_background;
+	PictureBox* character_background;
+	PictureBox* building_background;
+	PictureBox* supply_menu_background;
 };
