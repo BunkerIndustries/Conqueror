@@ -16,10 +16,19 @@ void MedicBuilding::SendMedic() {
 
 	gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->MedicSent();
 	gameScene->allyLayer->CreateMedic(gameObject->transform.position);
+
+	if (gameScene->GetActiveBuilding() == gameScene->mapLayer->medicBuilding) {
+		gameScene->uiLayer->DeactivateBuildingUI();
+		gameScene->uiLayer->ActivateMedicBuildlingUI();
+	}
 }
 
 void MedicBuilding::IncreaseAvailableMedics() {
 	available_medics++;
+	if (gameScene->GetActiveBuilding() == gameScene->mapLayer->medicBuilding) {
+		gameScene->uiLayer->DeactivateBuildingUI();
+		gameScene->uiLayer->ActivateMedicBuildlingUI();
+	}
 }
 
 uint32_t MedicBuilding::GetAvailableMedics() {

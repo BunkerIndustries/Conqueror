@@ -15,11 +15,15 @@ EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
 void EngineerBuilding::SendEngineer()
 {
 	available_engineers--;
+	gameScene->uiLayer->DeactivateBuildingUI();
+	gameScene->uiLayer->ActivateEngineerBuildingUI();
 }
 
 void EngineerBuilding::IncreaseAvailableEngineers()
 {
 	available_engineers++;
+	gameScene->uiLayer->DeactivateBuildingUI();
+	gameScene->uiLayer->ActivateEngineerBuildingUI();
 }
 
 void EngineerBuilding::IncreaseMgStock()
