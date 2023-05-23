@@ -176,8 +176,8 @@ inline Transform ui_medic_button_transform = Transform(glm::vec2(0.0f, -0.6f), g
 inline Transform ui_first_button_transform = Transform(glm::vec2(0.0f, -0.1f), glm::vec2(0.5f, 0.22f));
 inline Transform ui_second_button_transform = Transform(glm::vec2(0.0f, -0.6f), glm::vec2(0.5f, 0.22f));
 inline Transform ui_building_count_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.1, 0.1));
-inline Transform ui_hp_icon_transform = Transform(glm::vec2(-0.7f, 0.0f), glm::vec2(0.3f, 0.2f));
-inline Transform ui_health_text_transform = Transform(glm::vec2(0.0f, 0.4f), glm::vec2(0.3f, 0.2f));
+inline Transform ui_hp_icon_transform = Transform(glm::vec2(-0.58f, 0.0f), glm::vec2(0.25f, 0.12f));
+inline Transform ui_health_text_transform = Transform(glm::vec2(0.3f, 0.0f), glm::vec2(0.2f, 0.1f));
 
 // supply menu ui color
 inline glm::vec4 ui_supply_menu_background_color = glm::vec4(0.5f, 0.5f, 0.5f, 0.6f);

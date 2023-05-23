@@ -39,7 +39,8 @@ void UILayer::ActivateSoldierUI() {
 	PictureBox* icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_character_icon_transform, DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
 
 	PictureBox* hp_icon = new PictureBox(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), ui_hp_icon_transform, DataPool::GetTexture("UI/HP_icon_clear.png"), Type::Rectangle, "hp_icon");
-	Label* hp_text = new Label("HP", ui_font_color, ui_health_text_transform, DataPool::GetFont(ui_font_family), "hp_text");
+	float hp = gameScene->GetActiveCharacter()->GetComponent<Health>()->GetHp();
+	Label* hp_text = new Label("HP: " + std::to_string(hp), ui_font_color, ui_health_text_transform, DataPool::GetFont(ui_font_family), "hp_text");
 	character_background->AddChildObject(hp_icon);
 	character_background->AddChildObject(hp_text);
 

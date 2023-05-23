@@ -128,12 +128,15 @@ bool AllyLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 
 	if (clicked_character->HasTag("soldier") && !clicked_character->GetComponent<SoldierBehaviour>()->on_spawn_pos) {
 		gameScene->uiLayer->ActivateSoldierUI();
+		gameScene->SetActiveCharacter(clicked_character);
 	}
 	else if (clicked_character->HasTag("medic")) {
 		gameScene->uiLayer->ActivateMedicUI();
+		gameScene->SetActiveCharacter(clicked_character);
 	}
 	else if (clicked_character->HasTag("engineer")) {
 		gameScene->uiLayer->ActivateEngineerUI();
+		gameScene->SetActiveCharacter(clicked_character);
 	}
 	else {
 		return false;
