@@ -169,9 +169,11 @@ bool MapLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 		return true;
 	}
 	else if (clicked_mapobject->HasTag("medic_building")) {
+		gameScene->uiLayer->DeactivateBuildingUI();
 		gameScene->uiLayer->ActivateMedicBuildlingUI();
 	}
 	else if (clicked_mapobject->HasTag("engineer_building")) {
+		gameScene->uiLayer->DeactivateBuildingUI();
 		gameScene->uiLayer->ActivateEngineerBuildingUI();
 	}
 	else {
