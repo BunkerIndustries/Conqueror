@@ -55,7 +55,7 @@ GameObject* AllyLayer::CreateSoldier(glm::vec2 position) {
 
 GameObject* AllyLayer::CreateMedic(glm::vec2 position) {
 	GameObject* character = new GameObject("medic", Transform(position, character_scale));
-	character->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Anims/Engineer/med_walk_fixed-0001.png"), 112.0f, 304.0f, 24.0f, 16.0f, glm::vec2(0, 0)));
+	character->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Anims/Med/med_walk_fixed-0001.png"), 112.0f, 304.0f, 24.0f, 16.0f, glm::vec2(0, 0)));
 	character->AddComponent(new Movement(medic_movement_speed));
 	character->AddComponent(new Health(medic_health));
 	character->AddComponent(new MedicCharacter(gameScene->mapLayer->medicBuilding));
@@ -73,7 +73,7 @@ GameObject* AllyLayer::CreateEngineer(glm::vec2 position, bool mg_artillery) {
 	character->AddComponent(new Health(engineer_health));
 	character->AddComponent(new EngineerCharacter(mg_artillery));
 	character->AddComponent(new WalkingAnimation(glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), 10, glm::vec2(0.0f, 1.0f), true));
-	character->AddComponent(new SingleAnimation(DataPool::GetTexture("Anims/Engineer/engineer_build.png"), 168.0f, 304.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f), glm::vec2(3.0f, 3.0f), 10, glm::vec2(0.0f, 1.0f), DataPool::GetTexture("Anims/Engineer/engineer_walk_sideways.png"), 112.0f, 304.0f, 16.0f, 16.0f));
+	character->AddComponent(new SingleAnimation(DataPool::GetTexture("Anims/Engineer/engineer_build.png"), 168.0f, 304.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f), glm::vec2(3.0f, 0.0f), 10, glm::vec2(0.0f, 1.0f), DataPool::GetTexture("Anims/Engineer/engineer_walk_sideways.png"), 112.0f, 304.0f, 16.0f, 16.0f));
 	character->AddTag("engineer");
 	character->onlyLayerReceive = true;
 	AddGameObjectToLayer(character);
@@ -83,7 +83,9 @@ GameObject* AllyLayer::CreateEngineer(glm::vec2 position, bool mg_artillery) {
 GameObject* AllyLayer::CreateMg(glm::vec2 mg_position, GameObject* mg_node) {
 
 	GameObject* mg = new GameObject("mg", Transform(mg_position,mg_size));
-	mg->AddComponent(new SpriteRenderer(glm::vec4(0.5f, 0.1f, 0.5f, 1.0f), Geometry::RECTANGLE));
+	mg->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Buildings/mg_animation.png"), 80.0f, 224.0f, 0.0f, 0.0f, glm::vec2(0, 0)));
+	mg->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(0, 0));
+	mg->AddComponent(new SingleAnimation(DataPool::GetTexture("Anims/mg_animation.png"), 104.0f, 296.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f), glm::vec2(3.0f, 0.0f), 10, glm::vec2(0.0f, 0.0f), DataPool::GetTexture("Anims/mg_animation.png"), 104.0f, 296.0f, 16.0f, 16.0f));
 	mg->AddComponent(new MgComponent(mg_node));
 	AddGameObjectToLayer(mg);
 

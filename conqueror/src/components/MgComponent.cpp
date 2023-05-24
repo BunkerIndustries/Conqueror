@@ -3,6 +3,7 @@
 #include "MgComponent.h"
 #include "required/functions.h"
 #include "required/stands.h"
+#include "components/SingleAnimationComponent.h"
 
 MgComponent::MgComponent(GameObject* own_node) 
 	:own_node(own_node->GetComponent<Node>())
@@ -30,12 +31,14 @@ void MgComponent::OnUpdate() {
 			ammo = mg_magazin_size;
 			dt_counter = 0.0f;
 		}
+		gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(0.0, 0.0));
 		return;
 	}
 
 
 	if (dt_counter < mg_shoot_interval * game_time_factor) {
 		return;
+		gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(0.0, 0.0));
 	}
 
 	dt_counter = 0.0f;
@@ -79,6 +82,7 @@ void MgComponent::OnUpdate() {
 	glm::vec2 calcPos = Util::VectorAngle(angle);
 	ammo--;
 	gameScene->CreateBullet(gameScene->allyLayer, nullptr, gameObject->transform.position, gameObject->transform.position + calcPos * glm::vec2(length, length));
+	gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(1.0, 0.0));
 
 }
 
