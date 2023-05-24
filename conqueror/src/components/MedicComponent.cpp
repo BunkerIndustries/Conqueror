@@ -85,6 +85,10 @@ void MedicCharacter::OnUpdate() {
 			healing_target->GetComponent<Health>()->GetHealed();
 			gameObject->GetComponent<Movement>()->SetTrackingPos(&medic_building->transform.position);
 			healing_target->GetComponent<SoldierBehaviour>()->MedicLeft();
+			if (gameScene->GetActiveCharacter() == healing_target) {
+				gameScene->uiLayer->DeactivateCharacterUI();
+				gameScene->uiLayer->ActivateSoldierUI();
+			}
 		}
 		dt_counter += Application::GetDT();
 	}

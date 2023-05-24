@@ -122,9 +122,6 @@ bool AllyLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 		gameScene->uiLayer->DeactivateCharacterUI();
 		return true;
 	}
-	else {
-		gameScene->uiLayer->DeactivateCharacterUI();
-	}
 
 	if (clicked_character->HasTag("soldier") && !clicked_character->GetComponent<SoldierBehaviour>()->on_spawn_pos) {
 		gameScene->SetActiveCharacter(clicked_character);

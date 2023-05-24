@@ -161,9 +161,6 @@ bool MapLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 		gameScene->SetActiveBuilding(nullptr);
 		return true;
 	}
-	else {
-		gameScene->uiLayer->DeactivateBuildingUI();
-	}
 
 	if (clicked_mapobject->HasTag("move_node")) {
 		if (gameScene->GetActiveCharacter() == nullptr || !gameScene->GetActiveCharacter()->HasTag("soldier") || clicked_mapobject->GetComponent<Node>()->is_occupied) return false;
