@@ -201,3 +201,9 @@ inline glm::vec2 background_tile_size = glm::vec2(30.0f, 15.0f);
 inline glm::vec2 hiding_sprite_size = glm::vec2(1.6f, 0.85f);
 inline glm::vec2 hiding_sprite_node_offset = glm::vec2(0.0f, 0.8f);
 
+// nodes
+inline glm::vec2 trench_node_size = glm::vec2(1.2f, 1.0f);
+inline glm::vec2 waiting_node_size = glm::vec2(0.5f, 0.5f);
+inline glm::vec2 hiding_node_size = glm::vec2(0.5f, 0.5f);
+inline glm::vec2 bunker_node_size = glm::vec2(0.5f, 0.5f);
+inline glm::vec2 artillery_node_size = glm::vec2(0.5f, 0.5f);

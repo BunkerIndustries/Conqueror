@@ -43,25 +43,48 @@ void MapLayer::Update(const float dt)
 }
 
 GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
-	GameObject* node_go = new GameObject("node", Transform(position, node_size));
 
-	node_go->AddComponent(new SpriteRenderer(*node_stand.color, Geometry::RECTANGLE));
+	glm::vec2 node_scale = glm::vec2(node_size);
+	std::string sprite_path = "node_placeholder.png";
+
+	GameObject* node_go = new GameObject("node", Transform(position, node_scale));
 	node_go->AddComponent(new Node(node_stand.stand));
 
 	node_go->AddTag("move_node");
 
+	// TODO: change sprite_path and node_scale each
 	if (node_stand.stand == waiting_stand.stand) {
 		waiting_nodes.push_back(node_go);
 		node_go->RemoveTag("move_node");
+		//sprite_path = "";
+		node_scale = waiting_node_size;
 	}
 	else if (node_stand.stand == trench_stand.stand) {
 		trench_nodes.push_back(node_go);
+		sprite_path = "Map/bunker_tiles_top.png";
+		node_scale = trench_node_size;
+	}
+	else if (node_stand.stand == mg_stand.stand) {
+		sprite_path = "Map/bunker_tiles_top.png";
+		node_scale = trench_node_size;
+	}
+	else if (node_stand.stand == artillerie_stand.stand) {
+		//sprite_path = "";
+		node_scale = artillery_node_size;
+	}
+	else if (node_stand.stand == bunker_stand.stand) {
+		//sprite_path = "";
+		node_scale = bunker_node_size;
 	}
 	else if (node_stand.stand == hiding_stand.stand) {
 		hiding_nodes.push_back(node_go);
 		CreateMapSprite("Map/walls_frontview.png", Transform(position + hiding_sprite_node_offset, hiding_sprite_size));
-
+		//sprite_path = "";
+		node_scale = hiding_node_size;
 	}
+
+	node_go->AddComponent(new SpriteRenderer(white_color, DataPool::GetTexture(sprite_path), 1.0f, Geometry::RECTANGLE));
+	node_go->transform.scale = node_scale;
 
 	node_go->onlyLayerReceive = true;
 	AddGameObjectToLayer(node_go);
@@ -120,7 +143,7 @@ void MapLayer::CreateEnemyGrid(const uint8_t x_size, const uint8_t y_size, const
 				Transform(glm::vec2(start_pos.x + x * (offset + cube_rad * 2.0f), start_pos.y - y * (offset + 2.0f * cube_rad)),
 					glm::vec2(2 * cube_rad))));	// add gameobjects to it
 
-			y_row.at(y)->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f), Geometry::RECTANGLE));	// add SpriteRenderer
+			y_row.at(y)->AddComponent(new SpriteRenderer(glm::vec4(0.0f, 0.0f, 1.0f, 0.0f), Geometry::RECTANGLE));	// add SpriteRenderer
 			y_row.at(y)->AddComponent(new Node(nullptr));
 			//y_row.at(y)->AddTag("move_node");
 			AddGameObjectToLayer(y_row.at(y));
