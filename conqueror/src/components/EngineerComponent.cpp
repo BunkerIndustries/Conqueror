@@ -102,13 +102,13 @@ void EngineerCharacter::OnUpdate() {
 
 			if (mg_artillery) {
 				GameObject* mg_node = gameScene->mapLayer->CreateNode(building_node->transform.position, mg_stand);
-				gameScene->allyLayer->CreateMg(building_node->transform.position + mg_position_offset, mg_node);
+				gameScene->mapLayer->CreateMg(building_node->transform.position + mg_position_offset, mg_node);
 				
 
 			}
 			else {
 				GameObject* artillery_node = gameScene->mapLayer->CreateNode(building_node->transform.position, artillerie_stand);
-				gameScene->allyLayer->CreateArtillery(building_node->transform.position + artillery_position_offset, artillery_node);
+				gameScene->mapLayer->CreateArtillery(building_node->transform.position + artillery_position_offset, artillery_node);
 				
 			}
 			delete building_node;

@@ -80,32 +80,6 @@ GameObject* AllyLayer::CreateEngineer(glm::vec2 position, bool mg_artillery) {
 	return character;
 }
 
-GameObject* AllyLayer::CreateMg(glm::vec2 mg_position, GameObject* mg_node) {
-
-	GameObject* mg = new GameObject("mg", Transform(mg_position,mg_size));
-	mg->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Buildings/mg_animation.png"), 80.0f, 224.0f, 0.0f, 0.0f, glm::vec2(0, 0)));
-	mg->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(0, 0));
-	mg->AddComponent(new SingleAnimation(DataPool::GetTexture("Anims/mg_animation.png"), 104.0f, 296.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f), glm::vec2(3.0f, 0.0f), 10, glm::vec2(0.0f, 0.0f), DataPool::GetTexture("Anims/mg_animation.png"), 104.0f, 296.0f, 16.0f, 16.0f));
-	mg->AddComponent(new MgComponent(mg_node));
-	AddGameObjectToLayer(mg);
-
-	return mg;
-}
-
-GameObject* AllyLayer::CreateArtillery(glm::vec2 artillery_position, GameObject* artillery_node) {
-
-	GameObject* artillery = new GameObject("artillery", Transform(artillery_position, artillery_size));
-	artillery->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Buildings/artillerie_front_north.png"), 248.0f, 400.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f)));
-	artillery->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(0.0f, 0.0f));
-	artillery->AddComponent(new ArtilleryComponent(artillery_node));
-
-	artillery->AddComponent(new SingleAnimation(DataPool::GetTexture("Buildings/artillerie_front_north.png"), 248.0f, 400.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), artillery_shoot_anim_speed, glm::vec2(0.0f, 0.0f), DataPool::GetTexture("Buildings/artillerie_front_north.png"), 248.0f, 400.0f, 16.0f, 16.0f));
-
-	AddGameObjectToLayer(artillery);
-
-	return artillery;
-}
-
 bool AllyLayer::KeyReleased(KeyReleasedEvent& e) {
 	if (e.getKeyCode() == KEY_SPACE) {
 		Supply::TryCallSoldier();

@@ -24,6 +24,9 @@ public:
 	GameObject* CreateNode(glm::vec2 position, Stand& node_stand);
 	void CreateDeadBody(std::string sprite_path, glm::vec2 position);
 
+	GameObject* CreateMg(glm::vec2 mg_position, GameObject* mg_node);
+	GameObject* CreateArtillery(glm::vec2 artillery_position, GameObject* artillery_node);
+
 	GameObject* medicBuilding;
 	GameObject* engineerBuilding;
 private:
