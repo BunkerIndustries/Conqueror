@@ -30,8 +30,8 @@ void MapLayer::OnAttach()
 	CreateEnemyGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
 
 	Layer* layer = this;
-	medicBuilding = Medic::AddBuilding(Transform(glm::vec2(12.0f, -5.0f), building_size), start_medic_stock);
-	engineerBuilding = Engineer::AddBuilding(Transform(glm::vec2(-12.0f, -5.0f), building_size), start_engineer_stock);
+	medicBuilding = Medic::AddBuilding(Transform(glm::vec2(11.0f, -11.5f), building_size), start_medic_stock);
+	engineerBuilding = Engineer::AddBuilding(Transform(glm::vec2(-11.0f, -11.5f), building_size), start_engineer_stock);
 }
 
 void MapLayer::OnDetach()
@@ -92,6 +92,15 @@ GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 	return node_go;
 }
 
+void MapLayer::RotateTrenchNodes() {
+	for (size_t i = 0; i < 7; i++) {
+		trench_nodes.at(i)->transform.rotation = 45.0f;
+	}
+	for (size_t i = trench_nodes.size()-7; i < trench_nodes.size() ; i++) {
+		trench_nodes.at(i)->transform.rotation = -45.0f;
+	}
+}
+
 void MapLayer::CreateDeadBody(std::string sprite_path, glm::vec2 position) {
 	GameObject* sp = new GameObject("map_sprite", Transform(position, dead_body_size));
 	sp->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture(sprite_path), 1.0f, Geometry::RECTANGLE));
@@ -125,6 +134,8 @@ void MapLayer::CreateGameMap(std::vector<std::pair<std::vector<glm::vec2>, Stand
 			this->AddGameObjectToLayer(sp);
 		}
 	}
+
+	RotateTrenchNodes();
 }
 
 
