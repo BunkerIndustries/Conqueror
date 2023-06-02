@@ -40,13 +40,13 @@ void AllyLayer::Update(const float dt)
 
 GameObject* AllyLayer::CreateSoldier(glm::vec2 position) {
 	GameObject* character = new GameObject("soldier", Transform(position, character_scale));
-	character->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("/Anims/Soldier/German_Soldier_MG-0001.png"), 200.0f, 304.0f, 16.0f, 16.0f, glm::vec2(0, 0)));
+	character->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Anims/Soldier/German_Soldier_MG_fixed-0001.png"), 200.0f, 304.0f, 16.0f, 16.0f, glm::vec2(0, 0)));
 	character->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(3, 0));
 	character->AddComponent(new Movement(soldier_movement_speed));
 	character->AddComponent(new Health(soldier_health));
 	character->AddComponent(new SoldierBehaviour());
 	character->AddComponent(new SoldierShooting());
-	character->AddComponent(new WalkingAnimation(glm::vec2(3.0f, 1.0f), glm::vec2(5.0f, 1.0f), glm::vec2(3.0f, 0.0f), glm::vec2(5.0f, 0.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), 10, glm::vec2(3.0f, 1.0f), false));
+	character->AddComponent(new WalkingAnimation(glm::vec2(3.0f, 1.0f), glm::vec2(5.0f, 1.0f), glm::vec2(3.0f, 0.0f), glm::vec2(5.0f, 0.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), 32, glm::vec2(3.0f, 1.0f), false));
 	character->AddTag("soldier");
 	character->onlyLayerReceive = true;
 	AddGameObjectToLayer(character);
@@ -72,8 +72,8 @@ GameObject* AllyLayer::CreateEngineer(glm::vec2 position, bool mg_artillery) {
 	character->AddComponent(new Movement(engineer_movement_speed));
 	character->AddComponent(new Health(engineer_health));
 	character->AddComponent(new EngineerCharacter(mg_artillery));
-	character->AddComponent(new WalkingAnimation(glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), 10, glm::vec2(0.0f, 1.0f), true));
-	character->AddComponent(new SingleAnimation(DataPool::GetTexture("Anims/Engineer/engineer_build.png"), 168.0f, 304.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f), glm::vec2(3.0f, 0.0f), 10, glm::vec2(0.0f, 1.0f), DataPool::GetTexture("Anims/Engineer/engineer_walk_sideways.png"), 112.0f, 304.0f, 16.0f, 16.0f));
+	character->AddComponent(new WalkingAnimation(glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), 16, glm::vec2(0.0f, 1.0f), true));
+	character->AddComponent(new SingleAnimation(DataPool::GetTexture("Anims/Engineer/engineer_build_animation_fixedsprite.png"), 176.0f, 304.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f), glm::vec2(3.0f, 0.0f), 10, glm::vec2(0.0f, 1.0f), DataPool::GetTexture("Anims/Engineer/engineer_walk_sideways.png"), 112.0f, 304.0f, 24.0f, 16.0f));
 	character->AddTag("engineer");
 	character->onlyLayerReceive = true;
 	AddGameObjectToLayer(character);
