@@ -147,7 +147,7 @@ inline float artillery_critical_damage = 100.0f;
 inline glm::vec2 artillery_explosion_size = glm::vec2(3.0f, 3.0f);
 inline glm::vec2 artillery_position_offset = glm::vec2(0.0f, 0.4f);
 inline int artillery_shoot_anim_speed = 15;
-inline int artillery_explosion_anim_speed = 15;
+inline float artillery_explosion_anim_speed = 0.1f;
 inline float artillery_explosion_lasting = 3.0f;
 
 // ui fonts

@@ -69,7 +69,7 @@ GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 		node_scale = trench_node_size;
 	}
 	else if (node_stand.stand == artillerie_stand.stand) {
-		//sprite_path = "";
+		sprite_path = "Map/action_spot_hay.png";
 		node_scale = artillery_node_size;
 	}
 	else if (node_stand.stand == bunker_stand.stand) {
@@ -79,7 +79,7 @@ GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 	else if (node_stand.stand == hiding_stand.stand) {
 		hiding_nodes.push_back(node_go);
 		CreateMapSprite("Map/walls_frontview.png", Transform(position + hiding_sprite_node_offset, hiding_sprite_size));
-		//sprite_path = "";
+		sprite_path = "Map/action_spot_hay.png";
 		node_scale = hiding_node_size;
 	}
 
