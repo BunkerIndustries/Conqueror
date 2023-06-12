@@ -32,17 +32,6 @@ void EnemyLayer::Update(const float dt)
 
 void EnemyLayer::OnEvent(Event& event)
 {
-	EventDispatcher dispatcher(event);
-	dispatcher.dispatch<KeyPressedEvent>([this](KeyPressedEvent& e)
-	{
-		if (e.getKeyCode() == KEY_G)
-		{
-			CreateEnemy("enemy", glm::vec2(RandomF(enemy_grid_startpos.x - enemy_spawn_random_x_radius, enemy_grid_startpos.x + enemy_spawn_random_x_radius), enemy_spawn_y_position));
-			return true;
-		}
-	return false;
-	});
-
 }
 
 GameObject* EnemyLayer::CreateEnemy(std::string name, glm::vec2 spawn_pos) {
