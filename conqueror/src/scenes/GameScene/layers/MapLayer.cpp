@@ -189,7 +189,7 @@ GameObject* MapLayer::CreateBuilding(Transform transform, std::string type) {
 GameObject* MapLayer::CreateMg(glm::vec2 mg_position, GameObject* mg_node) {
 
 	GameObject* mg = new GameObject("mg", Transform(mg_position, mg_size));
-	mg->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Buildings/mg_animation.png"), 80.0f, 224.0f, 0.0f, 0.0f, glm::vec2(0, 0)));
+	mg->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Buildings/mg_stand.png"), 80.0f, 224.0f, 0.0f, 0.0f, glm::vec2(0, 0)));
 	mg->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(0, 0));
 	mg->AddComponent(new SingleAnimation(DataPool::GetTexture("Anims/mg_animation.png"), 104.0f, 296.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f), glm::vec2(3.0f, 0.0f), 10, glm::vec2(0.0f, 0.0f), DataPool::GetTexture("Anims/mg_animation.png"), 104.0f, 296.0f, 16.0f, 16.0f));
 	mg->AddComponent(new MgComponent(mg_node));

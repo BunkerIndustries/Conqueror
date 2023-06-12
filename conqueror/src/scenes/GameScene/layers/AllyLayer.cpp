@@ -35,7 +35,7 @@ void AllyLayer::OnDetach()
 
 void AllyLayer::Update(const float dt)
 {
-
+	Supply::TryCallSoldier();
 }
 
 GameObject* AllyLayer::CreateSoldier(glm::vec2 position) {
