@@ -46,7 +46,7 @@ inline float dead_body_lasting_time = 6.0f;
 
 //bullet
 inline float bullet_speed = 30.0f;
-inline glm::vec2 bullet_scale = glm::vec2(0.25f, 0.5f);
+inline glm::vec2 bullet_scale = glm::vec2(0.25f, 0.25f);
 inline glm::vec4 bullet_color = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
 
 //soldier behaviour 
@@ -120,7 +120,7 @@ inline glm::vec2 building_size = glm::vec2(3.0f, 3.0f);
 inline float start_preparation_time = 4.0f;
 inline float start_wave_duration = 4.0f;
 inline float wave_length_gradient = 1.5f;
-inline float enemy_start_spawn_interval = 2.0f;
+inline float enemy_start_spawn_interval = 1.8f;
 inline float enemy_spawn_interval_gradient = 0.9f;
 
 // stocks
