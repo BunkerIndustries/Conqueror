@@ -13,7 +13,7 @@ inline std::vector<std::vector<GameObject*>> enemy_grid;
 inline float camera_scroll_speed = 28.0f;
 inline float camera_move_speed = 2.0f;
 inline float min_camera_z_pos = 2.0f;
-inline float max_camera_z_pos = 15.0f;
+inline float max_camera_z_pos = 12.0f;
 inline glm::vec2 min_camera_positions = glm::vec2(-7.0f, -6.0f);
 inline glm::vec2 max_camera_positions = glm::vec2(7.0f, 5.0f);
 
