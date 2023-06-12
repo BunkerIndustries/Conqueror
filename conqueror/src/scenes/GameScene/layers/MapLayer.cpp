@@ -56,7 +56,7 @@ GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 	if (node_stand.stand == waiting_stand.stand) {
 		waiting_nodes.push_back(node_go);
 		node_go->RemoveTag("move_node");
-		//sprite_path = "";
+		sprite_path = "spawn_point.png";
 		node_scale = waiting_node_size;
 	}
 	else if (node_stand.stand == trench_stand.stand) {
@@ -73,7 +73,7 @@ GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 		node_scale = artillery_node_size;
 	}
 	else if (node_stand.stand == bunker_stand.stand) {
-		//sprite_path = "";
+		sprite_path = "bunker_floor.png";
 		node_scale = bunker_node_size;
 	}
 	else if (node_stand.stand == hiding_stand.stand) {
@@ -81,6 +81,9 @@ GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 		CreateMapSprite("Map/walls_frontview.png", Transform(position + hiding_sprite_node_offset, hiding_sprite_size));
 		sprite_path = "Map/action_spot_hay.png";
 		node_scale = hiding_node_size;
+	}
+	else if (node_stand.stand == front_stand.stand) {
+		sprite_path = "action_spot_hay.png";
 	}
 
 	node_go->AddComponent(new SpriteRenderer(white_color, DataPool::GetTexture(sprite_path), 1.0f, Geometry::RECTANGLE));
