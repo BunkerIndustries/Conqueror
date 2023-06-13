@@ -27,6 +27,7 @@ void UILayer::OnDetach()
 
 void UILayer::Update(const float dt)
 {
+	UpdateDeathCountdown();
 }
 
 
@@ -197,4 +198,18 @@ void UILayer::DeactivateBuildingUI() {
 
 void UILayer::DeactivateSupplyMenuUI() {
 	RemoveUIObject(supply_menu_background);
+}
+
+void UILayer::UpdateDeathCountdown() {
+	if (filled_last_row_grid_positions.size() > 0) {
+		loss_countdown -= filled_last_row_grid_positions.size();
+		Label* countDown = new Label(std::to_string(loss_countdown), ui_font_color, Transform(glm::vec2(0.0f, 0.0f)), DataPool::GetFont(ui_font_family), "ui_death_countdown");
+	}
+	else if (filled_last_row_grid_positions.size() == 0 && loss_countdown == 60) {
+		return;
+	}
+	else if (filled_last_row_grid_positions.size() == 0) {
+		loss_countdown++;
+	}
+
 }

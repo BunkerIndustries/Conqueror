@@ -19,6 +19,9 @@ size_t EnemyBehaviour::GetYIndex() {
 	return y_index;
 }
 
+size_t EnemyBehaviour::GetXIndex() {
+	return x_index;
+}
 
 void EnemyBehaviour::OnStart() {
 	move_component = gameObject->GetComponent<Movement>();
@@ -58,7 +61,9 @@ void EnemyBehaviour::OnUpdate() {
 			if (y_index != enemy_grid_y - 1) {
 				ChoosePosAndMove();
 			}
-			
+			else {
+				filled_last_row_grid_positions.push_front(x_index);
+			}
 		}
 		else {
 			if (!time_running) {

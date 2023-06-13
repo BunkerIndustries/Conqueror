@@ -22,6 +22,7 @@ public:
 	void DeactivateCharacterUI();
 	void DeactivateBuildingUI();
 	void DeactivateSupplyMenuUI();
+	void UpdateDeathCountdown();
 
 private:
 	PictureBox* character_background;

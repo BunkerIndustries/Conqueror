@@ -16,7 +16,7 @@ public:
 	GameObject* GetNode();
 
 	size_t GetYIndex();
-
+	size_t GetXIndex();
 private:
 	Movement* move_component = nullptr;
 	bool is_waiting = false;
