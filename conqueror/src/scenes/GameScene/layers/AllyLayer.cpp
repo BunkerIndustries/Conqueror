@@ -67,7 +67,7 @@ GameObject* AllyLayer::CreateMedic(glm::vec2 position) {
 }
 
 GameObject* AllyLayer::CreateEngineer(glm::vec2 position, bool mg_artillery) {
-	GameObject* character = new GameObject("engineer", Transform(position, character_scale));
+	GameObject* character = new GameObject("engineer", Transform(position, engineer_scale));
 	character->AddComponent(new SpriteSheet(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Anims/Engineer/engineer_walk_sideways.png"), 112.0f, 304.0f, 24.0f, 16.0f, glm::vec2(0, 0)));
 	character->AddComponent(new Movement(engineer_movement_speed));
 	character->AddComponent(new Health(engineer_health));

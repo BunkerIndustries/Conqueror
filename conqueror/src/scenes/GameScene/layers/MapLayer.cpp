@@ -84,6 +84,7 @@ GameObject* MapLayer::CreateNode(glm::vec2 position, Stand& node_stand) {
 	}
 	else if (node_stand.stand == front_stand.stand) {
 		sprite_path = "action_spot_hay.png";
+		node_scale = front_node_size;
 	}
 
 	node_go->AddComponent(new SpriteRenderer(white_color, DataPool::GetTexture(sprite_path), 1.0f, Geometry::RECTANGLE));

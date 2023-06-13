@@ -28,7 +28,7 @@ inline float min_enemy_waiting_time = 0.5f;
 inline float max_enemy_waiting_time = 2.0f;
 inline float enemy_movement_speed = 1.0f;
 inline uint8_t max_enemy_lock_target_tries = 3;
-inline glm::vec2 enemy_scale = glm::vec2(0.9f, 1.2f);
+inline glm::vec2 enemy_scale = glm::vec2(0.9f, 1.35f);
 inline uint8_t enemy_random_movement_sum = 5;
 inline uint8_t enemy_move_left_probability = 1;
 inline uint8_t enemy_move_mid_probability = 3;
@@ -108,10 +108,12 @@ inline float game_time_factor = 3.0f;
 // medics 
 inline glm::vec2 medic_healing_position_offset = glm::vec2(0.5f, 0.0f);
 inline float waiting_time_per_hp = 0.03f;
+inline glm::vec2 medic_size = glm::vec2(0.88f, 1.4f);
 
 // engineer 
 inline glm::vec2 engineer_building_position_offset = glm::vec2(0.5f, 0.0f);
 inline float building_time = 2.5f;
+inline glm::vec2 engineer_scale = glm::vec2(0.88f, 1.4f);
 
 // buildings
 inline glm::vec2 building_size = glm::vec2(3.0f, 3.0f);
@@ -119,9 +121,9 @@ inline glm::vec2 building_size = glm::vec2(3.0f, 3.0f);
 // wave 
 inline float start_preparation_time = 4.0f;
 inline float start_wave_duration = 4.0f;
-inline float wave_length_gradient = 1.5f;
+inline float wave_length_gradient = 1.25f;
 inline float enemy_start_spawn_interval = 1.8f;
-inline float enemy_spawn_interval_gradient = 0.9f;
+inline float enemy_spawn_interval_gradient = 0.7f;
 
 // stocks
 inline unsigned int start_soldier_stock = 5;
@@ -129,8 +131,8 @@ inline uint8_t start_engineer_stock = 3;
 inline uint8_t start_medic_stock = 3;
 
 // mg
-inline glm::vec2 mg_size = glm::vec2(0.6f, 0.8f);
-inline unsigned int mg_magazin_size = 50;
+inline glm::vec2 mg_size = glm::vec2(1.0f, 1.2f);
+inline unsigned int mg_magazin_size = 40;
 inline float mg_reload_time = 3.0f;
 inline float mg_shoot_interval = 0.05f;
 inline float mg_miss_points = 5;
@@ -139,13 +141,13 @@ inline float mg_inaccuracy = 10.0f;
 inline glm::vec2 mg_position_offset = glm::vec2(0.0f, 0.4f);
 
 // artillery
-inline glm::vec2 artillery_size = glm::vec2(0.7f, 0.9f); 
+inline glm::vec2 artillery_size = glm::vec2(0.8f, 1.0f); 
 inline float artillery_min_reload_time = 0.5f;
 inline float artillery_max_reload_time = 2.5f;
 inline float artillery_normal_damage = 70.0f;
 inline float artillery_critical_damage = 100.0f;
 inline glm::vec2 artillery_explosion_size = glm::vec2(3.0f, 3.0f);
-inline glm::vec2 artillery_position_offset = glm::vec2(0.0f, 0.4f);
+inline glm::vec2 artillery_position_offset = glm::vec2(0.0f, 0.55f);
 inline int artillery_shoot_anim_speed = 15;
 inline float artillery_explosion_anim_speed = 0.1f;
 inline float artillery_explosion_lasting = 3.0f;
@@ -189,7 +191,7 @@ inline glm::vec2 ui_choice_field_size = glm::vec2(0.32f, 0.58f);
 inline Transform ui_choice_field_text_transform = Transform(glm::vec2(0.0f, 0.9f), glm::vec2(0.1f, 0.16f));
 inline Transform ui_choice_field_count_transform = Transform(glm::vec2(0.0f, 0.5f), glm::vec2(0.11f, 0.14f));
 inline Transform ui_choice_field_button_transform = Transform(glm::vec2(0.0f, -0.63f), glm::vec2(0.7f, 0.2f));
-inline glm::vec2 anfordern_button_size = glm::vec2(0.18f, 0.62f);
+inline glm::vec2 anfordern_button_size = glm::vec2(0.12f, 0.54f);
 
 // supply menu
 inline uint8_t min_soldiers_choice = 2;
@@ -200,10 +202,12 @@ inline uint8_t soldier_increase_by_wave = 3;
 inline glm::vec2 background_tile_size = glm::vec2(30.0f, 15.0f);
 inline glm::vec2 hiding_sprite_size = glm::vec2(1.6f, 0.85f);
 inline glm::vec2 hiding_sprite_node_offset = glm::vec2(0.0f, 0.8f);
+inline glm::vec2 bunker_edge_sprite_size = glm::vec2(1.0f, 1.0f);
 
 // nodes
 inline glm::vec2 trench_node_size = glm::vec2(1.2f, 1.0f);
 inline glm::vec2 waiting_node_size = glm::vec2(0.5f, 0.5f);
-inline glm::vec2 hiding_node_size = glm::vec2(0.5f, 0.5f);
-inline glm::vec2 bunker_node_size = glm::vec2(1.1f, 1.1f);
-inline glm::vec2 artillery_node_size = glm::vec2(0.5f, 0.5f);
+inline glm::vec2 hiding_node_size = glm::vec2(0.7f, 0.7f);
+inline glm::vec2 bunker_node_size = glm::vec2(0.5f, 0.5f);
+inline glm::vec2 artillery_node_size = glm::vec2(0.7f, 0.7f);
+inline glm::vec2 front_node_size = glm::vec2(0.7f, 0.7f);

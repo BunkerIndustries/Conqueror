@@ -100,16 +100,18 @@ void EngineerCharacter::OnUpdate() {
 			going_back = true;
 			gameObject->GetComponent<Movement>()->SetTrackingPos(&engineer_building->transform.position);
 
+			float rotation = building_node->transform.rotation;
+
 			if (mg_artillery) {
 				GameObject* mg_node = gameScene->mapLayer->CreateNode(building_node->transform.position, mg_stand);
 				gameScene->mapLayer->CreateMg(building_node->transform.position + mg_position_offset, mg_node);
-				
+				mg_node->transform.rotation = rotation;
 
 			}
 			else {
 				GameObject* artillery_node = gameScene->mapLayer->CreateNode(building_node->transform.position, artillerie_stand);
 				gameScene->mapLayer->CreateArtillery(building_node->transform.position + artillery_position_offset, artillery_node);
-				
+				artillery_node->transform.rotation = rotation;
 			}
 			delete building_node;
 		}
