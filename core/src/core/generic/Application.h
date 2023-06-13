@@ -29,6 +29,7 @@ namespace core {
 		long int framesRendered = 0;
 		bool gameRunning = true;
 		bool resizing = false;
+		bool deleteOldScene = false;
 
 		//IMGUI
 		bool imguiEnabled = false; int imguiEnabledQueue = 0;
@@ -60,6 +61,7 @@ namespace core {
 		void OnEvent(Event& event);
 
 		static void ChangeScene(Scene* new_scene);
+		static void ChangeScene(Scene* new_scene, bool deleteOldScene);
 
 		void Exit() { gameRunning = false; }
 
@@ -78,7 +80,7 @@ namespace core {
 		static ImGuiLayer& GetImGuiLayer() { return *GetInstance()->imguiLayer; }
 		static LayerStack& GetLayerStack() { return GetInstance()->layerStack; }
 
-		virtual void GameObjectDeleted(GameObject* gameObject) {};
+		virtual void GameObjectDeleted(GameObject* gameObject) {}
 	};
 
 	//defined by client
