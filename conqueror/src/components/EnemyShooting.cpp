@@ -35,10 +35,9 @@ void EnemyShooting::Shoot() {
 		float dist = sqrt(distanceVec2.x * distanceVec2.x + distanceVec2.y * distanceVec2.y);
 
 		glm::vec2 pos = target->transform.position;
-		float distScale = dist / 
-			;
+		float distScale = dist / bulletInaccuracyMultiplicator;
 
-		if (RandomInt(hit_probability - 9, hit_probability + 1) < 0 && bulletDistanceMoreInaccuracy)
+		if (RandomInt(hit_probability - 15, hit_probability + 1) < 0 && bulletDistanceMoreInaccuracy)
 		{
 			float randomX = RandomF(-1.0f, 1.0f) * distScale;
 			pos.x += randomX;
