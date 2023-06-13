@@ -7,7 +7,7 @@ inline float tr_wi = trench_node_size.x;
 inline glm::vec2 mid_tr_start = glm::vec2(-4.0f * tr_wi, -4.0f);
 inline glm::vec2 mid_tr_end = glm::vec2(4.0f * tr_wi, -4.0f);
 
-inline glm::vec2 bkw_sc = glm::vec2(1.1f, 0.2f);
+inline glm::vec2 bkw_sc = glm::vec2(2.2f, 0.2f);
 
 inline std::vector<std::pair<std::vector<glm::vec2>, Stand>> standard_map =
 
@@ -64,15 +64,15 @@ inline std::vector<std::pair<std::vector<glm::vec2>, Stand>> standard_map =
 	},
 	{
 		{
-			glm::vec2(mid_tr_start.x - 2.25f, -3.5f),
-			glm::vec2(mid_tr_start.x - 2.25f, -4.0f),
+			glm::vec2(mid_tr_start.x - 2.75f, -3.0f),
+			glm::vec2(mid_tr_start.x - 2.75f, -4.0f),
 			glm::vec2(mid_tr_start.x - 1.75f, -4.0f),
-			glm::vec2(mid_tr_start.x - 1.75f, -3.5f),
+			glm::vec2(mid_tr_start.x - 1.75f, -3.0f),
 
-			glm::vec2(mid_tr_end.x + 2.25f, -3.5f),
-			glm::vec2(mid_tr_end.x + 2.25f, -4.0f),
+			glm::vec2(mid_tr_end.x + 2.75f, -3.0f),
+			glm::vec2(mid_tr_end.x + 2.75f, -4.0f),
 			glm::vec2(mid_tr_end.x + 1.75f, -4.0f),
-			glm::vec2(mid_tr_end.x + 1.75f, -3.5f)
+			glm::vec2(mid_tr_end.x + 1.75f, -3.0f)
 		}
 		,bunker_stand
 	},
@@ -92,10 +92,15 @@ inline std::vector<std::pair<std::vector<Transform>, std::string>> standard_map_
 {
 	{
 		{
-			Transform(glm::vec2(mid_tr_start.x - 2.0f, -3.3f), bkw_sc, 0.0f),
-			Transform(glm::vec2(mid_tr_start.x - 2.0f, -4.2f), bkw_sc, 0.0f),
-			Transform(glm::vec2(mid_tr_start.x - 1.55f, -3.75f), bkw_sc, 90.0f),
-			Transform(glm::vec2(mid_tr_start.x - 2.45f, -3.75f), bkw_sc, 90.0f)
+			Transform(glm::vec2(mid_tr_start.x - 2.25f, -2.4f), bkw_sc, 0.0f),
+			Transform(glm::vec2(mid_tr_start.x - 2.25f, -4.6f), bkw_sc, 0.0f),
+			Transform(glm::vec2(mid_tr_start.x - 3.3f, -3.5f), bkw_sc, 90.0f),
+			Transform(glm::vec2(mid_tr_start.x - 1.20f, -3.5f), bkw_sc, 90.0f),
+
+			Transform(glm::vec2(mid_tr_end.x + 2.25f, -2.4f), bkw_sc, 0.0f),
+			Transform(glm::vec2(mid_tr_end.x + 2.25f, -4.6f), bkw_sc, 0.0f),
+			Transform(glm::vec2(mid_tr_end.x + 3.3f, -3.5f), bkw_sc, 90.0f),
+			Transform(glm::vec2(mid_tr_end.x + 1.20f, -3.5f), bkw_sc, 90.0f)
 		}
 		,"bunker_wall_bottom_edge_left.png"
 	}
