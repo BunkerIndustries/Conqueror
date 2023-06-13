@@ -50,8 +50,8 @@ inline glm::vec2 bullet_scale = glm::vec2(0.25f, 0.25f);
 inline glm::vec4 bullet_color = glm::vec4(0.1f, 0.1f, 0.1f, 1.0f);
 
 //soldier behaviour 
-inline float min_soldier_shoot_waiting_time = 0.7f;
-inline float max_soldier_shoot_waiting_time = 1.0f;
+inline float min_soldier_shoot_waiting_time = 0.3f;
+inline float max_soldier_shoot_waiting_time = 0.7f;
 inline uint8_t max_soldier_lock_target_tries = 2;
 inline uint8_t soldier_miss_points = 1;
 inline glm::vec2 soldier_spawn_pos = glm::vec2(0.0f, -18.0f);
