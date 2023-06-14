@@ -13,9 +13,12 @@ public:
 
 	bool TakeDamage(float damage);
 	float GetHp();
+	float GetMaxHp();
 	void GetHealed();
+	void AddMaxHp(float addHp);
 private:
 	float hp;
 	bool just_hit = false;
 	float dt_counter = 0.0f;
+	float max_hp = soldier_health;
 };

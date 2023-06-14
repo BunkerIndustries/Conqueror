@@ -40,7 +40,7 @@ inline uint8_t enemy_move_right_probability = 1;
 inline float enemy_spawn_y_position = 17.0f;
 inline float enemy_spawn_random_x_radius = 10.0f;
 
-// character 
+// character
 inline float soldier_movement_speed = 1.2f;
 inline float medic_movement_speed = 2.9f;
 inline float engineer_movement_speed = 2.0f;
@@ -224,3 +224,13 @@ inline glm::vec2 front_node_size = glm::vec2(0.7f, 0.7f);
 // hits
 inline glm::vec4 hit_color = glm::vec4(1.0f, 0.55f, 0.55f, 1.0f);
 inline float show_hit_time = 0.07f;
+
+//upgrades
+inline float damage_upgrade = 0.0f;
+inline float armor_upgrade = 0.0f;
+inline float accuracy_upgrade = 0.0f;
+inline float engineer_speed_upgrade = 0.0f;
+inline float medic_speed_upgrade = 0.0f;
+inline float mg_damage_upgrade = 0.0f;
+inline float artillary_speed_upgrade = 0.0f;
+inline float build_speed_upgrade = 0.0f;

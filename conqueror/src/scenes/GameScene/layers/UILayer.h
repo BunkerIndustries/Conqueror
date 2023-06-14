@@ -29,6 +29,7 @@ public:
 	Label* countDown;
 	Label* money;
 	PictureBox* coin;
+	PictureBox* soldierPic;
 
 
 private:
