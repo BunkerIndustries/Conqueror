@@ -8,7 +8,13 @@ namespace core
 	UIObject::UIObject(std::string name, const Transform& transform, glm::vec4 color)
 		: Object(name, transform), color(color), globalPos(glm::vec2(0.0f)), globalScale(glm::vec2(0.0f)) { }
 
-	UIObject::~UIObject() { }
+	UIObject::~UIObject()
+	{
+		for (const auto child : childOjects)
+		{
+			delete child;
+		}
+	}
 
 	void UIObject::RenderObject()
 	{

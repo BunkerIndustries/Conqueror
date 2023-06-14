@@ -161,7 +161,7 @@ inline glm::vec4 white_color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
 // character and building ui transform
 inline glm::vec2 ui_building_background_size = glm::vec2(0.3f, 0.73f);
-inline glm::vec2 ui_background_size = glm::vec2(0.3f, 0.6f);
+inline glm::vec2 ui_background_size = glm::vec2(0.3f, 0.7f);
 inline glm::vec2 ui_character_position = glm::vec2(0.8f, 0.0f);
 inline glm::vec2 ui_building_position = glm::vec2(-0.8f, 0.0f);
 inline Transform ui_header_transform = Transform(glm::vec2(0.0f, 0.57f), glm::vec2(0.9f, 0.25f));
@@ -170,8 +170,8 @@ inline Transform ui_header_building_name_transform = Transform(glm::vec2(0.0f, 0
 inline Transform ui_character_icon_transform = Transform(glm::vec2(0.0f, 1.1f), glm::vec2(0.3f, 0.32f));
 inline Transform ui_building_icon_transform = Transform(glm::vec2(0.0f, 1.1f), glm::vec2(0.3f, 0.24f));
 inline Transform ui_medic_button_transform = Transform(glm::vec2(0.0f, -0.5f), glm::vec2(0.5f, 0.22f));
-inline Transform ui_first_button_transform = Transform(glm::vec2(0.0f, -0.2f), glm::vec2(0.5f, 0.22f));
-inline Transform ui_second_button_transform = Transform(glm::vec2(0.0f, -0.7f), glm::vec2(0.5f, 0.22f));
+inline Transform ui_first_button_transform = Transform(glm::vec2(-0.3f, -0.2f), glm::vec2(0.5f, 0.22f));
+inline Transform ui_second_button_transform = Transform(glm::vec2(-0.3f, -0.7f), glm::vec2(0.5f, 0.22f));
 inline Transform ui_building_count_transform = Transform(glm::vec2(0.0f, 0.15f), glm::vec2(0.1, 0.1));
 inline Transform ui_hp_icon_transform = Transform(glm::vec2(-0.3f, -0.01f), glm::vec2(0.25f, 0.2f));
 inline Transform ui_health_text_transform = Transform(glm::vec2(0.25f, -0.01f), glm::vec2(0.12f, 0.13f));

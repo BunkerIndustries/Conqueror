@@ -109,12 +109,17 @@ namespace core
 
 	void Layer::RemoveUIObject()
 	{
+		for (const auto object : uiObjects)
+		{
+			delete object;
+		}
 		uiObjects.clear();
 	}
 
 	void Layer::RemoveUIObject(uint32_t index)
 	{
 		if (index >= uiObjects.size()) return;
+		delete *(uiObjects.begin() + index);
 		uiObjects.erase(uiObjects.begin() + index);
 	}
 
@@ -122,6 +127,7 @@ namespace core
 	{
 		std::vector<UIObject*>::iterator it = std::find(uiObjects.begin(), uiObjects.end(), object);
 		if (it == uiObjects.end()) return;
+		delete *it;
 		uiObjects.erase(it);
 	}
 
