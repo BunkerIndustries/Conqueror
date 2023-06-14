@@ -236,5 +236,4 @@ inline float artillary_speed_upgrade = 0.0f;
 inline float build_speed_upgrade = 0.0f;
 
 // upgrade menu
-inline glm::vec2 upgrade_2_size = glm::vec2(0.3f, 0.3f);
-inline glm::vec2 upgrade_4_size = glm::vec2(0.3f, 0.45f);
+inline glm::vec2 upgrade_box_size = glm::vec2(0.3f, 0.3f);
