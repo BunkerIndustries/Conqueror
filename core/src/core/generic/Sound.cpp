@@ -7,7 +7,6 @@ namespace core {
 
     Sound::Sound()
     {
-        this->currentSound = 0;
         // initialize the engine without specific configuration
         if (ma_engine_init(NULL, &engine) != MA_SUCCESS)
         {

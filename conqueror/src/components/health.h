@@ -17,6 +17,7 @@ public:
 	void GetHealed();
 private:
 	Sound death;
+	Sound death_special;
 	Sound hit_soldier;
 	Sound hit_enemy;
 

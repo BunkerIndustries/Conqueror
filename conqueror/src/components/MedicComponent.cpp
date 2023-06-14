@@ -49,6 +49,7 @@ MedicCharacter::MedicCharacter(GameObject* medic_building)
 void MedicCharacter::OnStart() {
 	gameObject->GetComponent<Movement>()->SetTargetPos(healing_target_position);
 	heal.LoadSound("assets/sounds/medic_heals.wav");
+	heal_final.LoadSound("assets/sounds/heal_final.wav");
 
 }
 
@@ -92,11 +93,12 @@ void MedicCharacter::OnUpdate() {
 				{
 
 				}
-				heal.SoundPlay();
+				heal_final.SoundPlay();
 				gameScene->uiLayer->DeactivateCharacterUI();
 				gameScene->uiLayer->ActivateSoldierUI();
 			}
 		}
+		heal.SoundPlay();
 		dt_counter += Application::GetDT();
 	}
 }

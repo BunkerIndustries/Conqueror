@@ -33,7 +33,7 @@ public:
 
 private:
 	Sound heal;
-	Sound healFinal;
+	Sound heal_final;
 
 	GameObject* medic_building;
 	GameObject* healing_target;
