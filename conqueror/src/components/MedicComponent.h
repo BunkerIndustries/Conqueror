@@ -31,9 +31,10 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
 
+	static Shr<Sound> heal;
+	static Shr<Sound> heal_final;
+
 private:
-	Sound heal;
-	Sound heal_final;
 
 	GameObject* medic_building;
 	GameObject* healing_target;

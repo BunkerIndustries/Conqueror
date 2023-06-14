@@ -3,6 +3,10 @@
 
 #include "required/constants.h"
 
+
+std::shared_ptr<Sound> MedicCharacter::heal_final;
+std::shared_ptr<Sound> MedicCharacter::heal;
+
 MedicBuilding::MedicBuilding(uint32_t number_of_medics)
 	:available_medics(number_of_medics)
 {
