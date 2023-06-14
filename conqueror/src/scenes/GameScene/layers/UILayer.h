@@ -29,6 +29,11 @@ public:
 	void AddCountdown();
 	void AddMoney();
 	void UpdateMoney();
+
+	static bool UpgradeSoldier();
+	static bool UpgradeMedBuilding();
+	static bool UpgradeEngineerBuilding();
+	static void UpgradeSoldierTent();
 	Label* countDown;
 	Label* money;
 	PictureBox* coin;
