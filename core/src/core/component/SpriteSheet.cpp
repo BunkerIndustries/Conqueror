@@ -46,6 +46,9 @@ namespace core
 		ChangeCoords();
 	}
 
+	void SpriteSheet::ChangeColor(glm::vec4 newColor) {
+		color = newColor;
+	}
 	void SpriteSheet::ChangeCoords()
 	{
 		this->texCoords = Sprites[selectedSprite.y].at(selectedSprite.x)->GetTexCoords();

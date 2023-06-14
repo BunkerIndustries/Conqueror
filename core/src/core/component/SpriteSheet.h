@@ -25,6 +25,7 @@ namespace core
         int GetSpriteColumns() { return spriteColumns; };
 
         void ChangeSprite(glm::vec2 pos);
+        void ChangeColor(glm::vec4 newColor);
 
 
     private:
