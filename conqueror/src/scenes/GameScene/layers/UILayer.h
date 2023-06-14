@@ -28,6 +28,7 @@ public:
 	void UpdateMoney();
 	Label* countDown;
 	Label* money;
+	PictureBox* coin;
 
 
 private:
