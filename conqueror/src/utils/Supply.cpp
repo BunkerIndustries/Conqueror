@@ -69,6 +69,10 @@ void Supply::IncreaseSoldiers(){
 	soldiers++;
 }
 
+void Supply::DecreaseSoldiers() {
+	soldiers--;
+}
+
 int Supply::GetSoldiers() { return soldiers; }
 
 bool Supply::CheckForGameOver() {

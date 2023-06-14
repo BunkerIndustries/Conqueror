@@ -243,7 +243,7 @@ void UILayer::UpdateDeathCountdown() {
 }
 
 void UILayer::AddSoldierCount() {
-	soldierCount = new Label(std::to_string(Supply::GetSoldiers()), ui_font_color, Transform(glm::vec2(-0.85f, 0.85f), glm::vec2(0.15f, 0.15f)), DataPool::GetFont(ui_font_family), "ui_soldier_count");
+	soldierCount = new Label(std::to_string(Supply::GetSoldiers()), ui_font_color, Transform(glm::vec2(-0.85f, 0.85f), glm::vec2(0.12f, 0.12f)), DataPool::GetFont(ui_font_family), "ui_soldier_count");
 	AddUIObject(soldierCount, ProjectionMode::SCREEN);
 }
 

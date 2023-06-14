@@ -32,6 +32,7 @@ void SoldierBehaviour::OnStop() {
 			break;
 		}
 	}
+	Supply::DecreaseSoldiers();
 }
 
 void SoldierBehaviour::OnUpdate() {
