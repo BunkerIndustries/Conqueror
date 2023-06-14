@@ -15,4 +15,10 @@ public:
 
 private:
 	bool OnGameObjectClick(GameObjectPressedEvent& e);
+
+	GameObject* angelina;
+	GameObject* levi;
+	GameObject* matthias;
+	GameObject* pherel;
+	GameObject* gutsche;
 };

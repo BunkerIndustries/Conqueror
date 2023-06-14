@@ -29,6 +29,8 @@ MenuScene::~MenuScene() {
 void MenuScene::OnStart() {
 	AddLayer(menuBackgroundLayer);
 	AddLayer(menuLayer);
+
+	
 }
 
 void MenuScene::OnStop() {
