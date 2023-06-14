@@ -9,6 +9,8 @@ namespace core {
 
     // declare static maps in order to find a reference
     Map DataPool::dataPool;
+    
+    Sound DataPool::SoundSystem;
 
     Shr<Shader> DataPool::GetShader(std::string shaderName) {
         // set default path
@@ -93,6 +95,12 @@ namespace core {
             return 2;
 	    }
         return -1;
+    }
+
+    void DataPool::InitSoundSystem()
+    {
+        SoundSystem = Sound();
+        SoundSystem.InitSound();
     }
 
 }

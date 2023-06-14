@@ -30,10 +30,8 @@ namespace core {
         (void)pInput;
     }
 
-    bool Sound::LoadSound(std::string soundFile)
+    bool Sound::InitSound()
     {
-        Sound::soundFile = soundFile;
-
         // use the high level api || we are using it because we are already including the library 
         // and we can make use of the high level functions in order to play sounds with their own group
 
@@ -43,17 +41,17 @@ namespace core {
             LOG_CORE_ERROR("Failed to initialize the engine");
             return false;
         }
+        return true;
+    }
 
+    bool Sound::SoundPlay(std::string soundFile)
+    {
         if (ma_sound_init_from_file(&engine, soundFile.c_str(), 0, NULL, NULL, &currentSound) != MA_SUCCESS)
         {
             LOG_CORE_ERROR("Failed to load sound '" + std::string(soundFile) + "'");
             return false;
         }
-        return true;
-    }
 
-    bool Sound::PlaySound()
-    {
         // TODO: make the function add different sound ,,objects'' ma_sound sound = ma_sound_init_from_file ...
         // play sound and specify a sound group (different sound groups can be used to specify their volumes)
 
@@ -70,7 +68,7 @@ namespace core {
     {
         if (ma_sound_stop(&currentSound) != MA_SUCCESS)
         {
-            LOG_CORE_ERROR("Could not stop sound '" + std::string(soundFile) + "'");
+            LOG_CORE_ERROR("Could not stop sound '" + std::string(currentSoundFile) + "'");
             return false;
         }
         return true;

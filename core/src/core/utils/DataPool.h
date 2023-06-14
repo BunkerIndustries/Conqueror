@@ -2,6 +2,8 @@
 #include "_Core.h"
 #include "utility.h"
 
+#include "generic/Sound.h"
+
 namespace core {
 
     using Map = std::unordered_map<std::string, std::shared_ptr<void>>;
@@ -21,6 +23,10 @@ namespace core {
         static Shr<Texture> GetTexture(std::string textureName);
 
         static Shr<Font> GetFont(std::string fontName);
+
+        static Sound SoundSystem;
+
+        static void InitSoundSystem();
     };
 
     enum class ProjectionMode { PERSPECTIVE, ORTHOGRAPHIC, SCREEN };

@@ -30,6 +30,7 @@ bool MenuLayer::OnGameObjectClick(GameObjectPressedEvent& e)
 
 	if (go->HasTag("play")) {
 		delete gameScene;
+		DataPool::SoundSystem.SoundPlay("assets/sounds/start.wav");
 		gameScene = new GameScene();
 		Application::ChangeScene(gameScene);
 	}
