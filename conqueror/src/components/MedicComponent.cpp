@@ -2,6 +2,7 @@
 #include "MedicComponent.h"
 
 #include "required/constants.h"
+#include "required/functions.h"
 #include "required/names.h"
 
 MedicBuilding::MedicBuilding(uint32_t number_of_medics)
