@@ -234,7 +234,6 @@ inline float medic_speed_upgrade = 0.0f;
 inline float mg_damage_upgrade = 0.0f;
 inline float artillary_speed_upgrade = 0.0f;
 inline float build_speed_upgrade = 0.0f;
-inline float show_hit_time = 0.07f;
 
 // upgrade menu
 inline glm::vec2 upgrade_2_size = glm::vec2(0.3f, 0.3f);
