@@ -18,6 +18,8 @@ public:
 	void MedicLeft();
 	bool ReceivingMedic();
 
+	int GetLevel();
+
 	bool on_spawn_pos = true;
 
 private:
@@ -32,6 +34,8 @@ private:
 
 	float dt_counter = 0.0f;
 	float time_to_wait  = 0.0f;
+
+	int soldier_level = 1;
 
 	glm::vec2 target_position = glm::vec2(0.0f);
 

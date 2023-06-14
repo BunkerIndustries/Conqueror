@@ -74,7 +74,7 @@ void MedicCharacter::OnUpdate() {
 	if (!healing) {	// if he arrived and is not healing already
 		LOG_DEBUG("medic just arrived at soldier to heal");
 		healing = true;
-		heal_time = (soldier_health - healing_target->GetComponent<Health>()->GetHp()) * waiting_time_per_hp * game_time_factor;
+		heal_time = (healing_target->GetComponent<Health>()->GetMaxHp() - healing_target->GetComponent<Health>()->GetHp()) * waiting_time_per_hp * game_time_factor;
 	}
 	else if (healing) {
 		if (dt_counter >= heal_time) {

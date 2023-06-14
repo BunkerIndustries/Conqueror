@@ -37,7 +37,7 @@ void BulletComponent::OnUpdate()
 			{
 				if (gm != nullptr && gm->GetComponent<Health>() != nullptr && CoordRoundVec2(gameObject->transform.position, gm->transform.position))
 				{
-					gm->GetComponent<Health>()->TakeDamage(mg_damage);
+					gm->GetComponent<Health>()->TakeDamage(mg_damage + mg_damage_upgrade);
 					delete gameObject;
 					return;
 				}
@@ -50,9 +50,9 @@ void BulletComponent::OnUpdate()
 		if (target != nullptr && gameObject->transform.position == target->transform.position)
 		{
 			if (target->HasTag("enemy"))
-				target->GetComponent<Health>()->TakeDamage(soldier_damage);
+				target->GetComponent<Health>()->TakeDamage(soldier_damage + damage_upgrade);
 			if (target->HasTag("soldier"))
-				target->GetComponent<Health>()->TakeDamage(enemy_damage);
+				target->GetComponent<Health>()->TakeDamage(enemy_damage - armor_upgrade);
 		}
 		delete gameObject;
 	}
