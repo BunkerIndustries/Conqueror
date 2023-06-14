@@ -46,7 +46,7 @@ GameObject* AllyLayer::CreateSoldier(glm::vec2 position) {
 	character->AddComponent(new Health(soldier_health));
 	character->AddComponent(new SoldierBehaviour());
 	character->AddComponent(new SoldierShooting());
-	character->AddComponent(new WalkingAnimation(glm::vec2(3.0f, 1.0f), glm::vec2(5.0f, 1.0f), glm::vec2(3.0f, 0.0f), glm::vec2(5.0f, 0.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), 32, glm::vec2(3.0f, 1.0f), false));
+	character->AddComponent(new WalkingAnimation(glm::vec2(3.0f, 1.0f), glm::vec2(5.0f, 1.0f), glm::vec2(3.0f, 0.0f), glm::vec2(5.0f, 0.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), 0.5f, glm::vec2(3.0f, 1.0f), false));
 	character->AddTag("soldier");
 	character->onlyLayerReceive = true;
 	AddGameObjectToLayer(character);
@@ -59,7 +59,7 @@ GameObject* AllyLayer::CreateMedic(glm::vec2 position) {
 	character->AddComponent(new Movement(medic_movement_speed));
 	character->AddComponent(new Health(medic_health));
 	character->AddComponent(new MedicCharacter(gameScene->mapLayer->medicBuilding));
-	character->AddComponent(new WalkingAnimation(glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(3.0f, 0.0f), glm::vec2(5.0f, 0.0f), glm::vec2(3.0f, 1.0f), glm::vec2(5.0f, 1.0f), 16, glm::vec2(0.0f, 1.0f), false));
+	character->AddComponent(new WalkingAnimation(glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(3.0f, 0.0f), glm::vec2(5.0f, 0.0f), glm::vec2(3.0f, 1.0f), glm::vec2(5.0f, 1.0f), 0.5f, glm::vec2(0.0f, 1.0f), false));
 	character->AddTag("medic");
 	character->onlyLayerReceive = true;
 	AddGameObjectToLayer(character);
@@ -72,7 +72,7 @@ GameObject* AllyLayer::CreateEngineer(glm::vec2 position, bool mg_artillery) {
 	character->AddComponent(new Movement(engineer_movement_speed));
 	character->AddComponent(new Health(engineer_health));
 	character->AddComponent(new EngineerCharacter(mg_artillery));
-	character->AddComponent(new WalkingAnimation(glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), 16, glm::vec2(0.0f, 1.0f), true));
+	character->AddComponent(new WalkingAnimation(glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), glm::vec2(0.0f, 1.0f), glm::vec2(2.0f, 1.0f), 0.5f, glm::vec2(0.0f, 1.0f), true));
 	character->AddComponent(new SingleAnimation(DataPool::GetTexture("Anims/Engineer/engineer_build_animation_fixedsprite.png"), 176.0f, 304.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f), glm::vec2(3.0f, 0.0f), 10, glm::vec2(0.0f, 1.0f), DataPool::GetTexture("Anims/Engineer/engineer_walk_sideways.png"), 112.0f, 304.0f, 24.0f, 16.0f));
 	character->AddTag("engineer");
 	character->onlyLayerReceive = true;
