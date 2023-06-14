@@ -124,6 +124,7 @@ namespace core {
 	void Application::Run() 
 	{
 		DataPool::GetFont("mononoki.ttf");
+		DataPool::InitSoundSystem();
 		Init();
 
 		AddOverlay(imguiLayer);
