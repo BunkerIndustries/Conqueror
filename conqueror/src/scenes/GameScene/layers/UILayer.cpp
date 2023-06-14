@@ -174,8 +174,10 @@ void UILayer::ActivateSupplyMenuUI() {
 	left_option_button->AddChildObject(left_option_button_text);
 	left_option->AddChildObject(left_option_button);
 
-	PictureBox* right_option = new PictureBox(white_color, Transform(ui_right_choice_field_position, ui_choice_field_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
+	Label* wave = new Label(std::to_string(gameScene->waveManager->GetWaveCount()), ui_font_color, ui_wave_count_transform, DataPool::GetFont(ui_font_family), "ui_wave_count_transform");
+	supply_menu_background->AddChildObject(wave);
 
+	PictureBox* right_option = new PictureBox(white_color, Transform(ui_right_choice_field_position, ui_choice_field_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
 	Label* right_option_text = new Label(Supply::CreateRightOption(), ui_font_color, ui_choice_field_text_transform, DataPool::GetFont(ui_font_family), "ui_supply_menu_right_choice_text");
 	right_option->AddChildObject(right_option_text);
 	Label* right_option_count = new Label("1x", ui_font_color, ui_choice_field_count_transform, DataPool::GetFont(ui_font_family), "ui_supply_menu_right_choice_count");

@@ -11,6 +11,8 @@ public:
 	void OnUpdate();
 	void CheckForEnemiesDead();
 
+	int GetWaveCount();
+
 private:
 	GameScene* gameScene;
 
@@ -24,4 +26,6 @@ private:
 
 	float spawn_dt_counter;
 	float spawn_interval;
+
+	int wave_counter = 0;
 };
