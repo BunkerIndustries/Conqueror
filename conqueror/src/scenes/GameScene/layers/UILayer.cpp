@@ -42,7 +42,7 @@ void UILayer::ActivateSoldierUI() {
 
 	PictureBox* header = new PictureBox(white_color, ui_header_transform, DataPool::GetTexture("UI/box_small.png"), Type::Rectangle);
 	// picturebox with picture of soldier
-	Label* name = new Label(gameScene->GetActiveCharacter()->GetName(), ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
+	Label* name = new Label(gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->GetName(), ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
 	PictureBox* icon = new PictureBox(white_color, ui_character_icon_transform, DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
 
 	PictureBox* hp_icon = new PictureBox(white_color, ui_hp_icon_transform, DataPool::GetTexture("UI/HP_icon_clear.png"), Type::Rectangle, "hp_icon");
@@ -74,7 +74,7 @@ void UILayer::ActivateSoldierUI() {
 
 	Label* price = new Label("50", ui_font_color, Transform(glm::vec2(-0.6f, -0.3f), glm::vec2(0.15f, 0.45f)), DataPool::GetFont(ui_font_family));
 	PictureBox* coin = new PictureBox(white_color, Transform(glm::vec2(-0.15f, -0.3f), glm::vec2(0.16f, 0.32f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
-	Button* buy = new Button(white_color, Transform(glm::vec2(0.5f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, callback);
+	Button* buy = new Button(white_color, Transform(glm::vec2(0.5f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, nullptr);
 	PictureBox* buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	buy->AddChildObject(buy_pb);
 	soldier_upgrade_background->AddChildObject(price); soldier_upgrade_background->AddChildObject(coin); soldier_upgrade_background->AddChildObject(buy);
@@ -88,7 +88,7 @@ void UILayer::ActivateMedicUI() {
 	character_background = new PictureBox(white_color, Transform(ui_character_position, ui_background_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
 
 	PictureBox* header = new PictureBox(white_color, ui_header_transform, DataPool::GetTexture("UI/box_small.png"), Type::Rectangle);	// picturebox with picture of medic
-	Label* name = new Label(gameScene->GetActiveCharacter()->GetName(), ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
+	Label* name = new Label(gameScene->GetActiveCharacter()->GetComponent<MedicCharacter>()->GetName(), ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
 	PictureBox* icon = new PictureBox(white_color, ui_character_icon_transform, DataPool::GetTexture("UI/med_head.png"), Type::Rectangle);
 	header->AddChildObject(name);
 
@@ -108,7 +108,7 @@ void UILayer::ActivateEngineerUI() {
 	character_background = new PictureBox(white_color, Transform(ui_character_position, ui_background_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
 
 	PictureBox* header = new PictureBox(white_color, ui_header_transform, DataPool::GetTexture("UI/box_small.png"), Type::Rectangle);	// picturebox with picture of medic
-	Label* name = new Label(gameScene->GetActiveCharacter()->GetName(), ui_font_color, ui_header_building_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
+	Label* name = new Label(gameScene->GetActiveCharacter()->GetComponent<MedicCharacter>()->GetName(), ui_font_color, ui_header_building_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
 	PictureBox* icon = new PictureBox(white_color, ui_character_icon_transform, DataPool::GetTexture("UI/engineer_head.png"), Type::Rectangle);
 	header->AddChildObject(name);
 
@@ -150,10 +150,10 @@ void UILayer::ActivateMedicBuildlingUI() {
 
 	Label* price = new Label("50", ui_font_color, Transform(glm::vec2(-0.6f, -0.3f), glm::vec2(0.15f, 0.45f)), DataPool::GetFont(ui_font_family));
 	PictureBox* coin = new PictureBox(white_color, Transform(glm::vec2(-0.15f, -0.3f), glm::vec2(0.16f, 0.32f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
-	Button* buy = new Button(white_color, Transform(glm::vec2(0.5f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, callback);
+	Button* buy = new Button(white_color, Transform(glm::vec2(0.5f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, nullptr);
 	PictureBox* buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	buy->AddChildObject(buy_pb);
-	soldier_upgrade_background->AddChildObject(price); soldier_upgrade_background->AddChildObject(coin); soldier_upgrade_background->AddChildObject(buy);
+	medic_building_upgrade_background->AddChildObject(price); medic_building_upgrade_background->AddChildObject(coin); medic_building_upgrade_background->AddChildObject(buy);
 
 	AddUIObject(medic_building_upgrade_background, ProjectionMode::SCREEN);
 }
@@ -196,10 +196,10 @@ void UILayer::ActivateEngineerBuildingUI() {
 
 	Label* price = new Label("50", ui_font_color, Transform(glm::vec2(-0.6f, -0.3f), glm::vec2(0.15f, 0.45f)), DataPool::GetFont(ui_font_family));
 	PictureBox* coin = new PictureBox(white_color, Transform(glm::vec2(-0.15f, -0.3f), glm::vec2(0.16f, 0.32f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
-	Button* buy = new Button(white_color, Transform(glm::vec2(0.5f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, callback);
+	Button* buy = new Button(white_color, Transform(glm::vec2(0.5f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, nullptr);
 	PictureBox* buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	buy->AddChildObject(buy_pb);
-	soldier_upgrade_background->AddChildObject(price); soldier_upgrade_background->AddChildObject(coin); soldier_upgrade_background->AddChildObject(buy);
+	engineer_building_upgrade_background->AddChildObject(price); engineer_building_upgrade_background->AddChildObject(coin); engineer_building_upgrade_background->AddChildObject(buy);
 
 	AddUIObject(engineer_building_upgrade_background, ProjectionMode::SCREEN);
 }

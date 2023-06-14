@@ -101,3 +101,5 @@ void MedicCharacter::OnUpdate() {
 		dt_counter += Application::GetDT();
 	}
 }
+
+std::string MedicCharacter::GetName() { return name; }

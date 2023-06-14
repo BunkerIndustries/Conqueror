@@ -122,6 +122,7 @@ inline glm::vec2 engineer_scale = glm::vec2(0.88f, 1.4f);
 
 // buildings
 inline glm::vec2 building_size = glm::vec2(3.0f, 3.0f);
+inline glm::vec2 soldier_building_position = glm::vec2(0.0f, -12.0f);
 
 // stocks
 inline unsigned int start_soldier_stock = 3;
@@ -163,7 +164,7 @@ inline glm::vec2 ui_background_size = glm::vec2(0.3f, 0.7f);
 inline glm::vec2 ui_character_position = glm::vec2(0.8f, 0.0f);
 inline glm::vec2 ui_building_position = glm::vec2(-0.8f, 0.0f);
 inline Transform ui_header_transform = Transform(glm::vec2(0.0f, 0.57f), glm::vec2(0.9f, 0.25f));
-inline Transform ui_header_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.23f, 0.67f));
+inline Transform ui_header_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.17f, 0.55f));
 inline Transform ui_header_building_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.14f, 0.71f));
 inline Transform ui_character_icon_transform = Transform(glm::vec2(0.0f, 1.1f), glm::vec2(0.3f, 0.32f));
 inline Transform ui_building_icon_transform = Transform(glm::vec2(0.0f, 1.1f), glm::vec2(0.3f, 0.24f));
