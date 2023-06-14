@@ -5,6 +5,7 @@
 #include "required/constants.h"
 
 unsigned int Supply::soldier_stock;
+int Supply::soldiers;
 uint8_t Supply::min_soldiers;
 uint8_t Supply::max_soldiers;
 uint8_t Supply::left_option;
@@ -14,6 +15,7 @@ void Supply::Init() {
 	soldier_stock = start_soldier_stock;
 	min_soldiers = 1;
 	max_soldiers = start_max_soldiers;
+	soldiers = 0;
 }
 
 void Supply::TryCallSoldier() {
@@ -62,6 +64,16 @@ void Supply::IncreaseSoldierCount() {
 	min_soldiers = std::round(min_soldiers * std::pow(min_soldiers_gradient, wave_count * exponential_factor));
 	max_soldiers = std::round(min_soldiers * std::pow(max_soldiers_gradient, wave_count * exponential_factor));
 }
+
+void Supply::IncreaseSoldiers(){
+	soldiers++;
+}
+
+void Supply::DecreaseSoldiers() {
+	soldiers--;
+}
+
+int Supply::GetSoldiers() { return soldiers; }
 
 bool Supply::CheckForGameOver() {
 

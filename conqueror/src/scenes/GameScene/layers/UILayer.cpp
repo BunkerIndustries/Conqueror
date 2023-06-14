@@ -22,6 +22,7 @@ void UILayer::OnAttach()
 {
 	AddCountdown();
 	AddMoney();
+	AddSoldierCount();
 }
 
 void UILayer::OnDetach()
@@ -32,6 +33,7 @@ void UILayer::Update(const float dt)
 {
 	UpdateDeathCountdown();
 	UpdateMoney();
+	UpdateSoldierCount();
 }
 
 
@@ -219,6 +221,7 @@ void UILayer::AddMoney() {
 	AddUIObject(money, ProjectionMode::SCREEN);
 }
 
+
 void UILayer::UpdateDeathCountdown() {
 	static float i;
 	i += Application::GetDT();
@@ -245,6 +248,15 @@ void UILayer::UpdateDeathCountdown() {
 		gameOverScene = new GameOverScene();
 		Application::ChangeScene(gameOverScene, false);
 	}
+}
+
+void UILayer::AddSoldierCount() {
+	soldierCount = new Label(std::to_string(Supply::GetSoldiers()), ui_font_color, Transform(glm::vec2(-0.85f, 0.85f), glm::vec2(0.12f, 0.12f)), DataPool::GetFont(ui_font_family), "ui_soldier_count");
+	AddUIObject(soldierCount, ProjectionMode::SCREEN);
+}
+
+void UILayer::UpdateSoldierCount() {
+	soldierCount->text = std::to_string(Supply::GetSoldiers());
 }
 void UILayer::UpdateMoney() {
 	money->text = std::to_string(Economy::getBalance());
