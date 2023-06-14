@@ -1,4 +1,0 @@
-Vertexbuffer management in scene
-Get Textures to work with new renderer api
-pass shaders with drawcall
-fix nvidia texture glitch
