@@ -327,11 +327,11 @@ bool UILayer::UpgradeSoldier() {
 	return true;
 }
 bool UILayer::UpgradeMedBuilding() {
-	gameScene->GetActiveCharacter()->GetComponent<MedicBuilding>()->UpgradeBuilding();
+	gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->UpgradeBuilding();
 	return true;
 }
 bool UILayer::UpgradeEngineerBuilding() {
-	gameScene->GetActiveCharacter()->GetComponent<EngineerBuilding>()->UpgradeBuilding();
+	gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->UpgradeBuilding();
 	return true;
 }
 void UILayer::UpgradeSoldierTent() {
