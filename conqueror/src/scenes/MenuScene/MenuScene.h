@@ -3,6 +3,7 @@
 #include "_Game.h"
 #include "layers/MenuLayer.h"
 #include "layers/MenuBackgroundLayer.h"
+#include "layers/CreditLayer.h"
 
 class MenuScene : public Scene
 {
@@ -15,8 +16,11 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& e) override {}
 
+	void CreditsStart();
+
 	MenuLayer* menuLayer = nullptr;
 	MenuBackgroundLayer* menuBackgroundLayer = nullptr;
+	CreditLayer* creditLayer = nullptr;
 
 private:
 	GameObject* CreateButton(std::string sprite_name, glm::vec2 position, std::string action);

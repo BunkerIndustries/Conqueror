@@ -27,7 +27,8 @@ void MenuLayer::Update(const float dt)
 bool MenuLayer::OnGameObjectClick(GameObjectPressedEvent& e)
 {
 	GameObject* go = e.GetGameObject();
-	if (go->HasTag("play")) {
+	if (go->HasTag("play"))
+	{
 		delete gameScene;
 		gameScene = new GameScene();
 		Application::ChangeScene(gameScene);
@@ -36,7 +37,12 @@ bool MenuLayer::OnGameObjectClick(GameObjectPressedEvent& e)
 	{
 		Application::ChangeScene(gameScene);
 	}
-	else if (go->HasTag("quit")) {
+	else if (go->HasTag("credit"))
+	{
+		menuScene->CreditsStart();
+	}
+	else if (go->HasTag("quit")) 
+	{
 		Application::GetInstance()->Exit();
 	}
 

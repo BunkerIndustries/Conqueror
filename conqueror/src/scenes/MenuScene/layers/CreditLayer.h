@@ -17,8 +17,17 @@ private:
 	bool OnGameObjectClick(GameObjectPressedEvent& e);
 
 	GameObject* angelina;
+	GameObject* angelina_text;
+
 	GameObject* levi;
+	GameObject* levi_text;
+
 	GameObject* matthias;
+	GameObject* matthias_text;
+
 	GameObject* pherel;
+	GameObject* pherel_text;
+
 	GameObject* gutsche;
+	GameObject* gutsche_text;
 };

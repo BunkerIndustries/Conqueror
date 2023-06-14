@@ -10,7 +10,7 @@ void MenuBackgroundLayer::OnAttach() {
 }
 
 void MenuBackgroundLayer::CreateBackgroundTile(glm::vec2 pos) {
-	GameObject* tile = new GameObject("background-tile", Transform(pos, background_tile_size), ProjectionMode::PERSPECTIVE);
-	tile->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Map/dirt_pattern.png"), 100.0f, Geometry::RECTANGLE));
+	GameObject* tile = new GameObject("background-tile", Transform(pos, background_tile_size, 45.0f), ProjectionMode::PERSPECTIVE);
+	tile->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("bunker_floor.png"), 100.0f, Geometry::RECTANGLE));
 	this->AddGameObjectToLayer(tile);
 }

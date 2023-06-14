@@ -9,6 +9,7 @@ MenuScene::MenuScene() {
 
 	menuLayer = new MenuLayer();
 	menuBackgroundLayer = new MenuBackgroundLayer();
+	creditLayer = new CreditLayer();
 
 	CreateElement("title_object_001.png", glm::vec2(0.0f, 3.0f), glm::vec2(11.0f, 3.0f));
 	if (gameScene)
@@ -24,26 +25,31 @@ MenuScene::MenuScene() {
 }
 
 MenuScene::~MenuScene() {
+
 }
 
 void MenuScene::OnStart() {
 	AddLayer(menuBackgroundLayer);
 	AddLayer(menuLayer);
-
-	
+	AddLayer(creditLayer);
+	creditLayer->Detach();
 }
 
 void MenuScene::OnStop() {
 	RemoveLayer(menuBackgroundLayer);
 	RemoveLayer(menuLayer);
+	RemoveLayer(creditLayer);
 }
-static bool lol = false;
+
 void MenuScene::OnUpdate() {
-	if (lol)
-		menuBackgroundLayer->Detach();
-	else
-		menuBackgroundLayer->Attach();
-	lol = !lol;
+
+}
+
+void MenuScene::CreditsStart()
+{
+	menuLayer->Detach();
+
+	creditLayer->Attach();
 }
 
 GameObject* MenuScene::CreateElement(std::string sprite_name, glm::vec2 position, glm::vec2 size) {

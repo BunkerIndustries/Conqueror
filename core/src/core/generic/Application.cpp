@@ -229,24 +229,28 @@ namespace core {
 	void Application::AddLayer(Layer* layer)
 	{
 		GetInstance()->layerStack.AddLayer(layer);
-		layer->Attach();
+		if (!layer->IsAttached())
+			layer->Attach();
 	}
 
 	void Application::AddOverlay(Layer* layer)
 	{
 		GetInstance()->layerStack.AddOverlay(layer);
-		layer->Attach();
+		if (!layer->IsAttached())
+			layer->Attach();
 	}
 
 	void Application::RemoveLayer(Layer* layer)
 	{
-		layer->Detach();
+		if (layer->IsAttached())
+			layer->Detach();
 		GetInstance()->layerStack.RemoveLayer(layer);
 	}
 
 	void Application::RemoveOverlay(Layer* layer)
 	{
-		layer->Detach();
+		if (layer->IsAttached())
+			layer->Detach();
 		GetInstance()->layerStack.RemoveOverlay(layer);
 	}
 }

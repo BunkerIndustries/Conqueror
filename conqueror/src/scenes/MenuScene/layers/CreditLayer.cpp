@@ -13,28 +13,50 @@ CreditLayer::~CreditLayer()
 {
 
 }
-
+static glm::vec4 color = glm::vec4(0.75f, 0.75f, 0.75f, 1.0f);
 void CreditLayer::OnAttach()
 {
-	angelina = new GameObject("credit1");
-	angelina->AddComponent(new FontRenderer(glm::vec4(0.8f, 0.1f, 0.2f, 1.0f), "Angelina Heller\nGrafikdesign"));
+	angelina = new GameObject("credit1", Transform(glm::vec2(0.0f, 6.0f), glm::vec2(0.5f, 0.5f)));
+	angelina->AddComponent(new FontRenderer(color, "Angelina Heller", ui_font_family));
+
+	angelina_text = new GameObject("credit1", Transform(glm::vec2(0.0f, 5.0f), glm::vec2(0.5f, 0.5f)));
+	angelina_text->AddComponent(new FontRenderer(color, "Grafikdesign", ui_font_family));
+
+	levi = new GameObject("credit2", Transform(glm::vec2(0.0f, 3.0f), glm::vec2(0.5f, 0.5f)));
+	levi->AddComponent(new FontRenderer(color, "Levi Lauer", ui_font_family));
+
+	levi_text = new GameObject("credit2", Transform(glm::vec2(0.0f, 3.0f), glm::vec2(0.5f, 0.5f)));
+	levi_text->AddComponent(new FontRenderer(color, "Spieldesign und Spielplanung", ui_font_family));
+
+	matthias = new GameObject("credit3", Transform(glm::vec2(0.0f, 1.0f), glm::vec2(0.5f, 0.5f)));
+	matthias->AddComponent(new FontRenderer(color, "Matthias Geng", ui_font_family));
+
+	matthias_text = new GameObject("credit3", Transform(glm::vec2(0.0f, 1.0f), glm::vec2(0.5f, 0.5f)));
+	matthias_text->AddComponent(new FontRenderer(color, "Grafikimplementierung, Animationen und Spielplanung", ui_font_family));
+
+	pherel = new GameObject("credit4", Transform(glm::vec2(0.0f, -1.0f), glm::vec2(0.5f, 0.5f)));
+	pherel->AddComponent(new FontRenderer(color, "Pherel Fazliu", ui_font_family));
+
+	pherel_text = new GameObject("credit4", Transform(glm::vec2(0.0f, -1.0f), glm::vec2(0.5f, 0.5f)));
+	pherel_text->AddComponent(new FontRenderer(color, "Engine Entwicklung", ui_font_family));
+
+	gutsche = new GameObject("credit5", Transform(glm::vec2(0.0f, -3.0f), glm::vec2(0.5f, 0.5f)));
+	gutsche->AddComponent(new FontRenderer(color, "Pascal Gutsche", ui_font_family));
+
+	gutsche_text = new GameObject("credit5", Transform(glm::vec2(0.0f, -3.0f), glm::vec2(0.5f, 0.5f)));
+	gutsche_text->AddComponent(new FontRenderer(color, "Engine Entwicklung", ui_font_family));
+
+
 	AddGameObjectToLayer(angelina);
-
-	levi = new GameObject("credit2");
-	levi->AddComponent(new FontRenderer(glm::vec4(0.8f, 0.1f, 0.2f, 1.0f), "Levi Lauer\nSpieldesign und Spielplanung"));
+	AddGameObjectToLayer(angelina_text);
 	AddGameObjectToLayer(levi);
-
-	matthias = new GameObject("credit3");
-	matthias->AddComponent(new FontRenderer(glm::vec4(0.8f, 0.1f, 0.2f, 1.0f), "Matthias Geng\nGrafikimplementierung, Animationen und Spielplanung"));
+	AddGameObjectToLayer(levi_text);
 	AddGameObjectToLayer(matthias);
-
-	pherel = new GameObject("credit4");
-	pherel->AddComponent(new FontRenderer(glm::vec4(0.8f, 0.1f, 0.2f, 1.0f), "Pherel Fazliu\nEngine Entwicklung"));
+	AddGameObjectToLayer(matthias_text);
 	AddGameObjectToLayer(pherel);
-
-	gutsche = new GameObject("credit5");
-	gutsche->AddComponent(new FontRenderer(glm::vec4(0.8f, 0.1f, 0.2f, 1.0f), "Pascal Gutsche\nEngine Entwicklung"));
+	AddGameObjectToLayer(pherel_text);
 	AddGameObjectToLayer(gutsche);
+	AddGameObjectToLayer(gutsche_text);
 
 }
 
@@ -50,7 +72,7 @@ void CreditLayer::Update(const float dt)
 
 bool CreditLayer::OnGameObjectClick(GameObjectPressedEvent& e)
 {
-	
+	return false;
 }
 
 void CreditLayer::OnEvent(Event& event)
