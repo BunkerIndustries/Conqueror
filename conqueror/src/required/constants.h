@@ -28,7 +28,7 @@ inline float min_enemy_waiting_time = 0.5f;
 inline float max_enemy_waiting_time = 2.0f;
 inline float enemy_movement_speed = 1.0f;
 inline uint8_t max_enemy_lock_target_tries = 3;
-inline glm::vec2 enemy_scale = glm::vec2(0.9f, 1.35f);
+inline glm::vec2 enemy_scale = glm::vec2(0.9f, 1.41f);
 inline uint8_t enemy_random_movement_sum = 5;
 inline uint8_t enemy_move_left_probability = 1;
 inline uint8_t enemy_move_mid_probability = 3;
@@ -40,7 +40,7 @@ inline float enemy_spawn_random_x_radius = 10.0f;
 inline float soldier_movement_speed = 1.2f;
 inline float medic_movement_speed = 1.4f;
 inline float engineer_movement_speed = 3.9f;
-inline glm::vec2 character_scale = glm::vec2(1.3f, 1.6f);
+inline glm::vec2 character_scale = glm::vec2(1.33f, 1.63f);
 inline glm::vec2 dead_body_size = glm::vec2(1.6f, 1.4f);
 inline float dead_body_lasting_time = 6.0f;
 
@@ -59,10 +59,10 @@ inline glm::vec2 soldier_spawn_pos = glm::vec2(0.0f, -18.0f);
 // stands (probabilities have to be choose_probability_sum in total)
 inline uint8_t choose_probability_sum = 100;
 inline uint8_t front_choose_probability = 45;
-inline uint8_t mg_choose_probability = 20;
-inline uint8_t trench_choose_probability = 15;
-inline uint8_t hiding_choose_probability = 8;
-inline uint8_t artillerie_choose_probability = 12;
+inline uint8_t mg_choose_probability = 15;
+inline uint8_t trench_choose_probability = 20;
+inline uint8_t hiding_choose_probability = 12;
+inline uint8_t artillerie_choose_probability = 8;
 
 // shooting 
 inline uint8_t max_hit_probability = 10;
@@ -74,7 +74,7 @@ inline uint8_t artillerie_hit_probability = 6;
 
 // damage 
 inline uint8_t soldier_damage = 35;
-inline uint8_t enemy_damage = 35;
+inline uint8_t enemy_damage = 25;
 
 // health 
 inline float enemy_health = 100.0f;
@@ -108,7 +108,7 @@ inline float game_time_factor = 3.0f;
 // medics 
 inline glm::vec2 medic_healing_position_offset = glm::vec2(0.5f, 0.0f);
 inline float waiting_time_per_hp = 0.03f;
-inline glm::vec2 medic_size = glm::vec2(0.88f, 1.4f);
+inline glm::vec2 medic_size = glm::vec2(0.85f, 1.35f);
 
 // engineer 
 inline glm::vec2 engineer_building_position_offset = glm::vec2(0.5f, 0.0f);
@@ -126,8 +126,8 @@ inline float enemy_start_spawn_interval = 1.8f;
 inline float enemy_spawn_interval_gradient = 0.7f;
 
 // stocks
-inline unsigned int start_soldier_stock = 5;
-inline uint8_t start_engineer_stock = 3;
+inline unsigned int start_soldier_stock = 3;
+inline uint8_t start_engineer_stock = 1;
 inline uint8_t start_medic_stock = 3;
 
 // mg
@@ -194,9 +194,9 @@ inline Transform ui_choice_field_button_transform = Transform(glm::vec2(0.0f, -0
 inline glm::vec2 anfordern_button_size = glm::vec2(0.12f, 0.54f);
 
 // supply menu
-inline uint8_t min_soldiers_choice = 2;
-inline uint8_t max_soldiers_choice = 5;
-inline uint8_t soldier_increase_by_wave = 3;
+inline uint8_t min_soldiers_choice = 1;
+inline uint8_t max_soldiers_choice = 4;
+inline uint8_t soldier_increase_by_wave = 2;
 
 // map sprites
 inline glm::vec2 background_tile_size = glm::vec2(30.0f, 15.0f);
