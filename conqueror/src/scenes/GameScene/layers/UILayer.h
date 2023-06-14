@@ -24,7 +24,10 @@ public:
 	void DeactivateSupplyMenuUI();
 	void UpdateDeathCountdown();
 	void AddCountdown();
+	void AddMoney();
+	void UpdateMoney();
 	Label* countDown;
+	Label* money;
 
 
 private:

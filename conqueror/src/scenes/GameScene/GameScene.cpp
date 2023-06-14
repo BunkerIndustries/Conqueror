@@ -5,6 +5,7 @@
 
 #include "utils/Engineer.h"
 #include "utils/Supply.h"
+#include "utils/Economy.h"
 
 GameScene::GameScene() {
 	// set background color
