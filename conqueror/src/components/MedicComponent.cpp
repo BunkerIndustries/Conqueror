@@ -2,6 +2,7 @@
 #include "MedicComponent.h"
 
 #include "required/constants.h"
+#include "required/names.h"
 
 MedicBuilding::MedicBuilding(uint32_t number_of_medics)
 	:available_medics(number_of_medics)
@@ -53,6 +54,7 @@ MedicCharacter::MedicCharacter(GameObject* medic_building)
 
 void MedicCharacter::OnStart() {
 	gameObject->GetComponent<Movement>()->SetTargetPos(healing_target_position);
+	name = names.at(RandomInt(0, names.size() - 1));
 }
 
 void MedicCharacter::OnUpdate() {

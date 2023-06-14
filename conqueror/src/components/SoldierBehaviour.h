@@ -21,6 +21,8 @@ public:
 	int GetLevel();
 	void AddLevel();
 
+	std::string GetName();
+
 	bool on_spawn_pos = true;
 
 private:
@@ -43,4 +45,6 @@ private:
 	std::vector<GameObject*>* stand = nullptr;
 	GameObject* old_node = nullptr;
 	Node* current_node = nullptr;
+
+	std::string name;
 };

@@ -5,7 +5,7 @@
 #include "required/functions.h"
 #include "required/stands.h"
 #include "utils/Supply.h"
-
+#include "required/names.h"
 
 SoldierBehaviour::SoldierBehaviour() 
 {
@@ -21,6 +21,8 @@ void SoldierBehaviour::OnStart() {
 	time_to_wait = RandomF(min_soldier_shoot_waiting_time, max_soldier_shoot_waiting_time) * game_time_factor;
 	dt_counter = 0.0f;
 	Supply::IncreaseSoldiers();
+
+	name = names.at(RandomInt(0, names.size() - 1));
 }
 
 void SoldierBehaviour::OnStop() {
@@ -162,3 +164,5 @@ bool SoldierBehaviour::ReceivingMedic() { return gets_healed; }
 
 int SoldierBehaviour::GetLevel() { return soldier_level; }
 void SoldierBehaviour::AddLevel() { soldier_level++; }
+
+std::string SoldierBehaviour::GetName() { return name; }

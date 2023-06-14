@@ -31,6 +31,7 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
 
+	std::string GetName();
 private:
 	GameObject* medic_building;
 	GameObject* healing_target;
@@ -40,4 +41,5 @@ private:
 	bool going_back;
 	float heal_time;
 	float dt_counter;
+	std::string name;
 };

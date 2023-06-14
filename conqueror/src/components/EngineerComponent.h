@@ -29,6 +29,7 @@ public:
 
 	uint8_t GetAvailableEngineers();
 	float GetBuildingLevel();
+
 private:
 	uint32_t available_engineers;
 	uint32_t available_mgs;
@@ -46,6 +47,7 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
 
+	std::string GetName();
 private:
 	GameObject* engineer_building;
 	GameObject* building_node;
@@ -57,5 +59,6 @@ private:
 	bool isBuilding;
 	bool going_back;
 	float dt_counter;
+	std::string name;
 };
 

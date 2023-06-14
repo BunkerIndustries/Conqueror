@@ -5,6 +5,7 @@
 #include "required/functions.h"
 #include "required/stands.h"
 #include "SingleAnimationComponent.h"
+#include "required/names.h"
 
 EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
 	: available_engineers(engineerCount) {
@@ -75,6 +76,7 @@ EngineerCharacter::EngineerCharacter(bool mg_artillery)
 
 void EngineerCharacter::OnStart() {
 	gameObject->GetComponent<Movement>()->SetTargetPos(building_node_position);
+	name = names.at(RandomInt(0, names.size() - 1));
 }
 
 GameObject* EngineerCharacter::ChooseBuildingNode() {

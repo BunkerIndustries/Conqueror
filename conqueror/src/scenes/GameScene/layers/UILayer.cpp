@@ -42,7 +42,7 @@ void UILayer::ActivateSoldierUI() {
 
 	PictureBox* header = new PictureBox(white_color, ui_header_transform, DataPool::GetTexture("UI/box_small.png"), Type::Rectangle);
 	// picturebox with picture of soldier
-	Label* name = new Label("SOLDAT", ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
+	Label* name = new Label(gameScene->GetActiveCharacter()->GetName(), ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
 	PictureBox* icon = new PictureBox(white_color, ui_character_icon_transform, DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
 
 	PictureBox* hp_icon = new PictureBox(white_color, ui_hp_icon_transform, DataPool::GetTexture("UI/HP_icon_clear.png"), Type::Rectangle, "hp_icon");
@@ -88,7 +88,7 @@ void UILayer::ActivateMedicUI() {
 	character_background = new PictureBox(white_color, Transform(ui_character_position, ui_background_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
 
 	PictureBox* header = new PictureBox(white_color, ui_header_transform, DataPool::GetTexture("UI/box_small.png"), Type::Rectangle);	// picturebox with picture of medic
-	Label* name = new Label("ARZT", ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
+	Label* name = new Label(gameScene->GetActiveCharacter()->GetName(), ui_font_color, ui_header_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
 	PictureBox* icon = new PictureBox(white_color, ui_character_icon_transform, DataPool::GetTexture("UI/med_head.png"), Type::Rectangle);
 	header->AddChildObject(name);
 
@@ -108,7 +108,7 @@ void UILayer::ActivateEngineerUI() {
 	character_background = new PictureBox(white_color, Transform(ui_character_position, ui_background_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
 
 	PictureBox* header = new PictureBox(white_color, ui_header_transform, DataPool::GetTexture("UI/box_small.png"), Type::Rectangle);	// picturebox with picture of medic
-	Label* name = new Label("MECHANIKER", ui_font_color, ui_header_building_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
+	Label* name = new Label(gameScene->GetActiveCharacter()->GetName(), ui_font_color, ui_header_building_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
 	PictureBox* icon = new PictureBox(white_color, ui_character_icon_transform, DataPool::GetTexture("UI/engineer_head.png"), Type::Rectangle);
 	header->AddChildObject(name);
 
