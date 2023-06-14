@@ -166,3 +166,7 @@ int SoldierBehaviour::GetLevel() { return soldier_level; }
 void SoldierBehaviour::AddLevel() { soldier_level++; }
 
 std::string SoldierBehaviour::GetName() { return name; }
+
+int SoldierBehaviour::GetUpgradePrice() { return soldier_upgrade_price_int; }
+
+void SoldierBehaviour::SetUpgradePrice(int amount) { soldier_upgrade_price_int = amount; };

@@ -87,10 +87,11 @@ float Health::GetHp() { return hp; }
 float Health::GetMaxHp() { return max_hp; }
 
 void Health::GetHealed() {
-	hp = soldier_health;
+	hp = max_hp;
 }
 
 void Health::AddMaxHp(float addHp) {
 	max_hp += addHp;
+	hp += addHp;
 }
 
