@@ -38,8 +38,8 @@ inline float enemy_spawn_random_x_radius = 10.0f;
 
 // character 
 inline float soldier_movement_speed = 1.2f;
-inline float medic_movement_speed = 1.4f;
-inline float engineer_movement_speed = 3.9f;
+inline float medic_movement_speed = 2.4f;
+inline float engineer_movement_speed = 2.0f;
 inline glm::vec2 character_scale = glm::vec2(1.33f, 1.63f);
 inline glm::vec2 dead_body_size = glm::vec2(1.6f, 1.4f);
 inline float dead_body_lasting_time = 6.0f;
@@ -196,7 +196,7 @@ inline glm::vec2 anfordern_button_size = glm::vec2(0.12f, 0.54f);
 // supply menu
 inline uint8_t min_soldiers_choice = 1;
 inline uint8_t max_soldiers_choice = 4;
-inline uint8_t soldier_increase_by_wave = 2;
+inline uint8_t soldier_increase_by_wave = 1;
 
 // map sprites
 inline glm::vec2 background_tile_size = glm::vec2(30.0f, 15.0f);
@@ -211,3 +211,7 @@ inline glm::vec2 hiding_node_size = glm::vec2(0.7f, 0.7f);
 inline glm::vec2 bunker_node_size = glm::vec2(1.0f, 1.0f);
 inline glm::vec2 artillery_node_size = glm::vec2(0.7f, 0.7f);
 inline glm::vec2 front_node_size = glm::vec2(0.7f, 0.7f);
+
+// hits
+inline glm::vec4 hit_color = glm::vec4(1.0f, 0.6f, 0.6f, 1.0f);
+inline float show_hit_time = 0.3f;

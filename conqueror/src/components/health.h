@@ -16,4 +16,6 @@ public:
 	void GetHealed();
 private:
 	float hp;
+	bool just_hit = false;
+	float dt_counter = 0.0f;
 };
