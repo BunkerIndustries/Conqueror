@@ -23,6 +23,7 @@ inline const int enemy_grid_x = 15;
 inline const int enemy_grid_y = 9;
 inline float enemy_grid_offset = 1.0f;
 inline glm::vec2 enemy_grid_startpos = glm::vec2(0.0f, 5.0f);
+inline std::list <int> filled_last_row_grid_positions;
 
 // enemy behaviour 
 inline float min_enemy_waiting_time = 0.5f;
@@ -105,6 +106,7 @@ inline glm::vec4 node_waiting_color = glm::vec4(0.0f, 0.4f, 0.4f, node_alpha);
 
 // time 
 inline float game_time_factor = 3.0f;
+inline int loss_countdown = 60;
 
 // medics 
 inline glm::vec2 medic_healing_position_offset = glm::vec2(0.5f, 0.0f);
@@ -214,5 +216,5 @@ inline glm::vec2 artillery_node_size = glm::vec2(0.7f, 0.7f);
 inline glm::vec2 front_node_size = glm::vec2(0.7f, 0.7f);
 
 // hits
-inline glm::vec4 hit_color = glm::vec4(1.0f, 0.6f, 0.6f, 1.0f);
-inline float show_hit_time = 0.3f;
+inline glm::vec4 hit_color = glm::vec4(1.0f, 0.55f, 0.55f, 1.0f);
+inline float show_hit_time = 0.07f;
