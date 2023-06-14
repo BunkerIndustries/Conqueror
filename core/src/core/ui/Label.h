@@ -13,8 +13,8 @@ namespace core
 
 		void Render(core_id idToRender) override;
 
-	private:
 		std::string text;
+	private:
 		Shr<Font> font;
 	};
 }
