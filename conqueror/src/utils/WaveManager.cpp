@@ -5,6 +5,7 @@
 
 #include "required/constants.h"
 #include "required/functions.h"
+#include "utils/Supply.h"
 
 WaveManager::WaveManager(GameScene* gameScene)
 	: gameScene(gameScene)
@@ -52,6 +53,7 @@ void WaveManager::OnUpdate() {
 	else {
 		if (!enemies_are_dead) return;
 		LOG_DEBUG("Wave over - cooldown state");
+		Supply::IncreaseSoldierCount();
 		cooldown_state = true;
 		gameScene->uiLayer->ActivateSupplyMenuUI();
 		global_dt_counter = 0.0f;

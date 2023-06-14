@@ -152,7 +152,11 @@ namespace core {
 						currentScene->Stop();
 
 						// remove the scene
-						//delete currentScene;
+						if (deleteOldScene)
+						{
+							delete currentScene;
+							deleteOldScene = false;
+						}
 						// switch and initialize the scene
 						currentScene = queuedScene;
 						currentScene->Start();
@@ -206,6 +210,12 @@ namespace core {
 	void Application::ChangeScene(Scene* new_scene)
 	{
 		GetInstance()->queuedScene = new_scene;
+	}
+
+	void Application::ChangeScene(Scene* new_scene, bool deleteOldScene)
+	{
+		GetInstance()->queuedScene = new_scene;
+		GetInstance()->deleteOldScene = deleteOldScene;
 	}
 
 	void Application::AddLayer(Layer* layer)

@@ -10,6 +10,7 @@ public:
 
 	void OnUpdate();
 	void CheckForEnemiesDead();
+
 private:
 	GameScene* gameScene;
 
