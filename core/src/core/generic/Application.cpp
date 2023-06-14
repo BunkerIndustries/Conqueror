@@ -208,6 +208,7 @@ namespace core {
 			resizing = false;
 
 			dt = window->GetTime() - begin_time;
+			if (dt > 0.1f) dt = 0.0167;
 			begin_time = window->GetTime();
 		}
 

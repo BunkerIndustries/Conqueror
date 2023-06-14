@@ -8,17 +8,17 @@
 
 SoldierBehaviour::SoldierBehaviour() 
 {
-
-}
-
-void SoldierBehaviour::OnStart() {
-
 	// start configuration
 	on_spawn_pos = true;
 	travelling = false;
 	gets_healed = false;
 	time_to_wait = RandomF(min_soldier_shoot_waiting_time, max_soldier_shoot_waiting_time) * game_time_factor;
 	dt_counter = 0.0f;
+}
+
+void SoldierBehaviour::OnStart() {
+
+	
 }
 
 void SoldierBehaviour::OnStop() {

@@ -1,30 +1,33 @@
 #include "_Game.h"
 
-#include "MenuLayer.h"
+#include "CreditLayer.h"
 
 #include "required/constants.h"
 
-MenuLayer::MenuLayer()
+CreditLayer::CreditLayer()
 {
 }
 
-MenuLayer::~MenuLayer()
+CreditLayer::~CreditLayer()
 {
 }
 
-void MenuLayer::OnAttach()
+void CreditLayer::OnAttach()
 {
+
 }
 
-void MenuLayer::OnDetach()
+void CreditLayer::OnDetach()
 {
+
 }
 
-void MenuLayer::Update(const float dt)
+void CreditLayer::Update(const float dt)
 {
+
 }
 
-bool MenuLayer::OnGameObjectClick(GameObjectPressedEvent& e)
+bool CreditLayer::OnGameObjectClick(GameObjectPressedEvent& e)
 {
 	GameObject* go = e.GetGameObject();
 	if (go->HasTag("play")) {
@@ -39,14 +42,14 @@ bool MenuLayer::OnGameObjectClick(GameObjectPressedEvent& e)
 	else if (go->HasTag("quit")) {
 		Application::GetInstance()->Exit();
 	}
-
+	
 	return true;
 }
 
-void MenuLayer::OnEvent(Event& event)
+void CreditLayer::OnEvent(Event& event)
 {
 	EventDispatcher dispatcher(event);
-	dispatcher.dispatch<GameObjectPressedEvent>(BIND_EVENT_FN(MenuLayer::OnGameObjectClick));
+	//dispatcher.dispatch<GameObjectPressedEvent>(BIND_EVENT_FN(MenuLayer::OnGameObjectClick));
 }
 
 

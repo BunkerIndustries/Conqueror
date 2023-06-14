@@ -106,9 +106,21 @@ bool GameScene::GameObjectPressed(GameObjectPressedEvent& e) {
 	return true;
 }
 
+bool GameScene::KeyPressed(KeyPressedEvent& e)
+{
+	if (e.getKeyCode() == KEY_ESCAPE)
+	{
+		delete menuScene;
+		menuScene = new MenuScene();
+		Application::ChangeScene(menuScene);
+	}
+	return false;
+}
+
 GameObject* GameScene::CreateBullet(Layer* layer, GameObject* target, glm::vec2 startPos, glm::vec2 targetPos) {
 	GameObject* bullet = new GameObject("bullet", Transform(startPos, bullet_scale));
-	bullet->AddComponent(new CircleRenderer(bullet_color, 1.0f, 0.005));    bullet->AddComponent(new Movement(bullet_speed, targetPos));
+	bullet->AddComponent(new CircleRenderer(bullet_color, 1.0f, 0.005));
+	bullet->AddComponent(new Movement(bullet_speed, targetPos));
 	bullet->AddComponent(new BulletComponent(target, targetPos));
 	bullet->AddTag("bullet");
 	layer->AddGameObjectToLayer(bullet);
