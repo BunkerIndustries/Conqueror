@@ -23,6 +23,9 @@ public:
 	void DeactivateBuildingUI();
 	void DeactivateSupplyMenuUI();
 	void UpdateDeathCountdown();
+	void AddCountdown();
+	Label* countDown;
+
 
 private:
 	PictureBox* character_background;

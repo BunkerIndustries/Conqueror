@@ -19,6 +19,7 @@ UILayer::~UILayer()
 
 void UILayer::OnAttach()
 {
+	AddCountdown();
 }
 
 void UILayer::OnDetach()
@@ -200,16 +201,29 @@ void UILayer::DeactivateSupplyMenuUI() {
 	RemoveUIObject(supply_menu_background);
 }
 
+void UILayer::AddCountdown() {
+	countDown = new Label(std::to_string(loss_countdown), ui_font_color, Transform(glm::vec2(0.85f, 0.85f), glm::vec2(0.15f, 0.15f)), DataPool::GetFont(ui_font_family), "ui_death_countdown");
+	AddUIObject(countDown, ProjectionMode::SCREEN);
+}
 void UILayer::UpdateDeathCountdown() {
-	if (filled_last_row_grid_positions.size() > 0) {
-		loss_countdown -= filled_last_row_grid_positions.size();
-		Label* countDown = new Label(std::to_string(loss_countdown), ui_font_color, Transform(glm::vec2(0.0f, 0.0f)), DataPool::GetFont(ui_font_family), "ui_death_countdown");
+	static float i;
+	i += Application::GetDT();
+	if (i > 1) {
+		i--;
+		if (filled_last_row_grid_positions.size() > 0) {
+			loss_countdown -= filled_last_row_grid_positions.size();
+			countDown->SetColor(glm::vec4(1.0f, 0.0f, 0.0f, 0.8f));
+		}
+		else if (filled_last_row_grid_positions.size() == 0 && loss_countdown == 60) {
+			return;
+		}
+		else if (filled_last_row_grid_positions.size() == 0) {
+			loss_countdown++;
+			countDown->SetColor(glm::vec4(0.0f, 1.0f, 0.0f, 0.8f));
+		}
 	}
-	else if (filled_last_row_grid_positions.size() == 0 && loss_countdown == 60) {
-		return;
+	else if(i > 0.3f){
+		countDown->SetColor(ui_font_color);
 	}
-	else if (filled_last_row_grid_positions.size() == 0) {
-		loss_countdown++;
-	}
-
+	countDown->text = std::to_string(loss_countdown);
 }

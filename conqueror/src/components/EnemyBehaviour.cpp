@@ -61,7 +61,7 @@ void EnemyBehaviour::OnUpdate() {
 			if (y_index != enemy_grid_y - 1) {
 				ChoosePosAndMove();
 			}
-			else {
+			else if(std::find(filled_last_row_grid_positions.begin(), filled_last_row_grid_positions.end(), x_index) == filled_last_row_grid_positions.end()){
 				filled_last_row_grid_positions.push_front(x_index);
 			}
 		}
