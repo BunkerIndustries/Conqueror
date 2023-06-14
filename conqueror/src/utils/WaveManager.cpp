@@ -30,11 +30,12 @@ void WaveManager::OnUpdate() {
 	if (cooldown_state) {
 		if (global_dt_counter >= cooldown_duration) {
 			LOG_DEBUG("cooldown over - wave state");
+			cooldown_duration += cooldown_addition * game_time_factor;
 			cooldown_state = false;
 			enemies_are_dead = false;
 			global_dt_counter = 0.0f;
 			if (just_started) {
-				just_started = false; 
+				just_started = false;
 				return;
 			}
 		}
@@ -53,6 +54,7 @@ void WaveManager::OnUpdate() {
 	else {
 		if (!enemies_are_dead) return;
 		LOG_DEBUG("Wave over - cooldown state");
+		wave_counter++;
 		Supply::IncreaseSoldierCount();
 		cooldown_state = true;
 		gameScene->uiLayer->ActivateSupplyMenuUI();
@@ -68,3 +70,5 @@ void WaveManager::CheckForEnemiesDead() {
 
 	enemies_are_dead = true;
 }
+
+int WaveManager::GetWaveCount() { return wave_counter; }

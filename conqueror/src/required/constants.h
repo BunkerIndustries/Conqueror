@@ -14,7 +14,7 @@ inline float camera_scroll_speed = 28.0f;
 inline float camera_move_speed = 2.0f;
 inline float camera_move_speed_multiplier = 3.0f;
 inline float min_camera_z_pos = 2.0f;
-inline float max_camera_z_pos = 20.0f;
+inline float max_camera_z_pos = 13.0f;
 inline glm::vec2 min_camera_positions = glm::vec2(-10.5f, -12.0f);
 inline glm::vec2 max_camera_positions = glm::vec2(10.5f, 5.0f);
 
@@ -40,7 +40,7 @@ inline float enemy_spawn_random_x_radius = 10.0f;
 
 // character 
 inline float soldier_movement_speed = 1.2f;
-inline float medic_movement_speed = 2.4f;
+inline float medic_movement_speed = 2.9f;
 inline float engineer_movement_speed = 2.0f;
 inline glm::vec2 character_scale = glm::vec2(1.33f, 1.63f);
 inline glm::vec2 dead_body_size = glm::vec2(1.6f, 1.4f);
@@ -110,8 +110,8 @@ inline int loss_countdown = 60;
 
 // medics 
 inline glm::vec2 medic_healing_position_offset = glm::vec2(0.5f, 0.0f);
-inline float waiting_time_per_hp = 0.03f;
-inline glm::vec2 medic_size = glm::vec2(0.85f, 1.35f);
+inline float waiting_time_per_hp = 0.02f;
+inline glm::vec2 medic_size = glm::vec2(0.7f, 1.35f);
 
 // engineer 
 inline glm::vec2 engineer_building_position_offset = glm::vec2(0.5f, 0.0f);
@@ -120,13 +120,6 @@ inline glm::vec2 engineer_scale = glm::vec2(0.88f, 1.4f);
 
 // buildings
 inline glm::vec2 building_size = glm::vec2(3.0f, 3.0f);
-
-// wave 
-inline float start_preparation_time = 4.0f;
-inline float start_wave_duration = 4.0f;
-inline float wave_length_gradient = 1.25f;
-inline float enemy_start_spawn_interval = 1.8f;
-inline float enemy_spawn_interval_gradient = 0.7f;
 
 // stocks
 inline unsigned int start_soldier_stock = 3;
@@ -195,11 +188,22 @@ inline Transform ui_choice_field_text_transform = Transform(glm::vec2(0.0f, 0.9f
 inline Transform ui_choice_field_count_transform = Transform(glm::vec2(0.0f, 0.5f), glm::vec2(0.11f, 0.14f));
 inline Transform ui_choice_field_button_transform = Transform(glm::vec2(0.0f, -0.63f), glm::vec2(0.7f, 0.2f));
 inline glm::vec2 anfordern_button_size = glm::vec2(0.12f, 0.54f);
+inline Transform ui_wave_count_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.08f, 0.13f));
 
-// supply menu
-inline uint8_t min_soldiers_choice = 1;
-inline uint8_t max_soldiers_choice = 4;
-inline uint8_t soldier_increase_by_wave = 1;
+// supply
+inline uint8_t start_min_soldiers = 1;
+inline uint8_t start_max_soldiers = 2;
+inline float min_soldiers_gradient = 1.3f;
+inline float max_soldiers_gradient = 1.35f;
+inline float exponential_factor = 0.2f;
+
+// wave 
+inline float start_preparation_time = 4.0f;
+inline float cooldown_addition = 0.5f;
+inline float start_wave_duration = 4.0f;
+inline float wave_length_gradient = 1.15f;
+inline float enemy_start_spawn_interval = 1.8f;
+inline float enemy_spawn_interval_gradient = 0.9f;
 
 // map sprites
 inline glm::vec2 background_tile_size = glm::vec2(100.0f, 100.0f);

@@ -12,9 +12,8 @@ std::string Supply::right_option;
 
 void Supply::Init() {
 	soldier_stock = start_soldier_stock;
-	min_soldiers = min_soldiers_choice;
-	max_soldiers = max_soldiers_choice;
-	
+	min_soldiers = 1;
+	max_soldiers = start_max_soldiers;
 }
 
 void Supply::TryCallSoldier() {
@@ -59,8 +58,9 @@ void Supply::TakeRightOption() {
 }
 
 void Supply::IncreaseSoldierCount() {
-	min_soldiers += soldier_increase_by_wave;
-	max_soldiers += soldier_increase_by_wave;
+	int wave_count = gameScene->waveManager->GetWaveCount();
+	min_soldiers = std::round(min_soldiers * std::pow(min_soldiers_gradient, wave_count * exponential_factor));
+	max_soldiers = std::round(min_soldiers * std::pow(max_soldiers_gradient, wave_count * exponential_factor));
 }
 
 bool Supply::CheckForGameOver() {
