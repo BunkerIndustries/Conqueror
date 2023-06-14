@@ -12,3 +12,4 @@
 #include "components/BulletComponent.h"
 #include "components/MgComponent.h"
 #include "components/ArtilleryComponent.h"
+#include "components/MedicComponent.h"

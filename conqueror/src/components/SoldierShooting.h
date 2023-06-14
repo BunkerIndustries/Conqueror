@@ -23,7 +23,7 @@ public:
 	//	target = nullptr;
 	//}
 
-	void UpgradeHitProbability();
+	bool UpgradeSoldier();
 
 private:
 	GameObject* LockTarget();
