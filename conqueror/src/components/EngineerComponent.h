@@ -22,15 +22,18 @@ public:
 	void DecreaseMgStock();
 	void DecreaseArtilleryStock();
 
+	void UpgradeBuilding();
+
 	uint8_t GetMgStock();
 	uint8_t GetArtilleryStock();
 
 	uint8_t GetAvailableEngineers();
-
+	float GetBuildingLevel();
 private:
 	uint32_t available_engineers;
 	uint32_t available_mgs;
 	uint32_t available_artillery;
+	float building_level;
 };
 
 class EngineerCharacter : public Component {

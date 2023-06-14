@@ -99,6 +99,7 @@ GameObject* SoldierShooting::GetTarget() const
 	return nullptr;
 }
 
-void SoldierShooting::UpgradeHitProbability(float Upgrade) {
-	hit_probability_upgrade += Upgrade * gameObject->GetComponent<SoldierBehaviour>()->GetLevel();
+void SoldierShooting::UpgradeHitProbability() {
+	hit_probability_upgrade += accuracy_upgrade_value * gameObject->GetComponent<SoldierBehaviour>()->GetLevel();
+	gameObject->GetComponent<SoldierBehaviour>()->AddLevel();
 }

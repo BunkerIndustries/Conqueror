@@ -23,7 +23,7 @@ public:
 	//	target = nullptr;
 	//}
 
-	void UpgradeHitProbability(float Upgrade);
+	void UpgradeHitProbability();
 
 private:
 	GameObject* LockTarget();

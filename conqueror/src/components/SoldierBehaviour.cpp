@@ -161,3 +161,4 @@ void SoldierBehaviour::MedicLeft() { gets_healed = false; }
 bool SoldierBehaviour::ReceivingMedic() { return gets_healed; }
 
 int SoldierBehaviour::GetLevel() { return soldier_level; }
+void SoldierBehaviour::AddLevel() { soldier_level++; }

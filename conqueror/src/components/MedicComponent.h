@@ -13,9 +13,10 @@ public:
 
 	void SendMedic();
 	void IncreaseAvailableMedics();
-
+	void UpgradeBuilding();
 	uint32_t GetAvailableMedics();
 
+	float building_level;
 private:
 	uint32_t available_medics;
 };
