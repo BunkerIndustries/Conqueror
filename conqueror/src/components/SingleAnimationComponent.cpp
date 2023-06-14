@@ -10,7 +10,6 @@ void SingleAnimation::OnUpdate() {
         static int tey = 1;
         static float y = 0.01f;
         y += Application::GetDT();
-        //LOG_DEBUG(y);
         if (y > animationSpeed) {
             tey += 1;
             y -= animationSpeed;
@@ -38,16 +37,16 @@ void SingleAnimation::PlayAnimation(bool onceCycle) {
         int animationLength = indexEnd.x - indexStart.x + 1;
         static int tex = 0;
         static float x = 0.01f;
-        x += Application::GetDT() / animationSpeed;
-
-        tex = (int)(x * 100);
-
-        if (tex % (animationLength + 1) == 0)
-        {
-            x = 0.01f;
-            tex = (int)(x * 100);
+        x += Application::GetDT();
+        if (x > animationSpeed) {
+            tex += 1;
+            x -= animationSpeed;
         }
-        gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(tex + indexStart.x - 1, indexStart.y));
+        if (tex % animationLength == 0)
+        {
+            tex = 0;
+        }
+        gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(tex + indexStart.x, indexStart.y));
     }
     
 }

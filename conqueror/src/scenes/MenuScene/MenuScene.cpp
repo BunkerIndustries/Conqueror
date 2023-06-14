@@ -13,7 +13,7 @@ MenuScene::MenuScene() {
     CreateButton("play_object_001.png", glm::vec2(0.0f, -1.0f), "play");
     CreateButton("quit_button.png", glm::vec2(0.0f, -3.0f), "quit");
 }
-
+ 
 MenuScene::~MenuScene() {
 }
 

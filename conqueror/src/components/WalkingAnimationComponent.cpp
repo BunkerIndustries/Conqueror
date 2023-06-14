@@ -8,7 +8,7 @@
 #include "SingleAnimationComponent.h"
 
 WalkingAnimation::WalkingAnimation(){}
-WalkingAnimation::WalkingAnimation(glm::vec2 indexStartUp, glm::vec2 indexEndUp, glm::vec2 indexStartDown, glm::vec2 indexEndDown, glm::vec2 indexStartRight, glm::vec2 indexEndRight, glm::vec2 indexStartLeft, glm::vec2 indexEndLeft, int animationSpeed, glm::vec2 standartPosition, bool hasSingleAnimation)
+WalkingAnimation::WalkingAnimation(glm::vec2 indexStartUp, glm::vec2 indexEndUp, glm::vec2 indexStartDown, glm::vec2 indexEndDown, glm::vec2 indexStartRight, glm::vec2 indexEndRight, glm::vec2 indexStartLeft, glm::vec2 indexEndLeft, float animationSpeed, glm::vec2 standartPosition, bool hasSingleAnimation)
     : indexStartUp(indexStartUp), indexEndUp(indexEndUp), indexStartDown(indexStartDown), indexEndDown(indexEndDown), indexStartRight(indexStartRight), indexEndRight(indexEndRight), indexStartLeft(indexStartLeft), indexEndLeft(indexEndLeft), animationSpeed(animationSpeed), standartPosition(standartPosition), hasSingleAnimation(hasSingleAnimation){}
 
 void WalkingAnimation::CalculateDirection() {
@@ -52,13 +52,14 @@ void WalkingAnimation::Start(glm::vec2 indexStart, glm::vec2 indexEnd) {
     int animationLength = indexEnd.x - indexStart.x + 1;
     static int tex = 0;
     static float x = 0.01f;
-    x += Application::GetDT() / animationSpeed;
-
-    tex = (int)(x * 100);
-    if (tex % (animationLength + 1) == 0)
-    {
-        x = 0.01f;
-        tex = (int)(x * 100);
+    x += Application::GetDT();
+    if (x > animationSpeed) {
+        tex += 1;
+        x -= animationSpeed;
     }
-    gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(tex + indexStart.x - 1, indexStart.y));
+    if (tex % animationLength == 0)
+    {
+        tex = 0;
+    }
+    gameObject->GetComponent<SpriteSheet>()->ChangeSprite(glm::vec2(tex + indexStart.x, indexStart.y));
 }

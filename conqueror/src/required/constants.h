@@ -1,10 +1,12 @@
 #pragma once
 #include "scenes/MenuScene/MenuScene.h"
 #include "scenes/GameScene/GameScene.h"
+#include "scenes/GameOverScene/GameOverScene.h"
 
 // scenes
 inline GameScene* gameScene;
 inline MenuScene* menuScene;
+inline GameOverScene* gameOverScene;
 
 // enemy movement grid
 inline std::vector<std::vector<GameObject*>> enemy_grid;

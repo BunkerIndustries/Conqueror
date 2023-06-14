@@ -4,7 +4,7 @@
 class WalkingAnimation : public Component {
 public:
 	WalkingAnimation();
-	WalkingAnimation(glm::vec2 indexStartUp, glm::vec2 IndexEndUp, glm::vec2 IndexStartDown, glm::vec2 indexEndDown, glm::vec2 indexStartRight, glm::vec2 IndexEndRight, glm::vec2 IndexStartLeft, glm::vec2 indexEndLeft, int animationSpeed, glm::vec2 standartPosition, bool hasSingleAnimation);
+	WalkingAnimation(glm::vec2 indexStartUp, glm::vec2 IndexEndUp, glm::vec2 IndexStartDown, glm::vec2 indexEndDown, glm::vec2 indexStartRight, glm::vec2 IndexEndRight, glm::vec2 IndexStartLeft, glm::vec2 indexEndLeft, float animationSpeed, glm::vec2 standartPosition, bool hasSingleAnimation);
 	void OnStart() override { }
 	void OnStop() override { }
 	void OnUpdate() override;
@@ -15,7 +15,7 @@ public:
 
 private:
 	int max;
-	int animationSpeed;
+	float animationSpeed;
 	int spriteSheetLength;
 	glm::vec2 indexStart;
 	glm::vec2 indexEnd;

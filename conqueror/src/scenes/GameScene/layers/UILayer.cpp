@@ -232,4 +232,9 @@ void UILayer::UpdateDeathCountdown() {
 		countDown->SetColor(ui_font_color);
 	}
 	countDown->text = std::to_string(loss_countdown);
+	if (loss_countdown <= 0) {
+		delete gameOverScene;
+		gameOverScene = new GameOverScene();
+		Application::ChangeScene(gameOverScene, false);
+	}
 }
