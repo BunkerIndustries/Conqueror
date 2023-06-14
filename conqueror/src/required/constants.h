@@ -215,5 +215,5 @@ inline glm::vec2 artillery_node_size = glm::vec2(0.7f, 0.7f);
 inline glm::vec2 front_node_size = glm::vec2(0.7f, 0.7f);
 
 // hits
-inline glm::vec4 hit_color = glm::vec4(1.0f, 0.6f, 0.6f, 1.0f);
-inline float show_hit_time = 0.3f;
+inline glm::vec4 hit_color = glm::vec4(1.0f, 0.55f, 0.55f, 1.0f);
+inline float show_hit_time = 0.07f;
