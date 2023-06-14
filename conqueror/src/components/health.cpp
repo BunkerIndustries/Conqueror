@@ -10,8 +10,10 @@
 Health::Health(float hp) 
 	:hp(hp)
 {
-	
+	hit_soldier.LoadSound("assets/sounds/soldier_damage.wav");
+	hit_enemy.LoadSound("assets/sounds/enemy_damage.wav");
 }
+
 
 void Health::OnStart() {
 
@@ -34,6 +36,15 @@ void Health::OnUpdate() {
 bool Health::TakeDamage(float damage) {
 	hp -= damage;
 	just_hit = true;
+	if (gameObject->HasTag("soldier"))
+	{
+		hit_soldier.SoundPlay();
+	}
+	else
+	{
+		hit_enemy.SoundPlay();
+	}
+	
 	gameObject->GetComponent<SpriteSheet>()->ChangeColor(hit_color);
 	if (gameScene->GetActiveCharacter() == gameObject) {
 		gameScene->uiLayer->DeactivateCharacterUI();
@@ -51,12 +62,15 @@ bool Health::TakeDamage(float damage) {
 		if (gameScene->GetActiveCharacter() == gameObject) gameScene->SetActiveCharacter(nullptr);
 		if (gameObject->HasTag("soldier")) {
 			// get node and unoccupy it
+
 			gameObject->GetComponent<SoldierBehaviour>()->FreeNode();
 			gameScene->uiLayer->DeactivateCharacterUI();
 			Util::enemyTable.erase(Util::enemyTable.find(gameObject));
 			gameScene->mapLayer->CreateDeadBody("Anims/Soldier/soldier_dead.png", gameObject->transform.position);
 			Supply::CheckForGameOver();
 
+			death.LoadSound("assets/sounds/death.wav");
+			death.SoundPlay();
 		}
 		else if (gameObject->HasTag("enemy"))
 		{
@@ -75,6 +89,18 @@ bool Health::TakeDamage(float damage) {
 			gameScene->mapLayer->CreateDeadBody("Anims/Enemy/french_dead.png", gameObject->transform.position);
 
 			gameScene->waveManager->CheckForEnemiesDead();
+
+			int tmp = Utils::randRange(0, 5);
+			if (tmp == 3)
+			{
+				//hit_enemy.LoadSound("assets/sounds/enemy_death_special.wav");
+				//hit_enemy.SoundPlay();
+			}
+			else
+			{
+				//death.LoadSound("assets/sounds/death.wav");
+				//death.SoundPlay();
+			}
 		}
 		delete gameObject;
 		return true;

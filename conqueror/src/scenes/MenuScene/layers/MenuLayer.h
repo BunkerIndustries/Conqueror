@@ -15,4 +15,6 @@ public:
 
 private:
 	bool OnGameObjectClick(GameObjectPressedEvent& e);
+	Sound menu_theme;
+	Sound menu_select;
 };

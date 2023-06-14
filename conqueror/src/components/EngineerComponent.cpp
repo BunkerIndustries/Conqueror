@@ -69,6 +69,8 @@ EngineerCharacter::EngineerCharacter(bool mg_artillery)
 
 void EngineerCharacter::OnStart() {
 	gameObject->GetComponent<Movement>()->SetTargetPos(building_node_position);
+	sound_leave.LoadSound("assets/sounds/engineer_leaves.wav");
+	sound_leave.SoundPlay();
 }
 
 GameObject* EngineerCharacter::ChooseBuildingNode() {
@@ -124,4 +126,6 @@ void EngineerCharacter::OnUpdate() {
 	// if he arrived and is not building already
 	isBuilding = true;
 	dt_counter = 0.0f;
+	sound_building.LoadSound("assets/sounds/engineer_build.wav");
+	sound_building.SoundPlay();
 }

@@ -9,7 +9,7 @@ namespace core {
     class Sound
     {
     private:
-        std::string currentSoundFile;
+        std::string soundFile;
         ma_engine engine;
         ma_sound currentSound;
 
@@ -17,8 +17,8 @@ namespace core {
         Sound();
         ~Sound();
         static void DataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount);
-        bool InitSound();
-        bool SoundPlay(std::string soundFile);
+        bool LoadSound(std::string soundFile);
+        bool SoundPlay();
         bool StopSound();
         void SetVolume(float volume);
         float GetVolume();

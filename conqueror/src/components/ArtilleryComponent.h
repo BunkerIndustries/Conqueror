@@ -15,6 +15,7 @@ private:
 	float dt_counter;
 	float reload_time;
 	Node* own_node;
+	Sound shoot;
 
 	void Shoot();
 };

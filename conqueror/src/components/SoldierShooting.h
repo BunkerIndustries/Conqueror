@@ -29,4 +29,5 @@ private:
 	GameObject* LockTarget();
 	GameObject* GetTarget() const;
 	uint8_t hit_probability;
+	Sound soldier_shoot;
 };

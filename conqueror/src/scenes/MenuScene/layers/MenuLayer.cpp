@@ -14,10 +14,13 @@ MenuLayer::~MenuLayer()
 
 void MenuLayer::OnAttach()
 {
+	menu_theme.LoadSound("assets/sounds/menud.wav");
+	menu_theme.SoundPlay();
 }
 
 void MenuLayer::OnDetach()
 {
+	menu_theme.StopSound();
 }
 
 void MenuLayer::Update(const float dt)
@@ -30,7 +33,8 @@ bool MenuLayer::OnGameObjectClick(GameObjectPressedEvent& e)
 
 	if (go->HasTag("play")) {
 		delete gameScene;
-		DataPool::SoundSystem->SoundPlay("assets/sounds/start.wav");
+		menu_select.LoadSound("assets/sounds/start.wav");
+		menu_select.SoundPlay();
 		gameScene = new GameScene();
 		Application::ChangeScene(gameScene);
 	}

@@ -48,6 +48,8 @@ MedicCharacter::MedicCharacter(GameObject* medic_building)
 
 void MedicCharacter::OnStart() {
 	gameObject->GetComponent<Movement>()->SetTargetPos(healing_target_position);
+	heal.LoadSound("assets/sounds/medic_heals.wav");
+
 }
 
 void MedicCharacter::OnUpdate() {
@@ -86,6 +88,11 @@ void MedicCharacter::OnUpdate() {
 			gameObject->GetComponent<Movement>()->SetTrackingPos(&medic_building->transform.position);
 			healing_target->GetComponent<SoldierBehaviour>()->MedicLeft();
 			if (gameScene->GetActiveCharacter() == healing_target) {
+				if (gameObject->GetComponent<Health>()->GetHp() == 100)
+				{
+
+				}
+				heal.SoundPlay();
 				gameScene->uiLayer->DeactivateCharacterUI();
 				gameScene->uiLayer->ActivateSoldierUI();
 			}

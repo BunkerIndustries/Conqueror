@@ -52,7 +52,8 @@ void ArtilleryComponent::Shoot() {
 	//explosion->AddComponent(new DestroyOverTime(artillery_explosion_lasting));
 	gameScene->allyLayer->AddGameObjectToLayer(explosion);
 	explosion->GetComponent<SingleAnimation>()->PlayAnimation(true);
-
+	shoot.LoadSound("assets/sounds/artillery.wav");
+	shoot.SoundPlay();
 	glm::ivec2 top_left = glm::ivec2(target_x - 1, target_y - 1);
 	// loops through a field that starts at the top left of the randomly chosen middle-node
 	for (uint8_t x = 0; x < 3; x++) {

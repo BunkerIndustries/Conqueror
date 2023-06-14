@@ -7,7 +7,7 @@
 
 
 SoldierShooting::SoldierShooting() {
-
+	soldier_shoot.LoadSound("assets/sounds/soldier_bullet.wav");
 }
 
 void SoldierShooting::OnStart() {
@@ -42,7 +42,7 @@ void SoldierShooting::Shoot() {
 
 		
 		gameScene->CreateBullet(gameScene->allyLayer, target, gameObject->transform.position, pos);
-		
+		soldier_shoot.SoundPlay();
 		break;
 	}
 

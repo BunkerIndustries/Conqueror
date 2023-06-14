@@ -18,6 +18,7 @@ public:
 
 private:
 	uint32_t available_medics;
+
 };
 
 class MedicCharacter : public Component {
@@ -31,6 +32,9 @@ public:
 	void OnEvent(Event& event) override {};
 
 private:
+	Sound heal;
+	Sound healFinal;
+
 	GameObject* medic_building;
 	GameObject* healing_target;
 	glm::vec2 healing_target_position;

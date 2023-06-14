@@ -125,7 +125,7 @@ inline glm::vec2 building_size = glm::vec2(3.0f, 3.0f);
 
 // stocks
 inline unsigned int start_soldier_stock = 3;
-inline uint8_t start_engineer_stock = 1;
+inline uint8_t start_engineer_stock = 3;
 inline uint8_t start_medic_stock = 3;
 
 // mg

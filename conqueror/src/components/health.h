@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.h"
+#include "generic/Sound.h"
 
 class Health : public Component {
 public:
@@ -15,6 +16,10 @@ public:
 	float GetHp();
 	void GetHealed();
 private:
+	Sound death;
+	Sound hit_soldier;
+	Sound hit_enemy;
+
 	float hp;
 	bool just_hit = false;
 	float dt_counter = 0.0f;
