@@ -22,15 +22,20 @@ public:
 	void DeactivateCharacterUI();
 	void DeactivateBuildingUI();
 	void DeactivateSupplyMenuUI();
-	void UpdateDeathCountdown();
-	void AddCountdown();
-	Label* countDown;
-
+	
 
 private:
 	PictureBox* character_background;
 	PictureBox* building_background;
 	PictureBox* supply_menu_background;
+
+	
+	void UpdateDeathCountdown();
+	void AddCountdown();
+	void UpdateSoldierCount();
+	void AddSoldierCount();
+	Label* countDown;
+	Label* soldierCount;
 
 	int hp;
 	Label* hp_text;

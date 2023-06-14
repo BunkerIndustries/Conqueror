@@ -4,6 +4,7 @@
 #include "required/constants.h"
 #include "required/functions.h"
 #include "required/stands.h"
+#include "utils/Supply.h"
 
 
 SoldierBehaviour::SoldierBehaviour() 
@@ -19,6 +20,7 @@ void SoldierBehaviour::OnStart() {
 	gets_healed = false;
 	time_to_wait = RandomF(min_soldier_shoot_waiting_time, max_soldier_shoot_waiting_time) * game_time_factor;
 	dt_counter = 0.0f;
+	Supply::IncreaseSoldiers();
 }
 
 void SoldierBehaviour::OnStop() {

@@ -20,6 +20,7 @@ UILayer::~UILayer()
 void UILayer::OnAttach()
 {
 	AddCountdown();
+	AddSoldierCount();
 }
 
 void UILayer::OnDetach()
@@ -29,6 +30,7 @@ void UILayer::OnDetach()
 void UILayer::Update(const float dt)
 {
 	UpdateDeathCountdown();
+	UpdateSoldierCount();
 }
 
 
@@ -211,6 +213,7 @@ void UILayer::AddCountdown() {
 	countDown = new Label(std::to_string(loss_countdown), ui_font_color, Transform(glm::vec2(0.85f, 0.85f), glm::vec2(0.15f, 0.15f)), DataPool::GetFont(ui_font_family), "ui_death_countdown");
 	AddUIObject(countDown, ProjectionMode::SCREEN);
 }
+
 void UILayer::UpdateDeathCountdown() {
 	static float i;
 	i += Application::GetDT();
@@ -237,4 +240,13 @@ void UILayer::UpdateDeathCountdown() {
 		gameOverScene = new GameOverScene();
 		Application::ChangeScene(gameOverScene, false);
 	}
+}
+
+void UILayer::AddSoldierCount() {
+	soldierCount = new Label(std::to_string(Supply::GetSoldiers()), ui_font_color, Transform(glm::vec2(-0.85f, 0.85f), glm::vec2(0.15f, 0.15f)), DataPool::GetFont(ui_font_family), "ui_soldier_count");
+	AddUIObject(soldierCount, ProjectionMode::SCREEN);
+}
+
+void UILayer::UpdateSoldierCount() {
+	soldierCount->text = std::to_string(Supply::GetSoldiers());
 }
