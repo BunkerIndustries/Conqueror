@@ -246,6 +246,10 @@ bool MapLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 		gameScene->uiLayer->DeactivateBuildingUI();
 		gameScene->uiLayer->ActivateEngineerBuildingUI();
 	}
+	else if (clicked_mapobject->HasTag("soldier_building")) {
+		gameScene->uiLayer->DeactivateBuildingUI();
+		gameScene->uiLayer->ActivateSoldierBuildingUI();
+	}
 	else {
 		return false;
 	}

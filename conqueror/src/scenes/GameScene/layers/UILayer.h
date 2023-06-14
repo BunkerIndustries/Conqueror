@@ -22,6 +22,9 @@ public:
 	void DeactivateCharacterUI();
 	void DeactivateBuildingUI();
 	void DeactivateSupplyMenuUI();
+	void ActivateSoldierBuildingUI();
+	void DeactivateSoldierBuildingUI();
+
 	void UpdateDeathCountdown();
 	void AddCountdown();
 	void AddMoney();
@@ -40,6 +43,7 @@ private:
 	PictureBox* soldier_upgrade_background;
 	PictureBox* medic_building_upgrade_background;
 	PictureBox* engineer_building_upgrade_background;
+	PictureBox* soldier_building_upgrade_background;
 
 	void UpdateSoldierCount();
 	void AddSoldierCount();

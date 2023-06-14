@@ -158,6 +158,24 @@ void UILayer::ActivateMedicBuildlingUI() {
 	AddUIObject(medic_building_upgrade_background, ProjectionMode::SCREEN);
 }
 
+void UILayer::ActivateSoldierBuildingUI() {
+
+	soldier_building_upgrade_background = new PictureBox(white_color, Transform(glm::vec2(-0.8f, 0.0f), upgrade_box_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
+	PictureBox* u_header = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.57f), glm::vec2(0.9f, 0.3f)), DataPool::GetTexture("UI/box_small.png"), Type::Rectangle);
+	Label* u_name = new Label("SOLDATEN\nUPGRADE", ui_font_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.13f, 0.42f)), DataPool::GetFont(ui_font_family));
+	u_header->AddChildObject(u_name);
+	soldier_building_upgrade_background->AddChildObject(u_header);
+
+	Label* price = new Label("50", ui_font_color, Transform(glm::vec2(-0.6f, -0.3f), glm::vec2(0.15f, 0.45f)), DataPool::GetFont(ui_font_family));
+	PictureBox* coin = new PictureBox(white_color, Transform(glm::vec2(-0.15f, -0.3f), glm::vec2(0.16f, 0.32f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
+	Button* buy = new Button(white_color, Transform(glm::vec2(0.5f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, nullptr);
+	PictureBox* buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
+	buy->AddChildObject(buy_pb);
+	soldier_building_upgrade_background->AddChildObject(price); soldier_building_upgrade_background->AddChildObject(coin); soldier_building_upgrade_background->AddChildObject(buy);
+
+	AddUIObject(soldier_building_upgrade_background, ProjectionMode::SCREEN);
+}
+
 void UILayer::ActivateEngineerBuildingUI() {
 	building_background = new PictureBox(white_color, Transform(ui_building_position, ui_building_background_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
 
@@ -262,6 +280,7 @@ void UILayer::DeactivateBuildingUI() {
 	RemoveUIObject(building_background);
 	RemoveUIObject(medic_building_upgrade_background);
 	RemoveUIObject(engineer_building_upgrade_background);
+	RemoveUIObject(soldier_building_upgrade_background);
 }
 
 void UILayer::DeactivateSupplyMenuUI() {
