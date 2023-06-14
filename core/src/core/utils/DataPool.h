@@ -23,6 +23,7 @@ namespace core {
         static Shr<Texture> GetTexture(std::string textureName);
 
         static Shr<Font> GetFont(std::string fontName);
+
     };
 
     enum class ProjectionMode { PERSPECTIVE, ORTHOGRAPHIC, SCREEN };

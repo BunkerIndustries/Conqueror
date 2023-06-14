@@ -16,8 +16,9 @@ namespace core {
 
     Sound::~Sound()
     {
+        StopSound();
         ma_sound_uninit(&currentSound);
-        ma_engine_uninit(&engine);
+        //ma_engine_uninit(&engine);
     }
 
     void Sound::DataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount)

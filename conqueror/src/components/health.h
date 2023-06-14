@@ -7,6 +7,8 @@ public:
 	Health(float hp);
 	virtual ~Health() = default;
 
+	static void Init();
+
 	void OnStart() override;
 	void OnStop() override;
 	void OnUpdate() override;
@@ -16,10 +18,10 @@ public:
 	float GetHp();
 	void GetHealed();
 private:
-	Sound death;
-	Sound death_special;
-	Sound hit_soldier;
-	Sound hit_enemy;
+	static Shr<Sound> death;
+	static Shr<Sound> death_special;
+	static Shr<Sound> hit_soldier;
+	static Shr<Sound> hit_enemy;
 
 	float hp;
 	bool just_hit = false;

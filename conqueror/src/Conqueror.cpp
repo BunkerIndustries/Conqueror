@@ -5,6 +5,7 @@
 
 #include "scenes/MenuScene/MenuScene.h"
 #include "required/constants.h"
+#include "scenes/MenuScene/layers/MenuLayer.h"
 
 class Conqueror : public core::Application {
 public:
@@ -23,6 +24,9 @@ public:
 		gameOverScene = new GameOverScene();
 
 		DataPool::GetFont(ui_font_family);
+
+		Health::Init();
+		MenuLayer::Init();
 
 		Application::ChangeScene(menuScene);
 	}

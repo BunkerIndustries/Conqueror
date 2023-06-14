@@ -27,8 +27,6 @@ namespace core {
 
 		Renderer::Init();
 
-		
-
 		imguiLayer = new ImGuiLayer();
 	}
 

@@ -8,6 +8,8 @@ public:
 	MenuLayer();
 	~MenuLayer() override;
 
+	static void Init();
+
 	void OnAttach() override;
 	void OnDetach() override;
 	void Update(const float dt) override;
@@ -15,6 +17,6 @@ public:
 
 private:
 	bool OnGameObjectClick(GameObjectPressedEvent& e);
-	Sound menu_theme;
-	Sound menu_select;
+	static Shr<Sound> menu_theme;
+	static Shr<Sound> menu_select;
 };

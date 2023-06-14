@@ -6,17 +6,32 @@
 #include "utils/Supply.h"
 #include "utils/Economy.h"
 
+Shr<Sound> Health::death;
+Shr<Sound> Health::death_special;
+Shr<Sound> Health::hit_soldier;
+Shr<Sound> Health::hit_enemy;
 
 Health::Health(float hp) 
 	:hp(hp)
 {
-	hit_soldier.LoadSound("assets/sounds/soldier_damage.wav");
-	hit_enemy.LoadSound("assets/sounds/enemy_damage.wav");
-	death.LoadSound("assets/sounds/death.wav");
-	//death_special.LoadSound("assets/sounds/enemy_death_special.wav");
+	
 
 }
 
+
+void Health::Init()
+{
+	death = MakeShr<Sound>();
+	death_special = MakeShr<Sound>();
+	hit_soldier = MakeShr<Sound>();
+	hit_enemy = MakeShr<Sound>();
+
+
+	hit_soldier->LoadSound("assets/sounds/soldier_damage.wav");
+	hit_enemy->LoadSound("assets/sounds/enemy_damage.wav");
+	death->LoadSound("assets/sounds/death.wav");
+	death_special->LoadSound("assets/sounds/enemy_death_special.wav");
+}
 
 void Health::OnStart() {
 
@@ -41,11 +56,11 @@ bool Health::TakeDamage(float damage) {
 	just_hit = true;
 	if (gameObject->HasTag("soldier"))
 	{
-		hit_soldier.SoundPlay();
+		hit_soldier->SoundPlay();
 	}
 	else
 	{
-		hit_enemy.SoundPlay();
+		hit_enemy->SoundPlay();
 	}
 	
 	gameObject->GetComponent<SpriteSheet>()->ChangeColor(hit_color);
@@ -72,7 +87,7 @@ bool Health::TakeDamage(float damage) {
 			gameScene->mapLayer->CreateDeadBody("Anims/Soldier/soldier_dead.png", gameObject->transform.position);
 			Supply::CheckForGameOver();
 
-			//death.SoundPlay();
+			death->SoundPlay();
 		}
 		else if (gameObject->HasTag("enemy"))
 		{
@@ -95,13 +110,13 @@ bool Health::TakeDamage(float damage) {
 			int tmp = Utils::randRange(0, 5);
 			if (tmp == 3)
 			{
-				//death_special.SoundPlay();
+				death_special->SoundPlay();
 			}
 			else
 			{
 				
 			}
-			//death.SoundPlay();
+			death->SoundPlay();
 		}
 		delete gameObject;
 		return true;
