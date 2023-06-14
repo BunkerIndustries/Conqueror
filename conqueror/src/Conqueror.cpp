@@ -20,6 +20,7 @@ public:
 		Application::GetWindow()->SetVSync(true);
 		gameScene = new GameScene();
 		menuScene = new MenuScene();
+		gameOverScene = new GameOverScene();
 
 		DataPool::GetFont(ui_font_family);
 
