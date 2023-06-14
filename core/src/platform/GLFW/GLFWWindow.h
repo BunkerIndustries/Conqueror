@@ -11,44 +11,52 @@ namespace core
 {
 	class GLFWWindow : public Window
 	{
-    public:
+	public:
 
-        GLFWWindow(const WindowProps& window_props);
-        ~GLFWWindow() override;
+		GLFWWindow(const WindowProps& window_props);
+		~GLFWWindow() override;
 
-        void PollEvents() override;
-        void SwapBuffers() override;
+		void PollEvents() override;
+		void SwapBuffers() override;
 
-        unsigned int GetWidth() const override { return windowData.width; }
-        unsigned int GetHeight() const override { return windowData.height; }
+		unsigned int GetWidth() const override { return windowData.width; }
+		unsigned int GetHeight() const override { return windowData.height; }
 
-        float GetTime() const override;
+		float GetTime() const override;
 
-        void SetEventCallback(const EventCallbackFunction& callback_function) override { windowData.callback = callback_function; }
-        void SetVSync(bool enabled) override;
-        bool IsVSync() const override { return windowData.vsync; }
+		void Resize(unsigned width, unsigned height) override;
 
-        void* GetNativeWindow() const override { return glfwWindow; }
+		void SetEventCallback(const EventCallbackFunction& callback_function) override { windowData.callback = callback_function; }
+		void SetVSync(bool enabled) override;
+		bool IsVSync() const override { return windowData.vsync; }
 
-    private:
-        GLFWwindow* glfwWindow;
-        Shr<Context> context;
+		void EnableFullscreen(bool enabled) override;
 
-        bool initialized = false;
+		void* GetNativeWindow() const override { return glfwWindow; }
 
-        struct WindowData
-        {
-            std::string title;
-            unsigned int width, height;
-            bool vsync;
-            EventCallbackFunction callback;
-        };
+	private:
+		GLFWwindow* glfwWindow;
+		Shr<Context> context;
 
-        WindowData windowData;
+		glm::vec2 lastWindowSize;
+
+		bool fullscreenEnabled = false;
+
+		bool initialized = false;
+
+		struct WindowData
+		{
+			std::string title;
+			unsigned int width, height;
+			bool vsync;
+			EventCallbackFunction callback;
+		};
+
+		WindowData windowData;
 
 
-        void Init(const WindowProps& window_props);
-        void Quit() const;
+		void Init(const WindowProps& window_props);
+		void Quit() const;
 	};
 	
 }

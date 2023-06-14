@@ -30,6 +30,7 @@ namespace core {
 		bool gameRunning = true;
 		bool resizing = false;
 		bool deleteOldScene = false;
+		bool fullscreen;
 
 		//IMGUI
 		bool imguiEnabled = false; int imguiEnabledQueue = 0;

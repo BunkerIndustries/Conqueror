@@ -27,11 +27,10 @@ public:
 		EventDispatcher dispatcher(e);
 		dispatcher.dispatch<MouseScrolledEvent>(BIND_EVENT_FN(GameScene::OnMouseScroll));
 		dispatcher.dispatch<GameObjectPressedEvent>(BIND_EVENT_FN(GameScene::GameObjectPressed));
-		dispatcher.dispatch<KeyPressedEvent>(BIND_EVENT_FN(GameScene::KeyPressed));
 	};
+
 	bool OnMouseScroll(MouseScrolledEvent& e);
 	bool GameObjectPressed(GameObjectPressedEvent& e);
-	bool KeyPressed(KeyPressedEvent& e);
 
 	GameObject* GetActiveCharacter() const { return active_character; }
 	void SetActiveCharacter(GameObject* new_go) { active_character = new_go; }

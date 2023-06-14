@@ -12,10 +12,11 @@ inline std::vector<std::vector<GameObject*>> enemy_grid;
 // camera movement 
 inline float camera_scroll_speed = 28.0f;
 inline float camera_move_speed = 2.0f;
+inline float camera_move_speed_multiplier = 3.0f;
 inline float min_camera_z_pos = 2.0f;
-inline float max_camera_z_pos = 12.0f;
-inline glm::vec2 min_camera_positions = glm::vec2(-7.0f, -6.0f);
-inline glm::vec2 max_camera_positions = glm::vec2(7.0f, 5.0f);
+inline float max_camera_z_pos = 20.0f;
+inline glm::vec2 min_camera_positions = glm::vec2(-10.5f, -12.0f);
+inline glm::vec2 max_camera_positions = glm::vec2(10.5f, 5.0f);
 
 // enemy grid 
 inline const int enemy_grid_x = 15;
@@ -199,7 +200,7 @@ inline uint8_t max_soldiers_choice = 4;
 inline uint8_t soldier_increase_by_wave = 1;
 
 // map sprites
-inline glm::vec2 background_tile_size = glm::vec2(30.0f, 15.0f);
+inline glm::vec2 background_tile_size = glm::vec2(100.0f, 100.0f);
 inline glm::vec2 hiding_sprite_size = glm::vec2(1.6f, 0.85f);
 inline glm::vec2 hiding_sprite_node_offset = glm::vec2(0.0f, 0.8f);
 inline glm::vec2 bunker_edge_sprite_size = glm::vec2(1.0f, 1.0f);
