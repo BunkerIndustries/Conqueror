@@ -10,8 +10,14 @@ EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
 	: available_engineers(engineerCount) {
 	available_mgs = 0;
 	available_artillery = 0;
+	building_level = 1;
 }
 
+void EngineerBuilding::UpgradeBuilding() {
+	engineer_speed_upgrade += 0.15 + building_level/10;
+	mg_damage_upgrade += 3;
+	building_level++;
+}
 void EngineerBuilding::SendEngineer()
 {
 	available_engineers--;

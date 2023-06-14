@@ -19,6 +19,7 @@ public:
 	bool ReceivingMedic();
 
 	int GetLevel();
+	void AddLevel();
 
 	bool on_spawn_pos = true;
 

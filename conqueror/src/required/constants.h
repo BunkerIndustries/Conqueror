@@ -228,7 +228,7 @@ inline float show_hit_time = 0.07f;
 //upgrades
 inline float damage_upgrade = 0.0f;
 inline float armor_upgrade = 0.0f;
-inline float accuracy_upgrade = 0.0f;
+inline float accuracy_upgrade_value = 1.0f;
 inline float engineer_speed_upgrade = 0.0f;
 inline float medic_speed_upgrade = 0.0f;
 inline float mg_damage_upgrade = 0.0f;

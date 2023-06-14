@@ -6,7 +6,12 @@
 MedicBuilding::MedicBuilding(uint32_t number_of_medics)
 	:available_medics(number_of_medics)
 {
+	building_level = 1;
+}
 
+void MedicBuilding::UpgradeBuilding() {
+	medic_speed_upgrade += 0.15 + building_level / 10;
+	building_level++;
 }
 
 void MedicBuilding::SendMedic() {
