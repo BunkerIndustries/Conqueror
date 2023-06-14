@@ -292,8 +292,8 @@ void UILayer::AddCountdown() {
 	AddUIObject(countDown, ProjectionMode::SCREEN);
 }
 void UILayer::AddMoney() {
-	money = new Label("0", ui_font_color, Transform(glm::vec2(-0.9f, 0.9f), glm::vec2(0.075f, 0.075f)), DataPool::GetFont(ui_font_family), "ui_money");
-	coin = new PictureBox(glm::vec4(1.0f, 1.0f, 0.0f, 1.0f), Transform(glm::vec2(-0.8f, 0.9f), glm::vec2(0.075f, 0.075f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
+	money = new Label("0", ui_font_color, Transform(glm::vec2(-0.9f, 0.9f), glm::vec2(0.075f, 0.11f)), DataPool::GetFont(ui_font_family), "ui_money");
+	coin = new PictureBox(glm::vec4(1.0f, 1.0f, 0.0f, 1.0f), Transform(glm::vec2(-0.8f, 0.9f), glm::vec2(0.075f, 0.11f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
 	AddUIObject(money, ProjectionMode::SCREEN);
 	AddUIObject(coin, ProjectionMode::SCREEN);
 }
@@ -328,8 +328,8 @@ void UILayer::UpdateDeathCountdown() {
 }
 
 void UILayer::AddSoldierCount() {
-	soldierCount = new Label(std::to_string(Supply::GetSoldiers()), ui_font_color, Transform(glm::vec2(-0.9f, 0.8f), glm::vec2(0.075f, 0.075f)), DataPool::GetFont(ui_font_family), "ui_soldier_count");
-	soldierPic = new PictureBox(glm::vec4(1.0f, 1.0f, 0.0f, 1.0f), Transform(glm::vec2(-0.8f, 0.8f), glm::vec2(0.075f, 0.075f)), DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
+	soldierCount = new Label(std::to_string(Supply::GetSoldiers()), ui_font_color, Transform(glm::vec2(-0.9f, 0.77f), glm::vec2(0.075f, 0.11f)), DataPool::GetFont(ui_font_family), "ui_soldier_count");
+	soldierPic = new PictureBox(glm::vec4(1.0f, 1.0f, 0.0f, 1.0f), Transform(glm::vec2(-0.8f, 0.77f), glm::vec2(0.075f, 0.11f)), DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
 	AddUIObject(soldierCount, ProjectionMode::SCREEN);
 	AddUIObject(soldierPic, ProjectionMode::SCREEN);
 }

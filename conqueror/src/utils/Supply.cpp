@@ -82,6 +82,7 @@ bool Supply::CheckForGameOver() {
 		return false;
 	}
 	LOG_DEBUG("Scene change");
-	Application::ChangeScene(menuScene);	// TODO: change to game-over menu
+	waves_survived = gameScene->waveManager->GetWaveCount();
+	Application::ChangeScene(gameOverScene);	// TODO: change to game-over menu
 	return true;
 }

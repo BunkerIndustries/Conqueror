@@ -8,6 +8,8 @@ inline GameScene* gameScene;
 inline MenuScene* menuScene;
 inline GameOverScene* gameOverScene;
 
+inline int waves_survived = 0;
+
 // enemy movement grid
 inline std::vector<std::vector<GameObject*>> enemy_grid;
 
