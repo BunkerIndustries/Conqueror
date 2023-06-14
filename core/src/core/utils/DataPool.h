@@ -24,7 +24,7 @@ namespace core {
 
         static Shr<Font> GetFont(std::string fontName);
 
-        static Sound SoundSystem;
+        static std::shared_ptr<Sound> SoundSystem;
 
         static void InitSoundSystem();
     };
