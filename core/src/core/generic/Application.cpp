@@ -83,6 +83,7 @@ namespace core {
 	{
 		resizing = true;
 		Renderer::ResizeWindow(e.getWidth(), e.getHeight());
+		window->Resize(e.getWidth(), e.getHeight());
 		return false;
 	}
 
@@ -93,6 +94,12 @@ namespace core {
 		{
 			if (imguiEnabledQueue == 0 && imguiEnabled) imguiEnabledQueue = 1;
 			else imguiEnabledQueue = 2;
+			return true;
+		}
+		if (e.getKeyCode() == KEY_F11)
+		{
+			fullscreen = !fullscreen;
+			window->EnableFullscreen(fullscreen);
 			return true;
 		}
 		return false;

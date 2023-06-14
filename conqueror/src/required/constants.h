@@ -14,10 +14,11 @@ inline std::vector<std::vector<GameObject*>> enemy_grid;
 // camera movement 
 inline float camera_scroll_speed = 28.0f;
 inline float camera_move_speed = 2.0f;
+inline float camera_move_speed_multiplier = 3.0f;
 inline float min_camera_z_pos = 2.0f;
-inline float max_camera_z_pos = 12.0f;
-inline glm::vec2 min_camera_positions = glm::vec2(-7.0f, -6.0f);
-inline glm::vec2 max_camera_positions = glm::vec2(7.0f, 5.0f);
+inline float max_camera_z_pos = 20.0f;
+inline glm::vec2 min_camera_positions = glm::vec2(-10.5f, -12.0f);
+inline glm::vec2 max_camera_positions = glm::vec2(10.5f, 5.0f);
 
 // enemy grid 
 inline const int enemy_grid_x = 15;
@@ -165,7 +166,7 @@ inline glm::vec4 white_color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
 // character and building ui transform
 inline glm::vec2 ui_building_background_size = glm::vec2(0.3f, 0.73f);
-inline glm::vec2 ui_background_size = glm::vec2(0.3f, 0.6f);
+inline glm::vec2 ui_background_size = glm::vec2(0.3f, 0.7f);
 inline glm::vec2 ui_character_position = glm::vec2(0.8f, 0.0f);
 inline glm::vec2 ui_building_position = glm::vec2(-0.8f, 0.0f);
 inline Transform ui_header_transform = Transform(glm::vec2(0.0f, 0.57f), glm::vec2(0.9f, 0.25f));
@@ -174,8 +175,8 @@ inline Transform ui_header_building_name_transform = Transform(glm::vec2(0.0f, 0
 inline Transform ui_character_icon_transform = Transform(glm::vec2(0.0f, 1.1f), glm::vec2(0.3f, 0.32f));
 inline Transform ui_building_icon_transform = Transform(glm::vec2(0.0f, 1.1f), glm::vec2(0.3f, 0.24f));
 inline Transform ui_medic_button_transform = Transform(glm::vec2(0.0f, -0.5f), glm::vec2(0.5f, 0.22f));
-inline Transform ui_first_button_transform = Transform(glm::vec2(0.0f, -0.2f), glm::vec2(0.5f, 0.22f));
-inline Transform ui_second_button_transform = Transform(glm::vec2(0.0f, -0.7f), glm::vec2(0.5f, 0.22f));
+inline Transform ui_first_button_transform = Transform(glm::vec2(-0.3f, -0.2f), glm::vec2(0.5f, 0.22f));
+inline Transform ui_second_button_transform = Transform(glm::vec2(-0.3f, -0.7f), glm::vec2(0.5f, 0.22f));
 inline Transform ui_building_count_transform = Transform(glm::vec2(0.0f, 0.15f), glm::vec2(0.1, 0.1));
 inline Transform ui_hp_icon_transform = Transform(glm::vec2(-0.3f, -0.01f), glm::vec2(0.25f, 0.2f));
 inline Transform ui_health_text_transform = Transform(glm::vec2(0.25f, -0.01f), glm::vec2(0.12f, 0.13f));
@@ -203,7 +204,7 @@ inline uint8_t max_soldiers_choice = 4;
 inline uint8_t soldier_increase_by_wave = 1;
 
 // map sprites
-inline glm::vec2 background_tile_size = glm::vec2(30.0f, 15.0f);
+inline glm::vec2 background_tile_size = glm::vec2(100.0f, 100.0f);
 inline glm::vec2 hiding_sprite_size = glm::vec2(1.6f, 0.85f);
 inline glm::vec2 hiding_sprite_node_offset = glm::vec2(0.0f, 0.8f);
 inline glm::vec2 bunker_edge_sprite_size = glm::vec2(1.0f, 1.0f);
@@ -217,5 +218,5 @@ inline glm::vec2 artillery_node_size = glm::vec2(0.7f, 0.7f);
 inline glm::vec2 front_node_size = glm::vec2(0.7f, 0.7f);
 
 // hits
-inline glm::vec4 hit_color = glm::vec4(1.0f, 0.6f, 0.6f, 1.0f);
-inline float show_hit_time = 0.3f;
+inline glm::vec4 hit_color = glm::vec4(1.0f, 0.55f, 0.55f, 1.0f);
+inline float show_hit_time = 0.07f;

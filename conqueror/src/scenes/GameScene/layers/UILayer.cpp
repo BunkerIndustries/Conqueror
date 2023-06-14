@@ -132,11 +132,15 @@ void UILayer::ActivateEngineerBuildingUI() {
 	header->AddChildObject(name);
 
 	Label* count = new Label(std::to_string(gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->GetAvailableEngineers()) + " verfuegbar", ui_font_color, ui_building_count_transform, DataPool::GetFont(ui_font_family));
+	Label* mgCount = new Label(std::to_string(gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->GetMgStock()) + "x", ui_font_color, Transform(glm::vec2(0.5f, -0.2f), glm::vec2(0.15, 0.15)), DataPool::GetFont(ui_font_family));
+	Label* artillerieCount = new Label(std::to_string(gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->GetArtilleryStock()) + "x", ui_font_color, Transform(glm::vec2(0.5f, -0.7f), glm::vec2(0.15, 0.15)), DataPool::GetFont(ui_font_family));
 	
 	building_background->AddChildObject(header);
 	building_background->AddChildObject(place_mg_button);
 	building_background->AddChildObject(place_artillerie_button);
 	building_background->AddChildObject(count);
+	building_background->AddChildObject(mgCount);
+	building_background->AddChildObject(artillerieCount);
 	building_background->AddChildObject(icon);
 
 	AddUIObject(building_background, ProjectionMode::SCREEN);

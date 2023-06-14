@@ -21,11 +21,11 @@ void Health::OnStop() {
 }
 
 void Health::OnUpdate() {
-	dt_counter += Application::GetDT();
 	if (!just_hit) return;
+	dt_counter += Application::GetDT();
 	if (dt_counter > show_hit_time) {
 		just_hit = false;
-		gameObject->GetComponent<SpriteRenderer>()->SetColor(white_color);
+		gameObject->GetComponent<SpriteSheet>()->ChangeColor(white_color);
 		dt_counter = 0.0f;
 	}
 }
@@ -33,7 +33,7 @@ void Health::OnUpdate() {
 bool Health::TakeDamage(float damage) {
 	hp -= damage;
 	just_hit = true;
-	//gameObject->GetComponent<SpriteSheet>()->ChangeColor(hit_color);
+	gameObject->GetComponent<SpriteSheet>()->ChangeColor(hit_color);
 	if (gameScene->GetActiveCharacter() == gameObject) {
 		gameScene->uiLayer->DeactivateCharacterUI();
 		if (gameObject->HasTag("soldier")) {

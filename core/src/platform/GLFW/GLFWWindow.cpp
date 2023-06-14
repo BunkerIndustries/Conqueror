@@ -43,6 +43,9 @@ namespace core
         windowData.width = window_props.width;
         windowData.height = window_props.height;
 
+        lastWindowSize.x = window_props.width;
+        lastWindowSize.y = window_props.height;
+
         LOG_CORE_TRACE("Creating window {0} ({1}, {2})", window_props.title, window_props.width, window_props.height);
 
         if (!initialized)
@@ -163,9 +166,49 @@ namespace core
         return (float)glfwGetTime();
     }
 
+    void GLFWWindow::Resize(unsigned width, unsigned height)
+    {
+        if (fullscreenEnabled) return;
+        windowData.width = width;
+        windowData.height = height;
+    }
+
     void GLFWWindow::SetVSync(const bool enabled)
     {
         glfwSwapInterval(enabled);
         windowData.vsync = enabled;
+    }
+
+    void switchToFullscreen(GLFWwindow* window)
+    {
+        // Get the primary monitor
+        GLFWmonitor* monitor = glfwGetPrimaryMonitor();
+
+        // Get the video mode of the primary monitor
+        const GLFWvidmode* videoMode = glfwGetVideoMode(monitor);
+
+        // Switch the window to fullscreen mode
+        glfwSetWindowMonitor(window, monitor, 0, 0, videoMode->width, videoMode->height, videoMode->refreshRate);
+    }
+
+    void switchToWindowed(GLFWwindow* window, int width, int height)
+    {
+        // Restore the windowed mode
+        glfwSetWindowMonitor(window, nullptr, 100, 100, width, height, GLFW_DONT_CARE);
+    }
+
+    void GLFWWindow::EnableFullscreen(bool enabled)
+    {
+        if (enabled)
+        {
+            lastWindowSize.x = windowData.width;
+            lastWindowSize.y = windowData.height;
+            switchToFullscreen(glfwWindow);
+        }
+        else
+        {
+            switchToWindowed(glfwWindow, lastWindowSize.x, lastWindowSize.y);
+        }
+        fullscreenEnabled = enabled;
     }
 }
