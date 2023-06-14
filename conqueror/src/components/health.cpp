@@ -3,7 +3,8 @@
 #include "EnemyBehaviour.h"
 
 #include "required/constants.h"
-#include "utils\Supply.h"
+#include "utils/Supply.h"
+#include "utils/Economy.h"
 
 
 Health::Health(float hp) 
@@ -59,6 +60,7 @@ bool Health::TakeDamage(float damage) {
 		}
 		else if (gameObject->HasTag("enemy"))
 		{
+			Economy::AddBalance(2);
 			if(gameObject->GetComponent<EnemyBehaviour>()->GetXIndex()){
 				filled_last_row_grid_positions.remove(gameObject->GetComponent<EnemyBehaviour>()->GetXIndex());
 			}

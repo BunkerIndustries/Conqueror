@@ -7,6 +7,7 @@
 #include "utils/Medic.h"
 #include "utils/Engineer.h"
 #include "utils/Supply.h"
+#include "utils/Economy.h"
 
 UILayer::UILayer()
 	: Layer("UILayer")
@@ -20,6 +21,7 @@ UILayer::~UILayer()
 void UILayer::OnAttach()
 {
 	AddCountdown();
+	AddMoney();
 	AddSoldierCount();
 }
 
@@ -30,6 +32,7 @@ void UILayer::OnDetach()
 void UILayer::Update(const float dt)
 {
 	UpdateDeathCountdown();
+	UpdateMoney();
 	UpdateSoldierCount();
 }
 
@@ -213,6 +216,11 @@ void UILayer::AddCountdown() {
 	countDown = new Label(std::to_string(loss_countdown), ui_font_color, Transform(glm::vec2(0.85f, 0.85f), glm::vec2(0.15f, 0.15f)), DataPool::GetFont(ui_font_family), "ui_death_countdown");
 	AddUIObject(countDown, ProjectionMode::SCREEN);
 }
+void UILayer::AddMoney() {
+	money = new Label("0", ui_font_color, Transform(glm::vec2(-0.9f, 0.9f), glm::vec2(0.075f, 0.075f)), DataPool::GetFont(ui_font_family), "ui_money");
+	AddUIObject(money, ProjectionMode::SCREEN);
+}
+
 
 void UILayer::UpdateDeathCountdown() {
 	static float i;
@@ -249,4 +257,7 @@ void UILayer::AddSoldierCount() {
 
 void UILayer::UpdateSoldierCount() {
 	soldierCount->text = std::to_string(Supply::GetSoldiers());
+}
+void UILayer::UpdateMoney() {
+	money->text = std::to_string(Economy::getBalance());
 }
