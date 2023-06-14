@@ -14,7 +14,7 @@ public:
 	void OnEvent(Event& event) override;
 
 private:
-	bool OnGameObjectClick(GameObjectPressedEvent& e);
+	bool KeyPressed(KeyPressedEvent& e);
 
 	GameObject* angelina;
 	GameObject* angelina_text;
@@ -30,4 +30,12 @@ private:
 
 	GameObject* gutsche;
 	GameObject* gutsche_text;
+
+	GameObject* rahmen_des_seminarkurses;
+	GameObject* seminarkurs;
+	GameObject* mentoren;
+	GameObject* scn;
+	GameObject* lesle;
+	GameObject* racic;
+
 };

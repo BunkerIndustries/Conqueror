@@ -17,6 +17,7 @@ public:
 	void OnEvent(Event& e) override {}
 
 	void CreditsStart();
+	void CreditsStop();
 
 	MenuLayer* menuLayer = nullptr;
 	MenuBackgroundLayer* menuBackgroundLayer = nullptr;

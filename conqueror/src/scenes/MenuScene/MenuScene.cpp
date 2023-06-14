@@ -52,6 +52,13 @@ void MenuScene::CreditsStart()
 	creditLayer->Attach();
 }
 
+void MenuScene::CreditsStop()
+{
+	creditLayer->Detach();
+
+	menuLayer->Attach();
+}
+
 GameObject* MenuScene::CreateElement(std::string sprite_name, glm::vec2 position, glm::vec2 size) {
 
 	GameObject* element = new GameObject("menu_element", Transform(position, size));
