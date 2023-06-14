@@ -9,11 +9,6 @@
 
 SoldierBehaviour::SoldierBehaviour() 
 {
-
-}
-
-void SoldierBehaviour::OnStart() {
-
 	// start configuration
 	on_spawn_pos = true;
 	travelling = false;
@@ -23,6 +18,11 @@ void SoldierBehaviour::OnStart() {
 	Supply::IncreaseSoldiers();
 
 	name = names.at(RandomInt(0, names.size() - 1));
+}
+
+void SoldierBehaviour::OnStart() {
+
+	
 }
 
 void SoldierBehaviour::OnStop() {
