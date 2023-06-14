@@ -55,7 +55,6 @@ void WalkingAnimation::Start(glm::vec2 indexStart, glm::vec2 indexEnd) {
     x += Application::GetDT() / animationSpeed;
 
     tex = (int)(x * 100);
-    LOG_DEBUG(tex);
     if (tex % (animationLength + 1) == 0)
     {
         x = 0.01f;

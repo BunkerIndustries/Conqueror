@@ -1,5 +1,6 @@
 #include "_Game.h"
 #include "health.h"
+#include "EnemyBehaviour.h"
 
 #include "required/constants.h"
 #include "utils\Supply.h"
@@ -58,6 +59,9 @@ bool Health::TakeDamage(float damage) {
 		}
 		else if (gameObject->HasTag("enemy"))
 		{
+			if(gameObject->GetComponent<EnemyBehaviour>()->GetXIndex()){
+				filled_last_row_grid_positions.remove(gameObject->GetComponent<EnemyBehaviour>()->GetXIndex());
+			}
 			if (gameObject->GetComponent<EnemyBehaviour>()->GetNode() != nullptr)
 				gameObject->GetComponent<EnemyBehaviour>()->GetNode()->GetComponent<Node>()->is_occupied = false;
 			if (Util::soldierTable.count(gameObject))
