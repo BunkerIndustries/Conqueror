@@ -28,6 +28,7 @@ public:
 	void UpdateMoney();
 	Label* countDown;
 	Label* money;
+	PictureBox* coin;
 
 
 private:
@@ -36,11 +37,8 @@ private:
 	PictureBox* supply_menu_background;
 
 	
-	void UpdateDeathCountdown();
-	void AddCountdown();
 	void UpdateSoldierCount();
 	void AddSoldierCount();
-	Label* countDown;
 	Label* soldierCount;
 
 	int hp;
