@@ -63,6 +63,19 @@ void UILayer::ActivateSoldierUI() {
 	character_background->AddChildObject(call_medic_button);
 
 	AddUIObject(character_background, ProjectionMode::SCREEN);
+
+	// upgrade menu //
+
+	soldier_upgrade_background = new PictureBox(white_color, Transform(glm::vec2(0.8f, -0.55f), upgrade_2_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
+	PictureBox* u_header = new PictureBox(white_color, ui_header_transform, DataPool::GetTexture("UI/box_small.png"), Type::Rectangle);
+	Label* u_name = new Label("UPGRADES", ui_font_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.16f, 0.55f)), DataPool::GetFont(ui_font_family));
+	u_header->AddChildObject(u_name); 
+	soldier_upgrade_background->AddChildObject(u_header);
+
+	AddUIObject(soldier_upgrade_background, ProjectionMode::SCREEN);
+
+	/*Label* upg1_t = new Label("Genauigkeit", white_color, Transform(glm::vec2(-0.5f, 0.2f), glm::vec2(0.2f, 0.1f)), DataPool::GetFont(ui_font_family));
+	Label* upg1_p = new Label("10", white_color, Transform(glm::vec2(0.2f, 0.8f), glm::vec2(0.2f, 0.1f)), DataPool::GetFont(ui_font_family));*/
 }
 
 void UILayer::ActivateMedicUI() {
@@ -120,6 +133,16 @@ void UILayer::ActivateMedicBuildlingUI() {
 	building_background->AddChildObject(icon);
 
 	AddUIObject(building_background, ProjectionMode::SCREEN);
+
+	// upgrade menu //
+
+	medic_building_upgrade_background = new PictureBox(white_color, Transform(glm::vec2(-0.8f, -0.55f), upgrade_2_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
+	PictureBox* u_header = new PictureBox(white_color, ui_header_transform, DataPool::GetTexture("UI/box_small.png"), Type::Rectangle);
+	Label* u_name = new Label("UPGRADES", ui_font_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.16f, 0.55f)), DataPool::GetFont(ui_font_family));
+	u_header->AddChildObject(u_name);
+	medic_building_upgrade_background->AddChildObject(u_header);
+
+	AddUIObject(medic_building_upgrade_background, ProjectionMode::SCREEN);
 }
 
 void UILayer::ActivateEngineerBuildingUI() {
@@ -149,6 +172,16 @@ void UILayer::ActivateEngineerBuildingUI() {
 	building_background->AddChildObject(icon);
 
 	AddUIObject(building_background, ProjectionMode::SCREEN);
+
+	// upgrade menu //
+
+	engineer_building_upgrade_background = new PictureBox(white_color, Transform(glm::vec2(-0.8f, -0.6f), upgrade_4_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
+	PictureBox* u_header = new PictureBox(white_color, ui_header_transform, DataPool::GetTexture("UI/box_small.png"), Type::Rectangle);
+	Label* u_name = new Label("UPGRADES", ui_font_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.16f, 0.55f)), DataPool::GetFont(ui_font_family));
+	u_header->AddChildObject(u_name);
+	engineer_building_upgrade_background->AddChildObject(u_header);
+
+	AddUIObject(engineer_building_upgrade_background, ProjectionMode::SCREEN);
 }
 
 void UILayer::ActivateSupplyMenuUI() {
@@ -202,10 +235,13 @@ void UILayer::ActivateSupplyMenuUI() {
 
 void UILayer::DeactivateCharacterUI() {
 	RemoveUIObject(character_background);
+	RemoveUIObject(soldier_upgrade_background);
 }
 
 void UILayer::DeactivateBuildingUI() {
 	RemoveUIObject(building_background);
+	RemoveUIObject(medic_building_upgrade_background);
+	RemoveUIObject(engineer_building_upgrade_background);
 }
 
 void UILayer::DeactivateSupplyMenuUI() {

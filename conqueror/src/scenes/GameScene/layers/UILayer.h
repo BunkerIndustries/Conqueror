@@ -36,11 +36,14 @@ private:
 	PictureBox* building_background;
 	PictureBox* supply_menu_background;
 
-	
+	PictureBox* soldier_upgrade_background;
+	PictureBox* medic_building_upgrade_background;
+	PictureBox* engineer_building_upgrade_background;
+
 	void UpdateSoldierCount();
 	void AddSoldierCount();
 	Label* soldierCount;
-
+	
 	int hp;
 	Label* hp_text;
 };
