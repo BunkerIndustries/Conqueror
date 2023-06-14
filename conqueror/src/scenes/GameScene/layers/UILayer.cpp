@@ -153,7 +153,7 @@ void UILayer::ActivateMedicBuildlingUI() {
 	Button* buy = new Button(white_color, Transform(glm::vec2(0.5f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, UILayer::UpgradeMedBuilding, "medic_buy_button");
 	PictureBox* buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	buy->AddChildObject(buy_pb);
-	soldier_upgrade_background->AddChildObject(price); soldier_upgrade_background->AddChildObject(coin); soldier_upgrade_background->AddChildObject(buy);
+	medic_building_upgrade_background->AddChildObject(price); medic_building_upgrade_background->AddChildObject(coin); medic_building_upgrade_background->AddChildObject(buy);
 
 	AddUIObject(medic_building_upgrade_background, ProjectionMode::SCREEN);
 }
@@ -199,7 +199,7 @@ void UILayer::ActivateEngineerBuildingUI() {
 	Button* buy = new Button(white_color, Transform(glm::vec2(0.5f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, UILayer::UpgradeEngineerBuilding, "engineer_buy_button");
 	PictureBox* buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	buy->AddChildObject(buy_pb);
-	soldier_upgrade_background->AddChildObject(price); soldier_upgrade_background->AddChildObject(coin); soldier_upgrade_background->AddChildObject(buy);
+	engineer_building_upgrade_background->AddChildObject(price); engineer_building_upgrade_background->AddChildObject(coin); engineer_building_upgrade_background->AddChildObject(buy);
 
 	AddUIObject(engineer_building_upgrade_background, ProjectionMode::SCREEN);
 }
