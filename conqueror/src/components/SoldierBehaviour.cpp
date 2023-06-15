@@ -134,18 +134,23 @@ bool SoldierBehaviour::SoldierTryMoveToWaitingNode() {
 
 	// choose a free waiting node
 	for (auto& node : waiting_nodes) {
-		if (!node->GetComponent<Node>()->is_occupied) {
 
-			// move the gameobject to the chosen waiting node 
-			gameObject->GetComponent<Movement>()->SetTrackingPos(&node->transform.position);
-			this->target_position = node->transform.position;
-			node->GetComponent<Node>()->is_occupied = true;
-			this->stand = waiting_stand.stand;
-			this->stand->push_back(gameObject);
-			this->old_node = node;
+		if (node->GetComponent<Node>() != nullptr)
+		{
+			if (!node->GetComponent<Node>()->is_occupied) {
 
-			return true;
+				// move the gameobject to the chosen waiting node 
+				gameObject->GetComponent<Movement>()->SetTrackingPos(&node->transform.position);
+				this->target_position = node->transform.position;
+				node->GetComponent<Node>()->is_occupied = true;
+				this->stand = waiting_stand.stand;
+				this->stand->push_back(gameObject);
+				this->old_node = node;
+
+				return true;
+			}
 		}
+
 	}
 	return false;
 }
