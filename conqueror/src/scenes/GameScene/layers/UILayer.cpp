@@ -79,7 +79,7 @@ void UILayer::ActivateSoldierUI() {
 	soldier_upgrade_background->AddChildObject(u_header);
 
 	soldier_upgrade_price = new Label(gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->soldier_upgrade_price_display, ui_font_color, Transform(glm::vec2(-0.6f, -0.3f), glm::vec2(0.15f, 0.45f)), DataPool::GetFont(ui_font_family));
-	PictureBox* coin = new PictureBox(white_color, Transform(glm::vec2(-0.175f, -0.3f), glm::vec2(0.11f, 0.27f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
+	PictureBox* coin = new PictureBox(coin_color, Transform(glm::vec2(-0.175f, -0.3f), glm::vec2(0.11f, 0.27f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
 	Button* buy = new Button(white_color, Transform(glm::vec2(0.3f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, UILayer::UpgradeSoldier, "soldier_buy_button");
 	PictureBox* buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	buy->AddChildObject(buy_pb);
@@ -158,7 +158,7 @@ void UILayer::ActivateMedicBuildingUI() {
 	medic_building_upgrade_background->AddChildObject(u_header);
 
 	medic_building_upgrade_price = new Label(gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->building_upgrade_price_display, ui_font_color, Transform(glm::vec2(-0.6f, -0.3f), glm::vec2(0.15f, 0.45f)), DataPool::GetFont(ui_font_family));
-	PictureBox* coin = new PictureBox(white_color, Transform(glm::vec2(-0.175f, -0.3f), glm::vec2(0.11f, 0.27f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
+	PictureBox* coin = new PictureBox(coin_color, Transform(glm::vec2(-0.175f, -0.3f), glm::vec2(0.11f, 0.27f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
 	Button* buy = new Button(white_color, Transform(glm::vec2(0.3f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, UILayer::UpgradeMedBuilding, "medic_buy_button");
 	PictureBox* buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	buy->AddChildObject(buy_pb);
@@ -179,7 +179,7 @@ void UILayer::ActivateSoldierBuildingUI() {
 	soldier_building_upgrade_background->AddChildObject(u_header);
 
 	Label* soldier_building_upgrade_price = new Label(soldier_building_upgrade_price_display, ui_font_color, Transform(glm::vec2(-0.6f, -0.3f), glm::vec2(0.15f, 0.45f)), DataPool::GetFont(ui_font_family));
-	PictureBox* coin = new PictureBox(white_color, Transform(glm::vec2(-0.175f, -0.3f), glm::vec2(0.11f, 0.27f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
+	PictureBox* coin = new PictureBox(coin_color, Transform(glm::vec2(-0.175f, -0.3f), glm::vec2(0.11f, 0.27f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
 	soldier_building_upgrade_buy = new Button(white_color, Transform(glm::vec2(0.3f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, UILayer::UpgradeSoldierTent);
 	PictureBox* buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	soldier_building_upgrade_buy->AddChildObject(buy_pb);
@@ -228,7 +228,7 @@ void UILayer::ActivateEngineerBuildingUI() {
 	engineer_building_upgrade_background->AddChildObject(u_header);
 
 	engineer_building_upgrade_price = new Label(gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->building_upgrade_price_display, ui_font_color, Transform(glm::vec2(-0.6f, -0.3f), glm::vec2(0.15f, 0.45f)), DataPool::GetFont(ui_font_family));
-	PictureBox* coin = new PictureBox(white_color, Transform(glm::vec2(-0.175f, -0.3f), glm::vec2(0.11f, 0.27f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
+	PictureBox* coin = new PictureBox(coin_color, Transform(glm::vec2(-0.175f, -0.3f), glm::vec2(0.11f, 0.27f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
 	Button* buy = new Button(white_color, Transform(glm::vec2(0.3f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, UILayer::UpgradeEngineerBuilding, "engineer_buy_button");
 	PictureBox* buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	buy->AddChildObject(buy_pb);
@@ -311,7 +311,7 @@ void UILayer::AddCountdown() {
 }
 void UILayer::AddMoney() {
 	money = new Label("0", ui_font_color, Transform(glm::vec2(-0.9f, 0.9f), glm::vec2(0.075f, 0.11f)), DataPool::GetFont(ui_font_family), "ui_money");
-	coin = new PictureBox(glm::vec4(1.0f, 1.0f, 0.0f, 1.0f), Transform(glm::vec2(-0.8f, 0.9f), glm::vec2(0.075f, 0.11f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
+	coin = new PictureBox(coin_color, Transform(glm::vec2(-0.8f, 0.9f), glm::vec2(0.075f, 0.11f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
 	AddUIObject(money, ProjectionMode::SCREEN);
 	AddUIObject(coin, ProjectionMode::SCREEN);
 }
@@ -348,7 +348,7 @@ void UILayer::UpdateDeathCountdown()
 
 void UILayer::AddSoldierCount() {
 	soldierCount = new Label(std::to_string(Supply::GetSoldiers()), ui_font_color, Transform(glm::vec2(-0.9f, 0.77f), glm::vec2(0.075f, 0.11f)), DataPool::GetFont(ui_font_family), "ui_soldier_count");
-	soldierPic = new PictureBox(glm::vec4(1.0f, 1.0f, 0.0f, 1.0f), Transform(glm::vec2(-0.8f, 0.77f), glm::vec2(0.075f, 0.11f)), DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
+	soldierPic = new PictureBox(white_color, Transform(glm::vec2(-0.8f, 0.77f), glm::vec2(0.075f, 0.11f)), DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
 	AddUIObject(soldierCount, ProjectionMode::SCREEN);
 	AddUIObject(soldierPic, ProjectionMode::SCREEN);
 }

@@ -23,10 +23,17 @@ GameScene::GameScene() {
 	backgroundLayer->Load();
 	mapLayer->Load();
 	uiLayer->Load();
+
+	loss_countdown = 60;
 }
 
 GameScene::~GameScene() {
-
+	delete backgroundLayer;
+	delete mapLayer;
+	delete enemyLayer;
+	delete allyLayer;
+	delete uiLayer;
+	delete waveManager;
 }
 
 void GameScene::OnStop() {

@@ -15,6 +15,8 @@ inline glm::vec4 coin_color = glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);
 // enemy movement grid
 inline std::vector<std::vector<GameObject*>> enemy_grid;
 
+inline glm::vec2 soldier_building_position = glm::vec2(0.0f, -12.0f);
+
 // camera movement 
 inline float camera_scroll_speed = 28.0f;
 inline float camera_move_speed = 2.0f;
@@ -62,7 +64,7 @@ inline float min_soldier_shoot_waiting_time = 0.3f;
 inline float max_soldier_shoot_waiting_time = 0.7f;
 inline uint8_t max_soldier_lock_target_tries = 2;
 inline uint8_t soldier_miss_points = 1;
-inline glm::vec2 soldier_spawn_pos = glm::vec2(0.0f, -18.0f);
+inline glm::vec2 soldier_spawn_pos = soldier_building_position;
 
 // stands (probabilities have to be choose_probability_sum in total)
 inline uint8_t choose_probability_sum = 100;
@@ -126,7 +128,7 @@ inline glm::vec2 engineer_scale = glm::vec2(0.88f, 1.4f);
 
 // buildings
 inline glm::vec2 building_size = glm::vec2(3.0f, 3.0f);
-inline glm::vec2 soldier_building_position = glm::vec2(0.0f, -12.0f);
+
 
 // stocks
 inline unsigned int start_soldier_stock = 3;
