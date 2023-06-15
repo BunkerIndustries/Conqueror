@@ -257,3 +257,9 @@ inline std::string soldier_building_upgrade_price_display = "10";
 //soldier building
 inline int soldier_building_current_price = 10;
 inline int soldier_building_current_level = 1;
+
+// shop menu
+inline Transform shop_icon_transform = Transform(glm::vec2(-0.75f, 0.0f), glm::vec2(0.2f, 0.9f));
+inline Transform shop_price_transform = Transform(glm::vec2(-0.1f, 0.0f), glm::vec2(0.05f, 0.1f));
+inline Transform shop_coin_transform = Transform(glm::vec2(-0.2f, 0.0f), glm::vec2(0.1f, 0.65f));
+inline Transform shop_button_transform = Transform(glm::vec2(0.75f, 0.0f), glm::vec2(0.2f, 0.9f));
