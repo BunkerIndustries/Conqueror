@@ -13,6 +13,10 @@ public:
 	void Update(const float dt) override;
 	void OnEvent(Event& event) override;
 
+	static void ResetButton();
+
 private:
 	bool OnGameObjectClick(GameObjectPressedEvent& e);
+
+	GameObject* reset = nullptr;
 };

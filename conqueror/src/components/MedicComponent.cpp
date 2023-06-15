@@ -10,11 +10,15 @@ MedicBuilding::MedicBuilding(uint32_t number_of_medics)
 {
 	building_level = 1;
 	building_upgrade_price = medic_building_upgrade_price_start;
+	building_upgrade_price_display = std::to_string(medic_building_upgrade_price_start);
 }
 
 void MedicBuilding::UpgradeBuilding() {
-	medic_speed_upgrade += 0.15 + building_level / 10;
+	medic_speed_upgrade += 0.3 + building_level / 10;
 	building_level++;
+	if (building_level % 2 == 0) {
+		available_medics++;
+	}
 }
 
 void MedicBuilding::SendMedic() {
@@ -82,6 +86,7 @@ void MedicCharacter::OnUpdate() {
 	if ((gameObject->transform.position != healing_target_position) || going_back) return;	// if he has not arrived yet or is going back
 	if (!healing) {	// if he arrived and is not healing already
 		LOG_DEBUG("medic just arrived at soldier to heal");
+		healing_target->GetComponent<SpriteSheet>()->ChangeColor(heal_color);
 		healing = true;
 		heal_time = (healing_target->GetComponent<Health>()->GetMaxHp() - healing_target->GetComponent<Health>()->GetHp()) * waiting_time_per_hp * game_time_factor;
 	}
@@ -89,6 +94,7 @@ void MedicCharacter::OnUpdate() {
 		if (dt_counter >= heal_time) {
 			// healing is over
 			LOG_DEBUG("medic just finished healing");
+			healing_target->GetComponent<SpriteSheet>()->ChangeColor(white_color);
 			healing = false;
 			going_back = true;
 			healing_target->GetComponent<Health>()->GetHealed();

@@ -2,6 +2,7 @@
 
 #include "CreditLayer.h"
 
+#include "renderer/Font.h"
 #include "required/constants.h"
 
 CreditLayer::CreditLayer()
@@ -16,7 +17,12 @@ CreditLayer::~CreditLayer()
 static glm::vec4 color = glm::vec4(0.75f, 0.75f, 0.75f, 1.0f);
 void CreditLayer::OnAttach()
 {
-	static float yOffset = 10.0f;
+	press = new GameObject("press ESC", Transform(glm::vec2(-0.7f, 0.85f), glm::vec2(0.05f, 0.05f)), ProjectionMode::SCREEN);
+	press->AddComponent(new FontRenderer(glm::vec4(0.8f, 0.9f, 0.7f, 1.0f), "Press ESC to\nreturn to menu", ui_font_family));
+	press->AddTag("press");
+	AddGameObjectToLayer(press);
+
+	static float yOffset = 12.0f;
 	angelina = new GameObject("credit1", Transform(glm::vec2(0.0f, 6.0f - yOffset), glm::vec2(0.5f, 0.5f)));
 	angelina->AddComponent(new FontRenderer(color, "Angelina Heller", ui_font_family));
 
@@ -24,7 +30,7 @@ void CreditLayer::OnAttach()
 	angelina_text->AddComponent(new FontRenderer(color, "Grafikdesign", ui_font_family));
 
 	levi = new GameObject("credit2", Transform(glm::vec2(0.0f, 3.0f - yOffset), glm::vec2(0.5f, 0.5f)));
-	levi->AddComponent(new FontRenderer(color, "Levi Lauer", ui_font_family));
+	levi->AddComponent(new FontRenderer(color, "Levi Laur", ui_font_family));
 
 	levi_text = new GameObject("credit2", Transform(glm::vec2(0.0f, 2.0f - yOffset), glm::vec2(0.5f, 0.5f)));
 	levi_text->AddComponent(new FontRenderer(color, "Spiellogik Implementierung und Spielplanung", ui_font_family));
@@ -86,6 +92,7 @@ void CreditLayer::OnAttach()
 
 void CreditLayer::OnDetach()
 {
+	delete press;
 	delete angelina;
 	delete angelina_text;
 	delete levi;
@@ -110,7 +117,8 @@ void CreditLayer::Update(const float dt)
 {
 	for (auto gm : gameObjects)
 	{
-		gm->transform.position.y += 1 * Application::GetDT();
+		if (!gm->HasTag("press"))
+			gm->transform.position.y += 1 * Application::GetDT();
 	}
 
 }
