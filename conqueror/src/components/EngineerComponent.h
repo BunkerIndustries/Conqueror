@@ -52,7 +52,7 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
 
-	std::string GetName();
+	std::string GetName() { return name; };
 	static void Init();
 
 	static Shr<Sound> sound_building;

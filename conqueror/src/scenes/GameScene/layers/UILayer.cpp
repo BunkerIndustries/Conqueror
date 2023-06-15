@@ -129,7 +129,7 @@ void UILayer::ActivateEngineerUI() {
 	character_background = new PictureBox(white_color, Transform(ui_character_position, ui_background_size), DataPool::GetTexture("UI/box_1.png"), Type::Rectangle);
 
 	PictureBox* header = new PictureBox(white_color, ui_header_transform, DataPool::GetTexture("UI/box_small.png"), Type::Rectangle);	// picturebox with picture of medic
-	Label* name = new Label(gameScene->GetActiveCharacter()->GetComponent<MedicCharacter>()->GetName(), ui_font_color, ui_header_building_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
+	Label* name = new Label(gameScene->GetActiveCharacter()->GetComponent<EngineerCharacter>()->GetName(), ui_font_color, ui_header_building_name_transform, DataPool::GetFont(ui_font_family), "ui_character_name");
 	PictureBox* icon = new PictureBox(white_color, ui_character_icon_transform, DataPool::GetTexture("UI/engineer_head.png"), Type::Rectangle);
 	header->AddChildObject(name);
 
