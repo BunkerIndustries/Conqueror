@@ -83,9 +83,5 @@ GameObject* MenuScene::CreateResetButton(glm::vec2 position) {
 	Label* label = new Label("RESET", white_color, Transform(glm::vec2(0.0f), glm::vec2(0.25f, 1.0f)), DataPool::GetFont(ui_font_family));
 	button->AddChildObject(label);
 	menuScene->menuLayer->AddUIObject(button, ProjectionMode::PERSPECTIVE);
-	//GameObject* button = new GameObject("menu_reset_button", Transform(position));
-	//button->AddComponent(new FontRenderer(ui_font_color, "RESET", ui_font_family, true));
-	//button->AddTag("reset");
-	//menuLayer->AddGameObjectToLayer(button);
 	return nullptr;
 }
