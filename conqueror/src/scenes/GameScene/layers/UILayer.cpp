@@ -355,9 +355,6 @@ bool UILayer::UpgradeSoldier() {
 			gameScene->uiLayer->soldier_upgrade_price->text = "MAX";
 			gameScene->uiLayer->RemoveUIObject(gameScene->uiLayer->soldier_upgrade_buy);
 		}
-		else {
-			//gameScene->uiLayer->soldier_upgrade_price->text = std::to_string(gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->GetUpgradePrice());
-		}
 	}
 	return true;
 }
