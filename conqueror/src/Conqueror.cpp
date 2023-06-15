@@ -33,8 +33,8 @@ public:
 		// god please forgive me
 		Util::Init();
 		UILayer::Init();
-		MenuScene::Init();
 		MenuLayer::Init();
+		CreditLayer::Init();
 		Health::Init();
 		EnemyShooting::Init();
 		SoldierShooting::Init();

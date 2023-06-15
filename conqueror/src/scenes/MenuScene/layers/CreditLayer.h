@@ -13,6 +13,10 @@ public:
 	void Update(const float dt) override;
 	void OnEvent(Event& event) override;
 
+	static void Init();
+
+	static Shr<Sound> sound_credit;
+
 private:
 	bool KeyPressed(KeyPressedEvent& e);
 

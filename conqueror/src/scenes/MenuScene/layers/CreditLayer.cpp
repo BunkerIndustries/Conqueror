@@ -5,6 +5,15 @@
 #include "renderer/Font.h"
 #include "required/constants.h"
 
+Shr<Sound> CreditLayer::sound_credit;
+
+void CreditLayer::Init()
+{
+	sound_credit = MakeShr<Sound>();
+	sound_credit->LoadSound("assets/sounds/credits.wav");
+}
+
+
 CreditLayer::CreditLayer()
 {
 
@@ -110,11 +119,15 @@ void CreditLayer::OnDetach()
 	delete lesle;
 	delete racic;
 	gameObjects.clear();
+
+	sound_credit->StopSound();
+
 }
 
 
 void CreditLayer::Update(const float dt)
 {
+	sound_credit->SoundPlay();
 	for (auto gm : gameObjects)
 	{
 		if (!gm->HasTag("press"))
