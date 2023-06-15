@@ -94,7 +94,10 @@ void CreditLayer::OnAttach()
 	racic2->AddComponent(new FontRenderer(color, "Alexander Racic", ui_font_family));
 
 	rebstock = new GameObject("credit16", Transform(glm::vec2(0.0f, -28.0f - yOffset), glm::vec2(0.5f, 0.5f)));
-	rebstock->AddComponent(new FontRenderer(color, "Heiko Rebstock", ui_font_family));
+	rebstock->AddComponent(new FontRenderer(glm::vec4(0.19f, 1.0f, 0.19f, 0.6f), "Heiko Rebstock", ui_font_family));
+
+	rebstock_bild = new GameObject("credit17", Transform(glm::vec2(0.0f, -29.0f - yOffset), glm::vec2(5.52f, 1.0f)));
+	rebstock_bild->AddComponent(new SpriteRenderer(white_color, DataPool::GetTexture("reb2.png"), 1.0f, Geometry::RECTANGLE));
 
 	AddGameObjectToLayer(angelina);
 	AddGameObjectToLayer(angelina_text);
@@ -117,6 +120,7 @@ void CreditLayer::OnAttach()
 	AddGameObjectToLayer(nam);
 	AddGameObjectToLayer(racic2);
 	AddGameObjectToLayer(rebstock);
+	AddGameObjectToLayer(rebstock_bild);
 
 }
 
@@ -144,6 +148,7 @@ void CreditLayer::OnDetach()
 	delete nam;
 	delete racic2;
 	delete rebstock;
+	delete rebstock_bild;
 
 	gameObjects.clear();
 
@@ -164,7 +169,7 @@ void CreditLayer::Update(const float dt)
 		}
 	}
 	posY += 1 * Application::GetDT();
-	if (posY >= 41.0f)
+	if (posY >= 42.0f)
 	{
 		for (auto gm : gameObjects)
 		{
