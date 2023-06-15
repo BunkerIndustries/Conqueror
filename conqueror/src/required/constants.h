@@ -11,6 +11,7 @@ inline GameOverScene* gameOverScene;
 inline int waves_survived = 0;
 
 inline glm::vec4 coin_color = glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);
+inline glm::vec4 heal_color = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
 
 // enemy movement grid
 inline std::vector<std::vector<GameObject*>> enemy_grid;

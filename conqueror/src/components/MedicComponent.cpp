@@ -83,6 +83,7 @@ void MedicCharacter::OnUpdate() {
 	if ((gameObject->transform.position != healing_target_position) || going_back) return;	// if he has not arrived yet or is going back
 	if (!healing) {	// if he arrived and is not healing already
 		LOG_DEBUG("medic just arrived at soldier to heal");
+		healing_target->GetComponent<SpriteSheet>()->ChangeColor(heal_color);
 		healing = true;
 		heal_time = (healing_target->GetComponent<Health>()->GetMaxHp() - healing_target->GetComponent<Health>()->GetHp()) * waiting_time_per_hp * game_time_factor;
 	}
@@ -90,6 +91,7 @@ void MedicCharacter::OnUpdate() {
 		if (dt_counter >= heal_time) {
 			// healing is over
 			LOG_DEBUG("medic just finished healing");
+			healing_target->GetComponent<SpriteSheet>()->ChangeColor(white_color);
 			healing = false;
 			going_back = true;
 			healing_target->GetComponent<Health>()->GetHealed();
