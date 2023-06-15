@@ -172,9 +172,9 @@ void UILayer::ActivateSoldierBuildingUI() {
 	u_header->AddChildObject(u_name);
 	soldier_building_upgrade_background->AddChildObject(u_header);
 
-	Label* soldier_building_upgrade_price = new Label(std::to_string(soldier_building_upgrade_price_float), ui_font_color, Transform(glm::vec2(-0.6f, -0.3f), glm::vec2(0.15f, 0.45f)), DataPool::GetFont(ui_font_family));
+	Label* soldier_building_upgrade_price = new Label(soldier_building_upgrade_price_display, ui_font_color, Transform(glm::vec2(-0.6f, -0.3f), glm::vec2(0.15f, 0.45f)), DataPool::GetFont(ui_font_family));
 	PictureBox* coin = new PictureBox(white_color, Transform(glm::vec2(-0.175f, -0.3f), glm::vec2(0.11f, 0.27f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
-	soldier_building_upgrade_buy = new Button(white_color, Transform(glm::vec2(0.3f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, nullptr);
+	soldier_building_upgrade_buy = new Button(white_color, Transform(glm::vec2(0.3f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, UILayer::UpgradeSoldierTent);
 	PictureBox* buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	soldier_building_upgrade_buy->AddChildObject(buy_pb);
 	soldier_building_upgrade_background->AddChildObject(soldier_building_upgrade_price); soldier_building_upgrade_background->AddChildObject(coin); soldier_building_upgrade_background->AddChildObject(soldier_building_upgrade_buy);
