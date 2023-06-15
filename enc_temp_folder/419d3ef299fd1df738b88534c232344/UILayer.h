@@ -41,15 +41,15 @@ public:
 	static bool BuyMg();
 	static bool BuyArtillary();
 
-	Label* countDown = nullptr;
-	Label* money = nullptr;
-	Label* soldier_upgrade_price = nullptr;
-	Label* medic_building_upgrade_price = nullptr;
-	Label* engineer_building_upgrade_price = nullptr;
-	Label* soldier_building_upgrade_price = nullptr;
-	Button* soldier_building_upgrade_buy = nullptr;
-	PictureBox* coin = nullptr;
-	PictureBox* soldierPic = nullptr;
+	Label* countDown;
+	Label* money;
+	Label* soldier_upgrade_price;
+	Label* medic_building_upgrade_price;
+	Label* engineer_building_upgrade_price;
+	Label* soldier_building_upgrade_price;
+	Button* soldier_building_upgrade_buy;
+	PictureBox* coin;
+	PictureBox* soldierPic;
 
 	static void Init();
 

@@ -423,7 +423,6 @@ void UILayer::UpdateSoldierCount() {
 	soldierCount->text = std::to_string(Supply::GetSoldiers());
 }
 void UILayer::UpdateMoney() {
-	if (!money) AddMoney();
 	money->text = std::to_string(Economy::getBalance());
 }
 
