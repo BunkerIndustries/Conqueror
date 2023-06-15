@@ -22,11 +22,10 @@ void MapLayer::Init()
 	mg_place_sound->LoadSound("assets/sounds/mg_place.wav");
 
 	engineer_building_sound = MakeShr<Sound>();
-	engineer_building_sound->LoadSound("assets/sounds/test.wav");
+	engineer_building_sound->LoadSound("assets/sounds/engineer_building_click.wav");
 
 	medic_building_sound = MakeShr<Sound>();
 	medic_building_sound->LoadSound("assets/sounds/medic_building_click.wav");
-
 }
 
 

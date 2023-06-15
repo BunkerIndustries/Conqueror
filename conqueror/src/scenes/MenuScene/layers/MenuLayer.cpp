@@ -24,7 +24,6 @@ void MenuLayer::Init()
 
 void MenuLayer::OnAttach()
 {
-	menu_theme->SoundPlay();
 }
 
 void MenuLayer::OnDetach()
@@ -34,6 +33,7 @@ void MenuLayer::OnDetach()
 
 void MenuLayer::Update(const float dt)
 {
+	menu_theme->SoundPlay();
 }
 
 bool MenuLayer::OnGameObjectClick(GameObjectPressedEvent& e)

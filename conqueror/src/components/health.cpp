@@ -14,7 +14,6 @@ Shr<Sound> Health::hit_enemy;
 Health::Health(float hp) 
 	:hp(hp)
 {
-	
 
 }
 
@@ -31,7 +30,7 @@ void Health::Init()
 	hit_enemy->LoadSound("assets/sounds/enemy_damage.wav");
 
 	death->LoadSound("assets/sounds/death.wav");
-	death_special->LoadSound("assets/sounds/enemy_death_special.wav");
+	death_special->LoadSound("assets/sounds/enemy_special_death.wav");
 }
 
 void Health::OnStart() {
@@ -108,16 +107,15 @@ bool Health::TakeDamage(float damage) {
 
 			gameScene->waveManager->CheckForEnemiesDead();
 
-			int tmp = Utils::randRange(0, 5);
-			if (tmp == 3)
+			int tmp = Utils::randRange(0, 100);
+			if (tmp == 45)
 			{
 				death_special->SoundPlay();
 			}
 			else
 			{
-				
+				death->SoundPlay();
 			}
-			death->SoundPlay();
 		}
 		delete gameObject;
 		return true;
