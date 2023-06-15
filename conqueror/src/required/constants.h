@@ -159,7 +159,7 @@ inline glm::vec4 ui_font_color = glm::vec4(1.0f, 1.0f, 1.0f, 0.8f);
 
 // character ui color
 inline glm::vec4 white_color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-inline glm::vec4 mark_color = glm::vec4(0.8f, 0.8f, 0.8f, 0.8f);
+inline glm::vec4 mark_color = glm::vec4(0.6f, 0.6f, 0.6f, 1.0f);
 
 // character and building ui transform
 inline glm::vec2 ui_building_background_size = glm::vec2(0.3f, 0.73f);
