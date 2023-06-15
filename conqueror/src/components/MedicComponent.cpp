@@ -14,8 +14,11 @@ MedicBuilding::MedicBuilding(uint32_t number_of_medics)
 }
 
 void MedicBuilding::UpgradeBuilding() {
-	medic_speed_upgrade += 0.15 + building_level / 10;
+	medic_speed_upgrade += 0.3 + building_level / 10;
 	building_level++;
+	if (building_level % 2 == 0) {
+		available_medics++;
+	}
 }
 
 void MedicBuilding::SendMedic() {

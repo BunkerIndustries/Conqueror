@@ -424,6 +424,9 @@ bool UILayer::UpgradeSoldierTent() {
 		damage_upgrade += 5;
 		armor_upgrade += 3;
 		soldier_building_current_level++;
+		if (soldier_building_current_level == 5) {
+			damage_upgrade += 10;
+		}
 		soldier_building_current_price = price;
 		soldier_building_upgrade_price_display = std::to_string(soldier_building_current_price);
 		if (soldier_building_current_level == max_soldier_building_level) {
