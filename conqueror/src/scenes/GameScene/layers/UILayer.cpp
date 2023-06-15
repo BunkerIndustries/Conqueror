@@ -530,6 +530,7 @@ bool UILayer::UpgradeSoldierTent() {
 }
 
 bool UILayer::BuySoldier(){
+	sound_upgrade->SoundPlay();
 	if (Economy::getBalance() - Supply::GetSoldierPrice() >= 0) {
 		Supply::IncreaseSoldiers();
 		Economy::RemoveBalance(Supply::GetSoldierPrice());
@@ -540,6 +541,7 @@ bool UILayer::BuySoldier(){
 	return true;
 }
 bool UILayer::BuyMg() {
+	sound_upgrade->SoundPlay();
 	if (Economy::getBalance() - gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->mg_price >= 0) {
 		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->IncreaseMgStock();
 		Economy::RemoveBalance(gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->mg_price);
@@ -550,6 +552,7 @@ bool UILayer::BuyMg() {
 	return true;
 }
 bool UILayer::BuyArtillary() {
+	sound_upgrade->SoundPlay();
 	if (Economy::getBalance() - Supply::GetSoldierPrice() >= 0) {
 		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->IncreaseArtilleryStock();
 		Economy::RemoveBalance(gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->artillary_price);
