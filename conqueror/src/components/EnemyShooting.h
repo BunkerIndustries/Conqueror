@@ -16,8 +16,8 @@ public:
 
 	static std::shared_ptr<Sound> enemy_shoot;
 
+	GameObject* GetTarget() const;
 private:
 	GameObject* LockTarget();
-	GameObject* GetTarget() const;
 	uint8_t hit_probability = 0;
 };

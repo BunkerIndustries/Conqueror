@@ -405,6 +405,8 @@ void UILayer::UpdateDeathCountdown()
 	}
 	countDown->text = std::to_string(loss_countdown);
 	if (loss_countdown <= 0) {
+		loss_countdown = 60;
+		filled_last_row_grid_positions.clear();
 		delete gameOverScene;
 		gameOverScene = new GameOverScene();
 		Application::ChangeScene(gameOverScene, false);

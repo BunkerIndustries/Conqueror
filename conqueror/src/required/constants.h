@@ -34,7 +34,7 @@ inline std::list <int> filled_last_row_grid_positions;
 
 // enemy behaviour 
 inline float min_enemy_waiting_time = 0.5f;
-inline float max_enemy_waiting_time = 2.0f;
+inline float max_enemy_waiting_time = 1.0f;
 inline float enemy_movement_speed = 1.0f;
 inline uint8_t max_enemy_lock_target_tries = 3;
 inline glm::vec2 enemy_scale = glm::vec2(0.9f, 1.41f);
@@ -47,8 +47,8 @@ inline float enemy_spawn_random_x_radius = 10.0f;
 
 // character
 inline float soldier_movement_speed = 1.2f;
-inline float medic_movement_speed = 2.9f;
-inline float engineer_movement_speed = 2.0f;
+inline float medic_movement_speed = 1.9f;
+inline float engineer_movement_speed = 1.5f;
 inline glm::vec2 character_scale = glm::vec2(1.33f, 1.63f);
 inline glm::vec2 dead_body_size = glm::vec2(1.6f, 1.4f);
 inline float dead_body_lasting_time = 6.0f;

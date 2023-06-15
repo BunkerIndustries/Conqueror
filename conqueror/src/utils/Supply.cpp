@@ -70,8 +70,10 @@ void Supply::TakeRightOption() {
 
 void Supply::IncreaseSoldierCount() {
 	int wave_count = gameScene->waveManager->GetWaveCount();
-	min_soldiers += std::round(wave_count / 2.1f);
-	max_soldiers += std::round(wave_count / 1.75f);
+	min_soldiers = std::round(wave_count / 2.1f);
+	max_soldiers = std::round(wave_count / 1.75f);
+	min_soldiers == 0 ? min_soldiers = 1 : false;
+	max_soldiers == 0 ? max_soldiers = 1 : false;
 }
 
 void Supply::IncreaseSoldiers(){
