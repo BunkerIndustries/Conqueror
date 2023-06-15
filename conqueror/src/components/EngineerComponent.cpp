@@ -18,7 +18,7 @@ EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
 
 void EngineerBuilding::UpgradeBuilding() {
 	engineer_speed_upgrade += 0.15 + building_level/10;
-	mg_damage_upgrade += 3;
+	mg_damage_upgrade += 2;
 	building_level++;
 }
 
