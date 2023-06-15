@@ -458,7 +458,7 @@ bool UILayer::UpgradeMedBuilding() {
 	{
 		sound_upgrade->SoundPlay();
 	}
-	int price = 5 + oldPrice + 14 * oldLevel;
+	int price = 5 + oldPrice + 16 * oldLevel;
 	if (oldLevel < max_medic_building_level && Economy::getBalance() - oldPrice >= 0) {
 		gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->UpgradeBuilding();
 		Economy::RemoveBalance(oldPrice);

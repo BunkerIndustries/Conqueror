@@ -130,7 +130,7 @@ inline glm::vec2 building_size = glm::vec2(3.0f, 3.0f);
 inline glm::vec2 soldier_building_position = glm::vec2(0.0f, -12.0f);
 
 // stocks
-inline unsigned int start_soldier_stock = 4;
+inline unsigned int start_soldier_stock = 3;
 inline uint8_t start_engineer_stock = 1;
 inline uint8_t start_medic_stock = 1;
 
@@ -142,16 +142,16 @@ inline float mg_shoot_interval = 0.05f;
 inline float mg_miss_points = 5;
 inline float mg_damage = 15;
 inline float mg_inaccuracy = 10.0f;
-inline glm::vec2 mg_position_offset = glm::vec2(0.0f, 0.4f);
+inline glm::vec2 mg_position_offset = glm::vec2(0.0f, 0.45f);
 
 // artillery
-inline glm::vec2 artillery_size = glm::vec2(0.8f, 1.0f); 
+inline glm::vec2 artillery_size = glm::vec2(1.0f, 1.2f); 
 inline float artillery_min_reload_time = 0.5f;
 inline float artillery_max_reload_time = 2.5f;
 inline float artillery_normal_damage = 70.0f;
 inline float artillery_critical_damage = 100.0f;
 inline glm::vec2 artillery_explosion_size = glm::vec2(3.0f, 3.0f);
-inline glm::vec2 artillery_position_offset = glm::vec2(0.0f, 0.55f);
+inline glm::vec2 artillery_position_offset = glm::vec2(0.0f, 0.61f);
 inline int artillery_shoot_anim_speed = 15;
 inline float artillery_explosion_anim_speed = 0.1f;
 inline float artillery_explosion_lasting = 3.0f;
