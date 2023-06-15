@@ -22,8 +22,8 @@ inline float camera_move_speed = 2.0f;
 inline float camera_move_speed_multiplier = 3.0f;
 inline float min_camera_z_pos = 2.0f;
 inline float max_camera_z_pos = 15.0f;
-inline glm::vec2 min_camera_positions = glm::vec2(-8.5f, -9.0f);
-inline glm::vec2 max_camera_positions = glm::vec2(8.5f, 5.0f);
+inline glm::vec2 min_camera_positions = glm::vec2(-11.0f, -12.0f);
+inline glm::vec2 max_camera_positions = glm::vec2(11.0f, 5.0f);
 
 // enemy grid 
 inline const int enemy_grid_x = 15;
@@ -98,7 +98,7 @@ inline float max_inaccuracy = 1.4f;
 inline float trace_thickness = 0.3f;
 inline float trace_lasting = 0.15f;
 inline bool bulletDistanceMoreInaccuracy = true;
-inline float bulletInaccuracyMultiplicator = 10.0f;
+inline float bulletInaccuracyMultiplicator = 11.5f;
 
 // node 
 inline glm::vec2 node_size = glm::vec2(0.5f, 0.5f);
@@ -210,7 +210,7 @@ inline float exponential_factor = 0.2f;
 inline float start_preparation_time = 4.0f;
 inline float cooldown_addition = 0.5f;
 inline float start_wave_duration = 4.0f;
-inline float wave_length_gradient = 1.15f;
+inline float wave_length_gradient = 1.12f;
 inline float enemy_start_spawn_interval = 1.8f;
 inline float enemy_spawn_interval_gradient = 0.9f;
 
@@ -248,9 +248,9 @@ inline int max_medic_building_level = 5;
 inline int max_soldier_building_level = 5;
 
 inline int soldier_upgrade_price_start = 5;
-inline int medic_building_upgrade_price_start = 40;
-inline int engineer_building_upgrade_price_start = 45;
-inline int soldier_building_upgrade_price_start = 50;
+inline int medic_building_upgrade_price_start = 45;
+inline int engineer_building_upgrade_price_start = 60;
+inline int soldier_building_upgrade_price_start = 70;
 
 // upgrade menu
 inline glm::vec2 upgrade_box_size = glm::vec2(0.3f, 0.3f);
@@ -261,7 +261,7 @@ inline int soldier_building_current_price = 10;
 inline int soldier_building_current_level = 1;
 
 // shop menu
-inline Transform shop_icon_transform = Transform(glm::vec2(-0.75f, 0.0f), glm::vec2(0.2f, 0.9f));
-inline Transform shop_price_transform = Transform(glm::vec2(-0.1f, 0.0f), glm::vec2(0.5f, 0.1f));
-inline Transform shop_coin_transform = Transform(glm::vec2(-0.2f, 0.0f), glm::vec2(0.5f, 0.1f));
-inline Transform shop_button_transform = Transform(glm::vec2(0.75f, 0.0f), glm::vec2(0.1f, 0.5f));
+inline Transform shop_icon_transform = Transform(glm::vec2(-0.169f, 0.0f), glm::vec2(0.37f, 0.9f));
+inline Transform shop_price_transform = Transform(glm::vec2(0.018f, 0.0f), glm::vec2(0.135f, 0.45f));
+inline Transform shop_coin_transform = Transform(glm::vec2(0.105f, 0.0f), glm::vec2(0.075f, 0.65f));
+inline Transform shop_button_transform = Transform(glm::vec2(0.23f, 0.0f), glm::vec2(0.2f, 0.95f));

@@ -6,10 +6,18 @@
 #include "components/SingleAnimationComponent.h"
 #include "components/DestroyOverTime.h"
 
+Shr<Sound> ArtilleryComponent::shoot_sound;
+
 ArtilleryComponent::ArtilleryComponent(GameObject* own_node) 
 	:own_node(own_node->GetComponent<Node>())
 {
 	dt_counter = 0.0f;
+}
+
+void ArtilleryComponent::Init()
+{
+	shoot_sound = MakeShr<Sound>();
+	shoot_sound->LoadSound("assets/sounds/artillery.wav");
 }
 
 void ArtilleryComponent::OnStart() {
@@ -52,7 +60,7 @@ void ArtilleryComponent::Shoot() {
 	//explosion->AddComponent(new DestroyOverTime(artillery_explosion_lasting));
 	gameScene->allyLayer->AddGameObjectToLayer(explosion);
 	explosion->GetComponent<SingleAnimation>()->PlayAnimation(true);
-
+	shoot_sound->SoundPlay();
 	glm::ivec2 top_left = glm::ivec2(target_x - 1, target_y - 1);
 	// loops through a field that starts at the top left of the randomly chosen middle-node
 	for (uint8_t x = 0; x < 3; x++) {

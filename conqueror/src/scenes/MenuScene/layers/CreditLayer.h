@@ -13,6 +13,10 @@ public:
 	void Update(const float dt) override;
 	void OnEvent(Event& event) override;
 
+	static void Init();
+
+	static Shr<Sound> sound_credit;
+
 private:
 	bool KeyPressed(KeyPressedEvent& e);
 
@@ -39,5 +43,11 @@ private:
 	GameObject* scn;
 	GameObject* lesle;
 	GameObject* racic;
+
+	GameObject* special_thanks;
+	GameObject* boris;
+	GameObject* nam;
+	GameObject* racic2;
+	GameObject* rebstock;
 
 };

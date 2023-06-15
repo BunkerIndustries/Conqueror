@@ -13,6 +13,10 @@ public:
 
 	int GetWaveCount();
 
+	static void Init();
+
+	static Shr<Sound> sound_wave;
+
 private:
 	GameScene* gameScene;
 

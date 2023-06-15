@@ -11,8 +11,6 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
 
-
-
 private:
 	GameObject* target;
 	uint8_t hit_probability;

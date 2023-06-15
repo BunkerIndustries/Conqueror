@@ -9,6 +9,18 @@
 #include "utils/Supply.h"
 #include "utils/Economy.h"
 
+Shr<Sound> UILayer::sound_upgrade;
+Shr<Sound> UILayer::sound_time;
+
+void UILayer::Init()
+{
+	sound_upgrade = MakeShr<Sound>();
+	sound_time = MakeShr<Sound>();
+
+	sound_upgrade->LoadSound("assets/sounds/epic_sound.wav");
+	sound_time->LoadSound("assets/sounds/time.wav");
+}
+
 UILayer::UILayer()
 	: Layer("UILayer")
 {
@@ -198,41 +210,36 @@ void UILayer::ActivateSoldierBuildingUI() {
 	s_header->AddChildObject(s_name);
 	soldier_building_shop_background->AddChildObject(s_header);
 
-	Label* p1 = new Label("", ui_font_color, Transform(glm::vec2(0.0f, 0.1f), glm::vec2(0.95f, 0.25f)), DataPool::GetFont(ui_font_family));
-	PictureBox* p1_icon = new PictureBox(white_color, shop_icon_transform, DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
+	Label* p1 = new Label("", ui_font_color, Transform(glm::vec2(0.0f, 0.1f), glm::vec2(0.95f, 0.2f)), DataPool::GetFont(ui_font_family));
+	PictureBox* p1_icon = new PictureBox(white_color, Transform(shop_icon_transform.position, glm::vec2(0.2f, 0.9f)), DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
 	Label* p1_price = new Label("pr", ui_font_color, shop_price_transform, DataPool::GetFont(ui_font_family));
 	PictureBox* p1_coin = new PictureBox(white_color, shop_coin_transform, DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
-	Button* p1_buy_button = new Button(white_color, Transform(glm::vec2(0.3f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, nullptr);
+	Button* p1_buy_button = new Button(white_color, shop_button_transform, Type::Rectangle, nullptr);
 	PictureBox* p1_buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	p1->AddChildObject(p1_icon); p1_buy_button->AddChildObject(p1_buy_pb);
 	p1->AddChildObject(p1_price); p1->AddChildObject(p1_coin); p1->AddChildObject(p1_buy_button);
 	soldier_building_shop_background->AddChildObject(p1);
-	AddUIObject(p1, ProjectionMode::SCREEN);
 
 	Label* p2 = new Label("", ui_font_color, Transform(glm::vec2(0.0f, -0.3f), glm::vec2(0.95f, 0.2f)), DataPool::GetFont(ui_font_family));
-	PictureBox* p2_header = new PictureBox(white_color, shop_icon_transform, DataPool::GetTexture("UI/mg_button.png"), Type::Rectangle);
-	PictureBox* p2_icon = new PictureBox(white_color, shop_icon_transform, DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
+	PictureBox* p2_icon = new PictureBox(white_color, shop_icon_transform, DataPool::GetTexture("UI/mg_button.png"), Type::Rectangle);
 	Label* p2_price = new Label("pr", ui_font_color, shop_price_transform, DataPool::GetFont(ui_font_family));
 	PictureBox* p2_coin = new PictureBox(white_color, shop_coin_transform, DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
-	Button* p2_buy_button = new Button(white_color, Transform(glm::vec2(0.3f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, nullptr);
+	Button* p2_buy_button = new Button(white_color, shop_button_transform, Type::Rectangle, nullptr);
 	PictureBox* p2_buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	p2->AddChildObject(p2_icon); p2_buy_button->AddChildObject(p2_buy_pb);
 	p2->AddChildObject(p2_price); p2->AddChildObject(p2_coin); p2->AddChildObject(p2_buy_button);
 	soldier_building_shop_background->AddChildObject(p2);
-	AddUIObject(p2, ProjectionMode::SCREEN);
 
 
 	Label* p3 = new Label("", ui_font_color, Transform(glm::vec2(0.0f, -0.7f), glm::vec2(0.95f, 0.2f)), DataPool::GetFont(ui_font_family));
-	PictureBox* p3_header = new PictureBox(white_color, shop_icon_transform, DataPool::GetTexture("UI/artillery_button.png"), Type::Rectangle);
-	PictureBox* p3_icon = new PictureBox(white_color, shop_icon_transform, DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
+	PictureBox* p3_icon = new PictureBox(white_color, shop_icon_transform, DataPool::GetTexture("UI/artillery_button.png"), Type::Rectangle);
 	Label* p3_price = new Label("pr", ui_font_color, shop_price_transform, DataPool::GetFont(ui_font_family));
 	PictureBox* p3_coin = new PictureBox(white_color, shop_coin_transform, DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
-	Button* p3_buy_button = new Button(white_color, Transform(glm::vec2(0.3f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, nullptr);
+	Button* p3_buy_button = new Button(white_color, shop_button_transform, Type::Rectangle, nullptr);
 	PictureBox* p3_buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	p3->AddChildObject(p3_icon); p3_buy_button->AddChildObject(p3_buy_pb);
-	p3->AddChildObject(p1_price); p3->AddChildObject(p3_coin); p3->AddChildObject(p3_buy_button);
+	p3->AddChildObject(p3_price); p3->AddChildObject(p3_coin); p3->AddChildObject(p3_buy_button);
 	soldier_building_shop_background->AddChildObject(p3);
-	AddUIObject(p3, ProjectionMode::SCREEN);
 
 
 	AddUIObject(soldier_building_shop_background, ProjectionMode::SCREEN);
@@ -364,10 +371,20 @@ void UILayer::AddMoney() {
 	AddUIObject(coin, ProjectionMode::SCREEN);
 }
 
-
 void UILayer::UpdateDeathCountdown()
 {
 	static float i;
+
+	if (loss_countdown <= 20)
+	{
+		sound_time->SoundPlay();
+	}
+
+	if (!loss_countdown || loss_countdown > 20)
+	{
+		sound_time->StopSound();
+	}
+
 	i += Application::GetDT();
 	if (i > 1) {
 		i--;
@@ -412,6 +429,11 @@ bool UILayer::UpgradeSoldier() {
 	int oldLevel = gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->GetLevel();
 	int oldPrice = gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->GetUpgradePrice();
 	int price = 5 + oldPrice + 10 * oldLevel;
+	if (oldLevel != max_soldier_level)
+	{
+		sound_upgrade->SoundPlay();
+	}
+
 	if (oldLevel < max_soldier_level && Economy::getBalance() - oldPrice >= 0) {
 		gameScene->GetActiveCharacter()->GetComponent<SoldierShooting>()->UpgradeSoldier();
 		Economy::RemoveBalance(oldPrice);
@@ -429,7 +451,7 @@ bool UILayer::UpgradeSoldier() {
 bool UILayer::UpgradeMedBuilding() {
 	int oldLevel = gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->building_level;
 	int oldPrice = gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->building_upgrade_price;
-	int price = 1.5 * oldPrice;
+	int price = 5 + oldPrice + 10 * oldLevel;
 	if (oldLevel < max_medic_building_level && Economy::getBalance() - oldPrice >= 0) {
 		gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->UpgradeBuilding();
 		Economy::RemoveBalance(oldPrice);
@@ -448,7 +470,7 @@ bool UILayer::UpgradeMedBuilding() {
 bool UILayer::UpgradeEngineerBuilding() {
 	int oldLevel = gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->building_level;
 	int oldPrice = gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->building_upgrade_price;
-	int price = 2 * oldPrice + 10;
+	int price = 5 + oldPrice + 10 * oldLevel;
 	if (oldLevel < max_engineer_building_level && Economy::getBalance() - oldPrice >= 0) {
 		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->UpgradeBuilding();
 		Economy::RemoveBalance(oldPrice);
@@ -458,15 +480,17 @@ bool UILayer::UpgradeEngineerBuilding() {
 		if (gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->building_level == max_engineer_building_level) {
 			gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->building_upgrade_price_display = "MAX";
 		}
+
 		gameScene->uiLayer->DeactivateBuildingUI();
 		gameScene->uiLayer->ActivateEngineerBuildingUI();
 	}
 	return true;
 }
+
 bool UILayer::UpgradeSoldierTent() {
 	int oldLevel = soldier_building_current_level;
 	int oldPrice = soldier_building_current_price;
-	int price = 2 * oldPrice + 25;
+	int price = 5 + oldPrice + 10 * oldLevel;
 	if (oldLevel < max_soldier_building_level && Economy::getBalance() - oldPrice >= 0) {
 		Economy::RemoveBalance(oldPrice);
 		damage_upgrade += 5;
@@ -480,6 +504,7 @@ bool UILayer::UpgradeSoldierTent() {
 		if (soldier_building_current_level == max_soldier_building_level) {
 			soldier_building_upgrade_price_display = "MAX";
 		}
+
 		gameScene->uiLayer->DeactivateBuildingUI();
 		gameScene->uiLayer->ActivateSoldierBuildingUI();
 	}

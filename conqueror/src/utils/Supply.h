@@ -19,6 +19,8 @@ public:
 	static void IncreaseSoldiers();
 	static void DecreaseSoldiers();
 
+	static Shr<Sound> click_supply;
+
 private:
 	static unsigned int soldier_stock;
 	static uint8_t min_soldiers, max_soldiers;

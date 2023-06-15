@@ -21,6 +21,7 @@ public:
 	std::string building_upgrade_price_display;
 private:
 	uint32_t available_medics;
+
 };
 
 class MedicCharacter : public Component {
@@ -34,7 +35,12 @@ public:
 	void OnEvent(Event& event) override {};
 
 	std::string GetName();
+	static Shr<Sound> heal;
+	static Shr<Sound> heal_final;
+	
+	static void Init();
 private:
+
 	GameObject* medic_building;
 	GameObject* healing_target;
 	glm::vec2 healing_target_position;

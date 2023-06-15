@@ -6,6 +6,15 @@
 #include "required/constants.h"
 #include "required/stands.h"
 
+Shr<Sound> Engineer::click;
+
+void Engineer::Init()
+{
+	click = MakeShr<Sound>();
+
+	click->LoadSound("assets/sounds/click.wav");
+}
+
 GameObject* Engineer::AddBuilding(MapLayer* layer, Transform transform, uint32_t engineerCount)
 {
 	GameObject* engineerBuilding = layer->CreateBuilding(transform, "engineer");
@@ -14,6 +23,7 @@ GameObject* Engineer::AddBuilding(MapLayer* layer, Transform transform, uint32_t
 }
 
 void Engineer::PlaceMG() {
+	click->SoundPlay();
 	if (gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->GetMgStock() <= 0) return;
 
 	bool nop = true;
@@ -31,6 +41,7 @@ void Engineer::PlaceMG() {
 }
 
 void Engineer::PlaceArtillerie() {
+	click->SoundPlay();
 	if (gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->GetArtilleryStock() <= 0) return;
 
 	bool nop = true;

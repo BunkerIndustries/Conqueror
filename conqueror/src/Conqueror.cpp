@@ -5,6 +5,13 @@
 
 #include "scenes/MenuScene/MenuScene.h"
 #include "required/constants.h"
+#include "scenes/MenuScene/layers/MenuLayer.h"
+
+#include "components/MedicComponent.h"
+#include "components/ArtilleryComponent.h"
+#include "utils/Engineer.h"
+#include "utils/Supply.h"
+#include "scenes/GameScene/layers/UILayer.h"
 
 class Conqueror : public core::Application {
 public:
@@ -22,6 +29,25 @@ public:
 		gameOverScene = new GameOverScene();
 
 		DataPool::GetFont(ui_font_family);
+
+		// god please forgive me
+		Util::Init();
+		UILayer::Init();
+		MenuLayer::Init();
+		CreditLayer::Init();
+		Health::Init();
+		EnemyShooting::Init();
+		SoldierShooting::Init();
+		MedicCharacter::Init();
+		ArtilleryComponent::Init();
+		EngineerCharacter::Init();
+		GameOverScene::Init();
+		AllyLayer::Init();
+		MapLayer::Init();
+		Engineer::Init();
+		Supply::Init();
+		BulletComponent::Init();
+		WaveManager::Init();
 
 		Application::ChangeScene(menuScene);
 	}

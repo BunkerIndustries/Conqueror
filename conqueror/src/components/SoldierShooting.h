@@ -11,8 +11,10 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
 
-	void Shoot();
+	static void Init();
 
+	void Shoot();
+	static std::shared_ptr<Sound> soldier_shoot;
 	//GameObject* GetTarget() const
 	//{
 	//	return target;

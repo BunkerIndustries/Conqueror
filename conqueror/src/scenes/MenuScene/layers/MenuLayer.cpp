@@ -4,6 +4,8 @@
 
 #include "required/constants.h"
 
+Shr<Sound> MenuLayer::menu_theme;
+
 MenuLayer::MenuLayer()
 {
 }
@@ -13,23 +15,33 @@ MenuLayer::~MenuLayer()
 
 }
 
+void MenuLayer::Init()
+{
+	menu_theme = MakeShr<Sound>();
+
+	menu_theme->LoadSound("assets/sounds/menud.wav");
+}
+
 void MenuLayer::OnAttach()
 {
 }
 
 void MenuLayer::OnDetach()
 {
+	menu_theme->StopSound();
 }
 
 void MenuLayer::Update(const float dt)
 {
+	menu_theme->SoundPlay();
 }
 
 bool MenuLayer::OnGameObjectClick(GameObjectPressedEvent& e)
 {
 	GameObject* go = e.GetGameObject();
-	if (go->HasTag("play"))
-	{
+
+	if (go->HasTag("play")) {
+		Util::menu_select->SoundPlay();
 		delete gameScene;
 		gameScene = new GameScene();
 		Application::ChangeScene(gameScene);

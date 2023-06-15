@@ -32,6 +32,14 @@ public:
 	GameObject* medicBuilding;
 	GameObject* engineerBuilding;
 	GameObject* soldierBuilding;
+
+	static Shr<Sound> mg_place_sound;
+	static Shr<Sound> medic_building_sound;
+	static Shr<Sound> engineer_building_sound;
+	static Shr<Sound> soldier_building_sound;
+
+	static void Init();
+	
 private:
 	void CreateGameMap(std::vector<std::pair<std::vector<glm::vec2>, Stand>>& stands_with_nodes, std::vector<std::pair<std::vector<Transform>, std::string>>& map_sprites);
 	void CreateEnemyGrid(const uint8_t x_size, const uint8_t y_size, const float offset, const glm::vec2 mid_pos);

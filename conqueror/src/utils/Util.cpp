@@ -7,6 +7,14 @@ std::unordered_map<GameObject*, std::vector<EnemyShooting*>> Util::enemyTable;
 std::unordered_map<GameObject*, std::vector<MgComponent*>> Util::mgTable;
 std::unordered_map<GameObject*, std::vector<ArtilleryComponent*>> Util::artillerieTable;
 
+Shr<Sound> Util::menu_select;
+
+void Util::Init()
+{
+	menu_select = MakeShr<Sound>();
+	menu_select->LoadSound("assets/sounds/start.wav");
+}
+
 float Util::RadToDeg(float rad)
 {
 	return rad * (180 / M_PI);

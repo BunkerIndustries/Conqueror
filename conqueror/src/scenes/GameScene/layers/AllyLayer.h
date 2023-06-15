@@ -7,7 +7,6 @@ struct Stand;
 class AllyLayer : public Layer
 {
 public:
-
 	AllyLayer();
 	~AllyLayer() override;
 
@@ -27,5 +26,10 @@ public:
 	GameObject* CreateMedic(glm::vec2 position);
 	GameObject* CreateEngineer(glm::vec2 position, bool mg_artillery);
 
+	static void Init();
+
+	static Shr<Sound> soldier_click;
+	static Shr<Sound> medic_click;
+	static Shr<Sound> engineer_click;
 private:
 };

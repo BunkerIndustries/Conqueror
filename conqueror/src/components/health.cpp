@@ -6,11 +6,31 @@
 #include "utils/Supply.h"
 #include "utils/Economy.h"
 
+Shr<Sound> Health::death;
+Shr<Sound> Health::death_special;
+Shr<Sound> Health::hit_soldier;
+Shr<Sound> Health::hit_enemy;
 
 Health::Health(float hp) 
 	:hp(hp)
 {
-	
+
+}
+
+
+void Health::Init()
+{
+	death = MakeShr<Sound>();
+	death_special = MakeShr<Sound>();
+	hit_soldier = MakeShr<Sound>();
+	hit_enemy = MakeShr<Sound>();
+
+
+	hit_soldier->LoadSound("assets/sounds/soldier_damage.wav");
+	hit_enemy->LoadSound("assets/sounds/enemy_damage.wav");
+
+	death->LoadSound("assets/sounds/death.wav");
+	death_special->LoadSound("assets/sounds/enemy_special_death.wav");
 }
 
 void Health::OnStart() {
@@ -34,6 +54,15 @@ void Health::OnUpdate() {
 bool Health::TakeDamage(float damage) {
 	hp -= damage;
 	just_hit = true;
+	if (gameObject->HasTag("soldier"))
+	{
+		hit_soldier->SoundPlay();
+	}
+	else
+	{
+		hit_enemy->SoundPlay();
+	}
+	
 	gameObject->GetComponent<SpriteSheet>()->ChangeColor(hit_color);
 	if (gameScene->GetActiveCharacter() == gameObject) {
 		gameScene->uiLayer->DeactivateCharacterUI();
@@ -51,12 +80,14 @@ bool Health::TakeDamage(float damage) {
 		if (gameScene->GetActiveCharacter() == gameObject) gameScene->SetActiveCharacter(nullptr);
 		if (gameObject->HasTag("soldier")) {
 			// get node and unoccupy it
+
 			gameObject->GetComponent<SoldierBehaviour>()->FreeNode();
 			gameScene->uiLayer->DeactivateCharacterUI();
 			Util::enemyTable.erase(Util::enemyTable.find(gameObject));
 			gameScene->mapLayer->CreateDeadBody("Anims/Soldier/soldier_dead.png", gameObject->transform.position);
 			Supply::CheckForGameOver();
 
+			death->SoundPlay();
 		}
 		else if (gameObject->HasTag("enemy"))
 		{
@@ -75,6 +106,16 @@ bool Health::TakeDamage(float damage) {
 			gameScene->mapLayer->CreateDeadBody("Anims/Enemy/french_dead.png", gameObject->transform.position);
 
 			gameScene->waveManager->CheckForEnemiesDead();
+
+			int tmp = Utils::randRange(0, 100);
+			if (tmp == 45)
+			{
+				death_special->SoundPlay();
+			}
+			else
+			{
+				death->SoundPlay();
+			}
 		}
 		delete gameObject;
 		return true;

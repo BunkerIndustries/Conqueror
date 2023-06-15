@@ -16,8 +16,8 @@ void MgComponent::OnStart() {
 	ammo = mg_magazin_size;
 }
 
-void MgComponent::OnStop() {
-
+void MgComponent::OnStop()
+{
 }
 
 void MgComponent::OnUpdate() {

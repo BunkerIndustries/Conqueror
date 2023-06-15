@@ -46,6 +46,11 @@ public:
 	PictureBox* coin;
 	PictureBox* soldierPic;
 
+	static void Init();
+
+	static Shr<Sound> sound_upgrade;
+	static Shr<Sound> sound_time;
+
 	Button* soldier_upgrade_buy;
 
 

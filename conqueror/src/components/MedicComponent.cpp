@@ -5,6 +5,19 @@
 #include "required/functions.h"
 #include "required/names.h"
 
+
+std::shared_ptr<Sound> MedicCharacter::heal_final;
+std::shared_ptr<Sound> MedicCharacter::heal;
+
+void MedicCharacter::Init()
+{
+	heal = MakeShr<Sound>();
+	heal->LoadSound("assets/sounds/medic_heals.wav");
+
+	heal_final = MakeShr<Sound>();
+	heal_final->LoadSound("assets/sounds/heal_final.wav");
+}
+
 MedicBuilding::MedicBuilding(uint32_t number_of_medics)
 	:available_medics(number_of_medics)
 {
@@ -64,7 +77,6 @@ void MedicCharacter::OnStart() {
 }
 
 void MedicCharacter::OnUpdate() {
-
 	if (going_back) {
 		if (gameObject->transform.position == medic_building->transform.position) {
 			medic_building->GetComponent<MedicBuilding>()->IncreaseAvailableMedics();
@@ -91,7 +103,9 @@ void MedicCharacter::OnUpdate() {
 		heal_time = (healing_target->GetComponent<Health>()->GetMaxHp() - healing_target->GetComponent<Health>()->GetHp()) * waiting_time_per_hp * game_time_factor;
 	}
 	else if (healing) {
+		heal->SoundPlay();
 		if (dt_counter >= heal_time) {
+			heal_final->SoundPlay();
 			// healing is over
 			LOG_DEBUG("medic just finished healing");
 			healing_target->GetComponent<SpriteSheet>()->ChangeColor(white_color);

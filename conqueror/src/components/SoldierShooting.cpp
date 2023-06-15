@@ -4,9 +4,16 @@
 #include "required/functions.h"
 #include "required/stands.h"
 
+std::shared_ptr<Sound> SoldierShooting::soldier_shoot;
 
+void SoldierShooting::Init()
+{
+	soldier_shoot = MakeShr<Sound>();
+	soldier_shoot->LoadSound("assets/sounds/soldier_bullet.wav");
+}
 
-SoldierShooting::SoldierShooting() {
+SoldierShooting::SoldierShooting() 
+{
 
 }
 
@@ -42,7 +49,7 @@ void SoldierShooting::Shoot() {
 
 		
 		gameScene->CreateBullet(gameScene->allyLayer, target, gameObject->transform.position, pos);
-		
+		soldier_shoot->SoundPlay();
 		break;
 	}
 

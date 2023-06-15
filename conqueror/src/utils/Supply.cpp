@@ -11,11 +11,17 @@ uint8_t Supply::max_soldiers;
 uint8_t Supply::left_option;
 std::string Supply::right_option;
 
+Shr<Sound> Supply::click_supply;
+
 void Supply::Init() {
 	soldier_stock = start_soldier_stock;
 	min_soldiers = 1;
 	max_soldiers = start_max_soldiers;
 	soldiers = 0;
+
+	click_supply = MakeShr<Sound>();
+
+	click_supply->LoadSound("assets/sounds/click.wav");
 }
 
 void Supply::TryCallSoldier() {
@@ -41,6 +47,7 @@ std::string Supply::CreateRightOption() {
 void Supply::TakeLeftOption() {
 	soldier_stock += left_option;
 	gameScene->uiLayer->DeactivateSupplyMenuUI();
+	click_supply->SoundPlay();
 }
 
 void Supply::TakeRightOption() {
@@ -57,12 +64,14 @@ void Supply::TakeRightOption() {
 		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->IncreaseArtilleryStock();
 	}
 	gameScene->uiLayer->DeactivateSupplyMenuUI();
+	
+	click_supply->SoundPlay();
 }
 
 void Supply::IncreaseSoldierCount() {
 	int wave_count = gameScene->waveManager->GetWaveCount();
-	min_soldiers += std::floor(wave_count / 5) + std::floor(wave_count / 10);
-	max_soldiers += std::floor(wave_count / 4) + std::floor(wave_count / 10);
+	min_soldiers += std::round(wave_count / 2.1f);
+	max_soldiers += std::round(wave_count / 1.75f);
 }
 
 void Supply::IncreaseSoldiers(){

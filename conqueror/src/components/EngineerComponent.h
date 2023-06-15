@@ -50,6 +50,12 @@ public:
 	void OnEvent(Event& event) override {};
 
 	std::string GetName();
+	static void Init();
+
+	static Shr<Sound> sound_building;
+	static Shr<Sound> sound_leave;
+
+
 private:
 	GameObject* engineer_building;
 	GameObject* building_node;
