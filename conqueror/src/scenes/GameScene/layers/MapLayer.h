@@ -29,6 +29,7 @@ public:
 
 	GameObject* medicBuilding;
 	GameObject* engineerBuilding;
+	GameObject* soldierBuilding;
 
 	static Shr<Sound> mg_place_sound;
 	static Shr<Sound> medic_building_sound;

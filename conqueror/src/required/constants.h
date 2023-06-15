@@ -8,6 +8,8 @@ inline GameScene* gameScene;
 inline MenuScene* menuScene;
 inline GameOverScene* gameOverScene;
 
+inline int waves_survived = 0;
+
 // enemy movement grid
 inline std::vector<std::vector<GameObject*>> enemy_grid;
 
@@ -16,9 +18,9 @@ inline float camera_scroll_speed = 28.0f;
 inline float camera_move_speed = 2.0f;
 inline float camera_move_speed_multiplier = 3.0f;
 inline float min_camera_z_pos = 2.0f;
-inline float max_camera_z_pos = 13.0f;
-inline glm::vec2 min_camera_positions = glm::vec2(-10.5f, -12.0f);
-inline glm::vec2 max_camera_positions = glm::vec2(10.5f, 5.0f);
+inline float max_camera_z_pos = 10.0f;
+inline glm::vec2 min_camera_positions = glm::vec2(-8.5f, -9.0f);
+inline glm::vec2 max_camera_positions = glm::vec2(8.5f, 5.0f);
 
 // enemy grid 
 inline const int enemy_grid_x = 15;
@@ -40,7 +42,7 @@ inline uint8_t enemy_move_right_probability = 1;
 inline float enemy_spawn_y_position = 17.0f;
 inline float enemy_spawn_random_x_radius = 10.0f;
 
-// character 
+// character
 inline float soldier_movement_speed = 1.2f;
 inline float medic_movement_speed = 2.9f;
 inline float engineer_movement_speed = 2.0f;
@@ -122,6 +124,7 @@ inline glm::vec2 engineer_scale = glm::vec2(0.88f, 1.4f);
 
 // buildings
 inline glm::vec2 building_size = glm::vec2(3.0f, 3.0f);
+inline glm::vec2 soldier_building_position = glm::vec2(0.0f, -12.0f);
 
 // stocks
 inline unsigned int start_soldier_stock = 10;
@@ -163,7 +166,7 @@ inline glm::vec2 ui_background_size = glm::vec2(0.3f, 0.7f);
 inline glm::vec2 ui_character_position = glm::vec2(0.8f, 0.0f);
 inline glm::vec2 ui_building_position = glm::vec2(-0.8f, 0.0f);
 inline Transform ui_header_transform = Transform(glm::vec2(0.0f, 0.57f), glm::vec2(0.9f, 0.25f));
-inline Transform ui_header_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.23f, 0.67f));
+inline Transform ui_header_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.17f, 0.55f));
 inline Transform ui_header_building_name_transform = Transform(glm::vec2(0.0f, 0.0f), glm::vec2(0.14f, 0.71f));
 inline Transform ui_character_icon_transform = Transform(glm::vec2(0.0f, 1.1f), glm::vec2(0.3f, 0.32f));
 inline Transform ui_building_icon_transform = Transform(glm::vec2(0.0f, 1.1f), glm::vec2(0.3f, 0.24f));
@@ -224,3 +227,33 @@ inline glm::vec2 front_node_size = glm::vec2(0.7f, 0.7f);
 // hits
 inline glm::vec4 hit_color = glm::vec4(1.0f, 0.55f, 0.55f, 1.0f);
 inline float show_hit_time = 0.07f;
+
+//upgrades
+inline float damage_upgrade = 0.0f;
+inline float armor_upgrade = 0.0f;
+inline float accuracy_upgrade_value = 1.0f;
+inline float engineer_speed_upgrade = 0.0f;
+inline float medic_speed_upgrade = 0.0f;
+inline float mg_damage_upgrade = 0.0f;
+inline float artillary_speed_upgrade = 0.0f;
+inline float build_speed_upgrade = 0.0f;
+
+inline int max_soldier_level = 5;
+inline int max_engineer_building_level = 5;
+inline int max_medic_building_level = 5;
+inline int max_soldier_building_level = 5;
+
+inline int soldier_upgrade_price_start = 5;
+inline float medic_building_upgrade_price_start = 10.0f;
+inline float engineer_building_upgrade_price_start = 10.0f;
+inline float soldier_building_upgrade_price_start = 10.0f;
+
+// upgrade menu
+inline glm::vec2 upgrade_box_size = glm::vec2(0.3f, 0.3f);
+inline std::string medic_building_upgrade_price_display = "10";
+inline std::string engineer_building_upgrade_price_display = "10";
+inline std::string soldier_building_upgrade_price_display = "10";
+
+//soldier building
+inline int soldier_building_current_price = 10;
+inline int soldier_building_current_level = 1;

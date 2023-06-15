@@ -41,7 +41,7 @@ void SoldierShooting::Shoot() {
 		glm::vec2 pos = target->transform.position;
 		float distScale = dist / bulletInaccuracyMultiplicator;
 
-		if (RandomInt(-dist, 4) < 0 && bulletDistanceMoreInaccuracy)
+		if (RandomInt(-dist, 4 + hit_probability_upgrade) < 0 && bulletDistanceMoreInaccuracy)
 		{
 			float randomX = RandomF(-1.0f, 1.0f) * distScale;
 			pos.x += randomX;
@@ -104,4 +104,11 @@ GameObject* SoldierShooting::GetTarget() const
 		}
 	}
 	return nullptr;
+}
+
+bool SoldierShooting::UpgradeSoldier() {
+	hit_probability_upgrade += accuracy_upgrade_value * gameObject->GetComponent<SoldierBehaviour>()->GetLevel();
+	gameObject->GetComponent<SoldierBehaviour>()->AddLevel();
+	gameObject->GetComponent<Health>()->AddMaxHp(5);
+	return true;
 }

@@ -45,7 +45,16 @@ bool MenuLayer::OnGameObjectClick(GameObjectPressedEvent& e)
 		gameScene = new GameScene();
 		Application::ChangeScene(gameScene);
 	}
-	else if (go->HasTag("quit")) {
+	else if (go->HasTag("resume"))
+	{
+		Application::ChangeScene(gameScene);
+	}
+	else if (go->HasTag("credit"))
+	{
+		menuScene->CreditsStart();
+	}
+	else if (go->HasTag("quit")) 
+	{
 		Application::GetInstance()->Exit();
 	}
 

@@ -13,9 +13,11 @@ public:
 
 	void SendMedic();
 	void IncreaseAvailableMedics();
-
+	void UpgradeBuilding();
 	uint32_t GetAvailableMedics();
 
+	int building_level;
+	int building_upgrade_price;
 private:
 	uint32_t available_medics;
 
@@ -31,6 +33,7 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
 
+	std::string GetName();
 	static Shr<Sound> heal;
 	static Shr<Sound> heal_final;
 	
@@ -45,4 +48,5 @@ private:
 	bool going_back;
 	float heal_time;
 	float dt_counter;
+	std::string name;
 };

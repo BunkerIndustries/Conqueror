@@ -41,8 +41,8 @@ uint8_t Supply::CreateLeftOption() {
 }
 
 std::string Supply::CreateRightOption() {
-	std::string right_choices[4] = { "ARZT", "MECHANIKER", "MG", "ARTILLERIE" };
-	std::string banana = right_choices[RandomInt(0, 3)];
+	std::string right_choices[] = { "MG", "ARZT", "MECHANIKER", "MG", "ARZT", "ARTILLERIE" };
+	std::string banana = right_choices[RandomInt(0, 5)];
 	right_option = banana;
 	return banana;
 }
@@ -94,6 +94,7 @@ bool Supply::CheckForGameOver() {
 		return false;
 	}
 	LOG_DEBUG("Scene change");
-	Application::ChangeScene(menuScene);	// TODO: change to game-over menu
+	waves_survived = gameScene->waveManager->GetWaveCount();
+	Application::ChangeScene(gameOverScene);	// TODO: change to game-over menu
 	return true;
 }

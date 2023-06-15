@@ -24,7 +24,6 @@ public:
 
 	void Init() override {
 		Application::GetWindow()->SetVSync(true);
-		gameScene = new GameScene();
 		menuScene = new MenuScene();
 		gameOverScene = new GameOverScene();
 

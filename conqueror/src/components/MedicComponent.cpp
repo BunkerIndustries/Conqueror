@@ -2,6 +2,8 @@
 #include "MedicComponent.h"
 
 #include "required/constants.h"
+#include "required/functions.h"
+#include "required/names.h"
 
 
 std::shared_ptr<Sound> MedicCharacter::heal_final;
@@ -19,7 +21,13 @@ void MedicCharacter::Init()
 MedicBuilding::MedicBuilding(uint32_t number_of_medics)
 	:available_medics(number_of_medics)
 {
+	building_level = 1;
+	building_upgrade_price = medic_building_upgrade_price_start;
+}
 
+void MedicBuilding::UpgradeBuilding() {
+	medic_speed_upgrade += 0.15 + building_level / 10;
+	building_level++;
 }
 
 void MedicBuilding::SendMedic() {
@@ -32,7 +40,7 @@ void MedicBuilding::SendMedic() {
 
 	if (gameScene->GetActiveBuilding() == gameScene->mapLayer->medicBuilding) {
 		gameScene->uiLayer->DeactivateBuildingUI();
-		gameScene->uiLayer->ActivateMedicBuildlingUI();
+		gameScene->uiLayer->ActivateMedicBuildingUI();
 	}
 }
 
@@ -40,7 +48,7 @@ void MedicBuilding::IncreaseAvailableMedics() {
 	available_medics++;
 	if (gameScene->GetActiveBuilding() == gameScene->mapLayer->medicBuilding) {
 		gameScene->uiLayer->DeactivateBuildingUI();
-		gameScene->uiLayer->ActivateMedicBuildlingUI();
+		gameScene->uiLayer->ActivateMedicBuildingUI();
 	}
 }
 
@@ -61,6 +69,7 @@ MedicCharacter::MedicCharacter(GameObject* medic_building)
 
 void MedicCharacter::OnStart() {
 	gameObject->GetComponent<Movement>()->SetTargetPos(healing_target_position);
+	name = names.at(RandomInt(0, names.size() - 1));
 	heal->LoadSound("assets/sounds/medic_heals.wav");
 	heal_final->LoadSound("assets/sounds/heal_final.wav");
 
@@ -90,7 +99,7 @@ void MedicCharacter::OnUpdate() {
 	if (!healing) {	// if he arrived and is not healing already
 		LOG_DEBUG("medic just arrived at soldier to heal");
 		healing = true;
-		heal_time = (soldier_health - healing_target->GetComponent<Health>()->GetHp()) * waiting_time_per_hp * game_time_factor;
+		heal_time = (healing_target->GetComponent<Health>()->GetMaxHp() - healing_target->GetComponent<Health>()->GetHp()) * waiting_time_per_hp * game_time_factor;
 	}
 	else if (healing) {
 		if (dt_counter >= heal_time) {
@@ -111,3 +120,5 @@ void MedicCharacter::OnUpdate() {
 		dt_counter += Application::GetDT();
 	}
 }
+
+std::string MedicCharacter::GetName() { return name; }

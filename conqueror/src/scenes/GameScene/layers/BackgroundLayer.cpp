@@ -7,7 +7,6 @@ BackgroundLayer::BackgroundLayer() {
 }
 
 void BackgroundLayer::OnAttach() {
-	glm::vec2 background_tile_rad = background_tile_size / 2.0f;
 	CreateBackgroundTile(glm::vec2(0, 0));
 }
 

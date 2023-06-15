@@ -1,36 +1,33 @@
 #include "_Game.h"
-#include "GameOverScene.h"
 
-#include "required/constants.h"
+#include "GameOverScene.h"
+#include "../GameScene/GameScene.h"
+#include "layers/StatLayer.h"
+
 
 GameOverScene::GameOverScene() {
-	statLayer = new StatLayer();
+    backcolor = background_color;
 
-	CreateButton("quite_button.png", glm::vec2(0.0f, -3.0f), "menu");
+    statLayer = new StatLayer();
 
+    CreateButton("play_object_001.png", glm::vec2(0.0f, -1.0f), "play");
+    CreateButton("../GameOverMenu/main_menu.png", glm::vec2(0.0f, -3.0f), "main-menu");
+    
 }
 
 GameOverScene::~GameOverScene() {
-
 }
 
-void GameOverScene::OnStart(){
-	AddLayer(statLayer);
-
+void GameOverScene::OnStart() {
+    AddLayer(statLayer);
 }
 
 void GameOverScene::OnStop() {
-	RemoveLayer(statLayer);
+    RemoveLayer(statLayer);
 }
 
-void GameOverScene::OnUpdate() {}
+void GameOverScene::OnUpdate() {
 
-GameObject* GameOverScene::CreateElement(std::string sprite_name, glm::vec2 position, glm::vec2 size) {
-
-    GameObject* element = new GameObject("menu_element", Transform(position, size));
-    element->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("MainMenu/" + sprite_name), 1.0f, Geometry::RECTANGLE));
-    statLayer->AddGameObjectToLayer(element);
-    return element;
 }
 
 GameObject* GameOverScene::CreateButton(std::string sprite_name, glm::vec2 position, std::string action) {

@@ -22,15 +22,20 @@ public:
 	void DecreaseMgStock();
 	void DecreaseArtilleryStock();
 
+	void UpgradeBuilding();
+
 	uint8_t GetMgStock();
 	uint8_t GetArtilleryStock();
 
 	uint8_t GetAvailableEngineers();
+	int building_level;
+	int building_upgrade_price;
 
 private:
 	uint32_t available_engineers;
 	uint32_t available_mgs;
 	uint32_t available_artillery;
+
 };
 
 class EngineerCharacter : public Component {
@@ -43,6 +48,7 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
 
+	std::string GetName();
 	static void Init();
 
 	static Shr<Sound> sound_building;
@@ -60,5 +66,6 @@ private:
 	bool isBuilding;
 	bool going_back;
 	float dt_counter;
+	std::string name;
 };
 

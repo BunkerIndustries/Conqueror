@@ -5,15 +5,10 @@
 #include "required/functions.h"
 #include "required/stands.h"
 #include "utils/Supply.h"
-
+#include "required/names.h"
 
 SoldierBehaviour::SoldierBehaviour() 
 {
-
-}
-
-void SoldierBehaviour::OnStart() {
-
 	// start configuration
 	on_spawn_pos = true;
 	travelling = false;
@@ -21,6 +16,13 @@ void SoldierBehaviour::OnStart() {
 	time_to_wait = RandomF(min_soldier_shoot_waiting_time, max_soldier_shoot_waiting_time) * game_time_factor;
 	dt_counter = 0.0f;
 	Supply::IncreaseSoldiers();
+
+	name = names.at(RandomInt(0, names.size() - 1));
+}
+
+void SoldierBehaviour::OnStart() {
+
+	
 }
 
 void SoldierBehaviour::OnStop() {
@@ -159,3 +161,12 @@ void SoldierBehaviour::MedicSent() { gets_healed = true; }
 void SoldierBehaviour::MedicLeft() { gets_healed = false; }
 
 bool SoldierBehaviour::ReceivingMedic() { return gets_healed; }
+
+int SoldierBehaviour::GetLevel() { return soldier_level; }
+void SoldierBehaviour::AddLevel() { soldier_level++; }
+
+std::string SoldierBehaviour::GetName() { return name; }
+
+int SoldierBehaviour::GetUpgradePrice() { return soldier_upgrade_price_int; }
+
+void SoldierBehaviour::SetUpgradePrice(int amount) { soldier_upgrade_price_int = amount; };

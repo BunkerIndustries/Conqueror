@@ -48,6 +48,7 @@ void MapLayer::OnAttach()
 	Layer* layer = this;
 	medicBuilding = Medic::AddBuilding(Transform(glm::vec2(11.0f, -11.5f), building_size), start_medic_stock);
 	engineerBuilding = Engineer::AddBuilding(Transform(glm::vec2(-11.0f, -11.5f), building_size), start_engineer_stock);
+	soldierBuilding = CreateBuilding(Transform(soldier_building_position, building_size), "soldier");
 }
 
 void MapLayer::OnDetach()
@@ -197,6 +198,11 @@ GameObject* MapLayer::CreateBuilding(Transform transform, std::string type) {
 
 		building->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Buildings/engineer_tent.png"), 1.0f, Geometry::RECTANGLE));
 	}
+	else if (type == "soldier") {
+		building->AddTag("soldier_building");
+
+		building->AddComponent(new SpriteRenderer(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), DataPool::GetTexture("Buildings/soldier_tent.png"), 1.0f, Geometry::RECTANGLE));
+	}
 	else {
 		LOG_WARN("WARNING: probably no existing type given when creating a building");
 	}
@@ -255,12 +261,16 @@ bool MapLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 	else if (clicked_mapobject->HasTag("medic_building")) {
 		medic_building_sound->SoundPlay();
 		gameScene->uiLayer->DeactivateBuildingUI();
-		gameScene->uiLayer->ActivateMedicBuildlingUI();
+		gameScene->uiLayer->ActivateMedicBuildingUI();
 	}
 	else if (clicked_mapobject->HasTag("engineer_building")) {
 		engineer_building_sound->SoundPlay();
 		gameScene->uiLayer->DeactivateBuildingUI();
 		gameScene->uiLayer->ActivateEngineerBuildingUI();
+	}
+	else if (clicked_mapobject->HasTag("soldier_building")) {
+		gameScene->uiLayer->DeactivateBuildingUI();
+		gameScene->uiLayer->ActivateSoldierBuildingUI();
 	}
 	else {
 		return false;

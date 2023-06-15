@@ -206,6 +206,7 @@ namespace core {
 			resizing = false;
 
 			dt = window->GetTime() - begin_time;
+			if (dt > 0.1f) dt = 0.0167;
 			begin_time = window->GetTime();
 		}
 
@@ -226,24 +227,28 @@ namespace core {
 	void Application::AddLayer(Layer* layer)
 	{
 		GetInstance()->layerStack.AddLayer(layer);
-		layer->Attach();
+		if (!layer->IsAttached())
+			layer->Attach();
 	}
 
 	void Application::AddOverlay(Layer* layer)
 	{
 		GetInstance()->layerStack.AddOverlay(layer);
-		layer->Attach();
+		if (!layer->IsAttached())
+			layer->Attach();
 	}
 
 	void Application::RemoveLayer(Layer* layer)
 	{
-		layer->Detach();
+		if (layer->IsAttached())
+			layer->Detach();
 		GetInstance()->layerStack.RemoveLayer(layer);
 	}
 
 	void Application::RemoveOverlay(Layer* layer)
 	{
-		layer->Detach();
+		if (layer->IsAttached())
+			layer->Detach();
 		GetInstance()->layerStack.RemoveOverlay(layer);
 	}
 }

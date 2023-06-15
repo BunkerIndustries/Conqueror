@@ -5,6 +5,7 @@
 #include "required/functions.h"
 #include "required/stands.h"
 #include "SingleAnimationComponent.h"
+#include "required/names.h"
 
 Shr<Sound> EngineerCharacter::sound_leave;
 Shr<Sound> EngineerCharacter::sound_building;
@@ -13,6 +14,14 @@ EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
 	: available_engineers(engineerCount) {
 	available_mgs = 0;
 	available_artillery = 0;
+	building_level = 1;
+	building_upgrade_price = engineer_building_upgrade_price_start;
+}
+
+void EngineerBuilding::UpgradeBuilding() {
+	engineer_speed_upgrade += 0.15 + building_level/10;
+	mg_damage_upgrade += 3;
+	building_level++;
 }
 
 void EngineerCharacter::Init()
@@ -82,6 +91,7 @@ EngineerCharacter::EngineerCharacter(bool mg_artillery)
 
 void EngineerCharacter::OnStart() {
 	gameObject->GetComponent<Movement>()->SetTargetPos(building_node_position);
+	name = names.at(RandomInt(0, names.size() - 1));
 	sound_leave->SoundPlay();
 }
 
