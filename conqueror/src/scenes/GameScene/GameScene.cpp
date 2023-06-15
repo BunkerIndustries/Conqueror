@@ -11,6 +11,8 @@ GameScene::GameScene() {
 	// set background color
 	backcolor = glm::vec4(0.8f, 0.8f, 0.8f, 1.0f);
 
+	gameScene = this;
+
 	backgroundLayer = new BackgroundLayer();
 	mapLayer = new MapLayer();
 	enemyLayer = new EnemyLayer();

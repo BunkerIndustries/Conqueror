@@ -70,9 +70,16 @@ void EnemyBehaviour::OnUpdate() {
 				time_over = false;
 				time_running = true;
 
-				// random calculation of time to wait
-				time_to_wait = RandomF(min_enemy_waiting_time, max_enemy_waiting_time) * game_time_factor;
-				//LOG_DEBUG("time_to_wait: {0}", time_to_wait);
+				if (!gameObject->GetComponent<EnemyShooting>()->GetTarget())
+				{
+					time_to_wait = 0.5;
+				}
+				else
+				{
+					// random calculation of time to wait
+					time_to_wait = RandomF(min_enemy_waiting_time, max_enemy_waiting_time) * game_time_factor;
+				}
+
 			}
 			else {
 				if (dt_time_counter >= time_to_wait) {

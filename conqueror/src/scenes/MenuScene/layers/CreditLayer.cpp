@@ -139,6 +139,12 @@ void CreditLayer::OnDetach()
 	delete scn;
 	delete lesle;
 	delete racic;
+	delete special_thanks;
+	delete boris;
+	delete nam;
+	delete racic2;
+	delete rebstock;
+
 	gameObjects.clear();
 
 	sound_credit->StopSound();

@@ -32,9 +32,7 @@ bool StatLayer::OnGameObjectClick(GameObjectPressedEvent& e)
 	GameObject* go = e.GetGameObject();
 
 	if (go->HasTag("play")) {
-		delete gameScene;
-		gameScene = new GameScene();
-		Application::ChangeScene(gameScene);
+		Application::ChangeScene(new GameScene(), true);
 	}
 	else if (go->HasTag("main-menu")) {
 		Application::ChangeScene(menuScene);

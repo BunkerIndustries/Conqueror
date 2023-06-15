@@ -32,6 +32,9 @@ public:
 	int building_upgrade_price;
 	std::string building_upgrade_price_display;
 
+	int mg_price;
+	int artillary_price;
+
 private:
 	uint32_t available_engineers;
 	uint32_t available_mgs;
