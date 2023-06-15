@@ -63,6 +63,7 @@ private:
 	PictureBox* medic_building_upgrade_background;
 	PictureBox* engineer_building_upgrade_background;
 	PictureBox* soldier_building_upgrade_background;
+	PictureBox* soldier_building_shop_background;
 
 	void UpdateSoldierCount();
 	void AddSoldierCount();

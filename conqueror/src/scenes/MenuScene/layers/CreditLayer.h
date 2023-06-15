@@ -44,4 +44,10 @@ private:
 	GameObject* lesle;
 	GameObject* racic;
 
+	GameObject* special_thanks;
+	GameObject* boris;
+	GameObject* nam;
+	GameObject* racic2;
+	GameObject* rebstock;
+
 };
