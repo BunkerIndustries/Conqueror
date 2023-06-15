@@ -6,6 +6,7 @@
 #include "required/constants.h"
 #include "required/functions.h"
 #include "utils/Supply.h"
+#include "utils/Economy.h"
 
 WaveManager::WaveManager(GameScene* gameScene)
 	: gameScene(gameScene)
@@ -54,6 +55,7 @@ void WaveManager::OnUpdate() {
 	else {
 		if (!enemies_are_dead) return;
 		LOG_DEBUG("Wave over - cooldown state");
+		Economy::AddBalance(10 + wave_counter*5);
 		wave_counter++;
 		Supply::IncreaseSoldierCount();
 		cooldown_state = true;

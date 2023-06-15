@@ -102,6 +102,6 @@ GameObject* SoldierShooting::GetTarget() const
 bool SoldierShooting::UpgradeSoldier() {
 	hit_probability_upgrade += accuracy_upgrade_value * gameObject->GetComponent<SoldierBehaviour>()->GetLevel();
 	gameObject->GetComponent<SoldierBehaviour>()->AddLevel();
-	gameObject->GetComponent<Health>()->AddMaxHp(5);
+	gameObject->GetComponent<Health>()->AddMaxHp(10);
 	return true;
 }

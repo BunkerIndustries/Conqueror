@@ -374,7 +374,7 @@ bool UILayer::UpgradeSoldier() {
 bool UILayer::UpgradeMedBuilding() {
 	int oldLevel = gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->building_level;
 	int oldPrice = gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->building_upgrade_price;
-	int price = 2 * oldPrice + 10;
+	int price = 1.5 * oldPrice;
 	if (oldLevel < max_medic_building_level && Economy::getBalance() - oldPrice >= 0) {
 		gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->UpgradeBuilding();
 		Economy::RemoveBalance(oldPrice);
@@ -393,7 +393,7 @@ bool UILayer::UpgradeMedBuilding() {
 bool UILayer::UpgradeEngineerBuilding() {
 	int oldLevel = gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->building_level;
 	int oldPrice = gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->building_upgrade_price;
-	int price = 2*oldPrice + 10;
+	int price = 2 * oldPrice + 10;
 	if (oldLevel < max_engineer_building_level && Economy::getBalance() - oldPrice >= 0) {
 		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->UpgradeBuilding();
 		Economy::RemoveBalance(oldPrice);
@@ -411,7 +411,7 @@ bool UILayer::UpgradeEngineerBuilding() {
 bool UILayer::UpgradeSoldierTent() {
 	int oldLevel = soldier_building_current_level;
 	int oldPrice = soldier_building_current_price;
-	int price = 2 * oldPrice + 10;
+	int price = 2 * oldPrice + 25;
 	if (oldLevel < max_soldier_building_level && Economy::getBalance() - oldPrice >= 0) {
 		Economy::RemoveBalance(oldPrice);
 		damage_upgrade += 5;
