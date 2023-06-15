@@ -14,9 +14,11 @@ inline std::vector<std::pair<std::vector<glm::vec2>, Stand>> standard_map =
 {
 	{
 		{
+			glm::vec2(-7.0f, -12.0f),
 			glm::vec2(-6.0f, -12.0f),
 			glm::vec2(-5.0f, -12.0f),
 			glm::vec2(-4.0f, -12.0f),
+			glm::vec2(-7.0f, -11.0f),
 			glm::vec2(-6.0f, -11.0f),
 			glm::vec2(-5.0f, -11.0f),
 			glm::vec2(-4.0f, -11.0f)
