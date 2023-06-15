@@ -131,7 +131,7 @@ inline glm::vec2 soldier_building_position = glm::vec2(0.0f, -12.0f);
 // stocks
 inline unsigned int start_soldier_stock = 3;
 inline uint8_t start_engineer_stock = 1;
-inline uint8_t start_medic_stock = 3;
+inline uint8_t start_medic_stock = 1;
 
 // mg
 inline glm::vec2 mg_size = glm::vec2(1.0f, 1.2f);
@@ -248,13 +248,13 @@ inline int max_soldier_building_level = 5;
 
 inline int soldier_upgrade_price_start = 5;
 inline int medic_building_upgrade_price_start = 50;
-inline int engineer_building_upgrade_price_start = 50;
+inline int engineer_building_upgrade_price_start = 45;
 inline int soldier_building_upgrade_price_start = 50;
 
 // upgrade menu
 inline glm::vec2 upgrade_box_size = glm::vec2(0.3f, 0.3f);
-inline std::string soldier_building_upgrade_price_display = "10";
+inline std::string soldier_building_upgrade_price_display = "50";
 
 //soldier building
-inline int soldier_building_current_price = 10;
+inline int soldier_building_current_price = 50;
 inline int soldier_building_current_level = 1;

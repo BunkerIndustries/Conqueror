@@ -1,7 +1,7 @@
 #include "_Game.h"
 #include "Economy.h"
 
-int Economy::Balance = 5000;
+int Economy::Balance = 20;
 
 void Economy::AddBalance(int amount) {
 	Balance += amount;
