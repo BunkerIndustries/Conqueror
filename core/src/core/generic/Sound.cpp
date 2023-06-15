@@ -47,6 +47,8 @@ namespace core {
             LOG_CORE_ERROR("Failed to load sound '" + std::string(soundFile) + "'");
             return false;
         }
+
+        SetVolume(0.6);
         return true;
     }
 

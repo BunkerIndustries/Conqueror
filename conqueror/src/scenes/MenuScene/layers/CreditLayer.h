@@ -50,4 +50,6 @@ private:
 	GameObject* racic2;
 	GameObject* rebstock;
 
+	GameObject* rebstock_bild;
+
 };
