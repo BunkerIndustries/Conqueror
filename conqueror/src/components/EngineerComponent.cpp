@@ -12,6 +12,7 @@ EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
 	available_mgs = 0;
 	available_artillery = 0;
 	building_level = 1;
+	building_upgrade_price = engineer_building_upgrade_price_start;
 }
 
 void EngineerBuilding::UpgradeBuilding() {
@@ -19,6 +20,7 @@ void EngineerBuilding::UpgradeBuilding() {
 	mg_damage_upgrade += 3;
 	building_level++;
 }
+
 void EngineerBuilding::SendEngineer()
 {
 	available_engineers--;

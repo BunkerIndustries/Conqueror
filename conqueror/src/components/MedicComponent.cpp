@@ -9,6 +9,7 @@ MedicBuilding::MedicBuilding(uint32_t number_of_medics)
 	:available_medics(number_of_medics)
 {
 	building_level = 1;
+	building_upgrade_price = medic_building_upgrade_price_start;
 }
 
 void MedicBuilding::UpgradeBuilding() {
@@ -26,7 +27,7 @@ void MedicBuilding::SendMedic() {
 
 	if (gameScene->GetActiveBuilding() == gameScene->mapLayer->medicBuilding) {
 		gameScene->uiLayer->DeactivateBuildingUI();
-		gameScene->uiLayer->ActivateMedicBuildlingUI();
+		gameScene->uiLayer->ActivateMedicBuildingUI();
 	}
 }
 
@@ -34,7 +35,7 @@ void MedicBuilding::IncreaseAvailableMedics() {
 	available_medics++;
 	if (gameScene->GetActiveBuilding() == gameScene->mapLayer->medicBuilding) {
 		gameScene->uiLayer->DeactivateBuildingUI();
-		gameScene->uiLayer->ActivateMedicBuildlingUI();
+		gameScene->uiLayer->ActivateMedicBuildingUI();
 	}
 }
 

@@ -240,7 +240,7 @@ bool MapLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 	}
 	else if (clicked_mapobject->HasTag("medic_building")) {
 		gameScene->uiLayer->DeactivateBuildingUI();
-		gameScene->uiLayer->ActivateMedicBuildlingUI();
+		gameScene->uiLayer->ActivateMedicBuildingUI();
 	}
 	else if (clicked_mapobject->HasTag("engineer_building")) {
 		gameScene->uiLayer->DeactivateBuildingUI();

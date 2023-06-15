@@ -16,8 +16,8 @@ public:
 	void UpgradeBuilding();
 	uint32_t GetAvailableMedics();
 
-	float building_level;
-	float building_upgrade_price;
+	int building_level;
+	int building_upgrade_price;
 private:
 	uint32_t available_medics;
 };

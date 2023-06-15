@@ -16,7 +16,7 @@ public:
 	void ActivateSoldierUI();
 	void ActivateMedicUI();
 	void ActivateEngineerUI();
-	void ActivateMedicBuildlingUI();
+	void ActivateMedicBuildingUI();
 	void ActivateEngineerBuildingUI();
 	void ActivateSupplyMenuUI();
 	void DeactivateCharacterUI();
@@ -33,13 +33,14 @@ public:
 	static bool UpgradeSoldier();
 	static bool UpgradeMedBuilding();
 	static bool UpgradeEngineerBuilding();
-	static void UpgradeSoldierTent();
+	static bool UpgradeSoldierTent();
 	Label* countDown;
 	Label* money;
 	Label* soldier_upgrade_price;
 	Label* medic_building_upgrade_price;
 	Label* engineer_building_upgrade_price;
 	Label* soldier_building_upgrade_price;
+	Button* soldier_building_upgrade_buy;
 	PictureBox* coin;
 	PictureBox* soldierPic;
 
