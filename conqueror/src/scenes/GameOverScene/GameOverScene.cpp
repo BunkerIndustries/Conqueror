@@ -15,8 +15,7 @@ void GameOverScene::Init()
 
 GameOverScene::GameOverScene() {
     backcolor = background_color;
-    delete gameScene;
-    gameScene = nullptr;
+    
     statLayer = new StatLayer();
 
     CreateButton("play_object_001.png", glm::vec2(0.0f, -1.0f), "play");
