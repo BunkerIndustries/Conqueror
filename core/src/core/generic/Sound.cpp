@@ -48,7 +48,7 @@ namespace core {
             return false;
         }
 
-        SetVolume(0.6);
+        SetVolume(0.3);
         return true;
     }
 
