@@ -27,6 +27,7 @@ GameScene::GameScene() {
 	uiLayer->Load();
 
 	loss_countdown = 60;
+	wave_count = 0;
 }
 
 GameScene::~GameScene() {
