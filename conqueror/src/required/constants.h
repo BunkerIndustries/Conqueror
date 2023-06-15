@@ -130,7 +130,7 @@ inline glm::vec2 building_size = glm::vec2(3.0f, 3.0f);
 inline glm::vec2 soldier_building_position = glm::vec2(0.0f, -12.0f);
 
 // stocks
-inline unsigned int start_soldier_stock = 3;
+inline unsigned int start_soldier_stock = 4;
 inline uint8_t start_engineer_stock = 1;
 inline uint8_t start_medic_stock = 1;
 
@@ -212,7 +212,7 @@ inline float cooldown_addition = 0.5f;
 inline float start_wave_duration = 4.0f;
 inline float wave_length_gradient = 1.12f;
 inline float enemy_start_spawn_interval = 1.8f;
-inline float enemy_spawn_interval_gradient = 0.88f;
+inline float enemy_spawn_interval_gradient = 0.9f;
 
 // map sprites
 inline glm::vec2 background_tile_size = glm::vec2(100.0f, 100.0f);
