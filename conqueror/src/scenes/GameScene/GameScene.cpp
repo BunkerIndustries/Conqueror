@@ -73,18 +73,6 @@ void UpdateCamera(Shr<Camera> camera, float moveX, float moveY, float zoom)
 	camera->position.x = std::clamp(camera->position.x, min_camera_positions.x, max_camera_positions.x);
 	camera->position.y = std::clamp(camera->position.y, min_camera_positions.y, max_camera_positions.y);
 
-	// Calculate the visible area based on the camera zoom
-	float visibleWidth = (max_camera_positions.x - min_camera_positions.x) / camera->position.z;
-	float visibleHeight = (max_camera_positions.y - min_camera_positions.y) / camera->position.z;
-
-	// Calculate the maximum allowed camera position to prevent going outside the box
-	float maxCameraX = max_camera_positions.x - (visibleWidth / 2.0f);
-	float maxCameraY = max_camera_positions.y - (visibleHeight / 2.0f);
-
-	// Adjust camera position if it goes outside the box when zoomed out
-	camera->position.x = std::min(camera->position.x, maxCameraX);
-	camera->position.y = std::min(camera->position.y, maxCameraY);
-
 	// Clamp camera zoom level
 	camera->position.z = std::clamp(camera->position.z, min_camera_z_pos, max_camera_z_pos);
 }
