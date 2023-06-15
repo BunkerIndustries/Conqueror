@@ -26,6 +26,7 @@ public:
 	std::string GetName();
 
 	bool on_spawn_pos = true;
+	std::string soldier_upgrade_price_display = std::to_string(soldier_upgrade_price_start);
 
 private:
 	float health = 0.0f;
