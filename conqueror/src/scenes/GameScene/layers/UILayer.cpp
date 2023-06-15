@@ -542,7 +542,7 @@ bool UILayer::BuySoldier(){
 }
 bool UILayer::BuyMg() {
 	if (Economy::getBalance() - gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->mg_price >= 0) {
-		sound_upgrade->SoundPlay()
+		sound_upgrade->SoundPlay();
 		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->IncreaseMgStock();
 		Economy::RemoveBalance(gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->mg_price);
 		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->mg_price += mg_price_increase_per_buy;
