@@ -70,8 +70,8 @@ void Supply::TakeRightOption() {
 
 void Supply::IncreaseSoldierCount() {
 	int wave_count = gameScene->waveManager->GetWaveCount();
-	min_soldiers = std::round(min_soldiers * std::pow(min_soldiers_gradient, wave_count * exponential_factor));
-	max_soldiers = std::round(min_soldiers * std::pow(max_soldiers_gradient, wave_count * exponential_factor));
+	min_soldiers += std::floor(wave_count / 5) + std::floor(wave_count / 10);
+	max_soldiers += std::floor(wave_count / 4) + std::floor(wave_count / 10);
 }
 
 void Supply::IncreaseSoldiers(){
@@ -80,6 +80,7 @@ void Supply::IncreaseSoldiers(){
 
 void Supply::DecreaseSoldiers() {
 	soldiers--;
+	LOG_DEBUG(soldiers);
 }
 
 int Supply::GetSoldiers() { return soldiers; }

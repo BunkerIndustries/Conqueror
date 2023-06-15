@@ -6,6 +6,7 @@
 #include "required/constants.h"
 #include "required/functions.h"
 #include "utils/Supply.h"
+#include "utils/Economy.h"
 
 Shr<Sound> WaveManager::sound_wave;
 
@@ -63,6 +64,7 @@ void WaveManager::OnUpdate() {
 		if (!enemies_are_dead) return;
 		sound_wave->SoundPlay();
 		LOG_DEBUG("Wave over - cooldown state");
+		Economy::AddBalance(10 + wave_counter*5);
 		wave_counter++;
 		Supply::IncreaseSoldierCount();
 		cooldown_state = true;

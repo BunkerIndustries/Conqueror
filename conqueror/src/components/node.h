@@ -4,7 +4,7 @@
 class Node : public Component {
 public:
 	Node(std::vector<GameObject*>* stand = nullptr);
-	virtual ~Node() = default;
+	~Node() override;
 
 	void OnStart() override;
 	void OnStop() override;

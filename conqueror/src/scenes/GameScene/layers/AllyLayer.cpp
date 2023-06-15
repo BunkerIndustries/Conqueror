@@ -102,38 +102,60 @@ bool AllyLayer::KeyReleased(KeyReleasedEvent& e) {
 	return false;
 }
 
+static void ResetMarkColor()
+{
+	if (gameScene->GetActiveCharacter())
+		gameScene->GetActiveCharacter()->GetComponent<SpriteSheet>()->ChangeColor(white_color);
+}
+
 bool AllyLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 	// check if e belongs to allylayer - otherwise return false
-
+	
 	GameObject* clicked_character = e.GetGameObject();
 
 	if (clicked_character == gameScene->GetActiveCharacter()) {
+		ResetMarkColor();
+
 		gameScene->SetActiveCharacter(nullptr);
 		gameScene->uiLayer->DeactivateCharacterUI();
 		return true;
 	}
 
 	if (clicked_character->HasTag("soldier") && !clicked_character->GetComponent<SoldierBehaviour>()->on_spawn_pos) {
+		ResetMarkColor();
+
 		gameScene->SetActiveCharacter(clicked_character);
 		gameScene->uiLayer->DeactivateCharacterUI();
 		gameScene->uiLayer->ActivateSoldierUI();
+
+		clicked_character->GetComponent<SpriteSheet>()->ChangeColor(mark_color);
 		soldier_click->SoundPlay();
 	}
 	else if (clicked_character->HasTag("medic")) {
+		ResetMarkColor();
+
 		gameScene->SetActiveCharacter(clicked_character);
 		gameScene->uiLayer->DeactivateCharacterUI();
 		gameScene->uiLayer->ActivateMedicUI();
+
+		clicked_character->GetComponent<SpriteSheet>()->ChangeColor(mark_color);
 		medic_click->SoundPlay();
 	}
 	else if (clicked_character->HasTag("engineer")) {
+		ResetMarkColor();
+
 		gameScene->SetActiveCharacter(clicked_character);
 		gameScene->uiLayer->DeactivateCharacterUI();
 		gameScene->uiLayer->ActivateEngineerUI();
+
+		clicked_character->GetComponent<SpriteSheet>()->ChangeColor(mark_color);
 		engineer_click->SoundPlay();
 	}
 	else {
+		
 		return false;
 	}
+
 
 	return true;
 }

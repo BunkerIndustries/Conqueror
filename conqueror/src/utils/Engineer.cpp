@@ -17,7 +17,7 @@ void Engineer::Init()
 
 GameObject* Engineer::AddBuilding(Transform transform, uint32_t engineerCount)
 {
-	GameObject* engineerBuilding = gameScene->mapLayer->CreateBuilding(transform, "engineer");
+	GameObject* engineerBuilding = layer->CreateBuilding(transform, "engineer");
 	engineerBuilding->AddComponent(new EngineerBuilding(engineerCount));
 	return engineerBuilding;
 }

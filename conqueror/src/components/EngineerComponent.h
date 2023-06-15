@@ -30,6 +30,7 @@ public:
 	uint8_t GetAvailableEngineers();
 	int building_level;
 	int building_upgrade_price;
+	std::string building_upgrade_price_display;
 
 private:
 	uint32_t available_engineers;

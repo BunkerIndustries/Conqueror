@@ -12,6 +12,7 @@ MenuLayer::MenuLayer()
 
 MenuLayer::~MenuLayer()
 {
+
 }
 
 void MenuLayer::Init()
@@ -65,6 +66,13 @@ void MenuLayer::OnEvent(Event& event)
 {
 	EventDispatcher dispatcher(event);
 	dispatcher.dispatch<GameObjectPressedEvent>(BIND_EVENT_FN(MenuLayer::OnGameObjectClick));
+}
+
+void MenuLayer::ResetButton()
+{
+	delete gameScene;
+	gameScene = nullptr;
+	Application::ChangeScene(new MenuScene(), true);
 }
 
 

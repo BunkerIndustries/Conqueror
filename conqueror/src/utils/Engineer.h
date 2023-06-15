@@ -6,7 +6,7 @@ class GameScene;
 class Engineer
 {
 public:
-	static GameObject* AddBuilding(Transform transform, uint32_t engineerCount);
+	static GameObject* AddBuilding(MapLayer* layer, Transform transform, uint32_t engineerCount);
 	static void PlaceMG();
 	static void PlaceArtillerie();
 

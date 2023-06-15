@@ -1,7 +1,7 @@
 #pragma once
 #include "_Game.h"
 
-class SoldierBuilding :Component {
+class SoldierBuilding : public Component {
 	
 	SoldierBuilding() = default;
 	~SoldierBuilding() = default;

@@ -63,7 +63,9 @@ namespace core {
 		{
 			if (event.handled)
 				break;
-			(*--it)->LayerEvent(event);
+			--it;
+			if ((*it)->IsAttached())
+				(*it)->LayerEvent(event);
 		}
 		if (!event.handled)
 		{
@@ -90,9 +92,9 @@ namespace core {
 	{
 		if (!e.getRepeated() && e.getKeyCode() == KEY_P)
 		{
+			return false;
 			if (imguiEnabledQueue == 0 && imguiEnabled) imguiEnabledQueue = 1;
 			else imguiEnabledQueue = 2;
-			return true;
 		}
 		if (e.getKeyCode() == KEY_F11)
 		{

@@ -92,7 +92,7 @@ bool Health::TakeDamage(float damage) {
 		}
 		else if (gameObject->HasTag("enemy"))
 		{
-			Economy::AddBalance(2);
+			Economy::AddBalance(5);
 			if(gameObject->GetComponent<EnemyBehaviour>()->GetXIndex()){
 				filled_last_row_grid_positions.remove(gameObject->GetComponent<EnemyBehaviour>()->GetXIndex());
 			}
