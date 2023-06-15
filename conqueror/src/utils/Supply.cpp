@@ -10,6 +10,7 @@ uint8_t Supply::min_soldiers;
 uint8_t Supply::max_soldiers;
 uint8_t Supply::left_option;
 std::string Supply::right_option;
+int Supply::soldierPrice;
 
 Shr<Sound> Supply::click_supply;
 
@@ -18,6 +19,7 @@ void Supply::Init() {
 	min_soldiers = 1;
 	max_soldiers = start_max_soldiers;
 	soldiers = 0;
+	soldierPrice = soldier_start_price;
 
 	click_supply = MakeShr<Sound>();
 
@@ -86,6 +88,8 @@ void Supply::DecreaseSoldiers() {
 }
 
 int Supply::GetSoldiers() { return soldiers; }
+int Supply::GetSoldierPrice() { return soldierPrice; }
+void Supply::SetSoldierPrice(int amount) { soldierPrice = amount; }
 
 bool Supply::CheckForGameOver() {
 

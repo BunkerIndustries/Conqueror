@@ -36,6 +36,11 @@ public:
 	static bool UpgradeMedBuilding();
 	static bool UpgradeEngineerBuilding();
 	static bool UpgradeSoldierTent();
+
+	static bool BuySoldier();
+	static bool BuyMg();
+	static bool BuyArtillary();
+
 	Label* countDown;
 	Label* money;
 	Label* soldier_upgrade_price;

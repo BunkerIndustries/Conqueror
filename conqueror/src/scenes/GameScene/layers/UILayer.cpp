@@ -212,9 +212,9 @@ void UILayer::ActivateSoldierBuildingUI() {
 
 	Label* p1 = new Label("", ui_font_color, Transform(glm::vec2(0.0f, 0.1f), glm::vec2(0.95f, 0.2f)), DataPool::GetFont(ui_font_family));
 	PictureBox* p1_icon = new PictureBox(white_color, Transform(shop_icon_transform.position, glm::vec2(0.2f, 0.9f)), DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
-	Label* p1_price = new Label("pr", ui_font_color, shop_price_transform, DataPool::GetFont(ui_font_family));
+	Label* p1_price = new Label(std::to_string(Supply::GetSoldierPrice()), ui_font_color, shop_price_transform, DataPool::GetFont(ui_font_family));
 	PictureBox* p1_coin = new PictureBox(white_color, shop_coin_transform, DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
-	Button* p1_buy_button = new Button(white_color, shop_button_transform, Type::Rectangle, nullptr);
+	Button* p1_buy_button = new Button(white_color, shop_button_transform, Type::Rectangle, UILayer::BuySoldier);
 	PictureBox* p1_buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	p1->AddChildObject(p1_icon); p1_buy_button->AddChildObject(p1_buy_pb);
 	p1->AddChildObject(p1_price); p1->AddChildObject(p1_coin); p1->AddChildObject(p1_buy_button);
@@ -222,9 +222,9 @@ void UILayer::ActivateSoldierBuildingUI() {
 
 	Label* p2 = new Label("", ui_font_color, Transform(glm::vec2(0.0f, -0.3f), glm::vec2(0.95f, 0.2f)), DataPool::GetFont(ui_font_family));
 	PictureBox* p2_icon = new PictureBox(white_color, shop_icon_transform, DataPool::GetTexture("UI/mg_button.png"), Type::Rectangle);
-	Label* p2_price = new Label("pr", ui_font_color, shop_price_transform, DataPool::GetFont(ui_font_family));
+	Label* p2_price = new Label(std::to_string(gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->mg_price), ui_font_color, shop_price_transform, DataPool::GetFont(ui_font_family));
 	PictureBox* p2_coin = new PictureBox(white_color, shop_coin_transform, DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
-	Button* p2_buy_button = new Button(white_color, shop_button_transform, Type::Rectangle, nullptr);
+	Button* p2_buy_button = new Button(white_color, shop_button_transform, Type::Rectangle, UILayer::BuyMg);
 	PictureBox* p2_buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	p2->AddChildObject(p2_icon); p2_buy_button->AddChildObject(p2_buy_pb);
 	p2->AddChildObject(p2_price); p2->AddChildObject(p2_coin); p2->AddChildObject(p2_buy_button);
@@ -233,9 +233,9 @@ void UILayer::ActivateSoldierBuildingUI() {
 
 	Label* p3 = new Label("", ui_font_color, Transform(glm::vec2(0.0f, -0.7f), glm::vec2(0.95f, 0.2f)), DataPool::GetFont(ui_font_family));
 	PictureBox* p3_icon = new PictureBox(white_color, shop_icon_transform, DataPool::GetTexture("UI/artillery_button.png"), Type::Rectangle);
-	Label* p3_price = new Label("pr", ui_font_color, shop_price_transform, DataPool::GetFont(ui_font_family));
+	Label* p3_price = new Label(std::to_string(gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->artillary_price), ui_font_color, shop_price_transform, DataPool::GetFont(ui_font_family));
 	PictureBox* p3_coin = new PictureBox(white_color, shop_coin_transform, DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
-	Button* p3_buy_button = new Button(white_color, shop_button_transform, Type::Rectangle, nullptr);
+	Button* p3_buy_button = new Button(white_color, shop_button_transform, Type::Rectangle, UILayer::BuyArtillary);
 	PictureBox* p3_buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	p3->AddChildObject(p3_icon); p3_buy_button->AddChildObject(p3_buy_pb);
 	p3->AddChildObject(p3_price); p3->AddChildObject(p3_coin); p3->AddChildObject(p3_buy_button);
@@ -511,4 +511,35 @@ bool UILayer::UpgradeSoldierTent() {
 		gameScene->uiLayer->ActivateSoldierBuildingUI();
 	}
 	return true; 
+}
+
+bool UILayer::BuySoldier(){
+	if (Economy::getBalance() - Supply::GetSoldierPrice() >= 0) {
+		Supply::IncreaseSoldiers();
+		Economy::RemoveBalance(Supply::GetSoldierPrice());
+		Supply::SetSoldierPrice(soldier_price_increase_per_buy + Supply::GetSoldierPrice());
+		gameScene->uiLayer->DeactivateBuildingUI();
+		gameScene->uiLayer->ActivateSoldierBuildingUI();
+	}
+	return true;
+}
+bool UILayer::BuyMg() {
+	if (Economy::getBalance() - gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->mg_price >= 0) {
+		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->IncreaseMgStock();
+		Economy::RemoveBalance(gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->mg_price);
+		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->mg_price += mg_price_increase_per_buy;
+		gameScene->uiLayer->DeactivateBuildingUI();
+		gameScene->uiLayer->ActivateSoldierBuildingUI();
+	}
+	return true;
+}
+bool UILayer::BuyArtillary() {
+	if (Economy::getBalance() - Supply::GetSoldierPrice() >= 0) {
+		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->IncreaseArtilleryStock();
+		Economy::RemoveBalance(gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->artillary_price);
+		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->artillary_price += artillary_price_increase_per_buy;
+		gameScene->uiLayer->DeactivateBuildingUI();
+		gameScene->uiLayer->ActivateSoldierBuildingUI();
+	}
+	return true;
 }
