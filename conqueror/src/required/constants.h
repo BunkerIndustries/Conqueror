@@ -244,14 +244,12 @@ inline int max_medic_building_level = 5;
 inline int max_soldier_building_level = 5;
 
 inline int soldier_upgrade_price_start = 5;
-inline float medic_building_upgrade_price_start = 10.0f;
-inline float engineer_building_upgrade_price_start = 10.0f;
-inline float soldier_building_upgrade_price_start = 10.0f;
+inline int medic_building_upgrade_price_start = 50;
+inline int engineer_building_upgrade_price_start = 50;
+inline int soldier_building_upgrade_price_start = 50;
 
 // upgrade menu
 inline glm::vec2 upgrade_box_size = glm::vec2(0.3f, 0.3f);
-inline std::string medic_building_upgrade_price_display = "10";
-inline std::string engineer_building_upgrade_price_display = "10";
 inline std::string soldier_building_upgrade_price_display = "10";
 
 //soldier building
