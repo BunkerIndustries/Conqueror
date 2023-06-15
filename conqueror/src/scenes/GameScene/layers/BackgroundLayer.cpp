@@ -3,11 +3,14 @@
 #include "required/constants.h"
 
 BackgroundLayer::BackgroundLayer() {
+}
 
+void BackgroundLayer::Load()
+{
+	CreateBackgroundTile(glm::vec2(0, 0));
 }
 
 void BackgroundLayer::OnAttach() {
-	CreateBackgroundTile(glm::vec2(0, 0));
 }
 
 void BackgroundLayer::CreateBackgroundTile(glm::vec2 pos) {

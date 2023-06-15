@@ -20,12 +20,8 @@ SoldierBehaviour::SoldierBehaviour()
 	name = names.at(RandomInt(0, names.size() - 1));
 }
 
-void SoldierBehaviour::OnStart() {
-
-	
-}
-
-void SoldierBehaviour::OnStop() {
+SoldierBehaviour::~SoldierBehaviour()
+{
 	// delete the gameobject from the recent stand
 	if (!stand) return;
 	for (size_t i = 0; i < stand->size(); i++) {
@@ -35,6 +31,15 @@ void SoldierBehaviour::OnStop() {
 		}
 	}
 	Supply::DecreaseSoldiers();
+}
+
+void SoldierBehaviour::OnStart() {
+
+	
+}
+
+void SoldierBehaviour::OnStop() {
+	
 }
 
 void SoldierBehaviour::OnUpdate() {

@@ -17,22 +17,27 @@
 MapLayer::MapLayer()
 	: Layer("MapLayer")
 {
-
+	
 }
 
 MapLayer::~MapLayer()
 {
 }
 
-void MapLayer::OnAttach()
+void MapLayer::Load()
 {
 	CreateGameMap(standard_map, standard_map_sprites);
 	CreateEnemyGrid(enemy_grid_x, enemy_grid_y, enemy_grid_offset, enemy_grid_startpos);
 
 	Layer* layer = this;
-	medicBuilding = Medic::AddBuilding(Transform(glm::vec2(11.0f, -11.5f), building_size), start_medic_stock);
-	engineerBuilding = Engineer::AddBuilding(Transform(glm::vec2(-11.0f, -11.5f), building_size), start_engineer_stock);
+	medicBuilding = Medic::AddBuilding(this, Transform(glm::vec2(11.0f, -11.5f), building_size), start_medic_stock);
+	engineerBuilding = Engineer::AddBuilding(this, Transform(glm::vec2(-11.0f, -11.5f), building_size), start_engineer_stock);
 	soldierBuilding = CreateBuilding(Transform(soldier_building_position, building_size), "soldier");
+}
+
+void MapLayer::OnAttach()
+{
+	
 }
 
 void MapLayer::OnDetach()

@@ -9,11 +9,8 @@ Node::Node(std::vector<GameObject*>* stand)
 	contains_soldier = false;
 }
 
-void Node::OnStart() {
-	
-}
-
-void Node::OnStop() {
+Node::~Node()
+{
 	if (stand == trench_stand.stand) {
 		for (size_t i = 0; i < trench_nodes.size(); i++) {
 			if (trench_nodes.at(i) == gameObject) {
@@ -30,6 +27,14 @@ void Node::OnStop() {
 			}
 		}
 	}
+}
+
+void Node::OnStart() {
+	
+}
+
+void Node::OnStop() {
+	
 }
 
 void Node::OnUpdate() {

@@ -5,9 +5,9 @@
 
 #include "required/constants.h"
 
-GameObject* Medic::AddBuilding(Transform transform, uint32_t medicCount)
+GameObject* Medic::AddBuilding(MapLayer* layer, Transform transform, uint32_t medicCount)
 {
-	GameObject* medicBuilding = gameScene->mapLayer->CreateBuilding(transform, "medic");
+	GameObject* medicBuilding = layer->CreateBuilding(transform, "medic");
 	medicBuilding->AddComponent(new MedicBuilding(medicCount));
 	return medicBuilding;
 }

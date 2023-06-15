@@ -6,9 +6,9 @@
 #include "required/constants.h"
 #include "required/stands.h"
 
-GameObject* Engineer::AddBuilding(Transform transform, uint32_t engineerCount)
+GameObject* Engineer::AddBuilding(MapLayer* layer, Transform transform, uint32_t engineerCount)
 {
-	GameObject* engineerBuilding = gameScene->mapLayer->CreateBuilding(transform, "engineer");
+	GameObject* engineerBuilding = layer->CreateBuilding(transform, "engineer");
 	engineerBuilding->AddComponent(new EngineerBuilding(engineerCount));
 	return engineerBuilding;
 }
