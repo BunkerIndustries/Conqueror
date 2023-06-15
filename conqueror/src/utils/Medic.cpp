@@ -14,7 +14,7 @@ GameObject* Medic::AddBuilding(Transform transform, uint32_t medicCount)
 
 void Medic::SendMedic()
 {
-	if (gameScene->GetActiveCharacter()->GetComponent<Health>()->GetHp() == soldier_health
+	if (gameScene->GetActiveCharacter()->GetComponent<Health>()->GetHp() == gameScene->GetActiveCharacter()->GetComponent<Health>()->GetMaxHp()
 		|| gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->ReceivingMedic()) {
 		return;
 	}

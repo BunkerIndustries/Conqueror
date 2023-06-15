@@ -238,5 +238,15 @@ inline float mg_damage_upgrade = 0.0f;
 inline float artillary_speed_upgrade = 0.0f;
 inline float build_speed_upgrade = 0.0f;
 
+inline float max_soldier_level = 5.0f;
+inline float max_engineer_building_level = 5.0f;
+inline float max_medic_building_level = 5.0f;
+inline float max_soldier_building_level = 5.0f;
+
+inline float soldier_upgrade_price_float = 5;
+inline float medic_building_upgrade_price_float = 10.0f;
+inline float engineer_building_upgrade_price_float = 10.0f;
+inline float soldier_building_upgrade_price_float = 10.0f;
+
 // upgrade menu
 inline glm::vec2 upgrade_box_size = glm::vec2(0.3f, 0.3f);

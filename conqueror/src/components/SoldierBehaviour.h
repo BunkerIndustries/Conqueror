@@ -20,6 +20,8 @@ public:
 
 	int GetLevel();
 	void AddLevel();
+	int GetUpgradePrice();
+	void SetUpgradePrice(int amount);
 
 	std::string GetName();
 
@@ -39,6 +41,7 @@ private:
 	float time_to_wait  = 0.0f;
 
 	int soldier_level = 1;
+	int soldier_upgrade_price_int = 5;
 
 	glm::vec2 target_position = glm::vec2(0.0f);
 

@@ -36,8 +36,14 @@ public:
 	static void UpgradeSoldierTent();
 	Label* countDown;
 	Label* money;
+	Label* soldier_upgrade_price;
+	Label* medic_building_upgrade_price;
+	Label* engineer_building_upgrade_price;
+	Label* soldier_building_upgrade_price;
 	PictureBox* coin;
 	PictureBox* soldierPic;
+
+	Button* soldier_upgrade_buy;
 
 
 private:
@@ -53,6 +59,7 @@ private:
 	void UpdateSoldierCount();
 	void AddSoldierCount();
 	Label* soldierCount;
+
 	
 	int hp;
 	Label* hp_text;
