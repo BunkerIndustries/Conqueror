@@ -5,6 +5,7 @@
 
 
 MenuScene::MenuScene() {
+	menuScene = this;
 	backcolor = background_color;
 
 	menuLayer = new MenuLayer();
@@ -15,6 +16,7 @@ MenuScene::MenuScene() {
 	if (gameScene)
 	{
 		CreateButton("resume_object_001.png", glm::vec2(0.0f, 0.0f), "resume");
+		CreateResetButton(glm::vec2(7.0f, 0.0f));
 	}
 	else
 	{
@@ -74,4 +76,16 @@ GameObject* MenuScene::CreateButton(std::string sprite_name, glm::vec2 position,
 	button->AddTag(action);
 	menuLayer->AddGameObjectToLayer(button);
 	return button;
+}
+
+GameObject* MenuScene::CreateResetButton(glm::vec2 position) {
+	Button* button = new Button(glm::vec4(0.0f, 0.0f, 0.0f, 0.01f), Transform(position, glm::vec2(4.0f, 1.7f)), Type::Rectangle, MenuLayer::ResetButton);
+	Label* label = new Label("RESET", white_color, Transform(glm::vec2(0.0f), glm::vec2(0.25f, 1.0f)), DataPool::GetFont(ui_font_family));
+	button->AddChildObject(label);
+	menuScene->menuLayer->AddUIObject(button, ProjectionMode::PERSPECTIVE);
+	//GameObject* button = new GameObject("menu_reset_button", Transform(position));
+	//button->AddComponent(new FontRenderer(ui_font_color, "RESET", ui_font_family, true));
+	//button->AddTag("reset");
+	//menuLayer->AddGameObjectToLayer(button);
+	return nullptr;
 }
