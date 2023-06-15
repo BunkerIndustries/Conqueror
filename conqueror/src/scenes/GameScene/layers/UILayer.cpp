@@ -347,20 +347,25 @@ bool UILayer::UpgradeSoldier() {
 	int oldLevel = gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->GetLevel();
 	int oldPrice = gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->GetUpgradePrice();
 	int price = 5 + oldPrice + 10 * oldLevel;
-	if (oldLevel <= max_soldier_level && Economy::getBalance() - oldPrice >= 0) {
+	if (oldLevel < max_soldier_level && Economy::getBalance() - oldPrice >= 0) {
 		gameScene->GetActiveCharacter()->GetComponent<SoldierShooting>()->UpgradeSoldier();
 		Economy::RemoveBalance(price);
 		gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->SetUpgradePrice(5 + oldLevel * 10 + price);
-		gameScene->uiLayer->DeactivateCharacterUI();
-		gameScene->uiLayer->ActivateSoldierUI();
+		soldier_upgrade_price_display = std::to_string(gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->GetUpgradePrice());
+			
 		if (gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->GetLevel() == 5) {
-			gameScene->uiLayer->soldier_upgrade_price->text = "MAX";
+			soldier_upgrade_price_display = "MAX";
 			gameScene->uiLayer->RemoveUIObject(gameScene->uiLayer->soldier_upgrade_buy);
 		}
+		gameScene->uiLayer->DeactivateCharacterUI();
+		gameScene->uiLayer->ActivateSoldierUI();
 	}
 	return true;
 }
 bool UILayer::UpgradeMedBuilding() {
+	int oldLevel = gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->building_level;
+	int oldPrice = gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->building_upgrade_price;
+	int price = 5 + oldPrice + 10 * oldLevel;
 	if (gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->building_level <= max_medic_building_level) {
 		gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->UpgradeBuilding();
 	}
