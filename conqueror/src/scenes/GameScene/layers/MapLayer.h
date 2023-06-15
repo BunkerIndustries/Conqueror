@@ -36,6 +36,7 @@ public:
 	static Shr<Sound> mg_place_sound;
 	static Shr<Sound> medic_building_sound;
 	static Shr<Sound> engineer_building_sound;
+	static Shr<Sound> soldier_building_sound;
 
 	static void Init();
 	

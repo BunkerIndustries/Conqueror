@@ -15,6 +15,7 @@
 Shr<Sound> MapLayer::mg_place_sound;
 Shr<Sound> MapLayer::engineer_building_sound;
 Shr<Sound> MapLayer::medic_building_sound;
+Shr<Sound> MapLayer::soldier_building_sound;
 
 void MapLayer::Init()
 {
@@ -26,6 +27,9 @@ void MapLayer::Init()
 
 	medic_building_sound = MakeShr<Sound>();
 	medic_building_sound->LoadSound("assets/sounds/medic_building_click.wav");
+
+	soldier_building_sound = std::make_shared<Sound>();
+	soldier_building_sound->LoadSound("assets/sounds/soldier_building_click.wav");
 }
 
 
@@ -273,6 +277,7 @@ bool MapLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 		gameScene->uiLayer->ActivateEngineerBuildingUI();
 	}
 	else if (clicked_mapobject->HasTag("soldier_building")) {
+		soldier_building_sound->SoundPlay();
 		gameScene->uiLayer->DeactivateBuildingUI();
 		gameScene->uiLayer->ActivateSoldierBuildingUI();
 	}
