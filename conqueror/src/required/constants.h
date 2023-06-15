@@ -264,4 +264,4 @@ inline int soldier_building_current_level = 1;
 inline Transform shop_icon_transform = Transform(glm::vec2(-0.75f, 0.0f), glm::vec2(0.2f, 0.9f));
 inline Transform shop_price_transform = Transform(glm::vec2(-0.1f, 0.0f), glm::vec2(0.5f, 0.1f));
 inline Transform shop_coin_transform = Transform(glm::vec2(-0.2f, 0.0f), glm::vec2(0.5f, 0.1f));
-inline Transform shop_button_transform = Transform(glm::vec2(0.75f, 0.0f), glm::vec2(0.1f, 0.5f));
+inline Transform shop_button_transform = Transform(glm::vec2(0.75f, 0.0f), glm::vec2(0.1f, 0.5 f));
