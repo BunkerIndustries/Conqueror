@@ -9,6 +9,8 @@ public:
 	BackgroundLayer();
 	~BackgroundLayer() override = default;
 
+	void Load();
+
 	void OnAttach() override;
 	void OnDetach() override {};
 	void Update(const float dt) override {};

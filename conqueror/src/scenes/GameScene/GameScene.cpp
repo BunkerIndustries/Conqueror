@@ -18,6 +18,11 @@ GameScene::GameScene() {
 	uiLayer = new UILayer();
 
 	waveManager = new WaveManager(this);
+	Supply::Init();
+
+	backgroundLayer->Load();
+	mapLayer->Load();
+	uiLayer->Load();
 }
 
 GameScene::~GameScene() {
@@ -34,7 +39,6 @@ void GameScene::OnStop() {
 }
 void GameScene::OnStart() {
 
-	Supply::Init();
 
 	AddLayer(backgroundLayer);
 	AddLayer(mapLayer);

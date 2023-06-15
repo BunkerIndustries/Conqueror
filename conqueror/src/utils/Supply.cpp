@@ -71,6 +71,7 @@ void Supply::IncreaseSoldiers(){
 
 void Supply::DecreaseSoldiers() {
 	soldiers--;
+	LOG_DEBUG(soldiers);
 }
 
 int Supply::GetSoldiers() { return soldiers; }

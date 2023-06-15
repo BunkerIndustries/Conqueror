@@ -16,6 +16,8 @@ public:
 private:
 	bool KeyPressed(KeyPressedEvent& e);
 
+	GameObject* press;
+
 	GameObject* angelina;
 	GameObject* angelina_text;
 

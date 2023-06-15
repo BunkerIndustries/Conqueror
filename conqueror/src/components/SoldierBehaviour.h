@@ -4,7 +4,7 @@
 class SoldierBehaviour : public Component {
 public:
 	SoldierBehaviour();
-	virtual ~SoldierBehaviour() = default;
+	~SoldierBehaviour() override;
 
 	void OnStart() override;
 	void OnStop() override;

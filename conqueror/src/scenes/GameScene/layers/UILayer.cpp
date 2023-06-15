@@ -12,17 +12,23 @@
 UILayer::UILayer()
 	: Layer("UILayer")
 {
+
 }
 
 UILayer::~UILayer()
 {
 }
 
-void UILayer::OnAttach()
+void UILayer::Load()
 {
 	AddCountdown();
 	AddMoney();
 	AddSoldierCount();
+}
+
+void UILayer::OnAttach()
+{
+
 }
 
 void UILayer::OnDetach()
@@ -311,7 +317,8 @@ void UILayer::AddMoney() {
 }
 
 
-void UILayer::UpdateDeathCountdown() {
+void UILayer::UpdateDeathCountdown()
+{
 	static float i;
 	i += Application::GetDT();
 	if (i > 1) {
