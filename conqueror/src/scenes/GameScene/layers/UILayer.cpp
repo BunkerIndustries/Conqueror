@@ -72,16 +72,18 @@ void UILayer::ActivateSoldierUI() {
 	u_header->AddChildObject(u_name); 
 	soldier_upgrade_background->AddChildObject(u_header);
 
-	soldier_upgrade_price = new Label(std::to_string(gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->GetUpgradePrice()), ui_font_color, Transform(glm::vec2(-0.6f, -0.3f), glm::vec2(0.15f, 0.45f)), DataPool::GetFont(ui_font_family));
-	PictureBox* coin = new PictureBox(white_color, Transform(glm::vec2(-0.15f, -0.3f), glm::vec2(0.16f, 0.32f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
-	Button* buy = new Button(white_color, Transform(glm::vec2(0.5f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, UILayer::UpgradeSoldier, "soldier_buy_button");
+	soldier_upgrade_price = new Label(std::to_string(gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->GetUpgradePrice()), ui_font_color, Transform(glm::vec2(-0.65f, -0.3f), glm::vec2(0.15f, 0.45f)), DataPool::GetFont(ui_font_family));
+	PictureBox* coin = new PictureBox(white_color, Transform(glm::vec2(-0.2f, -0.3f), glm::vec2(0.16f, 0.32f)), DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
+	Button* buy = new Button(white_color, Transform(glm::vec2(0.3f, -0.3f), glm::vec2(0.22f, 0.34f)), Type::Rectangle, UILayer::UpgradeSoldier, "soldier_buy_button");
 	PictureBox* buy_pb = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f)), DataPool::GetTexture("UI/upgrade_button.png"), Type::Rectangle);
 	buy->AddChildObject(buy_pb);
+
+	Label* level = new Label(std::to_string(gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->GetUpgradePrice()), ui_font_color, Transform(glm::vec2(-0.65f, -0.3f), glm::vec2(0.15f, 0.45f)), DataPool::GetFont(ui_font_family));
+
 	soldier_upgrade_background->AddChildObject(soldier_upgrade_price); soldier_upgrade_background->AddChildObject(coin); soldier_upgrade_background->AddChildObject(buy);
 
 	AddUIObject(soldier_upgrade_background, ProjectionMode::SCREEN);
-	/*Label* upg1_t = new Label("Genauigkeit", white_color, Transform(glm::vec2(-0.5f, 0.2f), glm::vec2(0.2f, 0.1f)), DataPool::GetFont(ui_font_family));
-	Label* upg1_p = new Label("10", white_color, Transform(glm::vec2(0.2f, 0.8f), glm::vec2(0.2f, 0.1f)), DataPool::GetFont(ui_font_family));*/
+
 }
 
 void UILayer::ActivateMedicUI() {
