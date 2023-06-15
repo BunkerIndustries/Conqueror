@@ -198,7 +198,7 @@ void UILayer::ActivateSoldierBuildingUI() {
 	s_header->AddChildObject(s_name);
 	soldier_building_shop_background->AddChildObject(s_header);
 
-	Label* p1 = new Label("", ui_font_color, Transform(glm::vec2(0.0f, 0.2f), glm::vec2(0.95f, 0.25f)), DataPool::GetFont(ui_font_family));
+	Label* p1 = new Label("", ui_font_color, Transform(glm::vec2(0.0f, 0.1f), glm::vec2(0.95f, 0.25f)), DataPool::GetFont(ui_font_family));
 	PictureBox* p1_icon = new PictureBox(white_color, shop_icon_transform, DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
 	Label* p1_price = new Label("pr", ui_font_color, shop_price_transform, DataPool::GetFont(ui_font_family));
 	PictureBox* p1_coin = new PictureBox(white_color, shop_coin_transform, DataPool::GetTexture("UI/coin.png"), Type::Rectangle);
@@ -209,7 +209,7 @@ void UILayer::ActivateSoldierBuildingUI() {
 	soldier_building_shop_background->AddChildObject(p1);
 	AddUIObject(p1, ProjectionMode::SCREEN);
 
-	Label* p2 = new Label("", ui_font_color, Transform(glm::vec2(0.0f, -0.2f), glm::vec2(0.95f, 0.2f)), DataPool::GetFont(ui_font_family));
+	Label* p2 = new Label("", ui_font_color, Transform(glm::vec2(0.0f, -0.3f), glm::vec2(0.95f, 0.2f)), DataPool::GetFont(ui_font_family));
 	PictureBox* p2_header = new PictureBox(white_color, shop_icon_transform, DataPool::GetTexture("UI/mg_button.png"), Type::Rectangle);
 	PictureBox* p2_icon = new PictureBox(white_color, shop_icon_transform, DataPool::GetTexture("UI/soldier_head.png"), Type::Rectangle);
 	Label* p2_price = new Label("pr", ui_font_color, shop_price_transform, DataPool::GetFont(ui_font_family));
