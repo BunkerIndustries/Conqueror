@@ -18,6 +18,7 @@ public:
 	static int GetSoldiers();
 	static void IncreaseSoldiers();
 	static void DecreaseSoldiers();
+	static void IncreaseSoldierStock();
 
 	static int GetSoldierPrice();
 	static void SetSoldierPrice(int amount);
