@@ -12,7 +12,6 @@ uint8_t Supply::left_option;
 std::string Supply::right_option;
 
 Shr<Sound> Supply::click_supply;
-Shr<Sound> Supply::sound_game_over;
 
 void Supply::Init() {
 	soldier_stock = start_soldier_stock;
@@ -21,10 +20,8 @@ void Supply::Init() {
 	soldiers = 0;
 
 	click_supply = MakeShr<Sound>();
-	sound_game_over = MakeShr<Sound>();
 
 	click_supply->LoadSound("assets/sounds/click.wav");
-	sound_game_over->LoadSound("assets/sounds/death.wav");
 }
 
 void Supply::TryCallSoldier() {

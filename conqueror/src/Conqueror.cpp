@@ -11,6 +11,7 @@
 #include "components/ArtilleryComponent.h"
 #include "utils/Engineer.h"
 #include "utils/Supply.h"
+#include "scenes/GameScene/layers/UILayer.h"
 
 class Conqueror : public core::Application {
 public:
@@ -31,6 +32,8 @@ public:
 
 		// god please forgive me
 		Util::Init();
+		UILayer::Init();
+		MenuScene::Init();
 		MenuLayer::Init();
 		Health::Init();
 		EnemyShooting::Init();
@@ -38,10 +41,12 @@ public:
 		MedicCharacter::Init();
 		ArtilleryComponent::Init();
 		EngineerCharacter::Init();
+		GameOverScene::Init();
 		AllyLayer::Init();
 		MapLayer::Init();
 		Engineer::Init();
 		Supply::Init();
+		BulletComponent::Init();
 		WaveManager::Init();
 
 		Application::ChangeScene(menuScene);

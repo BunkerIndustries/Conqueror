@@ -3,6 +3,14 @@
 
 #include "Movement.h"
 
+Shr<Sound> BulletComponent::sound_mg;
+
+void BulletComponent::Init()
+{
+	sound_mg = MakeShr<Sound>();
+	sound_mg->LoadSound("assets/sounds/mg_bullet.wav");
+}
+
 static bool CoordRoundVec2(glm::vec2 targetPos, glm::vec2 pos)
 {
 	glm::vec2 diff = { targetPos.x - pos.x, targetPos.y - pos.y };
@@ -13,15 +21,20 @@ static bool CoordRoundVec2(glm::vec2 targetPos, glm::vec2 pos)
 BulletComponent::BulletComponent(GameObject* target, glm::vec2 pos)
 	: target(target), pos(pos)
 {
-
+	if (target == nullptr)
+	{
+		sound_mg->SoundPlay();
+	}
 }
 
 void BulletComponent::OnStart()
 {
+
 }
 
 void BulletComponent::OnStop()
 {
+
 }
 
 void BulletComponent::OnUpdate()

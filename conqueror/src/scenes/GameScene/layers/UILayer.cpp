@@ -9,6 +9,18 @@
 #include "utils/Supply.h"
 #include "utils/Economy.h"
 
+Shr<Sound> UILayer::sound_upgrade;
+Shr<Sound> UILayer::sound_time;
+
+void UILayer::Init()
+{
+	sound_upgrade = MakeShr<Sound>();
+	sound_time = MakeShr<Sound>();
+
+	sound_upgrade->LoadSound("assets/sounds/epic_sound.wav");
+	sound_time->LoadSound("assets/sounds/time.wav");
+}
+
 UILayer::UILayer()
 	: Layer("UILayer")
 {
@@ -312,6 +324,17 @@ void UILayer::AddMoney() {
 
 
 void UILayer::UpdateDeathCountdown() {
+	
+	if (loss_countdown <= 20)
+	{
+		sound_time->SoundPlay();
+	}
+	
+	if (!loss_countdown || loss_countdown > 20)
+	{
+		sound_time->StopSound();
+	}
+
 	static float i;
 	i += Application::GetDT();
 	if (i > 1) {
@@ -357,6 +380,11 @@ bool UILayer::UpgradeSoldier() {
 	int oldLevel = gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->GetLevel();
 	int oldPrice = gameScene->GetActiveCharacter()->GetComponent<SoldierBehaviour>()->GetUpgradePrice();
 	int price = 5 + oldPrice + 10 * oldLevel;
+	if (oldLevel != max_soldier_level)
+	{
+		sound_upgrade->SoundPlay();
+	}
+
 	if (oldLevel < max_soldier_level && Economy::getBalance() - oldPrice >= 0) {
 		gameScene->GetActiveCharacter()->GetComponent<SoldierShooting>()->UpgradeSoldier();
 		Economy::RemoveBalance(price);
@@ -375,6 +403,12 @@ bool UILayer::UpgradeMedBuilding() {
 	int oldLevel = gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->building_level;
 	int oldPrice = gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->building_upgrade_price;
 	int price = 5 + oldPrice + 10 * oldLevel;
+
+	if (oldLevel != max_medic_building_level)
+	{
+		sound_upgrade->SoundPlay();
+	}
+
 	if (oldLevel < max_medic_building_level && Economy::getBalance() - oldPrice >= 0) {
 		gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->UpgradeBuilding();
 		Economy::RemoveBalance(price);
@@ -394,6 +428,12 @@ bool UILayer::UpgradeEngineerBuilding() {
 	int oldLevel = gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->building_level;
 	int oldPrice = gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->building_upgrade_price;
 	int price = 5 + oldPrice + 10 * oldLevel;
+
+	if (oldLevel != max_engineer_building_level)
+	{
+		sound_upgrade->SoundPlay();
+	}
+
 	if (oldLevel < max_engineer_building_level && Economy::getBalance() - oldPrice >= 0) {
 		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->UpgradeBuilding();
 		Economy::RemoveBalance(price);
@@ -403,6 +443,7 @@ bool UILayer::UpgradeEngineerBuilding() {
 		if (gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->building_level == max_engineer_building_level) {
 			engineer_building_upgrade_price_display = "MAX";
 		}
+
 		gameScene->uiLayer->DeactivateBuildingUI();
 		gameScene->uiLayer->ActivateEngineerBuildingUI();
 	}
@@ -412,6 +453,12 @@ bool UILayer::UpgradeSoldierTent() {
 	int oldLevel = soldier_building_current_level;
 	int oldPrice = soldier_building_current_price;
 	int price = 5 + oldPrice + 10 * oldLevel;
+
+	if (oldLevel != max_soldier_building_level)
+	{
+		sound_upgrade->SoundPlay();
+	}
+
 	if (oldLevel < max_soldier_building_level && Economy::getBalance() - oldPrice >= 0) {
 		damage_upgrade += 5;
 		armor_upgrade += 3;
@@ -421,6 +468,7 @@ bool UILayer::UpgradeSoldierTent() {
 		if (soldier_building_current_level == max_soldier_building_level) {
 			soldier_building_upgrade_price_display = "MAX";
 		}
+
 		gameScene->uiLayer->DeactivateBuildingUI();
 		gameScene->uiLayer->ActivateSoldierBuildingUI();
 	}

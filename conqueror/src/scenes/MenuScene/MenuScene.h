@@ -23,6 +23,9 @@ public:
 	MenuBackgroundLayer* menuBackgroundLayer = nullptr;
 	CreditLayer* creditLayer = nullptr;
 
+	static void Init();
+
+	static Shr<Sound> sound_credit;
 private:
 	GameObject* CreateButton(std::string sprite_name, glm::vec2 position, std::string action);
 	GameObject* CreateElement(std::string sprite_name, glm::vec2 position, glm::vec2 size);

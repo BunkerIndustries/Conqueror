@@ -3,6 +3,13 @@
 #include "MenuScene.h"
 #include "../GameScene/GameScene.h"
 
+Shr<Sound> MenuScene::sound_credit;
+
+void MenuScene::Init()
+{
+	sound_credit = MakeShr<Sound>();
+	sound_credit->LoadSound("assets/sounds/credits.wav");
+}
 
 MenuScene::MenuScene() {
 	backcolor = background_color;
@@ -48,6 +55,7 @@ void MenuScene::OnUpdate() {
 void MenuScene::CreditsStart()
 {
 	menuLayer->Detach();
+	sound_credit->SoundPlay();
 
 	creditLayer->Attach();
 }
@@ -57,6 +65,8 @@ void MenuScene::CreditsStop()
 	creditLayer->Detach();
 
 	menuLayer->Attach();
+	
+	sound_credit->StopSound();
 }
 
 GameObject* MenuScene::CreateElement(std::string sprite_name, glm::vec2 position, glm::vec2 size) {

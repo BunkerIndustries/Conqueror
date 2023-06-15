@@ -15,6 +15,10 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
 
+	static void Init();
+
+	static Shr<Sound> sound_game_over;
+
 
 private:
 	GameObject* CreateButton(std::string sprite_name, glm::vec2 position, std::string action);

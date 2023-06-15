@@ -12,7 +12,7 @@ Shr<Sound> Util::menu_select;
 void Util::Init()
 {
 	menu_select = MakeShr<Sound>();
-	menu_select->LoadSound("assets/sounds/menu.wav");
+	menu_select->LoadSound("assets/sounds/start.wav");
 }
 
 float Util::RadToDeg(float rad)

@@ -21,8 +21,6 @@ public:
 
 	static Shr<Sound> click_supply;
 
-	static Shr<Sound> sound_game_over;
-
 private:
 	static unsigned int soldier_stock;
 	static uint8_t min_soldiers, max_soldiers;

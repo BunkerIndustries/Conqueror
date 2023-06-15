@@ -4,6 +4,14 @@
 #include "../GameScene/GameScene.h"
 #include "layers/StatLayer.h"
 
+Shr<Sound> GameOverScene::sound_game_over;
+
+void GameOverScene::Init()
+{
+    sound_game_over = MakeShr<Sound>();
+
+    sound_game_over->LoadSound("assets/sounds/death.wav");
+}
 
 GameOverScene::GameOverScene() {
     backcolor = background_color;
@@ -24,10 +32,11 @@ void GameOverScene::OnStart() {
 
 void GameOverScene::OnStop() {
     RemoveLayer(statLayer);
+    sound_game_over->StopSound();
 }
 
 void GameOverScene::OnUpdate() {
-
+    sound_game_over->SoundPlay();
 }
 
 GameObject* GameOverScene::CreateButton(std::string sprite_name, glm::vec2 position, std::string action) {

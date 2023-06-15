@@ -11,6 +11,8 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& event) override;
 
+	static void Init();
+	static Shr<Sound> sound_mg;
 
 private:
 	GameObject* target;
