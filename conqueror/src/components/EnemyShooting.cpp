@@ -4,9 +4,17 @@
 #include "required/functions.h"
 #include "required/stands.h"
 
+std::shared_ptr<Sound> EnemyShooting::enemy_shoot;
+
+
+void EnemyShooting::Init()
+{
+	enemy_shoot = MakeShr<Sound>();
+	enemy_shoot->LoadSound("assets/sounds/soldier_bullet.wav");
+}
 
 EnemyShooting::EnemyShooting() {
-	enemy_shoots.LoadSound("assets/sounds/soldier_bullet.wav");
+
 }
 
 void EnemyShooting::OnStart() {
@@ -45,7 +53,7 @@ void EnemyShooting::Shoot() {
 
 
 		gameScene->CreateBullet(gameScene->enemyLayer, target, gameObject->transform.position, pos);
-		enemy_shoots.SoundPlay();
+		enemy_shoot->SoundPlay();
 
 		break;
 

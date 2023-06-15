@@ -10,6 +10,20 @@
 #include "components/WalkingAnimationComponent.h"
 #include "components/SingleAnimationComponent.h"
 
+Shr<Sound> AllyLayer::soldier_click;
+Shr<Sound> AllyLayer::engineer_click;
+Shr<Sound> AllyLayer::medic_click;
+
+void AllyLayer::Init()
+{
+	soldier_click = MakeShr<Sound>();
+	engineer_click = MakeShr<Sound>();
+	medic_click = MakeShr<Sound>();
+
+	soldier_click->LoadSound("assets/sounds/soldier_click.wav");
+	engineer_click->LoadSound("assets/sounds/engineer_click.wav");
+	medic_click->LoadSound("assets/sounds/medic_click.wav");
+}
 
 AllyLayer::AllyLayer()
 	: Layer("AllyLayer")
@@ -103,16 +117,19 @@ bool AllyLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 		gameScene->SetActiveCharacter(clicked_character);
 		gameScene->uiLayer->DeactivateCharacterUI();
 		gameScene->uiLayer->ActivateSoldierUI();
+		soldier_click->SoundPlay();
 	}
 	else if (clicked_character->HasTag("medic")) {
 		gameScene->SetActiveCharacter(clicked_character);
 		gameScene->uiLayer->DeactivateCharacterUI();
 		gameScene->uiLayer->ActivateMedicUI();
+		medic_click->SoundPlay();
 	}
 	else if (clicked_character->HasTag("engineer")) {
 		gameScene->SetActiveCharacter(clicked_character);
 		gameScene->uiLayer->DeactivateCharacterUI();
 		gameScene->uiLayer->ActivateEngineerUI();
+		engineer_click->SoundPlay();
 	}
 	else {
 		return false;

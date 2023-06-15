@@ -124,9 +124,9 @@ inline glm::vec2 engineer_scale = glm::vec2(0.88f, 1.4f);
 inline glm::vec2 building_size = glm::vec2(3.0f, 3.0f);
 
 // stocks
-inline unsigned int start_soldier_stock = 3;
-inline uint8_t start_engineer_stock = 3;
-inline uint8_t start_medic_stock = 3;
+inline unsigned int start_soldier_stock = 10;
+inline uint8_t start_engineer_stock = 10;
+inline uint8_t start_medic_stock = 10;
 
 // mg
 inline glm::vec2 mg_size = glm::vec2(1.0f, 1.2f);

@@ -7,6 +7,11 @@
 #include "required/constants.h"
 #include "scenes/MenuScene/layers/MenuLayer.h"
 
+#include "components/MedicComponent.h"
+#include "components/ArtilleryComponent.h"
+#include "utils/Engineer.h"
+#include "utils/Supply.h"
+
 class Conqueror : public core::Application {
 public:
 	Conqueror() {
@@ -25,8 +30,20 @@ public:
 
 		DataPool::GetFont(ui_font_family);
 
-		Health::Init();
+		// god please forgive me
+		Util::Init();
 		MenuLayer::Init();
+		Health::Init();
+		EnemyShooting::Init();
+		SoldierShooting::Init();
+		MedicCharacter::Init();
+		ArtilleryComponent::Init();
+		EngineerCharacter::Init();
+		AllyLayer::Init();
+		MapLayer::Init();
+		Engineer::Init();
+		Supply::Init();
+		WaveManager::Init();
 
 		Application::ChangeScene(menuScene);
 	}

@@ -7,6 +7,15 @@
 std::shared_ptr<Sound> MedicCharacter::heal_final;
 std::shared_ptr<Sound> MedicCharacter::heal;
 
+void MedicCharacter::Init()
+{
+	heal = MakeShr<Sound>();
+	heal->LoadSound("assets/sounds/medic_heals.wav");
+
+	heal_final = MakeShr<Sound>();
+	heal_final->LoadSound("assets/sounds/heal_final.wav");
+}
+
 MedicBuilding::MedicBuilding(uint32_t number_of_medics)
 	:available_medics(number_of_medics)
 {
@@ -52,8 +61,8 @@ MedicCharacter::MedicCharacter(GameObject* medic_building)
 
 void MedicCharacter::OnStart() {
 	gameObject->GetComponent<Movement>()->SetTargetPos(healing_target_position);
-	heal.LoadSound("assets/sounds/medic_heals.wav");
-	heal_final.LoadSound("assets/sounds/heal_final.wav");
+	heal->LoadSound("assets/sounds/medic_heals.wav");
+	heal_final->LoadSound("assets/sounds/heal_final.wav");
 
 }
 
@@ -93,16 +102,12 @@ void MedicCharacter::OnUpdate() {
 			gameObject->GetComponent<Movement>()->SetTrackingPos(&medic_building->transform.position);
 			healing_target->GetComponent<SoldierBehaviour>()->MedicLeft();
 			if (gameScene->GetActiveCharacter() == healing_target) {
-				if (gameObject->GetComponent<Health>()->GetHp() == 100)
-				{
-
-				}
-				heal_final.SoundPlay();
+				heal_final->SoundPlay();
 				gameScene->uiLayer->DeactivateCharacterUI();
 				gameScene->uiLayer->ActivateSoldierUI();
 			}
 		}
-		heal.SoundPlay();
+		heal->SoundPlay();
 		dt_counter += Application::GetDT();
 	}
 }

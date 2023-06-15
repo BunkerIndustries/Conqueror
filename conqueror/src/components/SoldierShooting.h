@@ -11,23 +11,13 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
 
+	static void Init();
+
 	void Shoot();
-
-	//GameObject* GetTarget() const
-	//{
-	//	return target;
-	//}
-	//
-	//void NullTarget()
-	//{
-	//	target = nullptr;
-	//}
-
-	
+	static std::shared_ptr<Sound> soldier_shoot;
 
 private:
 	GameObject* LockTarget();
 	GameObject* GetTarget() const;
 	uint8_t hit_probability;
-	Sound soldier_shoot;
 };

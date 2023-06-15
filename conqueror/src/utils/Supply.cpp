@@ -11,11 +11,20 @@ uint8_t Supply::max_soldiers;
 uint8_t Supply::left_option;
 std::string Supply::right_option;
 
+Shr<Sound> Supply::click_supply;
+Shr<Sound> Supply::sound_game_over;
+
 void Supply::Init() {
 	soldier_stock = start_soldier_stock;
 	min_soldiers = 1;
 	max_soldiers = start_max_soldiers;
 	soldiers = 0;
+
+	click_supply = MakeShr<Sound>();
+	sound_game_over = MakeShr<Sound>();
+
+	click_supply->LoadSound("assets/sounds/click.wav");
+	sound_game_over->LoadSound("assets/sounds/death.wav");
 }
 
 void Supply::TryCallSoldier() {
@@ -41,6 +50,7 @@ std::string Supply::CreateRightOption() {
 void Supply::TakeLeftOption() {
 	soldier_stock += left_option;
 	gameScene->uiLayer->DeactivateSupplyMenuUI();
+	click_supply->SoundPlay();
 }
 
 void Supply::TakeRightOption() {
@@ -57,6 +67,8 @@ void Supply::TakeRightOption() {
 		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->IncreaseArtilleryStock();
 	}
 	gameScene->uiLayer->DeactivateSupplyMenuUI();
+	
+	click_supply->SoundPlay();
 }
 
 void Supply::IncreaseSoldierCount() {

@@ -9,5 +9,9 @@ public:
 	static GameObject* AddBuilding(Transform transform, uint32_t engineerCount);
 	static void PlaceMG();
 	static void PlaceArtillerie();
+
+	static void Init();
+
+	static Shr<Sound> click;
 };
 

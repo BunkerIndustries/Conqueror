@@ -15,8 +15,9 @@ public:
 	void Update(const float dt) override;
 	void OnEvent(Event& event) override;
 
+	static Shr<Sound> menu_theme;
+
 private:
 	bool OnGameObjectClick(GameObjectPressedEvent& e);
-	static Shr<Sound> menu_theme;
-	static Shr<Sound> menu_select;
+	
 };

@@ -7,6 +7,8 @@
 #include "required/functions.h"
 #include "utils/Supply.h"
 
+Shr<Sound> WaveManager::sound_wave;
+
 WaveManager::WaveManager(GameScene* gameScene)
 	: gameScene(gameScene)
 {
@@ -20,6 +22,12 @@ WaveManager::WaveManager(GameScene* gameScene)
 	cooldown_duration = start_preparation_time * game_time_factor;
 	wave_duration = start_wave_duration * game_time_factor;
 	spawn_interval = enemy_start_spawn_interval * game_time_factor;
+}
+
+void WaveManager::Init()
+{
+	sound_wave = MakeShr<Sound>();
+	sound_wave->LoadSound("assets/sounds/next_wave.wav");
 }
 
 void WaveManager::OnUpdate() {
@@ -53,6 +61,7 @@ void WaveManager::OnUpdate() {
 	}
 	else {
 		if (!enemies_are_dead) return;
+		sound_wave->SoundPlay();
 		LOG_DEBUG("Wave over - cooldown state");
 		wave_counter++;
 		Supply::IncreaseSoldierCount();

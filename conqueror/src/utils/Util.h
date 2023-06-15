@@ -13,5 +13,9 @@ public:
 	static std::unordered_map<GameObject*, std::vector<EnemyShooting*>> enemyTable;
 	static std::unordered_map<GameObject*, std::vector<MgComponent*>> mgTable;
 	static std::unordered_map<GameObject*, std::vector<ArtilleryComponent*>> artillerieTable;
+
+	static Shr<Sound> menu_select;
+
+	static void Init();
 };
 

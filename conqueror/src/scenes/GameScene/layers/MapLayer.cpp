@@ -12,6 +12,22 @@
 
 #include "scenes/GameScene/GameScene.h"
 
+Shr<Sound> MapLayer::mg_place_sound;
+Shr<Sound> MapLayer::engineer_building_sound;
+Shr<Sound> MapLayer::medic_building_sound;
+
+void MapLayer::Init()
+{
+	mg_place_sound = MakeShr<Sound>();
+	mg_place_sound->LoadSound("assets/sounds/mg_place.wav");
+
+	engineer_building_sound = MakeShr<Sound>();
+	engineer_building_sound->LoadSound("assets/sounds/test.wav");
+
+	medic_building_sound = MakeShr<Sound>();
+	medic_building_sound->LoadSound("assets/sounds/medic_building_click.wav");
+
+}
 
 
 MapLayer::MapLayer()
@@ -199,6 +215,8 @@ GameObject* MapLayer::CreateMg(glm::vec2 mg_position, GameObject* mg_node) {
 	mg->AddComponent(new MgComponent(mg_node));
 	AddGameObjectToLayer(mg);
 
+	mg_place_sound->SoundPlay();
+
 	return mg;
 }
 
@@ -212,6 +230,8 @@ GameObject* MapLayer::CreateArtillery(glm::vec2 artillery_position, GameObject* 
 	artillery->AddComponent(new SingleAnimation(DataPool::GetTexture("Buildings/artillerie_front_north.png"), 248.0f, 400.0f, 16.0f, 16.0f, glm::vec2(0.0f, 0.0f), glm::vec2(2.0f, 0.0f), artillery_shoot_anim_speed, glm::vec2(0.0f, 0.0f), DataPool::GetTexture("Buildings/artillerie_front_north.png"), 248.0f, 400.0f, 16.0f, 16.0f));
 
 	AddGameObjectToLayer(artillery);
+
+	mg_place_sound->SoundPlay();
 	return artillery;
 }
 
@@ -233,10 +253,12 @@ bool MapLayer::GameObjectPressed(GameObjectPressedEvent& e) {
 		return true;
 	}
 	else if (clicked_mapobject->HasTag("medic_building")) {
+		medic_building_sound->SoundPlay();
 		gameScene->uiLayer->DeactivateBuildingUI();
 		gameScene->uiLayer->ActivateMedicBuildlingUI();
 	}
 	else if (clicked_mapobject->HasTag("engineer_building")) {
+		engineer_building_sound->SoundPlay();
 		gameScene->uiLayer->DeactivateBuildingUI();
 		gameScene->uiLayer->ActivateEngineerBuildingUI();
 	}

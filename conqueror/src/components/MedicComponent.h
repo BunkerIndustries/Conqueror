@@ -33,7 +33,8 @@ public:
 
 	static Shr<Sound> heal;
 	static Shr<Sound> heal_final;
-
+	
+	static void Init();
 private:
 
 	GameObject* medic_building;

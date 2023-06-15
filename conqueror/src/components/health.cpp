@@ -29,6 +29,7 @@ void Health::Init()
 
 	hit_soldier->LoadSound("assets/sounds/soldier_damage.wav");
 	hit_enemy->LoadSound("assets/sounds/enemy_damage.wav");
+
 	death->LoadSound("assets/sounds/death.wav");
 	death_special->LoadSound("assets/sounds/enemy_death_special.wav");
 }

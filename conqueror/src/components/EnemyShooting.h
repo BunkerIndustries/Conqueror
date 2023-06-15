@@ -6,6 +6,7 @@ public:
 	EnemyShooting();
 	virtual ~EnemyShooting() = default;
 
+	static void Init();
 	void OnStart() override;
 	void OnStop() override;
 	void OnUpdate() override;
@@ -13,9 +14,10 @@ public:
 
 	void Shoot();
 
+	static std::shared_ptr<Sound> enemy_shoot;
+
 private:
 	GameObject* LockTarget();
 	GameObject* GetTarget() const;
 	uint8_t hit_probability = 0;
-	Sound enemy_shoots;
 };

@@ -6,10 +6,23 @@
 #include "required/stands.h"
 #include "SingleAnimationComponent.h"
 
+Shr<Sound> EngineerCharacter::sound_leave;
+Shr<Sound> EngineerCharacter::sound_building;
+
 EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
 	: available_engineers(engineerCount) {
 	available_mgs = 0;
 	available_artillery = 0;
+}
+
+void EngineerCharacter::Init()
+{
+	sound_leave = MakeShr<Sound>();
+	sound_building = MakeShr<Sound>();
+
+
+	sound_leave->LoadSound("assets/sounds/engineer_leaves.wav");
+	sound_building->LoadSound("assets/sounds/engineer_build.wav");
 }
 
 void EngineerBuilding::SendEngineer()
@@ -69,8 +82,7 @@ EngineerCharacter::EngineerCharacter(bool mg_artillery)
 
 void EngineerCharacter::OnStart() {
 	gameObject->GetComponent<Movement>()->SetTargetPos(building_node_position);
-	sound_leave.LoadSound("assets/sounds/engineer_leaves.wav");
-	sound_leave.SoundPlay();
+	sound_leave->SoundPlay();
 }
 
 GameObject* EngineerCharacter::ChooseBuildingNode() {
@@ -126,6 +138,5 @@ void EngineerCharacter::OnUpdate() {
 	// if he arrived and is not building already
 	isBuilding = true;
 	dt_counter = 0.0f;
-	sound_building.LoadSound("assets/sounds/engineer_build.wav");
-	sound_building.SoundPlay();
+	sound_building->SoundPlay();
 }

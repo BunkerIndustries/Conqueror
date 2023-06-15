@@ -43,9 +43,13 @@ public:
 	void OnUpdate() override;
 	void OnEvent(Event& event) override {};
 
+	static void Init();
+
+	static Shr<Sound> sound_building;
+	static Shr<Sound> sound_leave;
+
+
 private:
-	Sound sound_building;
-	Sound sound_leave;
 	GameObject* engineer_building;
 	GameObject* building_node;
 	glm::vec2 building_node_position;

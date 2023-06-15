@@ -17,11 +17,13 @@ public:
 	bool TakeDamage(float damage);
 	float GetHp();
 	void GetHealed();
-private:
+
 	static Shr<Sound> death;
 	static Shr<Sound> death_special;
 	static Shr<Sound> hit_soldier;
 	static Shr<Sound> hit_enemy;
+private:
+
 
 	float hp;
 	bool just_hit = false;
