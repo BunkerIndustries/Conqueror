@@ -17,6 +17,9 @@ EngineerBuilding::EngineerBuilding(uint32_t engineerCount)
 	building_level = 1;
 	building_upgrade_price = engineer_building_upgrade_price_start;
 	building_upgrade_price_display = std::to_string(engineer_building_upgrade_price_start);
+
+	mg_price = mg_start_price;
+	artillary_price = artillary_start_price;
 }
 
 void EngineerBuilding::UpgradeBuilding() {

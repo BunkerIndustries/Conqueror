@@ -252,12 +252,20 @@ inline int medic_building_upgrade_price_start = 45;
 inline int engineer_building_upgrade_price_start = 60;
 inline int soldier_building_upgrade_price_start = 70;
 
+inline int soldier_start_price = 70;
+inline int soldier_price_increase_per_buy = 10;
+
+inline int mg_start_price = 100;
+inline int mg_price_increase_per_buy = 20;
+
+inline int artillary_start_price = 300;
+inline int artillary_price_increase_per_buy = 50;
 // upgrade menu
 inline glm::vec2 upgrade_box_size = glm::vec2(0.3f, 0.3f);
-inline std::string soldier_building_upgrade_price_display = "50";
+inline std::string soldier_building_upgrade_price_display = "70";
 
 //soldier building
-inline int soldier_building_current_price = 10;
+inline int soldier_building_current_price = 70;
 inline int soldier_building_current_level = 1;
 
 // shop menu

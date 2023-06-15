@@ -19,6 +19,9 @@ public:
 	static void IncreaseSoldiers();
 	static void DecreaseSoldiers();
 
+	static int GetSoldierPrice();
+	static void SetSoldierPrice(int amount);
+
 	static Shr<Sound> click_supply;
 
 private:
@@ -26,6 +29,8 @@ private:
 	static uint8_t min_soldiers, max_soldiers;
 
 	static int soldiers;
+
+	static int soldierPrice;
 
 	static uint8_t left_option;
 	static std::string right_option;
