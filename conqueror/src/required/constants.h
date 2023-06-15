@@ -261,7 +261,7 @@ inline int soldier_building_current_price = 10;
 inline int soldier_building_current_level = 1;
 
 // shop menu
-inline Transform shop_icon_transform = Transform(glm::vec2(-0.75f, 0.0f), glm::vec2(0.2f, 0.9f));
-inline Transform shop_price_transform = Transform(glm::vec2(-0.1f, 0.0f), glm::vec2(0.5f, 0.1f));
-inline Transform shop_coin_transform = Transform(glm::vec2(-0.2f, 0.0f), glm::vec2(0.5f, 0.1f));
-inline Transform shop_button_transform = Transform(glm::vec2(0.75f, 0.0f), glm::vec2(0.1f, 0.5 f));
+inline Transform shop_icon_transform = Transform(glm::vec2(-0.169f, 0.0f), glm::vec2(0.37f, 0.9f));
+inline Transform shop_price_transform = Transform(glm::vec2(0.018f, 0.0f), glm::vec2(0.135f, 0.45f));
+inline Transform shop_coin_transform = Transform(glm::vec2(0.105f, 0.0f), glm::vec2(0.075f, 0.65f));
+inline Transform shop_button_transform = Transform(glm::vec2(0.23f, 0.0f), glm::vec2(0.2f, 0.95f));
