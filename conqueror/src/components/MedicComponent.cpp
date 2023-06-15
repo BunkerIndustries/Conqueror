@@ -74,13 +74,9 @@ MedicCharacter::MedicCharacter(GameObject* medic_building)
 void MedicCharacter::OnStart() {
 	gameObject->GetComponent<Movement>()->SetTargetPos(healing_target_position);
 	name = names.at(RandomInt(0, names.size() - 1));
-	heal->LoadSound("assets/sounds/medic_heals.wav");
-	heal_final->LoadSound("assets/sounds/heal_final.wav");
-
 }
 
 void MedicCharacter::OnUpdate() {
-
 	if (going_back) {
 		if (gameObject->transform.position == medic_building->transform.position) {
 			medic_building->GetComponent<MedicBuilding>()->IncreaseAvailableMedics();
@@ -107,7 +103,9 @@ void MedicCharacter::OnUpdate() {
 		heal_time = (healing_target->GetComponent<Health>()->GetMaxHp() - healing_target->GetComponent<Health>()->GetHp()) * waiting_time_per_hp * game_time_factor;
 	}
 	else if (healing) {
+		heal->SoundPlay();
 		if (dt_counter >= heal_time) {
+			heal_final->SoundPlay();
 			// healing is over
 			LOG_DEBUG("medic just finished healing");
 			healing_target->GetComponent<SpriteSheet>()->ChangeColor(white_color);
@@ -117,12 +115,10 @@ void MedicCharacter::OnUpdate() {
 			gameObject->GetComponent<Movement>()->SetTrackingPos(&medic_building->transform.position);
 			healing_target->GetComponent<SoldierBehaviour>()->MedicLeft();
 			if (gameScene->GetActiveCharacter() == healing_target) {
-				heal_final->SoundPlay();
 				gameScene->uiLayer->DeactivateCharacterUI();
 				gameScene->uiLayer->ActivateSoldierUI();
 			}
 		}
-		heal->SoundPlay();
 		dt_counter += Application::GetDT();
 	}
 }
