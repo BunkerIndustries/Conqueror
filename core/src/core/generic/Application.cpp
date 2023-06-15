@@ -100,9 +100,9 @@ namespace core {
 		}
 		if (e.getKeyCode() == KEY_F11)
 		{
+			return false;
 			fullscreen = !fullscreen;
 			window->EnableFullscreen(fullscreen);
-			return true;
 		}
 		return false;
 	}

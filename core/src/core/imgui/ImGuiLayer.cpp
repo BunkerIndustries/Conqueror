@@ -244,6 +244,7 @@ namespace core {
 
 	void ImGuiLayer::OnEvent(Event& e)
 	{
+		return;
 		EventDispatcher dispatcher(e);
 		dispatcher.dispatch<MouseButtonPressedEvent>([this](MouseButtonPressedEvent& e)
 			{
