@@ -15,7 +15,7 @@ void Engineer::Init()
 	click->LoadSound("assets/sounds/click.wav");
 }
 
-GameObject* Engineer::AddBuilding(Transform transform, uint32_t engineerCount)
+GameObject* Engineer::AddBuilding(MapLayer* layer, Transform transform, uint32_t engineerCount)
 {
 	GameObject* engineerBuilding = layer->CreateBuilding(transform, "engineer");
 	engineerBuilding->AddComponent(new EngineerBuilding(engineerCount));

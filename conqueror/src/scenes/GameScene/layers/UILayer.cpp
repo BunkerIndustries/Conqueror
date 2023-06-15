@@ -328,22 +328,20 @@ void UILayer::AddMoney() {
 	AddUIObject(coin, ProjectionMode::SCREEN);
 }
 
+void UILayer::UpdateDeathCountdown()
+{
+	static float i;
 
-void UILayer::UpdateDeathCountdown() {
-	
 	if (loss_countdown <= 20)
 	{
 		sound_time->SoundPlay();
 	}
-	
+
 	if (!loss_countdown || loss_countdown > 20)
 	{
 		sound_time->StopSound();
 	}
 
-void UILayer::UpdateDeathCountdown()
-{
-	static float i;
 	i += Application::GetDT();
 	if (i > 1) {
 		i--;
@@ -445,6 +443,7 @@ bool UILayer::UpgradeEngineerBuilding() {
 	}
 	return true;
 }
+
 bool UILayer::UpgradeSoldierTent() {
 	int oldLevel = soldier_building_current_level;
 	int oldPrice = soldier_building_current_price;
