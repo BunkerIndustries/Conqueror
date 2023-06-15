@@ -15,6 +15,8 @@ inline glm::vec4 coin_color = glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);
 // enemy movement grid
 inline std::vector<std::vector<GameObject*>> enemy_grid;
 
+inline glm::vec2 soldier_building_position = glm::vec2(0.0f, -12.0f);
+
 // camera movement 
 inline float camera_scroll_speed = 28.0f;
 inline float camera_move_speed = 2.0f;
@@ -62,7 +64,7 @@ inline float min_soldier_shoot_waiting_time = 0.3f;
 inline float max_soldier_shoot_waiting_time = 0.7f;
 inline uint8_t max_soldier_lock_target_tries = 2;
 inline uint8_t soldier_miss_points = 1;
-inline glm::vec2 soldier_spawn_pos = glm::vec2(0.0f, -18.0f);
+inline glm::vec2 soldier_spawn_pos = soldier_building_position;
 
 // stands (probabilities have to be choose_probability_sum in total)
 inline uint8_t choose_probability_sum = 100;
@@ -126,12 +128,12 @@ inline glm::vec2 engineer_scale = glm::vec2(0.88f, 1.4f);
 
 // buildings
 inline glm::vec2 building_size = glm::vec2(3.0f, 3.0f);
-inline glm::vec2 soldier_building_position = glm::vec2(0.0f, -12.0f);
+
 
 // stocks
 inline unsigned int start_soldier_stock = 3;
 inline uint8_t start_engineer_stock = 1;
-inline uint8_t start_medic_stock = 1;
+inline uint8_t start_medic_stock = 3;
 
 // mg
 inline glm::vec2 mg_size = glm::vec2(1.0f, 1.2f);
@@ -248,13 +250,13 @@ inline int max_soldier_building_level = 5;
 
 inline int soldier_upgrade_price_start = 5;
 inline int medic_building_upgrade_price_start = 50;
-inline int engineer_building_upgrade_price_start = 45;
+inline int engineer_building_upgrade_price_start = 50;
 inline int soldier_building_upgrade_price_start = 50;
 
 // upgrade menu
 inline glm::vec2 upgrade_box_size = glm::vec2(0.3f, 0.3f);
-inline std::string soldier_building_upgrade_price_display = "50";
+inline std::string soldier_building_upgrade_price_display = "10";
 
 //soldier building
-inline int soldier_building_current_price = 50;
+inline int soldier_building_current_price = 10;
 inline int soldier_building_current_level = 1;

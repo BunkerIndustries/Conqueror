@@ -18,10 +18,22 @@ GameScene::GameScene() {
 	uiLayer = new UILayer();
 
 	waveManager = new WaveManager(this);
+	Supply::Init();
+
+	backgroundLayer->Load();
+	mapLayer->Load();
+	uiLayer->Load();
+
+	loss_countdown = 60;
 }
 
 GameScene::~GameScene() {
-
+	delete backgroundLayer;
+	delete mapLayer;
+	delete enemyLayer;
+	delete allyLayer;
+	delete uiLayer;
+	delete waveManager;
 }
 
 void GameScene::OnStop() {
@@ -34,7 +46,6 @@ void GameScene::OnStop() {
 }
 void GameScene::OnStart() {
 
-	Supply::Init();
 
 	AddLayer(backgroundLayer);
 	AddLayer(mapLayer);
