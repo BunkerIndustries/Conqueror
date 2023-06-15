@@ -248,7 +248,7 @@ inline int max_medic_building_level = 5;
 inline int max_soldier_building_level = 5;
 
 inline int soldier_upgrade_price_start = 5;
-inline int medic_building_upgrade_price_start = 50;
+inline int medic_building_upgrade_price_start = 40;
 inline int engineer_building_upgrade_price_start = 45;
 inline int soldier_building_upgrade_price_start = 50;
 
