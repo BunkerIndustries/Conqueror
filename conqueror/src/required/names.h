@@ -6,5 +6,5 @@ inline std::vector<std::string> names = {
 	"Hans", "Bernhard", "Dieter", "Friedrich", "Franz", "Werner", "Peter", "Horst", "Ewald",
 	"Friedrich", "Klaus", "Guenter", "Karl", "Hermann", "Hans", "Wilhelm", "Rudolf", "Manfred", "Gerd", "Dieter", 
 	"Gerhard", "Friedrich", "Walter", "Fritz", "Helmut", "Hans", "Wilhelm",
-	"Heiko R.", "Reinhardt", "Alexander", "Dr.Steffen", "Gucce", "Gorr", "Laur", "G.Engineering" ,"Fazliu", "Geng", "Heller", "Grauffenberg", "Hubert", "Staller", "Hindenburg", "Bart", "Levent", "Mohammed", "Miguel", "Enes", "Furkan"
+	"Heiko R.", "Reinhardt", "Alexander", "Dr.Steffen", "Gucce", "Gorr", "Laur", "Fazliu", "Geng", "Heller", "Grauffenberg", "Hubert", "Staller", "Hindenburg", "Bart", "Levent", "Mohammed", "Miguel", "Enes", "Furkan", "Ulbricht", "Honecker", "Marx", "Hans-Peter"
 };
