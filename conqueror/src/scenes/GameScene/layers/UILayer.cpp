@@ -295,9 +295,8 @@ void UILayer::ActivateEngineerBuildingUI() {
 }
 
 void UILayer::ActivateSupplyMenuUI() {
-	RemoveUIObject(character_background);
-	RemoveUIObject(building_background);
-	RemoveUIObject(supply_menu_background);
+	DeactivateCharacterUI();
+	DeactivateBuildingUI();
 
 	supply_menu_background = new PictureBox(white_color, Transform(glm::vec2(0.0f, 0.0f), ui_supply_menu_background_size), DataPool::GetTexture("UI/big_box.png"), Type::Rectangle);
 
@@ -453,7 +452,7 @@ bool UILayer::UpgradeSoldier() {
 bool UILayer::UpgradeMedBuilding() {
 	int oldLevel = gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->building_level;
 	int oldPrice = gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->building_upgrade_price;
-	int price = 5 + oldPrice + 10 * oldLevel;
+	int price = 5 + oldPrice + 14 * oldLevel;
 	if (oldLevel < max_medic_building_level && Economy::getBalance() - oldPrice >= 0) {
 		gameScene->mapLayer->medicBuilding->GetComponent<MedicBuilding>()->UpgradeBuilding();
 		Economy::RemoveBalance(oldPrice);
@@ -472,7 +471,7 @@ bool UILayer::UpgradeMedBuilding() {
 bool UILayer::UpgradeEngineerBuilding() {
 	int oldLevel = gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->building_level;
 	int oldPrice = gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->building_upgrade_price;
-	int price = 5 + oldPrice + 10 * oldLevel;
+	int price = 5 + oldPrice + 13 * oldLevel;
 	if (oldLevel < max_engineer_building_level && Economy::getBalance() - oldPrice >= 0) {
 		gameScene->mapLayer->engineerBuilding->GetComponent<EngineerBuilding>()->UpgradeBuilding();
 		Economy::RemoveBalance(oldPrice);
@@ -492,7 +491,7 @@ bool UILayer::UpgradeEngineerBuilding() {
 bool UILayer::UpgradeSoldierTent() {
 	int oldLevel = soldier_building_current_level;
 	int oldPrice = soldier_building_current_price;
-	int price = 5 + oldPrice + 10 * oldLevel;
+	int price = 5 + oldPrice + 13 * oldLevel;
 	if (oldLevel < max_soldier_building_level && Economy::getBalance() - oldPrice >= 0) {
 		Economy::RemoveBalance(oldPrice);
 		damage_upgrade += 5;
@@ -515,7 +514,7 @@ bool UILayer::UpgradeSoldierTent() {
 
 bool UILayer::BuySoldier(){
 	if (Economy::getBalance() - Supply::GetSoldierPrice() >= 0) {
-		Supply::IncreaseSoldiers();
+		Supply::IncreaseSoldierStock();
 		Economy::RemoveBalance(Supply::GetSoldierPrice());
 		Supply::SetSoldierPrice(soldier_price_increase_per_buy + Supply::GetSoldierPrice());
 		gameScene->uiLayer->DeactivateBuildingUI();
