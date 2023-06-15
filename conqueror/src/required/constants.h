@@ -212,7 +212,7 @@ inline float cooldown_addition = 0.5f;
 inline float start_wave_duration = 4.0f;
 inline float wave_length_gradient = 1.12f;
 inline float enemy_start_spawn_interval = 1.8f;
-inline float enemy_spawn_interval_gradient = 0.9f;
+inline float enemy_spawn_interval_gradient = 0.88f;
 
 // map sprites
 inline glm::vec2 background_tile_size = glm::vec2(100.0f, 100.0f);

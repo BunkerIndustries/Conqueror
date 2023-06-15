@@ -507,7 +507,7 @@ bool UILayer::UpgradeSoldierTent() {
 		sound_upgrade->SoundPlay();
 	}
 
-	int price = 5 + oldPrice + 13 * oldLevel;
+	int price = 5 + oldPrice + 16 * oldLevel;
 	if (oldLevel < max_soldier_building_level && Economy::getBalance() - oldPrice >= 0) {
 		Economy::RemoveBalance(oldPrice);
 		damage_upgrade += 5;
