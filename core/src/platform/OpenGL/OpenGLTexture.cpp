@@ -9,6 +9,30 @@
 
 namespace core
 {
+
+	static GLenum ImageFormatToGLDataFormat(ImageFormat format)
+	{
+		switch (format)
+		{
+		case ImageFormat::RGB8:  return GL_RGB;
+		case ImageFormat::RGBA8: return GL_RGBA;
+		}
+
+		CORE_ASSERT("",  false);
+		return 0;
+	}
+
+	static GLenum ImageFormatToGLInternalFormat(ImageFormat format)
+	{
+		switch (format)
+		{
+		case ImageFormat::RGB8:  return GL_RGB8;
+		case ImageFormat::RGBA8: return GL_RGBA8;
+		}
+
+		CORE_ASSERT("", false);
+		return 0;
+	}
 	OpenGLTexture::OpenGLTexture(std::string filePath, std::string name)
 	{
 		this->filePath = filePath;
@@ -21,6 +45,30 @@ namespace core
 		}
 	}
 
+	OpenGLTexture::OpenGLTexture(TextureSpecification specification)
+		: specification(specification), width(specification.Width), height(specification.Height)
+	{
+
+		internalFormat = ImageFormatToGLInternalFormat(specification.Format);
+		dataFormat = ImageFormatToGLDataFormat(specification.Format);
+
+		glCreateTextures(GL_TEXTURE_2D, 1, &texID);
+		glTextureStorage2D(texID, 1, internalFormat, width, height);
+
+		glTextureParameteri(texID, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTextureParameteri(texID, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		glTextureParameteri(texID, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTextureParameteri(texID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	}
+
+	void OpenGLTexture::SetData(void* data, uint32_t size)
+	{
+		uint32_t bpp = dataFormat == GL_RGBA ? 4 : 3;
+		CORE_ASSERT(size == width * height * bpp, "Data must be entire texture!");
+		glTextureSubImage2D(texID, 0, 0, 0, width, height, dataFormat, GL_UNSIGNED_BYTE, data);
+	}
+
 	OpenGLTexture::~OpenGLTexture()
 	{
 		glDeleteTextures(1, &texID);
@@ -28,13 +76,18 @@ namespace core
 
 	void OpenGLTexture::Bind(unsigned slot)
 	{
-		if (slot < 32)
+		if (slot < 31)
 		{
 			glActiveTexture(GL_TEXTURE0 + slot);
 			glBindTexture(GL_TEXTURE_2D, texID);
 			return;
 		}
-		LOG_CORE_WARN("You should not go over 32 texture slots, as the OpenGL specification does not allow more");
+		LOG_CORE_WARN("You should not go over 31 texture slots, as the OpenGL specification does not allow more");
+	}
+
+	bool OpenGLTexture::IsLoaded()
+	{
+		return false;
 	}
 
 	void OpenGLTexture::Unbind()
@@ -49,7 +102,7 @@ namespace core
 
 	int OpenGLTexture::GetWidth()
 	{
-		return this->GetWidth();
+		return this->width;
 	}
 
 	int OpenGLTexture::GetHeight()
@@ -105,13 +158,13 @@ namespace core
 				LOG_CORE_ERROR("Unknown number of channel '" + std::to_string(channels) + "' by texture '" + path + "'");
 				return false;
 			}
+			glGenerateMipmap(GL_TEXTURE_2D);
 			glBindTexture(GL_TEXTURE_2D, 0);
 		}
 		else {
 			LOG_CORE_ERROR("Could not load image '" + path + "'");
 			return false;
 		}
-
 
 		stbi_image_free(localBuffer);
 		return true;

@@ -1,7 +1,6 @@
 #pragma once
-#include "Engine.h"
+#include "_Game.h"
 #include "required/constants.h"
-#include <vector>
 
 
 struct Stand {
@@ -24,5 +23,7 @@ inline std::vector<Stand> shootable_stands = {
 	front_stand, mg_stand, trench_stand, hiding_stand, artillerie_stand
 };
 
-inline GameObject* enemy_stands[enemy_grid_y][enemy_grid_x];
+inline std::array<std::array<GameObject*, enemy_grid_x>, enemy_grid_y> enemy_stands;
 inline std::vector<GameObject*> waiting_nodes;
+inline std::vector<GameObject*> trench_nodes;
+inline std::vector<GameObject*> hiding_nodes;

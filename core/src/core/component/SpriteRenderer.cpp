@@ -11,39 +11,28 @@
 
 namespace core {
     
-    SpriteRenderer::SpriteRenderer(glm::vec4 color, Geometry geometry)
-    { Init(color, nullptr, geometry); }
+    SpriteRenderer::SpriteRenderer(glm::vec4 color, Geometry geometry, bool registerAlphaPixelsToEvent)
+        : color(color), texture(nullptr), tilingFactor(1.0f), geometry(geometry), registerAlphaPixelsToEvent(registerAlphaPixelsToEvent) { }
 
-    SpriteRenderer::SpriteRenderer(glm::vec4 color, Shr<Texture> texture, Geometry geometry)
-    { Init(color, texture, geometry); }
-
-    void SpriteRenderer::Init(glm::vec4 color, Shr<Texture> texture, Geometry geometry)
-    {
-        this->color = color;
-        this->texture = texture;
-        this->texCoords[0] = { 0.0f, 0.0f };
-        this->texCoords[1] = { 1.0f, 0.0f };
-        this->texCoords[2] = { 1.0f, 1.0f };
-        this->texCoords[3] = { 0.0f, 1.0f };
-        this->geometry = geometry;
-    }
+    SpriteRenderer::SpriteRenderer(glm::vec4 color, Shr<Texture> texture, float tilingFactor, Geometry geometry, bool registerAlphaPixelsToEvent)
+        : color(color), texture(texture), tilingFactor(tilingFactor), geometry(geometry), registerAlphaPixelsToEvent(registerAlphaPixelsToEvent) { }
 
     void SpriteRenderer::OnUpdate() {
+        EdgeRenderData data;
+        data.transform = gameObject->transform;
+        data.color = color;
+        data.texture = texture;
+        data.tilingFactor = tilingFactor;
+        data.mode = gameObject->GetProjectionMode();
+        data.coreID = gameObject->GetCoreID();
+        data.coreIDToAlphaPixels = registerAlphaPixelsToEvent;
         switch (geometry)
         {
             case Geometry::RECTANGLE:
-                if (texture)
-                    Renderer::DrawRectangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, texture, 1.0f, color, gameObject->GetProjectionMode(), gameObject->GetObjectID());
-                else
-					Renderer::DrawRectangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, color, gameObject->GetProjectionMode(), gameObject->GetObjectID());
+                    Renderer::DrawRectangle(data);
                 break;
             case Geometry::TRIANGLE:
-                if (texture)
-                    Renderer::DrawTriangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, texture, 1.0f, color, gameObject->GetProjectionMode(), gameObject->GetObjectID());
-                else
-                    Renderer::DrawTriangle(gameObject->transform.position, gameObject->transform.scale, gameObject->transform.rotation, color, gameObject->GetProjectionMode(), gameObject->GetObjectID());
-                break;
-            case Geometry::CIRCLE: 
+                    Renderer::DrawTriangle(data);
                 break;
         }
     }

@@ -33,9 +33,12 @@ namespace core {
         glm::vec2 viewportSize;
         glm::vec2 viewportBounds[2];
 
+        bool viewportHovered;
+        bool viewportFocused;
+
         glm::ivec2 mousePosViewportRelative;
 
-        GameObject* selectedGameobject = nullptr;
+        Object* selectedObject = nullptr;
 
         std::unordered_map<std::string, void*> variablePool;
 
@@ -48,7 +51,7 @@ namespace core {
         void OnDetach() override;
         void Update(const float dt) override;
         void Imgui(const float dt) override;
-        void OnEvent(Event& e) override { }
+        void OnEvent(Event& e) override;
 
         void Begin(const float dt);
         void End();

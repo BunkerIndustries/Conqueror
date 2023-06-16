@@ -4,6 +4,7 @@
 
 #include "event/Input.h"
 #include "event/KeyCodes.h"
+#include "event/GameEvent.h"
 #include "renderer/RenderCommand.h"
 #include "renderer/Renderer.h"
 #include "imgui/ImGuiLayer.h"
@@ -25,8 +26,6 @@ namespace core {
 		SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
 		Renderer::Init();
-
-		
 
 		imguiLayer = new ImGuiLayer();
 	}
@@ -51,11 +50,22 @@ namespace core {
 		dispatcher.dispatch<WindowResizeEvent>(BIND_EVENT_FN(Application::OnWindowResize));
 		dispatcher.dispatch<KeyPressedEvent>(BIND_EVENT_FN(Application::OnKeyPressed));
 
+		if (event.IsInCategory(EventCategoryGameObject))
+		{
+			if (const GameObject* gm = (*dynamic_cast<GameObjectEvent*>(&event)).GetGameObject(); gm->onlyLayerReceive)
+			{
+				gm->GetLayer()->OnEvent(event);
+				return;
+			}
+		}
+
 		for (auto it = layerStack.end(); it != layerStack.begin(); )
 		{
 			if (event.handled)
 				break;
-			(*--it)->LayerEvent(event);
+			--it;
+			if ((*it)->IsAttached())
+				(*it)->LayerEvent(event);
 		}
 		if (!event.handled)
 		{
@@ -73,6 +83,7 @@ namespace core {
 	{
 		resizing = true;
 		Renderer::ResizeWindow(e.getWidth(), e.getHeight());
+		window->Resize(e.getWidth(), e.getHeight());
 		return false;
 	}
 
@@ -81,9 +92,15 @@ namespace core {
 	{
 		if (!e.getRepeated() && e.getKeyCode() == KEY_P)
 		{
+			return false;
 			if (imguiEnabledQueue == 0 && imguiEnabled) imguiEnabledQueue = 1;
 			else imguiEnabledQueue = 2;
-			return true;
+		}
+		if (e.getKeyCode() == KEY_F11)
+		{
+			return false;
+			fullscreen = !fullscreen;
+			window->EnableFullscreen(fullscreen);
 		}
 		return false;
 	}
@@ -106,15 +123,16 @@ namespace core {
 
 	void Application::Run() 
 	{
+		DataPool::GetFont("mononoki.ttf");
 		Init();
 
-		AddOverLay(imguiLayer);
+		AddOverlay(imguiLayer);
 
 
 		//set start scene
 		if (queuedScene) {
 			currentScene = queuedScene;
-			currentScene->InitGeneral();
+			currentScene->Start();
 			queuedScene = nullptr;
 		}
 
@@ -138,13 +156,17 @@ namespace core {
 					if (queuedScene != nullptr) {
 						// TODO: save scenes instead of deleting them
 						// delete the scene with it's heap components (renderer and camera)
-						currentScene->Disable();
+						currentScene->Stop();
 
 						// remove the scene
-						delete currentScene;
+						if (deleteOldScene)
+						{
+							delete currentScene;
+							deleteOldScene = false;
+						}
 						// switch and initialize the scene
 						currentScene = queuedScene;
-						currentScene->InitGeneral();
+						currentScene->Start();
 						// don't forget to reset the tempscene, because we want to override it
 						queuedScene = nullptr;
 					}
@@ -152,9 +174,12 @@ namespace core {
 					imguiLayer->Begin(dt);
 
 					for (Layer* layer : layerStack)
-						layer->Update(dt);
+					{
+						if (layer->IsAttached())
+							layer->Update(dt);
+					}
 
-					currentScene->OnUpdate();
+					currentScene->Update();
 
 					Input::ProcessInput();
 					
@@ -183,6 +208,7 @@ namespace core {
 			resizing = false;
 
 			dt = window->GetTime() - begin_time;
+			if (dt > 0.1f) dt = 0.0167;
 			begin_time = window->GetTime();
 		}
 
@@ -194,27 +220,37 @@ namespace core {
 		GetInstance()->queuedScene = new_scene;
 	}
 
+	void Application::ChangeScene(Scene* new_scene, bool deleteOldScene)
+	{
+		GetInstance()->queuedScene = new_scene;
+		GetInstance()->deleteOldScene = deleteOldScene;
+	}
+
 	void Application::AddLayer(Layer* layer)
 	{
 		GetInstance()->layerStack.AddLayer(layer);
-		layer->Attach();
+		if (!layer->IsAttached())
+			layer->Attach();
 	}
 
-	void Application::AddOverLay(Layer* layer)
+	void Application::AddOverlay(Layer* layer)
 	{
 		GetInstance()->layerStack.AddOverlay(layer);
-		layer->Attach();
+		if (!layer->IsAttached())
+			layer->Attach();
 	}
 
 	void Application::RemoveLayer(Layer* layer)
 	{
-		layer->Detach();
+		if (layer->IsAttached())
+			layer->Detach();
 		GetInstance()->layerStack.RemoveLayer(layer);
 	}
 
-	void Application::RemoveOverLay(Layer* layer)
+	void Application::RemoveOverlay(Layer* layer)
 	{
-		layer->Detach();
+		if (layer->IsAttached())
+			layer->Detach();
 		GetInstance()->layerStack.RemoveOverlay(layer);
 	}
 }

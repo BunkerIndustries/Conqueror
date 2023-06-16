@@ -2,6 +2,7 @@
 #include "_Core.h"
 #include "utility.h"
 
+#include "Object.h"
 #include "generic/Transform.h"
 #include "utils/DataPool.h"
 #include "event/Event.h"
@@ -11,37 +12,11 @@ namespace core {
     class Component;
     class Layer;
 
-    class GameObject {
-    private:
-        std::string id;
-        std::vector<Component*> components;
-        int zIndex;
-        Layer* layer;
-        bool deleted = false;
-
-        std::string name = "GameObject";
-        std::initializer_list<std::string> tags;
-        ProjectionMode mode;
-
-        bool running = false;
-
-        core_id objectID;
-
-        std::vector<std::string> tagList;
-
-        void StopComponentIndex(uint32_t index);
-        void DeleteComponentIndex(uint32_t index);
-
-        friend class Layer;
-        void SetLayer(Layer* layer);
-
-        static std::unordered_map<core_id, GameObject*> IDMap;
+    class GameObject : public Object {
     public:
-        Transform transform;
-        GameObject(std::string name, Transform& transform = Transform(), ProjectionMode mode = ProjectionMode::PERSPECTIVE);
+        GameObject(std::string name, const Transform& transform = Transform(), ProjectionMode mode = ProjectionMode::PERSPECTIVE);
 
-
-        ~GameObject();
+        ~GameObject() override;
 
         template<typename T>
         T* GetComponent();
@@ -57,8 +32,6 @@ namespace core {
         void Imgui(float dt);
         void OnEvent(Event& event);
 
-        void Delete();
-
         void DeleteComponents();
 
         GameObject* AddTag(std::string tag);
@@ -66,20 +39,37 @@ namespace core {
         bool RemoveTag(std::string tag);
         bool HasTag(std::string tag);
 
-        std::string GetName() { return this->name; }
-        int GetZIndex() { return this->zIndex; }
-        void SetZIndex(int zIndex) { this->zIndex = zIndex; }
-        core_id GetObjectID() const { return objectID; }
+        Layer* GetLayer() const { return this->layer; }
         bool IsRunning() const { return running; }
+        bool IsDeleted() const { return deleted; }
 
         ProjectionMode GetProjectionMode() const
         {
             return mode;
         }
 
-        static GameObject* GetGameObjectByID(core_id id);
-
+        bool onlyLayerReceive = true;
         
+
+    private:
+        std::vector<Component*> components;
+        Layer* layer = nullptr;
+        bool deleted = false;
+
+        std::initializer_list<std::string> tags;
+        ProjectionMode mode;
+
+        bool running = false;
+
+
+        std::vector<std::string> tagList;
+
+        void StopComponentIndex(uint32_t index);
+        void DeleteComponentIndex(uint32_t index);
+
+        friend class Layer;
+        void SetLayer(Layer* layer);
+
     };
 
     template <typename T>

@@ -18,7 +18,7 @@ namespace core {
         ~Sound();
         static void DataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount);
         bool LoadSound(std::string soundFile);
-        bool PlaySound();
+        bool SoundPlay();
         bool StopSound();
         void SetVolume(float volume);
         float GetVolume();

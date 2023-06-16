@@ -49,13 +49,20 @@ namespace core {
         this->rotation = rotation;
     }
 
+    glm::mat4 Transform::GetMatrix() const
+    {
+        return glm::translate(glm::mat4(1.0f), glm::vec3(position, 0.0f))
+            * glm::rotate(glm::mat4(1.0f), glm::radians(rotation), { 0.0f, 0.0f, 1.0f })
+            * glm::scale(glm::mat4(1.0f), glm::vec3(scale, 1.0f));
+    }
+
     void Transform::Update()
     {
-        while (rotation > 359)
+        while (rotation >= 360)
         {
             rotation -= 360;
         }
-        while (rotation < 359)
+        while (rotation <= -360)
         {
             rotation += 360;
         }

@@ -1,6 +1,5 @@
 #include "_Core.h"
 
-#include "imgui/ImGuiLayer.h"
 #include "generic/Application.h"
 #include "generic/Scene.h"
 #include "generic/Camera.h"
@@ -9,55 +8,76 @@
 
 namespace core {
 
-    Scene::Scene() {
+	Scene::Scene()
+	{
+		camera = std::make_shared<Camera>();
+	}
 
-    }
+	void Scene::Update()
+	{
+		OnUpdate();
+		Renderer::ClearStats();
+		Renderer::BeginRender(*camera);
 
-    Scene::~Scene() {
-        delete camera;
-    }
+		for (int i = 0; i < Application::GetLayerStack().GetSize(); i++)
+		{
+			Layer* layer = Application::GetLayerStack()[i];
+			if (!layer->IsAttached()) continue;
 
-    void Scene::InitGeneral() {
-        camera = new Camera();
+			for (int j = 0; j < layer->GetGameObjects().size(); j++)
+			{
+				GameObject* gameObject = layer->GetGameObjects()[j];
+				if (!gameObject->IsRunning()) continue;
+				gameObject->Update();
+			}
+			Renderer::NextBatch();
+			layer->RenderUI();
+		}
 
-        LoadResources();
-        Init();
-        Start();
-    }
+		Renderer::EndRender();
+	}
 
-    void Scene::OnUpdate()
-    {
-        Update();
-        Renderer::ClearStats();
-        Renderer::BeginRender(*camera);
+	void Scene::Start()
+	{
+		isRunning = true;
+		OnStart();
+	}
 
-        //updating gameobjects and its components
-        for (Layer* layer : Application::GetLayerStack())
-        {
-            for (GameObject* gameObject : layer->GetGameObjects())
-            {
-                if (!gameObject->IsRunning()) continue;
-                gameObject->Update();
-            }
-        }
+	void Scene::Stop()
+	{
+		isRunning = false;
+		OnStop();
+	}
 
-        Renderer::EndRender();
-    }
 
-    void Scene::Start() {
-        isRunning = true;
-    }
+	Shr<Camera> Scene::GetCamera() {
+		// return the current scene camera, useful for scene testing
+		return this->camera;
+	}
 
-    void Scene::Disable() {
-        delete camera;
-    }
+	glm::vec4& Scene::GetBackcolor() {
+		return this->backcolor;
+	}
 
-    Camera* Scene::GetCamera() {
-        // return the current scene camera, useful for scene testing
-        return this->camera;
-    }
+	void Scene::AddLayer(Layer* layer)
+	{
+		layer->SetScene(this);
+		Application::AddLayer(layer);
+	}
 
-    glm::vec4& Scene::GetBackcolor() {
-        return this->backcolor;
-    }
+	void Scene::AddOverlay(Layer* layer)
+	{
+		layer->SetScene(this);
+		Application::AddOverlay(layer);
+	}
+
+	void Scene::RemoveLayer(Layer* layer) const
+	{
+		Application::RemoveLayer(layer);
+	}
+
+	void Scene::RemoveOverlay(Layer* layer) const
+	{
+		Application::RemoveOverlay(layer);
+	}
 }

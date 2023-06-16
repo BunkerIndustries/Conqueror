@@ -6,8 +6,10 @@
 #include "generic/Application.h"
 #include "imgui/ImGuiLayer.h"
 #include "renderer/Renderer.h"
+#include "ui/Button.h"
 
 #include "GLFW/glfw3.h"
+#include "utils/Core.h"
 
 namespace core
 {
@@ -58,28 +60,42 @@ namespace core
         }
         if (Input::IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mouseClickedID[0] = mouseHoverID[0];
-            if (mouseClickedID[0] != mouseClickedID[1] && mouseClickedID[0] != 0 && !pressed)
+            if (mouseClickedID[0] != mouseClickedID[1] && mouseClickedID[0] != 0 && !pressed && !Core::IsDeleted(mouseClickedID[0]))
             {
-                Application::QueueEvents(new GameObjectPressedEvent(GameObject::GetGameObjectByID(mouseClickedID[0])));
+                GameObject* gameObject = dynamic_cast<GameObject*>(Core::GetObjectByID(mouseClickedID[0]));
+                if (gameObject)
+					Application::QueueEvents(new GameObjectPressedEvent(gameObject));
+
+                Button* button = dynamic_cast<Button*>(Core::GetObjectByID(mouseClickedID[0]));
+                if (button)
+                    button->buttonEventFunction();
             }
             pressed = true;
             mouseClickedID[1] = mouseClickedID[0];
         }
         else {
             pressed = false;
-            if (mouseClickedID[1] != 0) {
-                Application::QueueEvents(new GameObjectReleasedEvent(GameObject::GetGameObjectByID(mouseClickedID[1])));
+            if (mouseClickedID[1] != 0 && !Core::IsDeleted(mouseClickedID[1])) {
+                GameObject* gameObject = dynamic_cast<GameObject*>(Core::GetObjectByID(mouseClickedID[1]));
+                if (gameObject)
+					Application::QueueEvents(new GameObjectReleasedEvent(gameObject));
             }
 
 
             mouseClickedID[1] = 0;
             if (mouseHoverID[0] != mouseHoverID[1])
             {
-                if (mouseHoverID[1] != 0) {
-                    Application::QueueEvents(new GameObjectHoverEndEvent(GameObject::GetGameObjectByID(mouseHoverID[1])));
+                if (mouseHoverID[1] != 0 && !Core::IsDeleted(mouseHoverID[1])) {
+                    Object* object = Core::GetObjectByID(mouseHoverID[1]);
+                    GameObject* gameObject = dynamic_cast<GameObject*>(object);
+                    if (gameObject)
+						Application::QueueEvents(new GameObjectHoverEndEvent(gameObject));
                 }
-                if (mouseHoverID[0] != 0) {
-                    Application::QueueEvents(new GameObjectHoverBeginEvent(GameObject::GetGameObjectByID(mouseHoverID[0])));
+                if (mouseHoverID[0] != 0 && !Core::IsDeleted(mouseHoverID[0])) {
+                    Object* object = Core::GetObjectByID(mouseHoverID[0]);
+                    GameObject* gameObject = dynamic_cast<GameObject*>(object);
+                    if (gameObject)
+						Application::QueueEvents(new GameObjectHoverBeginEvent(gameObject));
                 }
             }
             mouseHoverID[1] = mouseHoverID[0];

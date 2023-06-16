@@ -10,7 +10,7 @@ namespace core {
 		AppTick, AppUpdate, AppRender,
 		KeyPressed, KeyReleased, KeyTyped,
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled,
-		GameObjectPressed, GameObjectReleased, GameObjectHoverBegin, GameObjectHoverEnd
+		GameObjectEvent, GameObjectPressed, GameObjectReleased, GameObjectHoverBegin, GameObjectHoverEnd
 	};
 
 	enum EventCategory {

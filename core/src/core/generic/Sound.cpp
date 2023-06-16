@@ -7,11 +7,16 @@ namespace core {
 
     Sound::Sound()
     {
-
+        // initialize the engine without specific configuration
+        if (ma_engine_init(NULL, &engine) != MA_SUCCESS)
+        {
+            LOG_CORE_ERROR("Failed to initialize the engine");
+        }
     }
 
     Sound::~Sound()
     {
+        StopSound();
         ma_sound_uninit(&currentSound);
         ma_engine_uninit(&engine);
     }
@@ -37,22 +42,17 @@ namespace core {
         // use the high level api || we are using it because we are already including the library 
         // and we can make use of the high level functions in order to play sounds with their own group
 
-        // initialize the engine without specific configuration
-        if (ma_engine_init(NULL, &engine) != MA_SUCCESS)
-        {
-            LOG_CORE_ERROR("Failed to initialize the engine");
-            return false;
-        }
-
         if (ma_sound_init_from_file(&engine, soundFile.c_str(), 0, NULL, NULL, &currentSound) != MA_SUCCESS)
         {
             LOG_CORE_ERROR("Failed to load sound '" + std::string(soundFile) + "'");
             return false;
         }
+
+        SetVolume(0.3);
         return true;
     }
 
-    bool Sound::PlaySound()
+    bool Sound::SoundPlay()
     {
         // TODO: make the function add different sound ,,objects'' ma_sound sound = ma_sound_init_from_file ...
         // play sound and specify a sound group (different sound groups can be used to specify their volumes)

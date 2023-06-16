@@ -11,8 +11,15 @@
 #define BIT(x) (1 << x)
 
 #define BIND_EVENT_FN(x) std::bind(&x, this, std::placeholders::_1)
+#define BIND_BUTTON_EVENT_FN(x) std::bind(&x, this)
 
 namespace core {
+
+	enum STATE
+	{
+		ON,
+		OFF
+	};
 
 	template<typename T>
 	using Shr = std::shared_ptr<T>;

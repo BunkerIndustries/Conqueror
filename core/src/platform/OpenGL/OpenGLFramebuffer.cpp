@@ -219,4 +219,9 @@ namespace core {
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
+	void OpenGLFramebuffer::BindAttachmentAsTexture(uint32_t attachment, uint32_t slot)
+	{
+		glActiveTexture(GL_TEXTURE0 + slot);
+		glBindTexture(GL_TEXTURE_2D, GetColorID(attachment));
+	}
 }

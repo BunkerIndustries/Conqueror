@@ -6,35 +6,43 @@ namespace core {
 
     class GameObject;
     class Camera;
+    class Layer;
 
     class Scene {
-    private:
-        bool isRunning = false;
-    protected:
-        Camera* camera = nullptr;
-        GameObject* activeGameObject = nullptr;
-        glm::vec4 backcolor = glm::vec4();
+        friend class Application;
     public:
         std::vector<GameObject*> gameObjects;
 
-    public:
         Scene();
-        virtual ~Scene();
+        virtual ~Scene() = default;
 
-        Camera* GetCamera();
+        Shr<Camera> GetCamera();
         glm::vec4& GetBackcolor();
 
         void Start();
-        void Disable();
-        void InitGeneral();
-        void OnUpdate();
+        void Stop();
 
-        virtual void Update() = 0;
+
+        void AddLayer(Layer* layer);
+        void AddOverlay(Layer* layer);
+        void RemoveLayer(Layer* layer) const;
+        void RemoveOverlay(Layer* layer) const;
+
+    protected:
+        Shr<Camera> camera = nullptr;
+        glm::vec4 backcolor = {};
+
+        virtual void OnStart() = 0;
+        virtual void OnStop() = 0;
+        virtual void OnUpdate() = 0;
         virtual void OnEvent(Event& e) = 0;
+        virtual void Imgui(float dt) {}
+
     private:
-        virtual void Imgui(float dt) {};
-        virtual void Init() = 0;
-        virtual void LoadResources() = 0;
+        bool isRunning = false;
+
+        void Update();
+
     };
 
 }

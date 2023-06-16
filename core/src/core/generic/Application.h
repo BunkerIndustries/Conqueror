@@ -29,6 +29,8 @@ namespace core {
 		long int framesRendered = 0;
 		bool gameRunning = true;
 		bool resizing = false;
+		bool deleteOldScene = false;
+		bool fullscreen;
 
 		//IMGUI
 		bool imguiEnabled = false; int imguiEnabledQueue = 0;
@@ -39,6 +41,12 @@ namespace core {
 		bool OnKeyPressed(KeyPressedEvent& e);
 
 		void ProcessQueues();
+
+		friend class Scene;
+		static void AddLayer(Layer* layer);
+		static void AddOverlay(Layer* layer);
+		static void RemoveLayer(Layer* layer);
+		static void RemoveOverlay(Layer* layer);
 
 		LayerStack layerStack;
 
@@ -53,12 +61,8 @@ namespace core {
 
 		void OnEvent(Event& event);
 
-		static void AddLayer(Layer* layer);
-		static void AddOverLay(Layer* layer);
-		static void RemoveLayer(Layer* layer);
-		static void RemoveOverLay(Layer* layer);
-
 		static void ChangeScene(Scene* new_scene);
+		static void ChangeScene(Scene* new_scene, bool deleteOldScene);
 
 		void Exit() { gameRunning = false; }
 
@@ -76,6 +80,8 @@ namespace core {
 		static Scene* GetActiveScene() { return GetInstance()->currentScene; }
 		static ImGuiLayer& GetImGuiLayer() { return *GetInstance()->imguiLayer; }
 		static LayerStack& GetLayerStack() { return GetInstance()->layerStack; }
+
+		virtual void GameObjectDeleted(GameObject* gameObject) {}
 	};
 
 	//defined by client

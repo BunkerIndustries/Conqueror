@@ -66,6 +66,8 @@ namespace core {
 		virtual void Bind() = 0;
 		virtual void Unbind() = 0;
 
+		virtual void BindAttachmentAsTexture(uint32_t attachment, uint32_t slot) = 0;
+
 		virtual FramebufferSpecification& GetSpecification() = 0;
 		static Shr<Framebuffer> CreateBuffer(const FramebufferSpecification& specification);
 	};

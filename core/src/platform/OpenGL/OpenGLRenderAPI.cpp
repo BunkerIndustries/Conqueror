@@ -38,7 +38,7 @@ namespace core
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		glEnable(GL_DEPTH_TEST);
+		//glEnable(GL_DEPTH_TEST);
 		glEnable(GL_LINE_SMOOTH);
 	}
 
@@ -57,11 +57,45 @@ namespace core
 		glViewport(x, y, width, height);
 	}
 
+	void OpenGLRenderAPI::SetPolygonModel(Polygon pol)
+	{
+		switch (pol) {
+			case Polygon::OFF: 
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+				break;
+			case Polygon::LINE:
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+				break;
+			case Polygon::POINT: 
+				glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+				break;
+		}
+	}
+
 	void OpenGLRenderAPI::DrawElements(Shr<VertexArray>& vertexArray, uint32_t elementCount)
 	{
 		vertexArray->Bind();
 		uint32_t count = elementCount ? elementCount : vertexArray->GetElementBuffer()->GetElementCount();
 		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
 		vertexArray->Unbind();
+	}
+	
+	void OpenGLRenderAPI::DrawLines(Shr<VertexArray>& vertexArray, uint32_t vertexCount, float thickness)
+	{
+		vertexArray->Bind();
+		SetLineWidth(thickness);
+		glDrawArrays(GL_LINES, 0, vertexCount);
+	}
+	
+	void OpenGLRenderAPI::SetLineWidth(float thickness)
+	{
+		glLineWidth(thickness);
+	}
+
+	void OpenGLRenderAPI::DrawIndexed(const Shr<VertexArray>& vertexArray, uint32_t indexCount)
+	{
+		vertexArray->Bind();
+		uint32_t count = indexCount ? indexCount : vertexArray->GetElementBuffer()->GetElementCount();
+		glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, nullptr);
 	}
 }
