@@ -61,4 +61,5 @@ Everything is **Open Source**! Feel free to explore and contribute to the codeba
 ![Engineer_MG](https://github.com/BunkerIndustries/Conqueror/blob/master/showcase/Engineer_MG.png?raw=true)
 
 ### Game Credits
+![Credits](https://github.com/BunkerIndustries/Conqueror/blob/master/showcase/Credits_GameTeam.png?raw=true)
 ![Credits](https://github.com/BunkerIndustries/Conqueror/blob/master/showcase/Credits.png?raw=true)
