@@ -1,7 +1,36 @@
-![image](https://github.com/user-attachments/assets/a02348df-86c7-46e9-bef1-170389718b44)
+# Conqueror
 
-![image](https://github.com/user-attachments/assets/ecbf0d5d-a9c3-460c-8174-a8183c39118b)
+## What is Conqueror?
+Conqueror is a **2D retro pixel strategy shooting game** based on **World War I**.
 
-![image](https://github.com/user-attachments/assets/d7cdb728-e26e-461b-ae06-e7409392e84b)
+## How was it built?
+This game has been developed using our **own custom Game Engine** written in **C++**. We drew inspiration from [Cherno's Walnut](https://github.com/StudioCherno/Walnut). Our engine includes the following features:
 
-![image](https://github.com/user-attachments/assets/13694872-c7c2-4988-a511-1000cb0bcbe5)
+- Basic **OpenGL** Features
+- Graphics API Abstraction: Various APIs such as **Vulkan** or **Metal** can be easily implemented, making Conqueror compatible across **Windows, Linux, and Mac**.
+- **Sprite Sheets** and **Text Rendering**
+- **Sound System**
+
+## Who built it?
+Conqueror was developed by a dedicated team of **five**:
+
+1. **Graphics Designer**: [Angelina](mailto:michelann90@gmail.com)
+2. **Game Developer**: [Levi](mailto:levlau@web.de)
+3. **Game Developer**: [Matthias](mailto:matthias05.geng@t-online.de)
+4. **Engine Developer & Bug Fixer**: [Pascal](https://gutsche.tech)
+5. **Engine Developer & Sound Maker**: [Pherel](https://phrl.dev)
+
+## Why did we build it?
+Because it was fun and we were curious! We also had the opportunity to **present our project to our entire school**, and we even created a contest to see who could survive the longest.
+
+## When was it developed?
+We worked on this project during **2022-2023** as part of a **High School seminar course**.
+
+## Platform Support
+Currently, we **only provide a Windows release**. However, you can run Windows executables on Linux and Mac using [Wine](https://gitlab.winehq.org/wine/wine/-/wikis/Download).
+
+## Open Source
+Everything is **Open Source**! Feel free to explore and contribute to the codebase.
+
+### [📥 Download Conqueror](https://github.com/BunkerIndustries/Conqueror/releases/download/sk23/Conqueror.zip)
+
