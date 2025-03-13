@@ -27,6 +27,9 @@ Because it was fun and we were curious! We also had the opportunity to **present
 ## When was it developed?
 We worked on this project during **2022-2023** as part of a **High School seminar course**.
 
+## Is there any documentation?
+Yes there is! We have a PDF that explains Engine functions and how the Game works. [PDF](https://github.com/BunkerIndustries/Conqueror/blob/master/showcase/Conqueror.pdf?raw=true)
+
 ## Platform Support
 Currently, we **only provide a Windows release**. However, you can run Windows executables on Linux and Mac using [Wine](https://gitlab.winehq.org/wine/wine/-/wikis/Download).
 
