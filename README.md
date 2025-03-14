@@ -5,7 +5,7 @@
 Conqueror is a **2D retro pixel strategy shooting game** based on **World War I**.
 
 ## How was it built?
-This game has been developed using our **own custom Game Engine** written in **C++**. We drew inspiration from [Cherno's Walnut](https://github.com/StudioCherno/Walnut). Our engine includes the following features:
+This game has been developed using our **own custom Game Engine** written in **C++**. We drew inspiration from [Cherno's Hazel](https://github.com/StudioCherno/Hazel). Our engine includes the following features:
 
 - Basic **OpenGL** Features
 - Graphics API Abstraction: Various APIs such as **Vulkan** or **Metal** can be easily implemented, making Conqueror compatible across **Windows, Linux, and Mac**.
